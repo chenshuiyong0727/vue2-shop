@@ -1,9 +1,14 @@
 <template lang="html">
   <!-- 在首页父组件发送http请求,后将数据通过props传递给子组件,可减少请求次数,减少服务器压力 -->
   <div class="index">
-    <v-header/>
-    <v-swiper :swiperData="datas.swiper"/>
-    <v-service/>
+    <mt-header title="首页">
+<!--      <router-link :to="{name:''}" slot="right">-->
+<!--        <mt-button icon="search"></mt-button>-->
+<!--      </router-link>-->
+    </mt-header>
+<!--    <v-header/>-->
+<!--    <v-swiper :swiperData="datas.swiper"/>-->
+    <v-service :countDay="countDay" :count="count"/>
     <v-section1 :list="datas.section1.list" :banner='datas.section1.banner'/>
     <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/>
     <v-section3/>
@@ -24,6 +29,8 @@ import Section4 from '@/components/index/section4.vue'
 import Baseline from '@/common/_baseline.vue'
 import Footer from '@/common/_footer.vue'
 import index from '@/http/mock.js' //模拟数据
+import { goodsOrderApi } from '@/api/goodsOrder'
+
 export default {
   components: {
     'v-header': Header,
@@ -45,10 +52,39 @@ export default {
         section4:{},
         swiper:[]
       },
-      loading: true
+      loading: true,
+      form: {},
+      orderIofo: {},
+      queryParam: {
+        createTimeFrom: '',
+        createTimeTo: ''
+      },
+      createTime: '',
+      chartSettings: {
+        xAxisType: 'time',
+        area: false,
+        axisSite: { right: ['profitsAmount'] },
+        labelAlias: {
+          'successNum': '订单数',
+          'orderAmount': '订单金额',
+          'profitsAmount': '利润'
+        }
+      },
+      chartData: {
+        columns: ['months', 'successNum', 'orderAmount', 'profitsAmount'],
+        rows: []
+      },
+      countDay: '0', // 倒计时
+      count: '', // 倒计时
+      seconds: 0, // 10天的秒数
+      nowDate: '',
+      nowTime: '',
+      nowWeek: '',
+      orderData: {},
+      loading: false,
+      dataEmpty: false
     }
   },
- 
   beforeCreate() {
     this.$api({
       method: 'post',
@@ -56,15 +92,105 @@ export default {
     }).then((response) => {
       this.datas = response.data;
     }).catch(function(error) {
-      alert(error)
+      console.info(error)
     })
+  },
+
+  created(){
+    this.initTime()
+    this.time()
+    this.getData()
+  },
+  methods: {
+    initTime() {
+      let myDate = new Date().getTime()
+      let endTime = '2023-01-22 00:00:00'
+      let timestamp2 = Date.parse(new Date(endTime))
+      this.seconds = (timestamp2 - myDate) / 1000
+    },
+    countDown() {
+      let d = parseInt(this.seconds / (24 * 60 * 60))
+      d = d < 10 ? '0' + d : d
+      let h = parseInt(this.seconds / (60 * 60) % 24);
+      h = h < 10 ? '0' + h : h
+      let m = parseInt(this.seconds / 60 % 60);
+      m = m < 10 ? '0' + m : m
+      let s = parseInt(this.seconds % 60);
+      s = s < 10 ? '0' + s : s
+      this.count = '天 ' + h + '时' + m + '分' + s + '秒'
+      this.countDay = d
+    },
+    time() {
+      setInterval(() => {
+        this.seconds -= 1
+        this.countDown()
+      }, 1000)
+    },
+    getData() {
+      goodsOrderApi.indexData().then(res => {
+          if (res.subCode === 1000) {
+          this.form = res.data ? res.data.commonDto : {}
+          this.orderIofo = res.data ? res.data.countDto : {}
+          if (this.form.inventoryCost && this.form.inventoryNum) {
+            this.form.inboundAverage = parseFloat(
+              this.form.inventoryCost / this.form.inventoryNum).toFixed(2)
+          }
+          if (this.form.successNum) {
+            this.form.orderAmountAverage = parseFloat(
+              this.form.orderAmount / this.form.successNum).toFixed(2)
+            this.form.freightAverage = parseFloat(
+              this.form.freight / this.form.successNum).toFixed(2)
+            this.form.profitsAverage = parseFloat(
+              this.form.profitsAmount / this.form.successNum).toFixed(2)
+          }
+          this.form.costAverage = parseFloat(
+            this.form.inboundAverage / 1 + this.form.freightAverage / 1).toFixed(2)
+          this.form.inventoryRatio = parseFloat(
+            this.form.inventoryNum / this.form.goodsPutInNum * 100).toFixed(2)
+          this.form.profitsProportion = parseFloat(
+            this.form.profitsAverage / this.form.costAverage * 100).toFixed(2)
+        } else {
+          this.$message.error(res.subMsg)
+        }
+      })
+    },
+    getData1() {
+      goodsOrderApi.indexOrderData(this.queryParam).then(res => {
+        if (res.subCode === 1000) {
+          this.dataEmpty = false
+          this.loading = false
+          this.chartData.rows = res.data.rows
+          this.orderData = res.data
+          if (this.orderData) {
+            this.orderData.successNumRate = parseFloat(
+              (this.orderData.successNum - this.orderData.successNumLast)
+              / this.orderData.successNumLast * 100).toFixed(2)
+            this.orderData.profitsAmountRate = parseFloat(
+              (this.orderData.profitsAmount - this.orderData.profitsAmountLast)
+              / this.orderData.profitsAmountLast * 100).toFixed(2)
+            this.orderData.orderAmountRate = parseFloat(
+              (this.orderData.orderAmount - this.orderData.orderAmountLast)
+              / this.orderData.orderAmountLast * 100).toFixed(2)
+          }
+        } else {
+          this.$message.error(res.subMsg)
+        }
+      })
+    },
   }
 }
 </script>
 
 
-
 <style lang="less" scoped>
+  @import '../assets/fz.less';
+  @import '../assets/index/style.css';
+  .mint-header {
+    padding: 6.8vw 4.8vw;
+    background-color: #fff;
+    color: #333!important;
+    .fz(font-size, 40)!important;
+  }
 .index {
     width: 100%;
     padding-bottom: 14vw;

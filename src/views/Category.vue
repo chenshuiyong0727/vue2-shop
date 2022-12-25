@@ -5,22 +5,25 @@
     </v-header>
     <section class="view">
       <v-aside :datas="allData.aside"/>
-      <router-view 
-        :datas="allData.aside" 
+      <router-view
+        :datas="allData.aside"
       />
     </section>
+    <v-footer/>
   </div>
 </template>
 
 <script>
 
 import Header from '@/common/_header.vue'
+import Footer from '@/common/_footer.vue'
 import Aside from '@/components/category/aside.vue'
 import category from '@/http/mock.js' //模拟数据
 export default {
   components: {
     'v-header': Header,
-    'v-aside': Aside
+    'v-aside': Aside,
+    'v-footer': Footer
   },
   data () {
     return {

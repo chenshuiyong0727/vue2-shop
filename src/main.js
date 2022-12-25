@@ -11,17 +11,16 @@ Vue.use(Mint);
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
 
-
+// if (localStorage.getItem('org_token_auth')) {
 // 用钩子函数beforeEach()对路由进行判断
 
 router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) {  // 需要权限,进一步进行判断
-      if (store.state.login.token) {  // 通过vuex state获取当前的token是否存在
+      if (localStorage.getItem('org_token_auth')) {  // 通过vuex state获取当前的token是否存在
         next();
-      }
-      else {    //如果没有权限,重定向到登录页,进行登录
+      }else {    //如果没有权限,重定向到登录页,进行登录
         next({
-          path: '/login',
+          path: '/login?flag=1',
           // query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
         })
       }

@@ -2,17 +2,33 @@
 
   <div class="service">
     <ul>
-      <li><i class="icon-ok"></i><span>自营品牌</span></li>
-      <li><i class="icon-ok"></i><span>无忧退货</span></li>
-      <li><i class="icon-ok"></i><span>48小时快速退款</span></li>
+      <li><span>春节倒计时  <strong class="color-danger"> {{countDay}}</strong> {{count}} </span></li>
+<!--      <li><i class="icon-ok"></i><span>无忧退货</span></li>-->
+<!--      <li><i class="icon-ok"></i><span>48小时快速退款</span></li>-->
     </ul>
   </div>
 </template>
+<script>
 
+  export default {
+    props: {
+      countDay: {
+        type: String,
+        default: ''
+      },
+      count: {
+        type: String,
+        default: ''
+      }
+    }
+  }
+
+</script>
 <style lang="less" scoped>
   @import '../../assets/fz.less';
   @import '../../assets/index/style.css';
   .service {
+    padding-top: 2vw;
     .bd();
     ul {
       display: -webkit-flex;
@@ -27,7 +43,7 @@
         align-items: center;
         padding: 3.3vw 0;
         span {
-          .fz(font-size,28);
+          .fz(font-size,38);
           padding-left: 1vw;
         }
         i {

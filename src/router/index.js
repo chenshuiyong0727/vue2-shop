@@ -15,11 +15,24 @@ const Login = resolve => require(['@/views/login.vue'], resolve)
 
 
 export default new Router({
-  routes: [{
+  routes: [
+    {
       path: '/',
       name: '首页',
-      component: Index
-    }, {
+      component: Index,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
+    },
+    {
+      path: '/home',
+      name: '首页',
+      component: Index,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
+    },
+    {
       path: '/category',
       name: '分类页',
       redirect: '/category/all',
@@ -27,15 +40,24 @@ export default new Router({
       children: [{
         path: '/category/:tab',
         component:CategoryMain
-      }]
+      }],
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
     }, {
       path: '/car',
       name: '购物车页',
-      component: Car
+      component: Car,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
     }, {
       path: '/car/pay',
       name: '支付页',
-      component: Pay
+      component: Pay,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
     },
     {
       path: '/user',
@@ -47,11 +69,17 @@ export default new Router({
     }, {
       path: '/detail',
       name: '详情页',
-      component: Detail
+      component: Detail,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
     }, {
       path: '/search',
       name: '搜索页',
-      component: Search
+      component: Search,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
     },{
       path: '/login',
       name: '登录页',
