@@ -93,9 +93,7 @@ export default {
       }
       let loginInfo = deepCopy(this.loginForm)
       loginInfo.loginPassword = encrypt(loginInfo.loginPassword, '58d10555a17a4039')
-      // console.info(loginInfo)
       userContainerApi.login(loginInfo).then(res => {
-        debugger
         if (res.subCode === 1000) {
           Toast("登录成功")
           if (res.data) {

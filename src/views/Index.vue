@@ -2,14 +2,9 @@
   <!-- 在首页父组件发送http请求,后将数据通过props传递给子组件,可减少请求次数,减少服务器压力 -->
   <div class="index">
     <mt-header title="首页">
-<!--      <router-link :to="{name:''}" slot="right">-->
-<!--        <mt-button icon="search"></mt-button>-->
-<!--      </router-link>-->
     </mt-header>
-<!--    <v-header/>-->
-<!--    <v-swiper :swiperData="datas.swiper"/>-->
-    <v-service :countDay="countDay" :count="count"/>
-    <v-section1 :list="datas.section1.list" :banner='datas.section1.banner'/>
+<!--    <v-service :countDay="countDay" :count="count"/>-->
+    <v-section1 :form="form" :countDay="countDay" :count="count" />
     <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/>
     <v-section3/>
     <v-section4 :list="datas.section4.list" :banner='datas.section4.banner'/>

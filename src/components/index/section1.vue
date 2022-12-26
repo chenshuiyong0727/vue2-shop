@@ -1,19 +1,129 @@
 <template lang="html">
   <section class="section1">
     <h1 class="section1-title">
-      section1
-      <i class="icon-right"></i>
+        仓库值
     </h1>
-    <ul class="section1-list">
-      <li v-for="k in list" :key="k.id">
+    <ul class="section1-list" style="display: ">
+      <li style="width: 47%">
         <router-link :to="{name:'详情页'}">
-          <img v-lazy="k.imgPath" alt="">
+          <p><strong class="color-danger"> {{countDay}}</strong>{{count}}</p>
+          <p class="section1name">春节倒计时</p>
         </router-link>
       </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.inventoryNum}}</p>
+          <p class="section1name">库存总数</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.inventoryCost}}</p>
+          <p  class="section1name">库存成本</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p v-if="form.inventoryNum  && form.goodsPutInNum">{{form.inventoryRatio}}%</p>
+          <p v-else> 0%</p>
+          <p class="section1name">库存比例</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.goodsNum}}</p>
+          <p class="section1name">商品款式</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.goodsPutInNum}}</p>
+          <p class="section1name">入库商品</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.inventoryAmount}}</p>
+          <p class="section1name">入库总额</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.profitsAmount}}</p>
+          <p class="section1name">利润总额</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.successNum}}</p>
+          <p class="section1name">交易成功</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.orderAmount}}</p>
+          <p class="section1name">成功总额</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.freight}}</p>
+          <p class="section1name">总运费</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.poundage}}</p>
+          <p class="section1name">手续费</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.otherRevenue}}</p>
+          <p class="section1name">其他收支</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.profitsAverage}}</p>
+          <p class="section1name">平均利润</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.inboundAverage}}</p>
+          <p class="section1name">库存均价</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.orderAmountAverage}}</p>
+          <p class="section1name">成功均价</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.freightAverage}}</p>
+          <p class="section1name">运费均价</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.costAverage}}</p>
+          <p class="section1name">成本均价</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p>{{form.profitsProportion}}%</p>
+          <p class="section1name">利润比例</p>
+        </router-link>
+      </li>
+
     </ul>
-  <router-link :to="{ name: '详情页'}"  class="section1-banner">
-    <img v-lazy="banner">
-  </router-link>
+<!--  <router-link :to="{ name: '详情页'}"  class="section1-banner">-->
+<!--    <img v-lazy="banner">-->
+<!--  </router-link>-->
   </section>
 </template>
 
@@ -22,15 +132,17 @@ import { Lazyload } from 'mint-ui';
 
 export default {
   props: {
-    banner: {
+    form: {
+      type: Object,
+      default: {}
+    },
+    countDay: {
       type: String,
       default: ''
     },
-    list: {
-      type: Array,
-      default: function () {
-        return []
-      }
+    count: {
+      type: String,
+      default: ''
     }
   }
 }
@@ -46,7 +158,7 @@ export default {
     .bt();
     background-color: #ffffff;
     text-align: center;
-    padding: 4vw 0;
+    padding: 2vw 0;
     .fz(font-size, 40);
     color: #333;
     position: relative;
@@ -68,21 +180,28 @@ export default {
     display: -ms-flex;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
+    /*display: flex;*/
     flex-wrap: wrap;
     -ms-flex-pack: distribute;
     justify-content: space-around;
-    padding: 0 2vw 4vw 2vw;
+    padding: 2vw 2vw 4vw 2vw;
     li {
-      width: 50%;
-      padding: 1vw;
+      /*border-style: groove;*/
+      background-color: #EEF2F7;
+      width: 22.5%;
+      padding: 1.6vw;
+      color: #333;
+      margin: 1vw;
+      font-size: 4.5vw;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       a,
       img {
         width: 100%;
         display: block;
+      }
+      p{
+        padding-top: 1vw;
       }
     }
   }
@@ -96,4 +215,8 @@ export default {
     }
   }
 }
+  .section1name{
+    color: black;
+    /*font-weight: 600;*/
+  }
 </style>
