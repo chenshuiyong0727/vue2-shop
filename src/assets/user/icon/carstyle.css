@@ -97,6 +97,10 @@
   content: "\e90f";
   color: #8a8a8a;
 }
+.icon2-loginOut:before {
+  content: "\e917";
+  color: #8a8a8a;
+}
 .icon2-fixed:before {
   content: "\e910";
 }

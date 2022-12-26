@@ -85,9 +85,10 @@
                     <span>F码通道</span><i class="icon-go"></i>
                   </p>
               </router-link>
-              <router-link :to="{ name: ''}" class="my-settle-bottom">
+              <router-link :to="{ name: '退出登录'}"  class="my-settle-bottom">
                 <div>
                   <span class="icon2-settle"></span>
+<!--                  <img style="width: 5.2vw" src="../../static/img/lagout.png" ></img>-->
                 </div>
                 <p>
                   <span>设置</span><i class="icon-go"></i>
@@ -103,14 +104,29 @@
 
 <script>
   // import * as mockData from '@/http/mock.js' //模拟数据
-
+  // import { userContainerApi } from '@/api/user'
+  // import { removeCookieByName } from '@/utils/auth'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   export default {
     components: {
       'v-baseline': Baseline,
       'v-footer': Footer
-    }
+    },
+    // methods:{
+    //   logout(){
+    //     alert(1)
+    //     // userContainerApi.logout().then(res => {
+    //     //   if (res.subCode === 1000) {
+    //     //     removeCookieByName('org_token_auth')
+    //     //     removeCookieByName('refresh_org_token_auth')
+    //     //     removeCookieByName('user_id')
+    //     //     resetRouter()
+    //     //     localStorage.clear() // remove all session
+    //     //   }
+    //     // })
+    //   }
+    // }
   }
 </script>
 
