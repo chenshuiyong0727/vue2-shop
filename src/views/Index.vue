@@ -5,17 +5,17 @@
     </mt-header>
 <!--    <v-service :countDay="countDay" :count="count"/>-->
     <v-section1 :form="form" :countDay="countDay" :count="count" />
-    <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/>
-    <v-section3/>
-    <v-section4 :list="datas.section4.list" :banner='datas.section4.banner'/>
-    <v-baseline/>
+<!--    <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/>-->
+    <v-orderNum :orderIofo ="orderIofo"/>
+<!--    <v-section4 :list="datas.section4.list" :banner='datas.section4.banner'/>-->
+<!--    <v-baseline/>-->
     <v-footer/>
   </div>
 </template>
 
 <script>
 import Header from '@/components/index/header.vue'
-import Swiper from '@/components/index/swiper.vue'
+import orderNum from '@/components/index/orderNum.vue'
 import Service from '@/components/index/service.vue'
 import Section1 from '@/components/index/section1.vue'
 import Section2 from '@/components/index/section2.vue'
@@ -29,7 +29,7 @@ import { goodsOrderApi } from '@/api/goodsOrder'
 export default {
   components: {
     'v-header': Header,
-    'v-swiper': Swiper,
+    'v-orderNum': orderNum,
     'v-service': Service,
     'v-section1': Section1,
     'v-section2': Section2,
@@ -81,20 +81,25 @@ export default {
     }
   },
   beforeCreate() {
-    this.$api({
-      method: 'post',
-      url: '/index'
-    }).then((response) => {
-      this.datas = response.data;
-    }).catch(function(error) {
-      console.info(error)
-    })
+    // this.getData()
+    // this.getData1()
+    // this.$api({
+    //   method: 'post',
+    //   url: '/index'
+    // }).then((response) => {
+    //   this.datas = response.data;
+    // }).catch(function(error) {
+    //   console.info(error)
+    // })
   },
 
   created(){
     this.initTime()
     this.time()
     this.getData()
+    this.getData1()
+    // this.getData()
+    // this.getData1()
   },
   methods: {
     initTime() {
