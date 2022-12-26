@@ -137,8 +137,8 @@ export default {
       default: {}
     },
     countDay: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 0
     },
     count: {
       type: String,

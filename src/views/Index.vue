@@ -14,28 +14,28 @@
 </template>
 
 <script>
-import Header from '@/components/index/header.vue'
+// import Header from '@/components/index/header.vue'
 import orderNum from '@/components/index/orderNum.vue'
-import Service from '@/components/index/service.vue'
+// import Service from '@/components/index/service.vue'
 import Section1 from '@/components/index/section1.vue'
-import Section2 from '@/components/index/section2.vue'
-import Section3 from '@/components/index/section3.vue'
-import Section4 from '@/components/index/section4.vue'
-import Baseline from '@/common/_baseline.vue'
+// import Section2 from '@/components/index/section2.vue'
+// import Section3 from '@/components/index/section3.vue'
+// import Section4 from '@/components/index/section4.vue'
+// import Baseline from '@/common/_baseline.vue'
 import Footer from '@/common/_footer.vue'
-import index from '@/http/mock.js' //模拟数据
+// import index from '@/http/mock.js' //模拟数据
 import { goodsOrderApi } from '@/api/goodsOrder'
 
 export default {
   components: {
-    'v-header': Header,
+    // 'v-header': Header,
     'v-orderNum': orderNum,
-    'v-service': Service,
+    // 'v-service': Service,
     'v-section1': Section1,
-    'v-section2': Section2,
-    'v-section3': Section3,
-    'v-section4': Section4,
-    'v-baseline': Baseline,
+    // 'v-section2': Section2,
+    // 'v-section3': Section3,
+    // 'v-section4': Section4,
+    // 'v-baseline': Baseline,
     'v-footer': Footer
   },
   data() {
@@ -69,7 +69,7 @@ export default {
         columns: ['months', 'successNum', 'orderAmount', 'profitsAmount'],
         rows: []
       },
-      countDay: '0', // 倒计时
+      countDay: 0, // 倒计时
       count: '', // 倒计时
       seconds: 0, // 10天的秒数
       nowDate: '',
