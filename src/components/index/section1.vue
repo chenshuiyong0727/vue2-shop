@@ -12,13 +12,25 @@
       </li>
       <li>
         <router-link :to="{name:'详情页'}">
-          <p>{{form.inventoryNum}}</p>
-          <p class="section1name">库存总数</p>
+          <p class="color-danger">{{form.inventoryNum}}</p>
+          <p class="section1name" >库存总数</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{name:'详情页'}">
-          <p>{{form.inventoryCost}}</p>
+          <p class="color-danger">{{form.profitsAmount}}</p>
+          <p class="section1name">利润总额</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p class="color-danger">{{form.profitsAverage}}</p>
+          <p class="section1name">平均利润</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{name:'详情页'}">
+          <p  class="color-danger">{{form.inventoryCost}}</p>
           <p  class="section1name">库存成本</p>
         </router-link>
       </li>
@@ -49,12 +61,6 @@
       </li>
       <li>
         <router-link :to="{name:'详情页'}">
-          <p>{{form.profitsAmount}}</p>
-          <p class="section1name">利润总额</p>
-        </router-link>
-      </li>
-      <li>
-        <router-link :to="{name:'详情页'}">
           <p>{{form.successNum}}</p>
           <p class="section1name">交易成功</p>
         </router-link>
@@ -81,12 +87,6 @@
         <router-link :to="{name:'详情页'}">
           <p>{{form.otherRevenue}}</p>
           <p class="section1name">其他收支</p>
-        </router-link>
-      </li>
-      <li>
-        <router-link :to="{name:'详情页'}">
-          <p>{{form.profitsAverage}}</p>
-          <p class="section1name">平均利润</p>
         </router-link>
       </li>
       <li>
