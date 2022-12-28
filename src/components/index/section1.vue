@@ -30,7 +30,7 @@
       </li>
       <li>
         <router-link :to="{name:'详情页'}">
-          <p  class="color-danger">{{form.inventoryCost}}</p>
+          <p>{{form.inventoryCost}}</p>
           <p  class="section1name">库存成本</p>
         </router-link>
       </li>

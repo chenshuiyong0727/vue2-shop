@@ -30,8 +30,8 @@ module.exports = {
     // proxyTable: {},
     proxyTable:{
       "/gw": {
-        target: "http://localhost:28087/gw", //设置调用的接口域名和端口
-        // target: "http://114.132.243.79:28087/gw", //设置调用的接口域名和端口
+        // target: "http://localhost:28087/gw", //设置调用的接口域名和端口
+        target: "http://114.132.243.79:28087/gw", //设置调用的接口域名和端口
         changeOrigin: true,
         pathRewrite: {
           "^/gw": "" //用'/api' 代替 'http://218.78.187.216/api/v1'

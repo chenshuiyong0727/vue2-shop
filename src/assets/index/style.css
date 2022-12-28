@@ -89,3 +89,11 @@
 .color-success {
   color: #0fbe8f;
 }
+.mint-header {
+  padding: 5.8vw 4.8vw;
+  background-color: #409EFF;
+  font-size: 20px;
+}
+.mint-field{
+  padding-left: 5vw;border-bottom: 0.3vw solid #eee;
+}

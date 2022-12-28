@@ -1,12 +1,13 @@
 <template lang="html">
 
   <div class="car">
-      <header class="header">
-          <div class="header-icon">
-              <span class="icon2-user"></span>
-          </div>
-          <span>登录/注册</span>
-      </header>
+    <mt-header title="个人中心"></mt-header>
+<!--      <header class="header">-->
+<!--          <div class="header-icon">-->
+<!--              <span class="icon2-user"></span>-->
+<!--          </div>-->
+<!--&lt;!&ndash;          <span>登录/注册</span>&ndash;&gt;-->
+<!--      </header>-->
       <div class="main">
           <router-link class="my-indent" :to="{ name: ''}">
               <span class="my-indent-left">我的订单</span>

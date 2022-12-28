@@ -10,6 +10,7 @@ const Car = resolve => require(['@/views/Car.vue'],resolve)
 const User = resolve => require(['@/views/User.vue'], resolve)
 const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
+const Order = resolve => require(['@/views/Order.vue'], resolve)
 const Pay = resolve => require(['@/components/car/pay/pay.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
 const logout = resolve => require(['@/views/logout.vue'], resolve)
@@ -78,6 +79,13 @@ export default new Router({
       path: '/search',
       name: '搜索页',
       component: Search,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
+    }, {
+      path: '/order',
+      name: '订单',
+      component: Order,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },
