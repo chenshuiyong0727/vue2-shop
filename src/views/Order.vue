@@ -18,8 +18,8 @@
           </div>
         </div>
         <div class="dingdans_con">
-          <div class="dingdans_con_left">
-            <img v-bind:src="fileUrl + item.imgUrl" alt="">
+          <div class="dingdans_con_left" @click="avatarShow(item.imgUrl)">
+            <img v-bind:src="fileUrl + item.imgUrl" alt="" >
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
@@ -34,7 +34,7 @@
               <mt-button
                 type="primary"
                 size="small"
-                @click="handleClick(item)">交易成功</mt-button>
+                @click="handleClick(item)">修改状态</mt-button>
               <mt-button
                 type="primary"
                 size="small"
@@ -51,9 +51,15 @@
           <mt-button size="small" @click="isShowDialog = false">关闭</mt-button>
         </div>
       </mt-header>
-      <section style="height: 130vw;width: 80vw">
+      <section style="height: 153vw;width: 80vw">
         <mt-field label="货号" v-model="orderData.actNo" :readonly="1==1"></mt-field>
         <mt-field label="尺码" v-model="orderData.size" :readonly="1==1"></mt-field>
+        <mt-field label="地址">
+            <select style="width: 40vw;font-size: 3.5vw;" v-model="requestParam.status">
+              <option :disabled="true" value="" selected>请选择</option>
+              <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>
+            </select>
+        </mt-field>
         <mt-field label="入库价" placeholder="请输入入库价" @keyup.native="keyup1($event)" type="number" v-model="requestParam.price"></mt-field>
         <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup1($event)" type="number" v-model="requestParam.shelvesPrice"></mt-field>
         <mt-field label="补贴价格" placeholder="请输入补贴价格" @keyup.native="keyup1($event)" type="number" v-model="requestParam.subsidiesPrice"></mt-field>
@@ -80,7 +86,7 @@
         <mt-field label="运费" placeholder="请输入运费"  type="number" v-model="requestParam1.freight"></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam1.waybillNo"></mt-field>
         <mt-field label="地址">
-            <select style="font-size: 3.5vw;" v-model="requestParam1.addressId">
+            <select style="width: 40vw;font-size: 3.5vw;" v-model="requestParam1.addressId">
              <option :disabled="true" value="" selected>请选择</option>
               <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
@@ -103,7 +109,11 @@
 <!--&lt;!&ndash;      <mt-picker  :slots="slots" @change="onValuesChange" value-key="fieldName"></mt-picker>&ndash;&gt;-->
 <!--      <mt-picker :slots="slots" @change="onValuesChange" :visible-item-count="5" :show-toolbar="false"  ref="picker" value-key="fieldName"></mt-picker>-->
 <!--    </mt-popup>-->
-
+    <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
+      <div class="imageShow">
+        <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">
+      </div>
+    </div>
     <v-baseline></v-baseline>
     <v-footer></v-footer>
   </div>
@@ -126,7 +136,8 @@
     //   }
     // },
     return {
-      // slots: '',
+      imageZoom: '',
+      pictureZoomShow: true,
       requestParam1: {
         id: '',
         waybillNo: '',
@@ -205,35 +216,11 @@
     this.getPage()
     this.listSysDict()
   },
-  // computed: {
-  //   slots () {
-  //     let slots = [
-  //       {
-  //         flex: 1,
-  //         values: this.addressList,
-  //         className: 'slot1',
-  //         textAlign: 'center'
-  //       }
-  //     ];
-  //     return  slots
-  //   }
-  // },
-    //
-    // created: function() {
-    //   this.getData()
-    // },
     methods:{
-      // cancelp(index){
-      //   if(index===2){
-      //     this.popupVisible = false ;
-      //   }else{
-      //     this.popupVisible = false ;
-      //     this.requestParam1.addressId = ''
-      //   }
-      // },
-      // onValuesChange(packer,val){
-      //   this.requestParam1.addressId = val[0]
-      // },
+      avatarShow(e) {
+        this.imageZoom = e
+        this.pictureZoomShow = true
+      },
       keyup1() {
         let profits = this.requestParam.theirPrice - this.requestParam.freight
           - this.requestParam.price
@@ -375,7 +362,10 @@
     background: #ffffff !important;
     font-size: 3.5vw;
   }
-
+  .dingdans {
+    padding-left: 2%;
+    width: 96%;
+  }
   .dingdans_item {
     padding: 2.4vw 1.0vw;
     background: #ffffff;
@@ -384,7 +374,7 @@
   }
 
   .dingdans_top {
-    font-size: 3.3vw;
+    font-size: 3.5vw;
     height: 3.88vw;
     line-height: 3.88vw;
     display: flex;
@@ -415,13 +405,13 @@
 
   .dingdans_con_right_down {
     margin-top: 1.4vw;
-    font-size: 1.2vw;
+    font-size: 3.5vw;
     margin-bottom: 2vw;
   }
   .dingdans_con_right_down_1 {
-    margin-left: 30vw;
+    margin-left: 25vw;
     margin-bottom: -7vw;
-    font-size: 1.5vw;
+    font-size: 3.5vw;
   }
   .color-danger {
     color: #F56C6C;

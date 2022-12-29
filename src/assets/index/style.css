@@ -97,3 +97,23 @@
 .mint-field{
   padding-left: 5vw;border-bottom: 0.3vw solid #eee;
 }
+.userPic {
+  width: 80px;
+  height: 80px;
+}
+.popContainer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 999;
+  display: grid;
+  align-items:center;
+}
+.imageShow {
+  margin: auto;
+  width: 70vw;
+  height: 70vw;
+}
