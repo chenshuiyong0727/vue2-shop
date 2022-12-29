@@ -79,29 +79,30 @@
         <mt-field label="尺码" v-model="orderData1.size" :readonly="1==1"></mt-field>
         <mt-field label="运费" placeholder="请输入运费"  type="number" v-model="requestParam1.freight"></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam1.waybillNo"></mt-field>
-        <mt-field label="地址" v-model="requestParam1.addressId">
-          <mt-button
-            size="small"
-            type="default"
-            @click="popupVisible = true">选择地址</mt-button>
+        <mt-field label="地址">
+            <select style="font-size: 3.5vw;" v-model="requestParam1.addressId">
+             <option :disabled="true" value="" selected>请选择</option>
+              <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>
+            </select>
         </mt-field>
         <div class="popupdiv" >
           <mt-button type="default" class="mt-button-div" size="normal"  @click="isShowDialog1 = false">取消</mt-button>
-          <mt-button type="primary" class="mt-button-div" size="normal" @click="confirmHandle">确认</mt-button>
+          <mt-button type="primary" class="mt-button-div" size="normal" @click="updateAddress">确认</mt-button>
         </div>
       </section>
     </mt-popup>
-    <mt-popup v-model="popupVisible" position="bottom" class="mint-popup" style="width: 100%;height: 30%;">
-      <mt-header title="选择地址">
-        <div slot="left">
-          <mt-button size="small" @click="cancelp(1)">取消</mt-button>
-        </div>
-        <div slot="right">
-          <mt-button size="small" @click="cancelp(2)">确定</mt-button>
-        </div>
-      </mt-header>
-      <mt-picker  :slots="slots" @change="onValuesChange" :visible-item-count="5" :show-toolbar="false"  ref="picker" value-key="name"></mt-picker>
-    </mt-popup>
+<!--    <mt-popup v-model="popupVisible" position="bottom" class="mint-popup" style="width: 100%;height: 30%;">-->
+<!--      <mt-header title="选择地址">-->
+<!--        <div slot="left">-->
+<!--          <mt-button size="small" @click="cancelp(1)">取消</mt-button>-->
+<!--        </div>-->
+<!--        <div slot="right">-->
+<!--          <mt-button size="small" @click="cancelp(2)">确定</mt-button>-->
+<!--        </div>-->
+<!--      </mt-header>-->
+<!--&lt;!&ndash;      <mt-picker  :slots="slots" @change="onValuesChange" value-key="fieldName"></mt-picker>&ndash;&gt;-->
+<!--      <mt-picker :slots="slots" @change="onValuesChange" :visible-item-count="5" :show-toolbar="false"  ref="picker" value-key="fieldName"></mt-picker>-->
+<!--    </mt-popup>-->
 
     <v-baseline></v-baseline>
     <v-footer></v-footer>
@@ -125,14 +126,7 @@
     //   }
     // },
     return {
-      slots: [
-        {
-          flex: 1,
-          values: ['男','女'],
-          className: 'slot1',
-          textAlign: 'center'
-        }
-      ],
+      // slots: '',
       requestParam1: {
         id: '',
         waybillNo: '',
@@ -150,7 +144,7 @@
         theirPrice: '',
         profits: ''
       },
-      popupVisible: false,
+      // popupVisible: false,
       orderData: '',
       isShowDialog: false,
       orderData1: '',
@@ -209,24 +203,37 @@
   },
   mounted() {
     this.getPage()
-    // this.listSysDict()
+    this.listSysDict()
   },
+  // computed: {
+  //   slots () {
+  //     let slots = [
+  //       {
+  //         flex: 1,
+  //         values: this.addressList,
+  //         className: 'slot1',
+  //         textAlign: 'center'
+  //       }
+  //     ];
+  //     return  slots
+  //   }
+  // },
     //
     // created: function() {
     //   this.getData()
     // },
     methods:{
-      cancelp(index){
-        if(index===2){
-          this.popupVisible = false ;
-        }else{
-          this.popupVisible = false ;
-          this.requestParam1.addressId = ''
-        }
-      },
-      onValuesChange(packer,val){
-        this.requestParam1.addressId = val[0]
-      },
+      // cancelp(index){
+      //   if(index===2){
+      //     this.popupVisible = false ;
+      //   }else{
+      //     this.popupVisible = false ;
+      //     this.requestParam1.addressId = ''
+      //   }
+      // },
+      // onValuesChange(packer,val){
+      //   this.requestParam1.addressId = val[0]
+      // },
       keyup1() {
         let profits = this.requestParam.theirPrice - this.requestParam.freight
           - this.requestParam.price
@@ -244,6 +251,15 @@
           if (res.subCode === 1000) {
             this.getPage()
             this.isShowDialog = false
+          }
+        })
+      },
+      updateAddress() {
+        goodsOrderApi.update(this.requestParam1).then(res => {
+          this.$toast(res.subMsg)
+          if (res.subCode === 1000) {
+            this.getPage()
+            this.isShowDialog1 = false
           }
         })
       },
@@ -303,6 +319,18 @@
         this.addressList = sysDictList.filter(item => item.typeValue == 38)
         this.statusList = sysDictList.filter(item => item.typeValue == 37)
         this.dataStatusList = sysDictList.filter(item => item.typeValue == 36)
+        console.info(this.addressList)
+        // this.slots =
+        // {
+        //   flex: 1,
+        //   values: this.addressList,
+        //   // values: [{"id":"1175188438572470272","typeValue":"38","typeName":"地址","fieldValue":"1","fieldName":"上海-龙盘路888号","sort":1},{"id":"1175188472399532032","typeValue":"38","typeName":"地址","fieldValue":"2","fieldName":"广州-山门大道700号","sort":2},{"id":"1175188504641146880","typeValue":"38","typeName":"地址","fieldValue":"3","fieldName":"四川成都-南六路1号","sort":3},{"id":"1175188529051996160","typeValue":"38","typeName":"地址","fieldValue":"4","fieldName":"湖北武汉-临空北路100号","sort":4},{"id":"1175188552649150464","typeValue":"38","typeName":"地址","fieldValue":"5","fieldName":"河北廊坊-富文道888号","sort":5},{"id":"1175188588107796480","typeValue":"38","typeName":"地址","fieldValue":"6","fieldName":"上海-彭封路333号","sort":6}],
+        //   className: 'slot1',
+        //   textAlign: 'center'
+        // }
+        // this.slots.values =  ['男','女']
+        // this.slots.values = this.addressList
+        // console.info(JSON.stringify(this.slots.values) )
       },
       // tab: function(index) {
       //   console.log(index)
@@ -312,7 +340,9 @@
     }
   }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
+
   @import '../assets/index/style.css';
   .mint-button--default.is-plain {
     border: 1px solid #409EFF;
