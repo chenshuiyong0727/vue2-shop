@@ -8,7 +8,7 @@
 <!--    <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/>-->
     <v-orderNum :orderIofo ="orderIofo"/>
 <!--    <v-section4 :list="datas.section4.list" :banner='datas.section4.banner'/>-->
-<!--    <v-baseline/>-->
+    <v-baseline/>
     <v-footer/>
   </div>
 </template>
@@ -21,7 +21,7 @@ import Section1 from '@/components/index/section1.vue'
 // import Section2 from '@/components/index/section2.vue'
 // import Section3 from '@/components/index/section3.vue'
 // import Section4 from '@/components/index/section4.vue'
-// import Baseline from '@/common/_baseline.vue'
+import Baseline from '@/common/_baseline.vue'
 import Footer from '@/common/_footer.vue'
 // import index from '@/http/mock.js' //模拟数据
 import { goodsOrderApi } from '@/api/goodsOrder'
@@ -35,7 +35,7 @@ export default {
     // 'v-section2': Section2,
     // 'v-section3': Section3,
     // 'v-section4': Section4,
-    // 'v-baseline': Baseline,
+    'v-baseline': Baseline,
     'v-footer': Footer
   },
   data() {

@@ -95,7 +95,8 @@
   font-size: 20px;
 }
 .mint-field{
-  padding-left: 5vw;border-bottom: 0.3vw solid #eee;
+  padding-left: 3vw;
+  margin-right: 3vw;
 }
 .userPic {
   width: 80px;
@@ -116,4 +117,20 @@
   margin: auto;
   width: 70vw;
   height: 70vw;
+}
+/* 我是有底线的 begin */
+.to-the-bottom {
+  position: relative;
+  color: #8a8a8a;
+  font-size: 0.32rem;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+select{
+  margin-left: -12px;
+  width: 44vw;
+  height:8vw;
+  font-size: 13px;
+  background-color: #ffffff;
+  border-color: #8a8a8a;
 }

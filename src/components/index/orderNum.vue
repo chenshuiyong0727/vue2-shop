@@ -8,12 +8,14 @@
       <section class="my-vip" style="margin-top: 0">
         <router-link class="my-vip-bottom ho" :to="{ name: ''}">
           <div>
-            <img style="width: 6.9vw" src="../../../static/img/order-2.png" ></img>
+            <img style="width: 7.9vw" src="../../../static/img/order-2.png" ></img>
           </div>
           <p>
             <span>已上架商品</span>
-            <i class="icon-go"></i>
-            <samp>{{orderIofo.count2}}</samp>
+            <i><samp>{{orderIofo.count2}} </samp>
+              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
+            </i>
+<!--            <samp>{{orderIofo.count2}}</samp>-->
           </p>
         </router-link>
       </section>
@@ -24,8 +26,9 @@
           </div>
           <p>
             <span>待发货商品</span>
-            <i class="icon-go"></i>
-            <samp :class="orderIofo.count3 > 0 ? 'color-danger' : ''">{{orderIofo.count3}}</samp>
+            <i><samp :class="orderIofo.count3 > 0 ? 'color-danger' : ''">{{orderIofo.count3}}</samp>
+              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
+            </i>
           </p>
         </router-link>
       </section>
@@ -36,8 +39,9 @@
           </div>
           <p>
             <span>已发货商品</span>
-            <i class="icon-go"></i>
-            <samp :class="orderIofo.count4 > 0 ? 'color-danger' : ''">{{orderIofo.count4}}</samp>
+            <i><samp :class="orderIofo.count4 > 0 ? 'color-danger' : ''">{{orderIofo.count4}}</samp>
+              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
+            </i>
           </p>
         </router-link>
       </section>
@@ -48,8 +52,9 @@
           </div>
           <p>
             <span>已揽件商品</span>
-            <i class="icon-go"></i>
-            <samp  :class="orderIofo.count5 > 0 ? 'color-danger' : ''">{{orderIofo.count5}}</samp>
+            <i><samp  :class="orderIofo.count5 > 0 ? 'color-danger' : ''">{{orderIofo.count5}}</samp>
+              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
+            </i>
           </p>
         </router-link>
       </section>
@@ -60,9 +65,9 @@
           </div>
           <p>
             <span>已收货商品</span>
-            <i class="icon-go"></i>
-            <samp           :class="orderIofo.count6 > 0 ? 'color-danger' : ''"
-            >{{orderIofo.count6}}</samp>
+            <i><samp :class="orderIofo.count6 > 0 ? 'color-danger' : ''">{{orderIofo.count6}}</samp>
+              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
+            </i>
           </p>
         </router-link>
       </section>
@@ -73,13 +78,28 @@
           </div>
           <p>
             <span>瑕疵商品</span>
-            <i class="icon-go"></i>
-          <samp
-          :class="orderIofo.count8 > 0 ? 'color-danger' : ''"
-          style="margin-left: 49vw">{{orderIofo.count8}}</samp>
+            <i><samp :class="orderIofo.count8 > 0 ? 'color-danger' : ''">{{orderIofo.count8}}</samp>
+              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
+            </i>
           </p>
         </router-link>
       </section>
+<!--      -->
+<!--      <section class="my-vip" style="margin-top: 0">-->
+<!--        <router-link class="my-vip-bottom ho" :to="{ name: ''}">-->
+<!--          <div>-->
+<!--            <img style="width: 6.2vw" src="../../../static/img/order-8.png" ></img>-->
+<!--          </div>-->
+<!--          <p>-->
+<!--            <span>瑕疵商品</span>-->
+<!--            <i> <samp-->
+<!--          :class="orderIofo.count8 > 0 ? 'color-danger' : ''"-->
+<!--          style="margin-left: 49vw">{{orderIofo.count8}} </samp>-->
+<!--              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>-->
+<!--            </i>-->
+<!--          </p>-->
+<!--        </router-link>-->
+<!--      </section>-->
     </div>
   </div>
 </template>
@@ -115,12 +135,17 @@
   @import '../../assets/fz.less';
   @import '../../assets/index/style.css';
   @import '../../assets/user/icon/carstyle.css';
-
+  /* 这里直接设置 1rem = 50px begin */
+  html {
+    font-size: 10px;
+  }
+  /* 这里直接设置 1rem = 50px end */
+  html,
   .section1-title {
     .bt();
     background-color: #ffffff;
     text-align: center;
-    padding: 2vw 0;
+    padding: 3vw 0;
     margin-top: 4vw;
     .fz(font-size, 40);
     color: #333;
@@ -140,7 +165,6 @@
   }
   .car {
     width: 100%;
-    padding-bottom: 14vw;
     background-color: #F8FCFF;
     .header {
       width: 100%;
@@ -286,7 +310,8 @@
             -webkit-box-flex: 10;
             flex: 10;
             position: relative;
-
+            font-size: 4.1vw;
+            top: 0.7VW;
             &:active {
               background-color: rgb(224, 227, 230);
             }
@@ -294,14 +319,12 @@
             i {
               position: absolute;
               right: 0;
-              top: .4vw;
+              top: 1.2vw;
             }
             samp {
               font-weight: 600;
-              position: absolute;
-              margin-left: 45vw;
+              /*margin-left: 42vw;*/
               font-size: 4.5vw;
-              /*top: .4vw;*/
             }
           }
         }

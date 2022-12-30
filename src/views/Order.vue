@@ -4,10 +4,19 @@
 <!--    <mt-header title="订单中心"></mt-header>-->
     <mt-header title="订单中心">
       <div slot="left">
-        <mt-button  icon="back"></mt-button>
+        <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
       </div>
     </mt-header>
     <div class="dingdans">
+      <mt-loadmore
+        :top-method="loadTop"
+        :bottom-method="loadBottom"
+        :bottom-all-loaded="allLoaded"
+        @top-status-change="handleTopChange"
+        @bottom-status-change="handleBottomChange"
+        :autoFill="false"
+        ref="loadmore"
+      >
       <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top">
           <div class="dingdans_top_left">
@@ -43,6 +52,19 @@
           </div>
         </div>
       </div>
+      </mt-loadmore>
+      <div slot="top" class="mint-loadmore-top">
+        <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }">松手释放↓</span>
+        <span v-show="topStatus === 'loading'">加载中</span>
+      </div>
+      <div slot="bottom" class="mint-loadmore-bottom">
+        <span
+          v-show="bottomStatus !== 'loading'"
+          :class="{ 'rotate': bottomStatus === 'drop' }"
+        >松手释放↑</span>
+        <span v-show="bottomStatus === 'loading'">加载中</span>
+      </div>
+      <p v-if="allLoaded" class="to-the-bottom">我是有底线的</p>
     </div>
     <mt-popup
       v-model="isShowDialog">
@@ -192,6 +214,11 @@
         pageSize: 10,
         pageNum: 1
       },
+      topStatus: "",
+      bottomStatus: "",
+      allLoaded: false,
+      mockArr: [],
+      number: 0,
       addressList: [],
       statusList: [],
       dataStatusList: [],
@@ -206,17 +233,82 @@
     }
   },
   created() {
-    const { actNo } = this.$route.query
-    this.queryParam.keyword = actNo
-    if (this.queryParam.keyword) {
-      this.getPage()
-    }
+    // const { actNo } = this.$route.query
+    // this.queryParam.keyword = actNo
+    // if (this.queryParam.keyword) {
+    //   // this.getPage()
+    // }
+    let timer = setTimeout(_ => {
+      clearTimeout(timer);
+      this.loadData('refresh');
+    }, 200);
   },
   mounted() {
-    this.getPage()
+    // this.getPage()
     this.listSysDict()
   },
-    methods:{
+  methods:{
+    loadData(p_status) {
+      // 第一次加载或者下拉刷新最新数据
+      if (p_status === "refresh") {
+        this.tableData = [];
+      }
+      goodsOrderApi.page(this.queryParam).then(res => {
+        if (res.subCode === 1000) {
+          let list =  res.data ? res.data.list : []
+          for (let i = 0; i < list.length; i++) {
+            this.tableData.push(list[i])
+          }
+          // this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
+        } else {
+          this.$toast(res.subMsg)
+          return false
+        }
+      })
+      // for (let i = 0; i < 5; ) {
+      //   let obj = {
+      //     cover: "/static/img/logo/logo.png",
+      //     title: "奥尔良鸡中翅饭",
+      //     num: 1,
+      //     price: 14.88
+      //   };
+      //   obj["id"] = this.mockArr.length + 1;
+      //   if (i % 2) {
+      //     obj["cover"] = "/static/img/logo/logo.png";
+      //     obj["title"] = "猪扒饭";
+      //     obj["num"] += 1;
+      //     obj["price"] -= 1;
+      //   }
+      //   i++;
+      //   this.mockArr.push(obj);
+      // }
+      // this.list = this.mockArr;
+    },
+    handleTopChange(p_status) {
+      this.topStatus = p_status;
+    },
+    handleBottomChange(p_status) {
+      this.bottomStatus = p_status;
+    },
+    loadBottom() {
+      alert(1)
+      // 一次下拉加载5条更多数据，使用定时器默认ajax加载
+      this.loadData()
+      this.number++;
+      // allLoaded 设置为 true 时,表示数据已全部获取完毕不需要再出现上拉加载更多
+      if (this.number === 3) {
+        this.allLoaded = true;
+      }
+      this.$refs.loadmore.onBottomLoaded();
+    },
+    loadTop() {
+      alert(2)
+      // 默认下拉刷新最新数据
+      this.loadData("refresh");
+      this.number = 0;
+      this.allLoaded = false;
+      this.$refs.loadmore.onTopLoaded();
+    },
       avatarShow(e) {
         this.imageZoom = e
         this.pictureZoomShow = true
@@ -306,7 +398,7 @@
         this.addressList = sysDictList.filter(item => item.typeValue == 38)
         this.statusList = sysDictList.filter(item => item.typeValue == 37)
         this.dataStatusList = sysDictList.filter(item => item.typeValue == 36)
-        console.info(this.addressList)
+        // console.info(this.addressList)
         // this.slots =
         // {
         //   flex: 1,
@@ -419,5 +511,34 @@
   .color-success {
     color: #0fbe8f;
   }
-
+  .mint-loadmore-top,
+  .mint-loadmore-bottom {
+    font-size: 0.28rem;
+  }
+  /* 我是有底线的 begin */
+  .to-the-bottom {
+    position: relative;
+    color: #999999;
+    font-size: 0.32rem;
+    text-align: center;
+    padding: 0.1rem 0;
+    background: #f1eded;
+  }
+  .to-the-bottom::before,
+  .to-the-bottom::after {
+    position: absolute;
+    top: 50%;
+    height: 0.02rem;
+    width: 25%;
+    margin-top: -0.01rem;
+    background: #999;
+    content: "";
+  }
+  .to-the-bottom::before {
+    left: 10%;
+  }
+  .to-the-bottom::after {
+    right: 10%;
+  }
+  /* 我是有底线的 end */
 </style>

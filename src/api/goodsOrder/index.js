@@ -1,5 +1,12 @@
 import request from '@/utils/request'
 
+export function pageWait(body) {
+  return request({
+    url: '/gw/op/v1/goodsOrder',
+    method: 'get',
+    params: body
+  });
+}
 export const goodsOrderApi = {
   // 获取数据列表
   page: (body) => request({
