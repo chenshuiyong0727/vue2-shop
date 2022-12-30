@@ -29,11 +29,11 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
-              货号：<strong>{{item.actNo}} </strong> 尺码：<strong>{{item.size}}</strong>
+              货号：<strong>{{item.actNo}} </strong> 尺码：<strong>{{item.size}}</strong> 售价：<strong>{{item.shelvesPrice}}</strong>
             </div>
             <div class="dingdans_con_right_down">
               <span v-if="item.profits">利润：<strong class="color-danger">{{item.profits}}</strong></span>
-              <span v-if="item.theirPrice">到手价：<strong>{{item.theirPrice}}</strong></span>
+              <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
               入库价：<strong>{{item.price}}</strong>
             </div>
             <div class="dingdans_con_right_down_1">
@@ -444,11 +444,13 @@
   .dingdans_con_left {
     width: 20vw;
     height: 20vw;
+    display: flex;
   }
 
   .dingdans_con_left img {
     width: 100%;
-    height: 100%;
+    margin: auto;
+    /*height: 100%;*/
   }
 
   .diangdans_con_right {
@@ -494,7 +496,7 @@
   /* 给要上拉的容器设置 begin */
   .hello {
     background-color: #F8FCFF;
-    /*background: #ffffff !important;*/
+    padding-top: 12vw;
     font-size: 3.5vw;
     height: 100vh;
     overflow-y: auto;

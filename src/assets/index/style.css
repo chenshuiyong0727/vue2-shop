@@ -93,6 +93,11 @@
   padding: 5.8vw 4.8vw;
   background-color: #409EFF;
   font-size: 20px;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  right: 0;
+  left: 0;
 }
 .mint-field{
   padding-left: 3vw;
@@ -116,7 +121,7 @@
 .imageShow {
   margin: auto;
   width: 70vw;
-  height: 70vw;
+  /*height: 70vw;*/
 }
 /* 我是有底线的 begin */
 .to-the-bottom {
