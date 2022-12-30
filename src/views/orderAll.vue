@@ -61,7 +61,7 @@
         <span v-if="bottomStatus === 'loading'">加载中</span>
       </div>
     </mt-loadmore>
-    <p v-if="allLoaded" class="to-the-bottom">人家是有底线的 -.-</p>
+    <p v-if="allLoaded" class="to-the-bottom">{{emtityMsg}}</p>
     <mt-popup
       v-model="isShowDialog">
       <mt-header title="交易成功">
@@ -163,6 +163,7 @@
           profits: ''
         },
         // popupVisible: false,
+        emtityMsg: '人家是有底线的 -.-',
         orderData: '',
         isShowDialog: false,
         orderData1: '',
@@ -244,6 +245,13 @@
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
+            if (this.totalCount == 0) {
+              this.allLoaded = true;
+              this.emtityMsg = '暂无相关订单 -.-'
+            } else if (this.totalCount <= this.queryParam.pageSize) {
+              this.allLoaded = true;
+              this.emtityMsg = '人家是有底线的 -.-'
+            }
           } else {
             this.$message.error(res.subMsg)
           }
@@ -485,7 +493,8 @@
   /*}*/
   /* 给要上拉的容器设置 begin */
   .hello {
-    background: #ffffff !important;
+    background-color: #F8FCFF;
+    /*background: #ffffff !important;*/
     font-size: 3.5vw;
     height: 100vh;
     overflow-y: auto;
