@@ -186,7 +186,7 @@
           poundageTo: '',
           theirPriceFrom: '',
           theirPriceTo: '',
-          addressId: '2',
+          addressId: '',
           waybillNo: '',
           createTimeFrom: '',
           createTimeTo: '',
