@@ -120,7 +120,7 @@
 }
 .imageShow {
   margin: auto;
-  width: 70vw;
+  width: 90vw;
   /*height: 70vw;*/
 }
 /* 我是有底线的 begin */
@@ -132,10 +132,26 @@
   padding: 1.5rem 0;
 }
 select{
-  margin-left: -12px;
-  width: 44vw;
+  /*margin-left: -12px;*/
+  /*width: 44vw;*/
   height:8vw;
   font-size: 13px;
   background-color: #ffffff;
   border-color: #8a8a8a;
+}
+.select80{
+  margin-left: -12px;
+  width: 44vw;
+  /*height:8vw;*/
+  /*font-size: 13px;*/
+  /*background-color: #ffffff;*/
+  /*border-color: #8a8a8a;*/
+}
+.select100{
+  margin-left: -12px;
+  width: 62vw;
+  /*height:8vw;*/
+  /*font-size: 13px;*/
+  /*background-color: #ffffff;*/
+  /*border-color: #8a8a8a;*/
 }
