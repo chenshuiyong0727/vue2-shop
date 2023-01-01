@@ -3,10 +3,10 @@
   <div class="car">
     <div class="main">
       <h1 class="section1-title">
-        代处理事务
+        待处理事务
       </h1>
       <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ name: ''}">
+        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=2'}">
           <div>
             <img style="width: 7.9vw" src="../../../static/img/order-2.png" ></img>
           </div>
@@ -20,7 +20,7 @@
         </router-link>
       </section>
       <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ name: ''}">
+        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=3'}">
           <div>
             <img style="width: 6.2vw" src="../../../static/img/order-3.png" ></img>
           </div>
@@ -33,7 +33,7 @@
         </router-link>
       </section>
       <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ name: ''}">
+        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=4'}">
           <div>
             <img style="width: 7.9vw" src="../../../static/img/order-4.png" ></img>
           </div>
@@ -46,7 +46,7 @@
         </router-link>
       </section>
       <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ name: ''}">
+        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=5'}">
           <div>
             <img style="width: 6.2vw" src="../../../static/img/order-5.png" ></img>
           </div>
@@ -59,7 +59,7 @@
         </router-link>
       </section>
       <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ name: ''}">
+        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=6'}">
           <div>
             <img style="width: 6.2vw" src="../../../static/img/order-6.png" ></img>
           </div>
@@ -72,7 +72,7 @@
         </router-link>
       </section>
       <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ name: ''}">
+        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=8'}">
           <div>
             <img style="width: 6.2vw" src="../../../static/img/order-8.png" ></img>
           </div>
@@ -86,7 +86,7 @@
       </section>
 <!--      -->
 <!--      <section class="my-vip" style="margin-top: 0">-->
-<!--        <router-link class="my-vip-bottom ho" :to="{ name: ''}">-->
+<!--        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=4'}">-->
 <!--          <div>-->
 <!--            <img style="width: 6.2vw" src="../../../static/img/order-8.png" ></img>-->
 <!--          </div>-->

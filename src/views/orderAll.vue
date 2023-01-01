@@ -153,7 +153,7 @@
       </mt-header>
       <section style="height: 150vw;width: 100vw">
         <mt-field label="状态" style="margin-top: 11vw;">
-            <select class="select100" v-model="queryParam.status" @change="changeSystem">
+            <select class="select100" v-model="queryParam.status" @change="changeSystem" :disabled="status">
                <option :disabled="true" value="" selected>请选择状态</option>
               <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
@@ -164,8 +164,23 @@
               <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
         </mt-field>
+<!--        <mt-field label="成功开始时间">-->
+<!--          <mt-button-->
+<!--            type="primary"-->
+<!--            size="small"-->
+<!--            @click="open('picker1')">选择时间</mt-button>-->
+<!--        </mt-field>-->
+<!--        <mt-field label="成功结束时间">-->
+<!--          <mt-button-->
+<!--            type="primary"-->
+<!--            size="small"-->
+<!--            @click="open('picker1')">选择时间</mt-button>-->
+<!--        </mt-field>-->
+        <mt-field label="成功开始时间" type="date" placeholder="成功开始时间"  v-model="queryParam.successTimeFrom" ></mt-field>
+        <mt-field label="成功结束时间" type="date" placeholder="成功结束时间"  v-model="queryParam.successTimeTo" ></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="queryParam.waybillNo"></mt-field>
         <mt-field label="订单号" placeholder="请输入订单号"  v-model="queryParam.orderNo"></mt-field>
+
       </section>
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
@@ -261,8 +276,10 @@
         dataStatusList: [],
         sellTime: '',
         successTime: '',
+        startDate: new Date(),
         createTime: '',
         updateTime: '',
+        status: '',
         selectedId: [],
         ids: [],
         tableData: [],
@@ -277,10 +294,15 @@
     //   }, 200);
     // },
     created() {
-      const { actNo } = this.$route.query
+      const { actNo,status } = this.$route.query
       this.queryParam.keyword = actNo
-      if (this.queryParam.keyword) {
-        this.getPage()
+      this.status = status
+      this.queryParam.status = status
+      if (this.queryParam.keyword || this.queryParam.status) {
+        if(this.queryParam.status){
+          this.changeSystem()
+        }
+        this.search1()
       }
       // let timer = setTimeout(_ => {
       //   clearTimeout(timer);
@@ -292,6 +314,15 @@
       this.listSysDict()
     },
     methods: {
+      successTimeChange() {
+        if (this.successTime) {
+          this.queryParam.successTimeFrom = this.successTime[0]
+          this.queryParam.successTimeTo = this.successTime[1]
+        } else {
+          this.queryParam.successTimeFrom = null
+          this.queryParam.successTimeTo = null
+        }
+      },
       getPage() {
         goodsOrderApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
@@ -348,16 +379,17 @@
         this.allLoaded = false;
         this.getPage()
       },
+      // 日期
+      open(picker) {
+        this.$refs[picker].open();
+      },
       changeSystem() {
-        // alert(1)
         let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
           localStorage.getItem('sysDictList')) : []
         let res = sysDictList.filter(
           item => item.typeValue == 37 && item.fieldValue == this.queryParam.status)
-        // alert(res.length ? res[0].fieldName : '--')
         this.titleName = res.length ? res[0].fieldName : ''
         this.titleName = this.titleName + '订单'
-
       },
       search1() {
         this.queryParam.pageNum = 1
@@ -371,7 +403,7 @@
           keyword: '',
           orderNo: '',
           inventoryId: '',
-          status: '',
+          status: this.status,
           shelvesPriceFrom: '',
           shelvesPriceTo: '',
           freightFrom: '',
@@ -398,6 +430,7 @@
         this.updateTime = ''
         this.sellTime = ''
         this.successTime = ''
+        this.changeSystem()
         this.search1()
       },
       handleTopChange(p_status) {
