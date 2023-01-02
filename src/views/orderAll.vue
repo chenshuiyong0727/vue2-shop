@@ -7,7 +7,7 @@
     </mt-header>
     <div class="fenlei_top">
       <div    class="fenlei_top_left">
-        <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键字（货号、尺码）" class="ins">
+        <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索货号" class="ins">
       </div>
       <div class="fenlei_top_right" >
         <mt-button
@@ -180,7 +180,7 @@
         <mt-field label="成功结束时间" type="date" placeholder="成功结束时间"  v-model="queryParam.successTimeTo" ></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="queryParam.waybillNo"></mt-field>
         <mt-field label="订单号" placeholder="请输入订单号"  v-model="queryParam.orderNo"></mt-field>
-
+        <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
       </section>
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
@@ -242,6 +242,7 @@
         fileUrl: fileUrl,
         queryParam: {
           id: '',
+          size: '',
           keyword: '',
           orderNo: '',
           inventoryId: '',
@@ -401,6 +402,7 @@
         this.queryParam = {
           id: '',
           keyword: '',
+          size: '',
           orderNo: '',
           inventoryId: '',
           status: this.status,
