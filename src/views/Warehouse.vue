@@ -58,7 +58,7 @@
               <span >预计利润：<strong class="color-danger">{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong></span>
               <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
               入库价：<strong>{{item.price}}</strong>
-              售价：<strong>{{item.dwPrice}}</strong>
+              得物价：<strong>{{item.dwPrice}}</strong>
             </div>
             <div style="
             margin-bottom: -7vw;
@@ -287,9 +287,10 @@
     //   }, 200);
     // },
     created() {
-      const { actNo } = this.$route.query
+      const { actNo,size } = this.$route.query
+      this.queryParam.size = size
       this.queryParam.actNo = actNo
-      if (this.queryParam.actNo) {
+      if (this.queryParam.actNo || this.queryParam.size) {
         this.search1()
       }
     },
