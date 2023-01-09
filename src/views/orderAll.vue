@@ -11,13 +11,15 @@
       </div>
       <div class="fenlei_top_right" >
         <mt-button
-          style="margin-left: -60px"
+          style="margin-left: -65px"
           type="primary"
           size="small"
           @click="search">搜索</mt-button>
         <mt-button
-          style="margin-left: 14px;
-           width: 70px;"
+          style="
+           padding-top: 1.3px;
+           margin-left: 12px;
+           width: 67px;"
           type="primary"
           size="small"
           @click="isShowDialog2 = true">  <img style="margin-left: -10px;" src="../../static/img/choose.png" height="20" width="20" slot="icon">
@@ -63,11 +65,11 @@
               <mt-button
                 type="primary"
                 size="small"
-                @click="handleClick(item)">修改状态</mt-button>
-              <mt-button
-                type="primary"
-                size="small"
-                @click="changeStatusDialog1(item)">修改地址</mt-button>
+                @click="handleClick(item)">修改</mt-button>
+<!--              <mt-button-->
+<!--                type="primary"-->
+<!--                size="small"-->
+<!--                @click="changeStatusDialog1(item)">修改地址</mt-button>-->
             </div>
           </div>
         </div>
@@ -87,7 +89,7 @@
     <p v-if="allLoaded" class="to-the-bottom">{{emtityMsg}}</p>
     <mt-popup
       v-model="isShowDialog">
-      <mt-header title="交易成功">
+      <mt-header title="修改">
         <div slot="right">
           <mt-button size="normal"  @click="isShowDialog = false" style="font-size: 16px">关闭</mt-button>
         </div>
@@ -95,9 +97,16 @@
           <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 135vw;width: 80vw">
+      <section style="height: 130vw;width: 80vw">
         <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :readonly="true"></mt-field>
         <mt-field label="尺码" v-model="orderData.size" :readonly="true"></mt-field>
+        <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam.waybillNo"></mt-field>
+        <mt-field label="地址">
+            <select class="select80" v-model="requestParam.addressId">
+          <option :disabled="true" value="" selected>请选择</option>
+              <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>
+            </select>
+        </mt-field>
         <mt-field label="状态">
             <select  class="select80" v-model="requestParam.status">
               <option :disabled="true" value="" selected>请选择</option>
@@ -145,13 +154,13 @@
       v-model="isShowDialog2">
       <mt-header title="筛选" >
         <div slot="right">
-          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px">关闭</mt-button>
+          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px"> 重置（关闭）</mt-button>
         </div>
         <div slot="left">
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 150vw;width: 100vw">
+      <section style="height: 80vw;width: 100vw">
         <mt-field label="状态" style="margin-top: 11vw;">
             <select class="select100" v-model="queryParam.status" @change="changeSystem" :disabled="status">
                <option :disabled="true" value="" selected>请选择状态</option>
@@ -226,7 +235,9 @@
           freight: '',
           poundage: '',
           theirPrice: '',
-          profits: ''
+          profits: '',
+          waybillNo: '',
+          addressId: ''
         },
         // popupVisible: false,
         titleName: '订单',
@@ -459,6 +470,23 @@
         this.pictureZoomShow = true
       },
       keyup1() {
+        // let theirPrice =  this.requestParam.subsidiesPrice * 1
+        //   +  this.requestParam.shelvesPrice - (this.requestParam.shelvesPrice * 0.075 + 38 + 8.5)
+        // // let theirPrice = this.requestParam.theirPrice - this.requestParam.freight
+        // //   - this.theirPrice.price
+        // this.requestParam.profits = parseFloat(theirPrice).toFixed(2)
+        //
+        // let profits = this.requestParam.theirPrice - this.requestParam.freight
+        //   - this.requestParam.price
+        // this.requestParam.profits = parseFloat(profits).toFixed(2)
+
+        let poundage = this.requestParam.shelvesPrice * 0.075 + 38 + 8.5
+        this.requestParam.poundage = parseFloat(poundage).toFixed(2)
+
+        let theirPrice = this.requestParam.subsidiesPrice * 1 + this.requestParam.shelvesPrice
+          - (this.requestParam.shelvesPrice * 0.075 + 38 + 8.5)
+        this.requestParam.theirPrice = parseFloat(theirPrice).toFixed(2)
+
         let profits = this.requestParam.theirPrice - this.requestParam.freight
           - this.requestParam.price
         this.requestParam.profits = parseFloat(profits).toFixed(2)
@@ -503,6 +531,8 @@
         this.requestParam.shelvesPrice = this.orderData.shelvesPrice
         this.requestParam.subsidiesPrice = this.orderData.subsidiesPrice
         this.requestParam.freight = this.orderData.freight
+        this.requestParam.waybillNo = this.orderData.waybillNo
+        this.requestParam.addressId = this.orderData.addressId
         // let poundage = this.requestParam.shelvesPrice * 0.075 + 38 + 8.5
         // this.requestParam.poundage = parseFloat(poundage).toFixed(2)
         if (!this.orderData.poundage) {
@@ -612,7 +642,7 @@
     margin-bottom: 2vw;
   }
   .dingdans_con_right_down_1 {
-    margin-left: 26vw;
+    margin-left: 55vw;
     margin-bottom: -7vw;
     font-size: 3.5vw;
   }
@@ -711,7 +741,8 @@
     top: 0;
     left: 0;
     z-index: 99;
-    margin-top:0.85rem;
+    margin-top:11.6vw;
+    /*margin-top:0.85rem;*/
   }
 
   .fenlei_top_right {
@@ -753,7 +784,8 @@
     border-image: initial;
     border: 0;
     outline: none;
-    width: 5.7rem;
+    width: 76vw;
+    /*width: 5.7rem;*/
     padding: 0.2rem;
 
   }
