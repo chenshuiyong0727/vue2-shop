@@ -7,6 +7,7 @@ import api from '@/http/api.js'       //http请求
 import '@/utils/filter'
 import less from 'less'
 import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import Mint from 'mint-ui';    //移动端UI
 import 'mint-ui/lib/style.css'
 import { Popup } from 'mint-ui';

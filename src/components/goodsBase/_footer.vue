@@ -7,7 +7,7 @@
         <img src="../../../static/img/index_2.png" height="25" width="25" slot="icon">
         回到首页
       </mt-button>
-      <mt-button style="margin-left: 5px;
+      <mt-button @click="gotoAdd(null,3)" style="margin-left: 5px;
     margin-top: 9px;" type="primary">
         <img src="../../../static/img/add.png" height="20" width="20" slot="icon">
         新增
@@ -33,7 +33,10 @@
     methods: {
       gotoIndex(row) {
         this.$router.push({ path: '/'})
-      }
+      },
+      gotoAdd(id, type) {
+        this.$router.push({ path: '/goodsAdd', query: { id, type } })
+      },
     }
   }
 </script>

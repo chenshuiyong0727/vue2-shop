@@ -66,7 +66,7 @@
     font-size: 3.5vw;
     margin-top: -1vw;">
               <mt-button
-                style="margin-left: 30.1vw;"
+                style="margin-left: 16.1vw;"
                 type="primary"
                 size="small"
                 @click="jumpactNo(item)">查看库存</mt-button>
@@ -74,7 +74,12 @@
                 style="margin-left: 1vw;"
                 type="primary"
                 size="small"
-                @click="handleClick(item)">修改</mt-button>
+                @click="goDetail(item.id,1)">查看</mt-button>
+              <mt-button
+                style="margin-left: 1vw;"
+                type="primary"
+                size="small"
+                @click="goDetail(item.id,2)">编辑</mt-button>
             </div>
           </div>
         </div>
@@ -290,6 +295,9 @@
       this.listSysDict()
     },
     methods: {
+      goDetail(id, type) {
+        this.$router.push({ path: '/goodsAdd', query: { id, type } })
+      },
       jumpactNo(row) {
         let actNo = row.actNo
         if (!actNo) {
