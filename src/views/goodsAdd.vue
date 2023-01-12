@@ -64,6 +64,14 @@
       </mt-field>
       <mt-field
         :disabled="type == 1 "
+       label="名称"
+        placeholder="请输入名称"
+        type = "text"
+        v-model = "form.name"
+        >
+      </mt-field>
+      <mt-field
+        :disabled="type == 1 "
        label="备注"
         placeholder="请输入备注"
         type = "textarea"
@@ -82,15 +90,15 @@
     </section>
     <div style="    margin-left: 20vw;
     margin-top: 20px;">
-      <mt-button v-if="type != 1"
+      <mt-button v-if="type != 1" style="bottom: 10px"
         type="primary"
         @click="submit">提交</mt-button>
-      <mt-button v-else
+      <mt-button v-else style="bottom: 10px"
         type="primary"
         @click="goEdit">编辑</mt-button>
-      <mt-button
+      <mt-button style="bottom: 10px"
         @click="$router.go(-1)">取消</mt-button>
-      <mt-button
+      <mt-button style="bottom: 10px"
         type="primary"
         @click="gotoIndex">回到首页</mt-button>
     </div>

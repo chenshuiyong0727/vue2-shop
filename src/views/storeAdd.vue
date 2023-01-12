@@ -68,7 +68,7 @@
           </el-table-column>
           <el-table-column fixed="right" align="center" label="操作" width="60">
             <template scope="scope">
-              <el-button type="text" @click="changeStatusDialog1(scope.row)">详情
+              <el-button type="text" @click="changeStatusDialog1(scope.row.sizeIndex,scope.row)">详情
               </el-button>
             </template>
           </el-table-column>
@@ -143,23 +143,6 @@
         </el-table>
       </div>
     </div>
-<!--    <div style="-->
-<!--        border-bottom: 1vw solid #eee;-->
-<!--    font-size: 10px;-->
-<!--    padding-top: 2.4vw;-->
-<!--    padding-left: 4vw;-->
-<!--    padding-right: 3vw;-->
-<!--    background: #ffffff;" >-->
-<!--      <h5 style="font-size: 20px;margin-bottom: 8px;">批量处理</h5>-->
-<!--      <div class="clearfix btm-distance">-->
-<!--        <el-input v-model.trim="unifiedPrice" placeholder="一键设置进价">-->
-<!--          <el-button type="primary" slot="append" @click="setUnifiedPrice()">确认</el-button>-->
-<!--        </el-input>-->
-<!--        <el-input v-model.trim="unifiedDwPrice" placeholder="一键设置售价">-->
-<!--          <el-button type="primary" slot="append" @click="setUnifiedDwPrice()">确认</el-button>-->
-<!--        </el-input>-->
-<!--      </div>-->
-<!--    </div>-->
     <mt-popup
       v-model="isShowDialog1">
       <mt-header title="查看详情">
@@ -167,7 +150,7 @@
           <mt-button size="normal"  @click="isShowDialog1 = false" style="font-size: 16px">关闭</mt-button>
         </div>
         <div slot="left">
-          <mt-button size="normal" @click="isShowDialog1 = false" style="font-size: 16px">确定</mt-button>
+          <mt-button size="normal" @click="goDel" style="font-size: 16px">移除</mt-button>
         </div>
       </mt-header>
       <section style="height: 80vw;width: 80vw">
@@ -182,12 +165,12 @@
     </mt-popup>
     <div style="    margin-left: 20vw;
     margin-top: 20px;">
-      <mt-button
+      <mt-button style="bottom: 10px"
         type="primary"
         @click="goAdd">提交</mt-button>
-      <mt-button
+      <mt-button style="bottom: 10px"
         @click="$router.go(-1)">取消</mt-button>
-      <mt-button
+      <mt-button style="bottom: 10px"
         type="primary"
         @click="gotoIndex">回到首页</mt-button>
     </div>
@@ -211,6 +194,7 @@ export default {
       },
       isShowDialog1: false,
       orderData1: '',
+      inventoryIndex:'',
       activeIndex: [],
       fileUrl: fileUrl,
       goodsId: '',
@@ -231,30 +215,34 @@ export default {
   mounted() {
   },
   methods:{
-    changeStatusDialog1(row) {
-      if (!row.inventory) {
-        this.$toast('请输入尺码 ' + row.size + ' 的库存')
-        return
-      }
-      if (!row.price) {
-        this.$toast('请输入尺码 ' + row.size  + ' 的入库价')
-        return
-      }
-      if (!row.dwPrice) {
-        this.$toast('请输入尺码 ' + row.size  + ' 的售价')
-        return
-      }
+    changeStatusDialog1(index,row) {
+      this.inventoryIndex = index
+      // if (!row.inventory) {
+      //   this.$toast('请输入尺码 ' + row.size + ' 的库存')
+      //   return
+      // }
+      // if (!row.price) {
+      //   this.$toast('请输入尺码 ' + row.size  + ' 的入库价')
+      //   return
+      // }
+      // if (!row.dwPrice) {
+      //   this.$toast('请输入尺码 ' + row.size  + ' 的售价')
+      //   return
+      // }
       this.orderData1 = row
-      let poundage = this.orderData1.dwPrice * 0.075 + 38 + 8.5
-      this.orderData1.poundage = parseFloat(poundage).toFixed(2)
+      if (this.orderData1.dwPrice)  {
+        let poundage = this.orderData1.dwPrice * 0.075 + 38 + 8.5
+        this.orderData1.poundage = parseFloat(poundage).toFixed(2)
 
-      let theirPrice =  this.orderData1.dwPrice
-        - (this.orderData1.dwPrice * 0.075 + 38 + 8.5)
-      this.orderData1.theirPrice = parseFloat(theirPrice).toFixed(2)
-
-      let profits = this.orderData1.theirPrice - 10
-        - this.orderData1.price
-      this.orderData1.profits = parseFloat(profits).toFixed(2)
+        let theirPrice =  this.orderData1.dwPrice
+          - (this.orderData1.dwPrice * 0.075 + 38 + 8.5)
+        this.orderData1.theirPrice = parseFloat(theirPrice).toFixed(2)
+      }
+      if (this.orderData1.theirPrice && this.orderData1.price)  {
+        let profits = this.orderData1.theirPrice - 10
+          - this.orderData1.price
+        this.orderData1.profits = parseFloat(profits).toFixed(2)
+      }
       this.isShowDialog1 = true
       console.info(this.orderData1)
     },
@@ -340,9 +328,10 @@ export default {
     goDetail(item) {
       console.info(item)
     },
-    goDel(index, item) {
-      this.del(index)
-      this.delItem(item)
+    goDel() {
+      this.del(this.inventoryIndex)
+      this.delItem(this.orderData1)
+      this.isShowDialog1 = false
     },
     del(index) {
       for (let i = 0; i < this.activeIndex.length; i++) {

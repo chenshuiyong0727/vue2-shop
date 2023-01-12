@@ -55,6 +55,7 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
+              <span v-if="item.name"><strong>{{item.name}} </strong></span>
               货号：<strong>{{item.actNo}} </strong>
             </div>
             <div class="dingdans_con_right_down">
