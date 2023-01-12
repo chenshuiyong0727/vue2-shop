@@ -45,28 +45,28 @@
         <el-table  style="margin-top: 20px" border :data="tableData">
 <!--          <el-table-column label="序号" type="index" width="50" align="center"></el-table-column>-->
           <el-table-column align="center" prop="size" width="50" label="尺码"/>
-          <el-table-column align="center" prop="inventory" label="库存">
+          <el-table-column align="center" prop="inventory" width="70" label="库存">
             <template scope="scope">
               <div class="input-box">
                 <input class="elInput1" type="number" v-model="scope.row.inventory"></input>
               </div>
             </template>
           </el-table-column>
-          <el-table-column align="center" prop="price" label="进价">
+          <el-table-column align="center" prop="price"  width="80"  label="进价">
             <template scope="scope">
               <div class="input-box">
                 <input class="elInput1"  type="number" v-model="scope.row.price"></input>
               </div>
             </template>
           </el-table-column>
-          <el-table-column align="center" prop="dwPrice" label="售价">
+          <el-table-column align="center" prop="dwPrice"    label="售价">
             <template scope="scope">
               <div class="input-box">
                 <input class="elInput1" type="number"  v-model="scope.row.dwPrice"></input>
               </div>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" align="center" label="操作" width="60">
+          <el-table-column fixed="right" align="center" label="操作" width="55">
             <template scope="scope">
               <el-button type="text" @click="changeStatusDialog1(scope.row.sizeIndex,scope.row)">详情
               </el-button>
@@ -475,7 +475,7 @@ export default {
   }
   .city {
     height: 48px;
-    width: 63px;
+    width: 59px;
     border-radius: 15px;
     font-size: 20px;
     background-color: #F6F6F6;
@@ -496,7 +496,7 @@ export default {
     /*margin-bottom: 10px;*/
     /*display: inline-block;*/
     height: 48px;
-    width: 63px;
+    width: 59px;
     border-radius: 15px;
     font-size: 20px;
     background-color: #BEBEBE;
