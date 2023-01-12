@@ -68,7 +68,7 @@
           </el-table-column>
           <el-table-column fixed="right" align="center" label="操作" width="60">
             <template scope="scope">
-              <el-button type="text" @click="goDetail(scope.row)">详情
+              <el-button type="text" @click="changeStatusDialog1(scope.row)">详情
               </el-button>
             </template>
           </el-table-column>
@@ -143,6 +143,43 @@
         </el-table>
       </div>
     </div>
+<!--    <div style="-->
+<!--        border-bottom: 1vw solid #eee;-->
+<!--    font-size: 10px;-->
+<!--    padding-top: 2.4vw;-->
+<!--    padding-left: 4vw;-->
+<!--    padding-right: 3vw;-->
+<!--    background: #ffffff;" >-->
+<!--      <h5 style="font-size: 20px;margin-bottom: 8px;">批量处理</h5>-->
+<!--      <div class="clearfix btm-distance">-->
+<!--        <el-input v-model.trim="unifiedPrice" placeholder="一键设置进价">-->
+<!--          <el-button type="primary" slot="append" @click="setUnifiedPrice()">确认</el-button>-->
+<!--        </el-input>-->
+<!--        <el-input v-model.trim="unifiedDwPrice" placeholder="一键设置售价">-->
+<!--          <el-button type="primary" slot="append" @click="setUnifiedDwPrice()">确认</el-button>-->
+<!--        </el-input>-->
+<!--      </div>-->
+<!--    </div>-->
+    <mt-popup
+      v-model="isShowDialog1">
+      <mt-header title="查看详情">
+        <div slot="right">
+          <mt-button size="normal"  @click="isShowDialog1 = false" style="font-size: 16px">关闭</mt-button>
+        </div>
+        <div slot="left">
+          <mt-button size="normal" @click="isShowDialog1 = false" style="font-size: 16px">确定</mt-button>
+        </div>
+      </mt-header>
+      <section style="height: 80vw;width: 80vw">
+        <mt-field label="尺码" style="margin-top: 11vw;"  v-model="orderData1.size" :readonly="true"></mt-field>
+        <mt-field label="库存" v-model="orderData1.inventory" :readonly="true"></mt-field>
+        <mt-field label="进价" v-model="orderData1.price" :readonly="true"></mt-field>
+        <mt-field label="售价" v-model="orderData1.dwPrice" :readonly="true"></mt-field>
+        <mt-field label="手续费" :readonly="true" v-model="orderData1.poundage"></mt-field>
+        <mt-field label="到手价" :readonly="true" v-model="orderData1.theirPrice"></mt-field>
+        <mt-field label="利润" :readonly="true" v-model="orderData1.profits"></mt-field>
+      </section>
+    </mt-popup>
     <div style="    margin-left: 20vw;
     margin-top: 20px;">
       <mt-button
@@ -172,6 +209,8 @@ export default {
         actNo: '',
         imgUrl: ''
       },
+      isShowDialog1: false,
+      orderData1: '',
       activeIndex: [],
       fileUrl: fileUrl,
       goodsId: '',
@@ -192,6 +231,33 @@ export default {
   mounted() {
   },
   methods:{
+    changeStatusDialog1(row) {
+      if (!row.inventory) {
+        this.$toast('请输入尺码 ' + row.size + ' 的库存')
+        return
+      }
+      if (!row.price) {
+        this.$toast('请输入尺码 ' + row.size  + ' 的入库价')
+        return
+      }
+      if (!row.dwPrice) {
+        this.$toast('请输入尺码 ' + row.size  + ' 的售价')
+        return
+      }
+      this.orderData1 = row
+      let poundage = this.orderData1.dwPrice * 0.075 + 38 + 8.5
+      this.orderData1.poundage = parseFloat(poundage).toFixed(2)
+
+      let theirPrice =  this.orderData1.dwPrice
+        - (this.orderData1.dwPrice * 0.075 + 38 + 8.5)
+      this.orderData1.theirPrice = parseFloat(theirPrice).toFixed(2)
+
+      let profits = this.orderData1.theirPrice - 10
+        - this.orderData1.price
+      this.orderData1.profits = parseFloat(profits).toFixed(2)
+      this.isShowDialog1 = true
+      console.info(this.orderData1)
+    },
     gotoIndex() {
       this.$router.push({ path: '/'})
     },
@@ -208,7 +274,7 @@ export default {
           return
         }
         if (!data1.dwPrice) {
-          this.$toast('请输入尺码 ' + size + ' 的得物价')
+          this.$toast('请输入尺码 ' + size + ' 的售价')
           return
         }
       }
@@ -238,10 +304,11 @@ export default {
         table1.push(data1)
       }
       this.tableData = table1
+      console.info(this.tableData)
     },
     setUnifiedDwPrice() {
       if (!this.unifiedDwPrice) {
-        this.$toast('请输入得物价格')
+        this.$toast('请输入售价格')
         return
       }
       let table1 = []
@@ -258,6 +325,12 @@ export default {
         item.sizeIndex = index
         item.sizeId = item.id
         item.goodsId = this.goodsId
+        if (this.tableData.length) {
+          let data1 = this.tableData[0]
+          item.inventory = data1.inventory
+          item.price = data1.price
+          item.dwPrice = data1.dwPrice
+        }
         this.tableData.push(item)
       } else {
         this.del(index)

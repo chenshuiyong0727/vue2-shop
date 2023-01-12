@@ -560,6 +560,17 @@
         this.requestParam1.inventoryId = this.orderData1.id
         this.requestParam1.num = this.orderData1.inventory - this.orderData1.galleryCount
         this.requestParam1.shelvesPrice = this.orderData1.dwPrice
+
+        let poundage = this.requestParam1.shelvesPrice * 0.075 + 38 + 8.5
+        this.requestParam1.poundage = parseFloat(poundage).toFixed(2)
+
+        let theirPrice =  this.requestParam1.shelvesPrice
+          - (this.requestParam1.shelvesPrice * 0.075 + 38 + 8.5)
+        this.requestParam1.theirPrice = parseFloat(theirPrice).toFixed(2)
+
+        let profits = this.requestParam1.theirPrice - 10
+          - this.orderData1.price
+        this.requestParam1.profits = parseFloat(profits).toFixed(2)
         this.isShowDialog1 = true
       },
       handleClick(orderData) {
