@@ -11,7 +11,7 @@ if (!sysDictList.length) {
       sysDictList = res.data
       localStorage.setItem('sysDictList', JSON.stringify(res.data))
     } else {
-      this.$message.error(res.subMsg)
+      this.$toast(res.subMsg)
     }
   })
 }

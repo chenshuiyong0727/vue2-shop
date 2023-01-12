@@ -388,7 +388,7 @@
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
           } else {
-            this.$message.error(res.subMsg)
+            this.$toast(res.subMsg)
           }
         })
       },

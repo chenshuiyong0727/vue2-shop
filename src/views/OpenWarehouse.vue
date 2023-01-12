@@ -57,23 +57,6 @@
             <div class="dingdans_con_right_down" v-if="isShowPrice">
               得物价：<strong class="color-danger">{{item.dwPrice}}</strong>
             </div>
-<!--            <div style="-->
-<!--            margin-bottom: -7vw;-->
-<!--    font-size: 3.5vw;-->
-<!--    margin-top: -1vw;">-->
-<!--              <strong> {{item.createTime |formateTime }}</strong>-->
-<!--              <mt-button-->
-<!--                v-if="item.inventory > item.galleryCount"-->
-<!--                style="margin-left: 4.1vw;"-->
-<!--                type="primary"-->
-<!--                size="small"-->
-<!--                @click="changeStatusDialog1(item)">上架</mt-button>-->
-<!--              <mt-button-->
-<!--                :style="item.inventory <= item.galleryCount ? 'margin-left: 20.5vw;' : 'margin-left: 1vw;'"-->
-<!--                type="primary"-->
-<!--                size="small"-->
-<!--                @click="handleClick(item)">修改</mt-button>-->
-<!--            </div>-->
           </div>
         </div>
       </div>
@@ -330,7 +313,7 @@
               this.emtityMsg = '人家是有底线的 -.-'
             }
           } else {
-            this.$message.error(res.subMsg)
+            this.$toast(res.subMsg)
           }
         })
       },

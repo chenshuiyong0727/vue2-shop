@@ -7,17 +7,17 @@
       </h1>
       <section class="my-vip" style="margin-top: 0">
         <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=2'}">
-          <div>
-            <img style="width: 7.9vw;margin-left: -0.5vw;    margin-bottom: 5px;" src="../../../static/img/order-2.png" ></img>
-          </div>
-          <p>
-            <span>已上架商品</span>
-            <i><samp>{{orderIofo.count2}} </samp>
-              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
-            </i>
-<!--            <samp>{{orderIofo.count2}}</samp>-->
-          </p>
-        </router-link>
+        <div>
+          <img style="width: 7.9vw;margin-left: -0.5vw;    margin-bottom: 5px;" src="../../../static/img/order-2.png" ></img>
+        </div>
+        <p>
+          <span>已上架商品</span>
+          <i><samp>{{orderIofo.count2}} </samp>
+            <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
+          </i>
+          <!--            <samp>{{orderIofo.count2}}</samp>-->
+        </p>
+      </router-link>
       </section>
       <section class="my-vip" style="margin-top: 0">
         <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=3'}">

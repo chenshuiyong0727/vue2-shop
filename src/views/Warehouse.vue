@@ -162,6 +162,20 @@
         <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
+    <div style="
+    right: 15px;
+    bottom: 20vw;
+    position: absolute;
+    text-align: center;
+    ">
+      <mt-button  @click="goGoodsBase"  style="margin-left: 5px;
+    border-radius: 100%;
+    margin-top: 0px;
+    height: 55px;
+    width: 55px;" type="primary">
+        <img src="../../static/img/add.png" height="30" width="30" slot="icon">
+      </mt-button>
+    </div>
     <v-footer></v-footer>
   </div>
 </template>
@@ -170,6 +184,7 @@
   import Footer from '@/common/_footer.vue'
   import { goodsOrderApi } from '@/api/goodsOrder'
   import { goodsInventoryApi } from '@/api/goodsInventory'
+
   import {
     MessageBox
   } from "mint-ui";
@@ -299,6 +314,9 @@
       this.listSysDict()
     },
     methods: {
+      goGoodsBase(row) {
+        this.$router.push({ path: '/goodsBase'})
+      },
       successTimeChange() {
         if (this.successTime) {
           this.queryParam.successTimeFrom = this.successTime[0]
@@ -331,7 +349,7 @@
               this.emtityMsg = '人家是有底线的 -.-'
             }
           } else {
-            this.$message.error(res.subMsg)
+            this.$toast(res.subMsg)
           }
         })
       },

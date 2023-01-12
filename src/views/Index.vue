@@ -150,7 +150,7 @@ export default {
           this.form.profitsProportion = parseFloat(
             this.form.profitsAverage / this.form.costAverage * 100).toFixed(2)
         } else {
-          this.$message.error(res.subMsg)
+          this.$toast(res.subMsg)
         }
       })
     },
@@ -173,7 +173,7 @@ export default {
               / this.orderData.orderAmountLast * 100).toFixed(2)
           }
         } else {
-          this.$message.error(res.subMsg)
+          this.$toast(res.subMsg)
         }
       })
     },

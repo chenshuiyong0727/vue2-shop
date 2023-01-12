@@ -8,7 +8,7 @@ export function initSysDict() {
           localStorage.setItem('sysDictList', JSON.stringify(res.data))
           resolve()
         } else {
-          this.$message.error(res.subMsg)
+          this.$toast(res.subMsg)
         }
       })
     } else {

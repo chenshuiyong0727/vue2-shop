@@ -66,10 +66,15 @@
     font-size: 3.5vw;
     margin-top: -1vw;">
               <mt-button
-                style="margin-left: 16.1vw;"
+                style="margin-left: 7.1vw;"
+                type="danger"
+                size="small"
+                @click="storeAdd(item.id)">选择</mt-button>
+              <mt-button
+                style="margin-left: 1vw;"
                 type="primary"
                 size="small"
-                @click="jumpactNo(item)">查看库存</mt-button>
+                @click="jumpactNo(item)">库存</mt-button>
               <mt-button
                 style="margin-left: 1vw;"
                 type="primary"
@@ -298,6 +303,9 @@
       goDetail(id, type) {
         this.$router.push({ path: '/goodsAdd', query: { id, type } })
       },
+      storeAdd(goodsId) {
+        this.$router.push({ path: '/storeAdd', query: { goodsId } })
+      },
       jumpactNo(row) {
         let actNo = row.actNo
         if (!actNo) {
@@ -319,7 +327,7 @@
               this.emtityMsg = '人家是有底线的 -.-'
             }
           } else {
-            this.$message.error(res.subMsg)
+            this.$toast(res.subMsg)
           }
         })
       },

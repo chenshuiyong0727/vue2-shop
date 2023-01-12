@@ -87,7 +87,7 @@ export default {
         // this.toggle = false;
         // this.$store.commit('CHANGE_TOKEN',1);
       // }else {
-      //   this.$message.error("账号密码不能为空")
+      //   this.$toast("账号密码不能为空")
         Toast('账号密码不能为空');
         return
       }
@@ -117,7 +117,7 @@ export default {
           }
         } else {
           Toast(res.subMsg)
-        // this.$message.error(res.subMsg)
+        // this.$toast(res.subMsg)
       }
     })
       // this.$store.dispatch('user/login', loginInfo).then((res) => {
@@ -126,7 +126,7 @@ export default {
       //     // 初始化字典
       //     this.gotopath()
       //   } else {
-      //     this.$message.error(res.subMsg)
+      //     this.$toast(res.subMsg)
       //     this.refreshCodeHandle()
       //   }
       // }).catch(() => {

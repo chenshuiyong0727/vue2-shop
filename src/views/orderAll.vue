@@ -348,7 +348,7 @@
               this.emtityMsg = '人家是有底线的 -.-'
             }
           } else {
-            this.$message.error(res.subMsg)
+            this.$toast(res.subMsg)
           }
         })
       },
