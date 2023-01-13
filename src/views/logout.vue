@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="login" >
-    <mt-header title="账号设置">
+    <mt-header :title="title">
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
       </div>
@@ -22,9 +22,12 @@
       <h5 style="font-size: 35px; font-weight: 600; margin-top: 20px;">{{
          userName ? userName : '系统用户'
         }}</h5>
-      <div class="clearfix btm-distance">
+      <div class="clearfix btm-distance" v-if="type == 1">
         <el-button style="margin-top: 42px;" type="primary" @click="comfirm">退出登录</el-button>
         <el-button  @click="comfirm1">切换账号</el-button>
+      </div>
+      <div class="clearfix btm-distance" v-else>
+        <el-button style="margin-top: 42px;" type="primary" @click="comfirm2">修改密码</el-button>
       </div>
     </div>
 
@@ -41,8 +44,17 @@ export default {
   components:{
     'v-header':Header
   },
+  created() {
+    const { type } = this.$route.query
+    this.type = type
+    if (this.type == 2) {
+      this.title = '账户管理'
+    }
+  },
   data(){
     return {
+      type:'1',
+      title: '账号设置',
       userName: localStorage.getItem('user_name')
     }
   },
@@ -83,6 +95,9 @@ export default {
       }).catch(() => {
         // this.goBack()
       })
+    },
+    comfirm2(){
+        this.$router.push({ path: '/resetPwd'})
     },
 
   }

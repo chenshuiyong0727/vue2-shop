@@ -29,7 +29,7 @@
     font-size: 14px;
     color: rgba(0, 0, 0, 0.4);
     position: relative;">
-            <el-button style="    border: 1px solid #409EFF; color: #409EFF" size="small" round>账户管理</el-button>
+            <el-button @click="comfirm(2)" style="    border: 1px solid #409EFF; color: #409EFF" size="small" round>账户管理</el-button>
           </span>
         </div>
 
@@ -151,7 +151,7 @@
                     <span>其他收支</span><i class="icon-go"></i>
                   </p>
               </router-link>
-              <router-link :to="{ name: '退出登录'}"  class="my-settle-bottom">
+              <router-link :to="{ path: '/logout?type=1'}"  class="my-settle-bottom">
                 <div>
                   <img style="width: 6.2vw" src="../../static/img/setting0.png" ></img>
                   <!--                  <span class="icon2-settle"></span>-->
@@ -184,20 +184,11 @@
         userName: localStorage.getItem('user_name')
       }
     },
-    // methods:{
-    //   logout(){
-    //     alert(1)
-    //     // userContainerApi.logout().then(res => {
-    //     //   if (res.subCode === 1000) {
-    //     //     removeCookieByName('org_token_auth')
-    //     //     removeCookieByName('refresh_org_token_auth')
-    //     //     removeCookieByName('user_id')
-    //     //     resetRouter()
-    //     //     localStorage.clear() // remove all session
-    //     //   }
-    //     // })
-    //   }
-    // }
+    methods:{
+      comfirm(type){
+        this.$router.push({ path: '/logout', query: { type } })
+      },
+    }
   }
 </script>
 

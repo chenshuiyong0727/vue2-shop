@@ -37,6 +37,7 @@
           :disableClear = '!toggle'>
         </el-input>
         <el-input
+          show-password
           style="margin-top: 10px"
           placeholder="请输入密码"
           prefix-icon="el-icon-warning"
