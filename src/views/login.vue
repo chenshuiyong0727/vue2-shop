@@ -64,7 +64,7 @@
 <!--        ></mt-field>-->
       </section>
       <div class="clearfix btm-distance">
-        <el-button style="margin-top: 25px;    width: 70vw;" type="primary" @click="login" v-if='toggle'>登录</el-button>
+        <el-button style="margin-top: 25px;    width: 50vw;" type="primary" @click="login" v-if='toggle'>登录</el-button>
 <!--                  <el-button  @click="comfirm1">忘记密码</el-button>-->
                 </div>
               </div>
