@@ -1,45 +1,103 @@
 <template lang="html">
   <div class="login">
-    <v-header>
-      <h1 slot="title">登录页</h1>
-    </v-header>
-    <section>
-      <mt-field
-       label="账号"
-        placeholder="请输入账号"
-        type = "text"
-        v-model = "loginForm.loginAccount"
-        :readonly = '!toggle'
-        :disableClear = '!toggle'
-        ></mt-field>
-      <mt-field
-       label="密码"
-       placeholder="请输入密码"
-       type="password"
-       v-model="loginForm.loginPassword"
-       :readonly='!toggle'
-       :disableClear = '!toggle'
-        ></mt-field>
+    <mt-header title="移动仓库">
+    </mt-header>
+    <div style="
+    font-size: 10px;
+    padding-top: 13.4vw;
+    padding-left: 4vw;
+    max-width: 264px!important;
+    max-height: 494px!important;
+    margin: 42px auto!important;
+    width: 100%!important;
+    height: 336px!important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+" >
+      <div>
+        <img style="
+        margin-left: 74px;
+        margin-top: 10px;
+    margin-bottom: -3px;
+    width: 14.2vw;
+    display: block;
+    top: 0px;
+    left: 0px;
+" src="../../static/img/logo/logo.png" ></img>
+        <h5 style="font-size: 25px; font-weight: 600; margin-top: 17px;">欢迎来到移动仓库</h5>
+      </div>
+
+      <section style="margin-top: 30px">
+        <el-input
+          placeholder="请输入账号"
+          prefix-icon="el-icon-s-custom"
+          v-model = "loginForm.loginAccount"
+          :readonly = '!toggle'
+          :disableClear = '!toggle'>
+        </el-input>
+        <el-input
+          style="margin-top: 10px"
+          placeholder="请输入密码"
+          prefix-icon="el-icon-warning"
+          type="password"
+          v-model="loginForm.loginPassword"
+          :readonly='!toggle'
+          :disableClear = '!toggle'>
+        </el-input>
+
+<!--        <mt-field-->
+<!--          label="账号"-->
+<!--          placeholder="请输入账号"-->
+<!--          type = "text"-->
+<!--          v-model = "loginForm.loginAccount"-->
+<!--          :readonly = '!toggle'-->
+<!--          :disableClear = '!toggle'-->
+<!--        ></mt-field>-->
+<!--        <mt-field-->
+<!--          label="密码"-->
+<!--          placeholder="请输入密码"-->
+<!--          type="password"-->
+<!--          v-model="loginForm.loginPassword"-->
+<!--          :readonly='!toggle'-->
+<!--          :disableClear = '!toggle'-->
+<!--        ></mt-field>-->
+      </section>
+      <div class="clearfix btm-distance">
+        <el-button style="margin-top: 25px;    width: 70vw;" type="primary" @click="login" v-if='toggle'>登录</el-button>
+<!--                  <el-button  @click="comfirm1">忘记密码</el-button>-->
+                </div>
+              </div>
+
+
+          <!--    <section>-->
 <!--      <mt-field-->
-<!--       label="验证码"-->
-<!--       placeholder="请输入验证码"-->
-<!--       type="text"-->
-<!--       v-model="verifyCode"-->
+<!--       label="账号"-->
+<!--        placeholder="请输入账号"-->
+<!--        type = "text"-->
+<!--        v-model = "loginForm.loginAccount"-->
+<!--        :readonly = '!toggle'-->
+<!--        :disableClear = '!toggle'-->
+<!--        ></mt-field>-->
+<!--      <mt-field-->
+<!--       label="密码"-->
+<!--       placeholder="请输入密码"-->
+<!--       type="password"-->
+<!--       v-model="loginForm.loginPassword"-->
 <!--       :readonly='!toggle'-->
 <!--       :disableClear = '!toggle'-->
 <!--        ></mt-field>-->
-<!--      <p class="tip">Tip : 账号密码随便输</p>-->
-    </section>
-    <mt-button
-     plain
-     size="large"
-     @click="login"
-     v-if='toggle'>登录</mt-button>
-    <mt-button
-     plain
-     size="large"
-     @click="logout"
-     v-else>退出登录</mt-button>
+<!--    </section>-->
+<!--    <mt-button-->
+<!--     plain-->
+<!--     size="large"-->
+<!--     @click="login"-->
+<!--     v-if='toggle'>登录</mt-button>-->
+<!--    <mt-button-->
+<!--     plain-->
+<!--     size="large"-->
+<!--     @click="logout"-->
+<!--     v-else>退出登录</mt-button>-->
 
   </div>
 </template>
@@ -171,6 +229,45 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  @import '../assets/fz.less';
+  @import '../assets/index/style.css';
+  @import '../assets/user/icon/carstyle.css';
+  * {
+    /*margin: 0;*/
+    /*padding: 0;*/
+    box-sizing: border-box;
+  }
+  /* 这里直接设置 1rem = 50px begin */
+  html {
+    font-size: 10px;
+  }
+  /* 这里直接设置 1rem = 50px end */
+  html,
+  body {
+    /*font-family: "微软雅黑";*/
+    /*color: #333;*/
+    /*background: #fff;*/
+  }
+  /*.login {*/
+  /*  >section {*/
+  /*    .tip {*/
+  /*      padding: 6vw 3vw;*/
+  /*      color:rgb(224, 145, 71);*/
+  /*      letter-spacing: 2px;*/
+  /*      font-size: 16px;*/
+  /*    }*/
+  /*  }*/
+  /*}*/
+  .clearfix {
+    &:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
+  }
 .login {
   >section {
     .tip {
