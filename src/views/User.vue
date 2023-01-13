@@ -49,6 +49,12 @@
                 <img style=" margin-top: 7px;
     margin-bottom: -4px;
     width: 8.2vw;" src="../../static/img/order-3.png" ></img>
+                <i style="    color: #fff;
+    border-radius: 100%;
+    margin-left: -10px;
+    background-color: #409EFF;
+    width: 37px;
+}">23</i>
                   <p style="color: #5e5e5e">待发货</p>
               </router-link>
               <router-link :to="{ path: '/order?status=4'}">
