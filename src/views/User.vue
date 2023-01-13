@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <div class="car"  style="font-size: 15px;">
+  <div class="car"  style="height: 100%;font-size: 15px;">
     <mt-header title="个人中心">
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
@@ -20,9 +20,11 @@
               </span>
 <!--            <img src="../../static/img/userpic.jpg">-->
           </div>
-          <span>chensy</span>
+          <span>{{
+         userName ? userName : '系统用户'
+        }}</span>
         <div class="my-indent-right">
-          <span style="    margin-left: 37vw;
+          <span style="
     display: inline-block;
     font-size: 14px;
     color: rgba(0, 0, 0, 0.4);
@@ -43,46 +45,58 @@
 
           <section class="my-pay">
               <router-link :to="{ path: '/order?status=3'}">
-                  <span class="icon2-money"></span>
-                  <p>待发货</p>
+<!--                  <span class="icon2-money"></span>-->
+                <img style=" margin-top: 7px;
+    margin-bottom: -4px;
+    width: 8.2vw;" src="../../static/img/order-3.png" ></img>
+                  <p style="color: #5e5e5e">待发货</p>
               </router-link>
               <router-link :to="{ path: '/order?status=4'}">
-                  <span class="icon2-thecar"></span>
-                  <p>已发货</p>
+<!--                  <span class="icon2-thecar"></span>-->
+                <img style="    margin-top: 5px;
+    margin-bottom: -9px;
+    width: 10.2vw;" src="../../static/img/order-4.png" ></img>
+                  <p style="color: #5e5e5e">已发货</p>
               </router-link>
               <router-link :to="{ path: '/order?status=5'}">
-                  <span class="icon2-thecar"></span>
-                  <p>已揽件</p>
+<!--                  <span class="icon2-thecar"></span>-->
+                <img style=" margin-top: 7px;
+    margin-bottom: -4px;
+    width: 8.2vw;" src="../../static/img/order-5.png" ></img>
+                <p style="color: #5e5e5e">已揽件</p>
               </router-link>
               <router-link :to="{ path: '/order?status=6'}">
-                  <span class="icon2-fixed"></span>
-                  <p>已收货</p>
+<!--                  <span class="icon2-fixed"></span>-->
+                <img style="margin-top: 10px;
+    margin-bottom: -3px;
+    width: 7.2vw;" src="../../static/img/order-6.png" ></img>
+                  <p style="color: #5e5e5e">已收货</p>
               </router-link>
 
           </section>
 
-          <section class="my-vip">
-            <router-link class="my-vip-top ho" :to="{ name: ''}" >
-              <div class="my-vip-top-div">
-                <span class="icon2-vip">
-                    <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span>
-                </span>
-              </div>
-              <p>
-                <span>会员福利</span><i class="icon-go"></i>
-              </p>
-            </router-link>
-            <router-link class="my-vip-bottom ho" :to="{ name: ''}">
-              <div>
-                <span class="icon2-money"></span>
-              </div>
-              <p>
-                <span>我的优惠</span><i class="icon-go"></i>
-              </p>
-            </router-link>
-          </section>
+<!--          <section class="my-vip">-->
+<!--            <router-link class="my-vip-top ho" :to="{ name: ''}" >-->
+<!--              <div class="my-vip-top-div">-->
+<!--                <span class="icon2-vip">-->
+<!--                    <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span>-->
+<!--                </span>-->
+<!--              </div>-->
+<!--              <p>-->
+<!--                <span>会员福利</span><i class="icon-go"></i>-->
+<!--              </p>-->
+<!--            </router-link>-->
+<!--            <router-link class="my-vip-bottom ho" :to="{ name: ''}">-->
+<!--              <div>-->
+<!--                <span class="icon2-money"></span>-->
+<!--              </div>-->
+<!--              <p>-->
+<!--                <span>我的优惠</span><i class="icon-go"></i>-->
+<!--              </p>-->
+<!--            </router-link>-->
+<!--          </section>-->
 
-          <section class="my-service">
+<!--          <section class="my-service">
               <router-link class="my-service-top" :to="{ name: ''}">
                   <div>
                     <span class="icon2-service">
@@ -101,22 +115,46 @@
                     <span>电商之家</span><i class="icon-go"></i>
                   </p>
               </router-link>
+          </section>-->
+
+          <section class="my-settle">
+              <router-link :to="{ name: ''}" class="my-settle-top">
+                  <div>
+<!--                    <span class="icon2-f"></span>-->
+                    <img style="width: 5.8vw" src="../../static/img/putin1.png" ></img>
+                  </div>
+
+                  <p>
+                    <span>入库报表</span><i class="icon-go"></i>
+                  </p>
+              </router-link>
+              <router-link :to="{ name: '退出登录'}"  class="my-settle-bottom">
+                <div>
+                  <img style="width: 5.2vw" src="../../static/img/sell2.png" ></img>
+                  <!--                  <span class="icon2-settle"></span>-->
+<!--                  <img style="width: 5.2vw" src="../../static/img/lagout.png" ></img>-->
+                </div>
+                <p>
+                  <span>销售报表</span><i class="icon-go"></i>
+                </p>
+              </router-link>
           </section>
 
           <section class="my-settle">
               <router-link :to="{ name: ''}" class="my-settle-top">
                   <div>
-                    <span class="icon2-f"></span>
-
+<!--                    <span class="icon2-f"></span>-->
+                    <img style="width: 6.2vw" src="../../static/img/other1.png" ></img>
                   </div>
 
                   <p>
-                    <span>F码通道</span><i class="icon-go"></i>
+                    <span>其他收支</span><i class="icon-go"></i>
                   </p>
               </router-link>
               <router-link :to="{ name: '退出登录'}"  class="my-settle-bottom">
                 <div>
-                  <span class="icon2-settle"></span>
+                  <img style="width: 6.2vw" src="../../static/img/setting0.png" ></img>
+                  <!--                  <span class="icon2-settle"></span>-->
 <!--                  <img style="width: 5.2vw" src="../../static/img/lagout.png" ></img>-->
                 </div>
                 <p>
@@ -134,13 +172,17 @@
 <script>
   // import * as mockData from '@/http/mock.js' //模拟数据
   // import { userContainerApi } from '@/api/user'
-  // import { removeCookieByName } from '@/utils/auth'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   export default {
     components: {
       'v-baseline': Baseline,
       'v-footer': Footer
+    },
+    data(){
+      return {
+        userName: localStorage.getItem('user_name')
+      }
     },
     // methods:{
     //   logout(){
@@ -220,6 +262,7 @@
         .fz(font-size, 30);
         color: #333;
         letter-spacing: .2vw;
+        width: 50vw;
       }
     }
     .main {
