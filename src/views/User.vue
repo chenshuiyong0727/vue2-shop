@@ -1,15 +1,39 @@
 <template lang="html">
 
-  <div class="car">
-    <mt-header title="个人中心"></mt-header>
-<!--      <header class="header">-->
-<!--          <div class="header-icon">-->
-<!--              <span class="icon2-user"></span>-->
-<!--          </div>-->
-<!--&lt;!&ndash;          <span>登录/注册</span>&ndash;&gt;-->
-<!--      </header>-->
+  <div class="car"  style="font-size: 15px;">
+    <mt-header title="个人中心">
+      <div slot="left">
+        <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
+      </div>
+    </mt-header>
+      <header class="header"
+              style="
+              height: 80px;
+    margin-top: 42px;
+    background-color: #fff;
+    border-bottom-color: rgba(185, 185, 185, 0.14);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;"
+      >
+          <div class="header-icon">
+              <span class="icon2-user">
+              </span>
+<!--            <img src="../../static/img/userpic.jpg">-->
+          </div>
+          <span>chensy</span>
+        <div class="my-indent-right">
+          <span style="    margin-left: 37vw;
+    display: inline-block;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.4);
+    position: relative;">
+            <el-button style="    border: 1px solid #409EFF; color: #409EFF" size="small" round>账户管理</el-button>
+          </span>
+        </div>
+
+      </header>
       <div class="main">
-          <router-link class="my-indent" :to="{ name: ''}">
+          <router-link class="my-indent" :to="{ name: '订单'}">
               <span class="my-indent-left">我的订单</span>
               <div class="my-indent-right">
                   <span>全部订单</span>
@@ -18,17 +42,21 @@
           </router-link>
 
           <section class="my-pay">
-              <router-link :to="{ name: ''}">
+              <router-link :to="{ path: '/order?status=3'}">
                   <span class="icon2-money"></span>
-                  <p>代付款</p>
+                  <p>待发货</p>
               </router-link>
-              <router-link :to="{ name: ''}">
+              <router-link :to="{ path: '/order?status=4'}">
                   <span class="icon2-thecar"></span>
-                  <p>待收货</p>
+                  <p>已发货</p>
               </router-link>
-              <router-link :to="{ name: ''}">
+              <router-link :to="{ path: '/order?status=5'}">
+                  <span class="icon2-thecar"></span>
+                  <p>已揽件</p>
+              </router-link>
+              <router-link :to="{ path: '/order?status=6'}">
                   <span class="icon2-fixed"></span>
-                  <p>退换修</p>
+                  <p>已收货</p>
               </router-link>
 
           </section>
@@ -135,7 +163,22 @@
   @import '../assets/fz.less';
   @import '../assets/index/style.css';
   @import '../assets/user/icon/carstyle.css';
-
+  * {
+    /*margin: 0;*/
+    /*padding: 0;*/
+    box-sizing: border-box;
+  }
+  /* 这里直接设置 1rem = 50px begin */
+  html {
+    font-size: 10px;
+  }
+  /* 这里直接设置 1rem = 50px end */
+  html,
+  body {
+    /*font-family: "微软雅黑";*/
+    /*color: #333;*/
+    /*background: #fff;*/
+  }
 
   .car {
     width: 100%;
@@ -144,7 +187,8 @@
     .header {
       width: 100%;
       height: 16vw;
-      background: url(../../static/carbg.png) center 0 #f37d0f;
+      /*background: url(../../static/carbg.png) center 0 #f37d0f;*/
+      /*background: url(../../static/img/bg1.png) center 0 #f37d0f;*/
       background-size: auto 100%;
       padding: 3.2vw 0;
       display: -webkit-box;
@@ -174,7 +218,7 @@
       >span {
         margin-left: 3.2vw;
         .fz(font-size, 30);
-        color: #ffffff;
+        color: #333;
         letter-spacing: .2vw;
       }
     }
