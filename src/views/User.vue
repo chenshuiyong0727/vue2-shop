@@ -432,7 +432,7 @@
     line-height: 12px;
     color: #fff;
     background-color: #fc6666;
-    font-size: 8px;
+    font-size: 12px;
     top: 0;
     right: 0;
     border-radius: 8px;
