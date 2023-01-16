@@ -4,7 +4,7 @@
         仓库值
     </h1>
     <ul class="section1-list" style="display: ">
-      <li style="width: 47%">
+      <li style="width: 47%" v-if="countDay > 0">
         <router-link :to="{name:'详情页'}">
           <p><strong class="color-danger"> {{countDay}}</strong>{{count}}</p>
           <p class="section1name">春节倒计时</p>

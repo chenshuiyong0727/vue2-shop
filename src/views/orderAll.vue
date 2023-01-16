@@ -118,7 +118,7 @@
         <mt-field label="补贴价格" placeholder="请输入补贴价格" @keyup.native="keyup1($event)" type="number" v-model="requestParam.subsidiesPrice"></mt-field>
         <mt-field label="手续费" placeholder="请输入手续费" @keyup.native="keyup1($event)" type="number" v-model="requestParam.poundage"></mt-field>
         <mt-field label="运费" placeholder="请输入运费" @keyup.native="keyup1($event)" type="number" v-model="requestParam.freight"></mt-field>
-        <mt-field label="到手价" placeholder="请输入到手价" @keyup.native="keyup1($event)" type="number" v-model="requestParam.theirPrice"></mt-field>
+        <mt-field label="到手价" placeholder="请输入到手价" @keyup.native="keyup2($event)" type="number" v-model="requestParam.theirPrice"></mt-field>
         <mt-field label="利润" placeholder="请输入利润" @keyup.native="keyup1($event)" type="number" v-model="requestParam.profits"></mt-field>
 <!--        <div class="popupdiv" >-->
 <!--          <mt-button type="default" class="mt-button-div" size="normal"  @click="isShowDialog = false">取消</mt-button>-->
@@ -486,6 +486,14 @@
         let theirPrice = this.requestParam.subsidiesPrice * 1 + this.requestParam.shelvesPrice
           - (this.requestParam.shelvesPrice * 0.075 + 38 + 8.5)
         this.requestParam.theirPrice = parseFloat(theirPrice).toFixed(2)
+
+        let profits = this.requestParam.theirPrice - this.requestParam.freight
+          - this.requestParam.price
+        this.requestParam.profits = parseFloat(profits).toFixed(2)
+      },
+      keyup2() {
+        let poundage = this.requestParam.shelvesPrice * 0.075 + 38 + 8.5
+        this.requestParam.poundage = parseFloat(poundage).toFixed(2)
 
         let profits = this.requestParam.theirPrice - this.requestParam.freight
           - this.requestParam.price
