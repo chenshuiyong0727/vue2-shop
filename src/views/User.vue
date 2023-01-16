@@ -140,7 +140,7 @@
                     <span>入库报表</span><i class="icon-go"></i>
                   </p>
               </router-link>
-              <router-link :to="{ name: '退出登录'}"  class="my-settle-bottom">
+              <router-link :to="{ name: '销售报表'}"  class="my-settle-bottom">
                 <div>
                   <img style="width: 5.2vw" src="../../static/img/sell2.png" ></img>
                   <!--                  <span class="icon2-settle"></span>-->
