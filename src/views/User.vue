@@ -153,7 +153,7 @@
           </section>
 
           <section class="my-settle">
-              <router-link :to="{ name: ''}" class="my-settle-top">
+              <router-link :to="{ name: '其他收支'}" class="my-settle-top">
                   <div>
 <!--                    <span class="icon2-f"></span>-->
                     <img style="width: 6.2vw" src="../../static/img/other1.png" ></img>
