@@ -162,7 +162,7 @@
       </mt-header>
       <section style="height: 80vw;width: 100vw">
         <mt-field label="状态" style="margin-top: 11vw;">
-            <select class="select100" v-model="queryParam.status" @change="changeSystem" :disabled="status">
+            <select class="select100" v-model="queryParam.status" @change="changeSystem">
                <option :disabled="true" value="" selected>请选择状态</option>
               <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>

@@ -46,37 +46,43 @@
           <section class="my-pay">
               <router-link :to="{ path: '/order?status=3'}">
 <!--                  <span class="icon2-money"></span>-->
-                <img style=" margin-top: 7px;
+                <img
+                     :class="orderIofo.count3 > 0 ? 'count3' : ''"
+                     style="
+                 margin-top: 7px;
     margin-bottom: -4px;
     width: 8.2vw;" src="../../static/img/order-3.png" ></img>
-                <i style="    color: #fff;
-    border-radius: 100%;
-    margin-left: -10px;
-    background-color: #409EFF;
-    width: 37px;
-}">23</i>
+                <i v-if="orderIofo.count3" class="danger-num">{{orderIofo.count3}}</i>
                   <p style="color: #5e5e5e">待发货</p>
               </router-link>
               <router-link :to="{ path: '/order?status=4'}">
 <!--                  <span class="icon2-thecar"></span>-->
-                <img style="    margin-top: 5px;
+                <img
+                  :class="orderIofo.count4 > 0 ? 'count4' : ''"
+                  style=" margin-top: 5px;
     margin-bottom: -9px;
     width: 10.2vw;" src="../../static/img/order-4.png" ></img>
-                  <p style="color: #5e5e5e">已发货</p>
+                <i v-if="orderIofo.count4"  style="margin-left: -14px" class="danger-num">{{orderIofo.count4}}</i>
+                <p style="color: #5e5e5e">已发货</p>
               </router-link>
               <router-link :to="{ path: '/order?status=5'}">
 <!--                  <span class="icon2-thecar"></span>-->
-                <img style=" margin-top: 7px;
+                <img
+                  :class="orderIofo.count5 > 0 ? 'count5' : ''"
+                  style="margin-top: 7px;
     margin-bottom: -4px;
     width: 8.2vw;" src="../../static/img/order-5.png" ></img>
+                <i v-if="orderIofo.count5"  style="margin-left: -10px" class="danger-num">{{orderIofo.count5}}</i>
                 <p style="color: #5e5e5e">已揽件</p>
               </router-link>
               <router-link :to="{ path: '/order?status=6'}">
-<!--                  <span class="icon2-fixed"></span>-->
-                <img style="margin-top: 10px;
+                <img
+                  :class="orderIofo.count6 > 0 ? 'count6' : ''"
+                  style="margin-top: 10px;
     margin-bottom: -3px;
     width: 7.2vw;" src="../../static/img/order-6.png" ></img>
-                  <p style="color: #5e5e5e">已收货</p>
+                <i v-if="orderIofo.count6"  style="margin-left: -10px" class="danger-num">{{orderIofo.count6}}</i>
+                <p style="color: #5e5e5e">已收货</p>
               </router-link>
 
           </section>
@@ -178,6 +184,7 @@
 <script>
   // import * as mockData from '@/http/mock.js' //模拟数据
   // import { userContainerApi } from '@/api/user'
+  import { goodsOrderApi } from '@/api/goodsOrder'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   export default {
@@ -187,12 +194,26 @@
     },
     data(){
       return {
+        orderIofo: {},
         userName: localStorage.getItem('user_name')
       }
+    },
+
+    created(){
+      this.getData()
     },
     methods:{
       comfirm(type){
         this.$router.push({ path: '/logout', query: { type } })
+      },
+      getData() {
+        goodsOrderApi.indexData().then(res => {
+          if (res.subCode === 1000) {
+            this.orderIofo = res.data ? res.data.countDto : {}
+          } else {
+            this.$toast(res.subMsg)
+          }
+        })
       },
     }
   }
@@ -401,6 +422,34 @@
 
   .icon2-service {
     .fz(font-size, 34);
+  }
+
+  .danger-num{
+    padding: 0px 6px;
+    min-width: 11px;
+    text-align: center;
+    height: 12px;
+    line-height: 12px;
+    color: #fff;
+    background-color: #fc6666;
+    font-size: 8px;
+    top: 0;
+    right: 0;
+    border-radius: 8px;
+    margin-left: -10px;
+  }
+
+  .count3{
+    margin-left: 16px;
+  }
+  .count4{
+    margin-left: 12px;
+  }
+  .count5{
+    margin-left: 10px;
+  }
+  .count6{
+    margin-left: 10px;
   }
 
 </style>
