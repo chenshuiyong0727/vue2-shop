@@ -5,37 +5,37 @@
     </h1>
     <ul class="section1-list" style="display: ">
       <li style="width: 47%" v-if="countDay > 0">
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:''}">
           <p><strong class="color-danger"> {{countDay}}</strong>{{count}}</p>
           <p class="section1name">春节倒计时</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'仓库'}">
           <p class="color-danger">{{form.inventoryNum}}</p>
           <p class="section1name" >库存总数</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'销售报表'}">
           <p class="color-danger">{{form.profitsAmount}}</p>
           <p class="section1name">利润总额</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'销售报表'}">
           <p class="color-danger">{{form.profitsAverage}}</p>
           <p class="section1name">平均利润</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'仓库'}">
           <p>{{form.inventoryCost}}</p>
           <p  class="section1name">库存成本</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'仓库'}">
           <p v-if="form.inventoryNum  && form.goodsPutInNum">{{form.inventoryRatio}}%</p>
           <p v-else> 0%</p>
           <p class="section1name">库存比例</p>
@@ -48,73 +48,73 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'入库报表'}">
           <p>{{form.goodsPutInNum}}</p>
           <p class="section1name">入库商品</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'入库报表'}">
           <p>{{form.inventoryAmount}}</p>
           <p class="section1name">入库总额</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'销售报表'}">
           <p>{{form.successNum}}</p>
           <p class="section1name">交易成功</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'销售报表'}">
           <p>{{form.orderAmount}}</p>
           <p class="section1name">成功总额</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{ path: '/order?status=7'}">
           <p>{{form.freight}}</p>
           <p class="section1name">总运费</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{ path: '/order?status=7'}">
           <p>{{form.poundage}}</p>
           <p class="section1name">手续费</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'其他收支'}">
           <p>{{form.otherRevenue}}</p>
           <p class="section1name">其他收支</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'入库报表'}">
           <p>{{form.inboundAverage}}</p>
           <p class="section1name">库存均价</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'销售报表'}">
           <p>{{form.orderAmountAverage}}</p>
           <p class="section1name">成功均价</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{ path: '/order?status=7'}">
           <p>{{form.freightAverage}}</p>
           <p class="section1name">运费均价</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{ path: '/order?status=7'}">
           <p>{{form.costAverage}}</p>
           <p class="section1name">成本均价</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{ path: '/order?status=7'}">
           <p>{{form.profitsProportion}}%</p>
           <p class="section1name">利润比例</p>
         </router-link>
