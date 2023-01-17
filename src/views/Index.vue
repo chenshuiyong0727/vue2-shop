@@ -7,7 +7,30 @@
     <v-section1 :form="form" :countDay="countDay" :count="count" />
 <!--    <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/>-->
     <v-orderNum :orderIofo ="orderIofo"/>
-<!--    <v-section4 :list="datas.section4.list" :banner='datas.section4.banner'/>-->
+    <div style="padding: 10px;border-left:1px solid #DCDFE6; background-color: #fff">
+<!--      <el-date-picker-->
+<!--        style="float: right;z-index: 1"-->
+<!--        size="small"-->
+<!--        v-model="createTime"-->
+<!--        type="monthrange"-->
+<!--        align="right"-->
+<!--        unlink-panels-->
+<!--        range-separator="至"-->
+<!--        start-placeholder="开始日期"-->
+<!--        end-placeholder="结束日期"-->
+<!--        @change="handleDateChange"-->
+<!--      >-->
+<!--      </el-date-picker>-->
+      <div>
+        <ve-line
+          height="250px"
+          :data="chartData"
+          :legend-visible="false"
+          :loading="loading"
+          :data-empty="dataEmpty"
+          :settings="chartSettings"></ve-line>
+      </div>
+    </div>
     <v-baseline/>
     <v-footer/>
   </div>

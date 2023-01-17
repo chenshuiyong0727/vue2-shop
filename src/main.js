@@ -11,12 +11,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 import Mint from 'mint-ui';    //移动端UI
 import 'mint-ui/lib/style.css'
 import { Popup } from 'mint-ui';
-
+import VCharts from 'v-charts-v2'
 // set ElementUI lang to EN
 // Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 Vue.use(ElementUI)
 Vue.use(Mint);
+Vue.use(VCharts);
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
 Vue.component(Popup.name, Popup);
