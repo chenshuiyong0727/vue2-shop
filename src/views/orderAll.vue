@@ -63,6 +63,11 @@
             </div>
             <div class="dingdans_con_right_down_1">
               <mt-button
+                style="margin-left: -15vw;"
+                type="primary"
+                size="small"
+                @click="goDetail(item)">查看</mt-button>
+              <mt-button
                 type="primary"
                 size="small"
                 @click="handleClick(item)">修改</mt-button>
@@ -531,6 +536,9 @@
         this.requestParam1.addressId = this.orderData1.addressId
 
         this.isShowDialog1 = true
+      },
+      goDetail(item) {
+        this.$router.push({ path: '/orderDetail', query: { item } })
       },
       handleClick(orderData) {
         this.orderData = orderData

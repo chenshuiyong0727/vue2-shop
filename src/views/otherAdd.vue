@@ -142,11 +142,6 @@ export default {
         goodsOtherApi.getDetailById(id).then(res => {
           if (res.subCode === 1000) {
             this.form = res.data ? res.data : {}
-            this.form.sizeList = []
-            this.sizeList = res.data.sizeListList
-            for (let i = 0; i < res.data.sizeListList.length; i++) {
-              this.form.sizeList.push(res.data.sizeListList[i][1])
-            }
           } else {
             this.$toast(res.subMsg)
           }

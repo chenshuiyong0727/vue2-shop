@@ -11,6 +11,7 @@ const User = resolve => require(['@/views/User.vue'], resolve)
 const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
 const Order = resolve => require(['@/views/OrderAll.vue'], resolve)
+const orderDetail = resolve => require(['@/views/orderDetail.vue'], resolve)
 const putin = resolve => require(['@/views/putin.vue'], resolve)
 const sellList = resolve => require(['@/views/sellList.vue'], resolve)
 const otherList = resolve => require(['@/views/otherList.vue'], resolve)
@@ -97,6 +98,13 @@ export default new Router({
       path: '/order',
       name: '订单',
       component: Order,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
+    }, {
+      path: '/orderDetail',
+      name: '订单详情',
+      component: orderDetail,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },
