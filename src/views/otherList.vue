@@ -49,9 +49,11 @@
           </div>
         </div>
         <div class="dingdans_con">
-          <div class="dingdans_con_left" @click="avatarShow(item.imgUrl)">
-            <img v-if="item.imgUrl" v-bind:src="fileUrl + item.imgUrl" alt="" >
-            <img v-else src="../../static/img/other2.png">
+          <div v-if="item.imgUrl" class="dingdans_con_left" @click="avatarShow(item.imgUrl)">
+            <img  v-bind:src="fileUrl + item.imgUrl" alt="" >
+          </div>
+          <div v-else class="dingdans_con_left">
+            <img src="../../static/img/other2.png">
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top" style="margin-top: -28px;">
@@ -67,11 +69,15 @@
     font-size: 3.5vw;
     margin-top: -1vw;">
               <strong> {{item.createTime |formateTime }}</strong>
-<!--          todo    <mt-button-->
-<!--                style="margin-left: 20.5vw;"-->
-<!--                type="primary"-->
-<!--                size="small"-->
-<!--                @click="handleClick(item)">修改</mt-button>-->
+              <mt-button
+                style="margin-left: 5.1vw;"
+                type="primary"
+                size="small"
+                @click="goDetail(item.id , 1)">查看</mt-button>
+              <mt-button
+                type="primary"
+                size="small"
+                @click="goDetail(item.id ,2)">修改</mt-button>
             </div>
           </div>
         </div>
@@ -89,49 +95,6 @@
       </div>
     </mt-loadmore>
     <p v-if="allLoaded" class="to-the-bottom">{{emtityMsg}}</p>
-    <mt-popup
-      v-model="isShowDialog">
-      <mt-header title="修改">
-        <div slot="right">
-          <mt-button size="normal"  @click="isShowDialog = false" style="font-size: 16px">关闭</mt-button>
-        </div>
-        <div slot="left">
-          <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>
-        </div>
-      </mt-header>
-      <section style="height: 130vw;width: 80vw">
-        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :readonly="true"></mt-field>
-        <mt-field label="尺码" v-model="orderData.size" :readonly="true"></mt-field>
-        <mt-field label="入库价" placeholder="请输入入库价" @keyup.native="keyup1($event)" type="number" v-model="requestParam.price"></mt-field>
-        <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup1($event)" type="number" v-model="requestParam.dwPrice"></mt-field>
-        <mt-field label="手续费" :readonly="true" v-model="requestParam.poundage"></mt-field>
-        <mt-field label="到手价" :readonly="true" v-model="requestParam.theirPrice"></mt-field>
-        <mt-field label="利润" :readonly="true" v-model="requestParam.profits"></mt-field>
-      </section>
-    </mt-popup>
-    <mt-popup
-      v-model="isShowDialog1">
-      <mt-header title="上架">
-        <div slot="right">
-          <mt-button size="normal"  @click="isShowDialog1 = false" style="font-size: 16px">关闭</mt-button>
-        </div>
-        <div slot="left">
-          <mt-button size="normal" @click="confirmHandle1" style="font-size: 16px">确定</mt-button>
-        </div>
-      </mt-header>
-      <section style="height: 130vw;width: 80vw">
-        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData1.actNo" :readonly="true"></mt-field>
-        <mt-field label="尺码" v-model="orderData1.size" :readonly="true"></mt-field>
-        <mt-field label="当前库存" v-model="orderData1.inventory" :readonly="true"></mt-field>
-        <mt-field label="已上架数量" v-model="orderData1.galleryCount" :readonly="true"></mt-field>
-        <mt-field label="入库价" v-model="orderData1.price" :readonly="true"></mt-field>
-        <mt-field label="上架数量" placeholder="请输入上架数量"  @keyup.native="keyup2($event)" type="number" v-model="requestParam1.num"></mt-field>
-        <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup2($event)" type="number" v-model="requestParam1.shelvesPrice"></mt-field>
-        <mt-field label="手续费" :readonly="true" v-model="requestParam1.poundage"></mt-field>
-        <mt-field label="到手价" :readonly="true" v-model="requestParam1.theirPrice"></mt-field>
-        <mt-field label="利润" :readonly="true" v-model="requestParam1.profits"></mt-field>
-      </section>
-    </mt-popup>
     <mt-popup
       position="bottom"
       v-model="isShowDialog2">
@@ -160,20 +123,20 @@
         <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
-<!--  todo  <div style="-->
-<!--    right: 15px;-->
-<!--    bottom: 20vw;-->
-<!--    position: absolute;-->
-<!--    text-align: center;-->
-<!--    ">-->
-<!--      <mt-button  @click="goGoodsBase"  style="margin-left: 5px;-->
-<!--    border-radius: 100%;-->
-<!--    margin-top: 0px;-->
-<!--    height: 55px;-->
-<!--    width: 55px;" type="primary">-->
-<!--        <img src="../../static/img/add.png" height="30" width="30" slot="icon">-->
-<!--      </mt-button>-->
-<!--    </div>-->
+    <div style="
+    right: 15px;
+    bottom: 20vw;
+    position: absolute;
+    text-align: center;
+    ">
+      <mt-button  @click="goDetail(null,3)"  style="margin-left: 5px;
+    border-radius: 100%;
+    margin-top: 0px;
+    height: 55px;
+    width: 55px;" type="primary">
+        <img src="../../static/img/add.png" height="30" width="30" slot="icon">
+      </mt-button>
+    </div>
     <v-footer></v-footer>
   </div>
 </template>
@@ -189,34 +152,10 @@
     name: "HelloWorld",
     data() {
       return {
-        requestParam1: {
-          poundage: '',
-          theirPrice: '',
-          profits: '',
-          inventoryId: '',
-          type: 1,
-          num: '',
-          shelvesPrice: ''
-        },
-        requestParam: {
-          id: '',
-          price: '',
-          dwPrice: '',
-          poundage: '',
-          theirPrice: '',
-          profits: '',
-          waybillNo: '',
-          addressId: ''
-        },
-        // popupVisible: false,
-        titleName: '其他收支',
-        emtityMsg: '人家是有底线的 -.-',
-        orderData: '',
-        isShowDialog: false,
-        orderData1: '',
-        isShowDialog1: false,
         orderData2: '',
         isShowDialog2: false,
+        titleName: '其他收支',
+        emtityMsg: '人家是有底线的 -.-',
         pictureZoomShow: false,
         imageZoom: '',
         fileUrl: fileUrl,
@@ -239,22 +178,6 @@
         topStatus: "",
         bottomStatus: "",
         allLoaded: false,
-        mockArr: [],
-        addressList: [],
-        inventoryToList: [
-          { fieldValue: 1, fieldName: '现货' }, { fieldValue: 0, fieldName: '售空' },
-          { fieldValue: 2, fieldName: '未上架' }
-        ],
-        statusList: [],
-        dataStatusList: [],
-        sellTime: '',
-        successTime: '',
-        startDate: new Date(),
-        createTime: '',
-        updateTime: '',
-        status: '',
-        selectedId: [],
-        ids: [],
         tableData: [],
         totalCount: 1
       }
@@ -264,8 +187,8 @@
       this.listSysDict()
     },
     methods: {
-      goGoodsBase(row) {
-        this.$router.push({ path: '/goodsBase'})
+      goDetail(id, type) {
+        this.$router.push({ path: '/otherAdd', query: { id, type } })
       },
       getPage() {
         goodsOtherApi.page(this.queryParam).then(res => {
@@ -288,7 +211,6 @@
         let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
           localStorage.getItem('sysDictList')) : []
         this.typeList = sysDictList.filter(item => item.typeValue == 39)
-        this.dataStatusList = sysDictList.filter(item => item.typeValue == 36)
       },
       loadData(p_status) {
         // 第一次加载或者下拉刷新最新数据
@@ -342,13 +264,17 @@
       },
       resetHandle() {
         this.queryParam = {
-          id: '',
-          inventory: 1,
-          inventoryFrom: '',
-          inventoryTo: '',
-          size: '',
+          type: '',
           actNo: '',
-          goodsId: '',
+          name: '',
+          brand: '',
+          remark: '',
+          priceFrom: '',
+          priceTo: '',
+          createTimeFrom: '',
+          createTimeTo: '',
+          updateTimeFrom: '',
+          updateTimeTo: '',
           pageSize: 10,
           pageNum: 1
         }
@@ -379,153 +305,6 @@
         this.imageZoom = e
         this.pictureZoomShow = true
       },
-      keyup1() {
-        // let theirPrice =
-        //   +  this.requestParam.dwPrice - (this.requestParam.dwPrice * 0.075 + 38 + 8.5)
-        // // let theirPrice = this.requestParam.theirPrice - 10
-        // //   - this.theirPrice.price
-        // this.requestParam.profits = parseFloat(theirPrice).toFixed(2)
-        //
-        // let profits = this.requestParam.theirPrice - 10
-        //   - this.requestParam.price
-        // this.requestParam.profits = parseFloat(profits).toFixed(2)
-
-        let poundage = this.requestParam.dwPrice * 0.075 + 38 + 8.5
-        this.requestParam.poundage = parseFloat(poundage).toFixed(2)
-
-        let theirPrice =  this.requestParam.dwPrice
-          - (this.requestParam.dwPrice * 0.075 + 38 + 8.5)
-        this.requestParam.theirPrice = parseFloat(theirPrice).toFixed(2)
-
-        let profits = this.requestParam.theirPrice - 10
-          - this.requestParam.price
-        this.requestParam.profits = parseFloat(profits).toFixed(2)
-      },
-      keyup2() {
-        // let theirPrice =
-        //   +  this.requestParam.dwPrice - (this.requestParam.dwPrice * 0.075 + 38 + 8.5)
-        // // let theirPrice = this.requestParam.theirPrice - 10
-        // //   - this.theirPrice.price
-        // this.requestParam.profits = parseFloat(theirPrice).toFixed(2)
-        //
-        // let profits = this.requestParam.theirPrice - 10
-        //   - this.requestParam.price
-        // this.requestParam.profits = parseFloat(profits).toFixed(2)
-
-        let poundage = this.requestParam1.shelvesPrice * 0.075 + 38 + 8.5
-        this.requestParam1.poundage = parseFloat(poundage).toFixed(2)
-
-        let theirPrice =  this.requestParam1.shelvesPrice
-          - (this.requestParam1.shelvesPrice * 0.075 + 38 + 8.5)
-        this.requestParam1.theirPrice = parseFloat(theirPrice).toFixed(2)
-
-        let profits = this.requestParam1.theirPrice - 10
-          - this.orderData1.price
-        this.requestParam1.profits = parseFloat(profits).toFixed(2)
-
-        if (this.requestParam1.num > this.orderData1.inventory - this.orderData1.galleryCount) {
-          this.requestParam1.num = this.orderData1.inventory - this.orderData1.galleryCount
-        }
-      },
-      confirmHandle1() {
-        if (!this.requestParam1.num) {
-          this.$messagebox("上架数量错误");
-          // this.$toast('上架数量错误')
-          return
-        }
-        if (this.requestParam1.num > this.orderData1.inventory) {
-          this.$messagebox('上架数量大于当前库存')
-          return
-        }
-        let data = {}
-        data.inventoryId = this.requestParam1.inventoryId
-        data.type = this.requestParam1.type
-        data.num = this.requestParam1.num
-        data.shelvesPrice = this.requestParam1.shelvesPrice
-        goodsInventoryApi.shelvesGoods(data).then(res => {
-          this.$toast(res.subMsg)
-          if (res.subCode === 1000) {
-            this.getPage()
-            this.isShowDialog1 = false
-          }
-        })
-      },
-      confirmHandle() {
-        // 利润= 到手价-运费-原价
-        // // 出售
-        // goodsOrderApi.sellGoods(this.requestParam).then(res => {
-        //   this.$toast(res.subMsg)
-        //   if (res.subCode === 1000) {
-        //     this.getPage()
-        //     this.isShowDialog = false
-        //   }
-        // })
-        goodsInventoryApi.update(this.requestParam).then(res => {
-          this.$toast(res.subMsg)
-          if (res.subCode === 1000) {
-            this.getPage()
-            this.isShowDialog = false
-          }
-        })
-      },
-      updateAddress() {
-        goodsOrderApi.update(this.requestParam1).then(res => {
-          this.$toast(res.subMsg)
-          if (res.subCode === 1000) {
-            this.getPage()
-            this.isShowDialog1 = false
-          }
-        })
-      },
-      changeStatusDialog1(row) {
-        this.orderData1 = row
-        this.requestParam1.inventoryId = this.orderData1.id
-        this.requestParam1.num = this.orderData1.inventory - this.orderData1.galleryCount
-        this.requestParam1.shelvesPrice = this.orderData1.dwPrice
-
-        let poundage = this.requestParam1.shelvesPrice * 0.075 + 38 + 8.5
-        this.requestParam1.poundage = parseFloat(poundage).toFixed(2)
-
-        let theirPrice =  this.requestParam1.shelvesPrice
-          - (this.requestParam1.shelvesPrice * 0.075 + 38 + 8.5)
-        this.requestParam1.theirPrice = parseFloat(theirPrice).toFixed(2)
-
-        let profits = this.requestParam1.theirPrice - 10
-          - this.orderData1.price
-        this.requestParam1.profits = parseFloat(profits).toFixed(2)
-        this.isShowDialog1 = true
-      },
-      handleClick(orderData) {
-        this.orderData = orderData
-        this.requestParam.id = this.orderData.id
-        this.requestParam.price = this.orderData.price
-        this.requestParam.dwPrice = this.orderData.dwPrice
-        this.requestParam.waybillNo = this.orderData.waybillNo
-        this.requestParam.addressId = this.orderData.addressId
-        // let poundage = this.requestParam.dwPrice * 0.075 + 38 + 8.5
-        // this.requestParam.poundage = parseFloat(poundage).toFixed(2)
-        if (!this.orderData.poundage) {
-          let poundage = this.requestParam.dwPrice * 0.075 + 38 + 8.5
-          this.requestParam.poundage = parseFloat(poundage).toFixed(2)
-        } else {
-          this.requestParam.poundage = this.orderData.poundage
-        }
-        if (!this.orderData.theirPrice) {
-          let theirPrice =  this.requestParam.dwPrice
-            - (this.requestParam.dwPrice * 0.075 + 38 + 8.5)
-          this.requestParam.theirPrice = parseFloat(theirPrice).toFixed(2)
-        } else {
-          this.requestParam.theirPrice = this.orderData.theirPrice
-        }
-        if (!this.orderData.profits) {
-          let profits = this.requestParam.theirPrice - 10
-            - this.requestParam.price
-          this.requestParam.profits = parseFloat(profits).toFixed(2)
-        } else {
-          this.requestParam.profits = this.orderData.profits
-        }
-        this.isShowDialog = true
-      }
     }
   };
 </script>
@@ -533,30 +312,6 @@
 <style>
 
   @import '../assets/index/style.css';
-  /*.mint-button--default.is-plain {*/
-  /*  border: 1px solid #409EFF;*/
-  /*  background-color: transparent;*/
-  /*  box-shadow: none;*/
-  /*  color: #409EFF;*/
-  /*}*/
-  /*.popupdiv {*/
-  /*  border-top: 1vw solid #eee;*/
-  /*  display: flex;*/
-  /*  padding-left: 22vw ;*/
-  /*}*/
-  /*.mt-button-div{*/
-  /*  margin-bottom: 3vw;margin-top: 2vw;margin-left: 1vw;margin-right: 2vw;*/
-  /*}*/
-  /*弹窗 end*/
-
-  /*.all_orders {*/
-  /*  background: #ffffff !important;*/
-  /*  font-size: 3.5vw;*/
-  /*}*/
-  /*.dingdans {*/
-  /*  padding-left: 2%;*/
-  /*  width: 96%;*/
-  /*}*/
   strong{
     font-weight: 600;
   }
