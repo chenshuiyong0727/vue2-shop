@@ -6,25 +6,27 @@
       </div>
     </mt-header>
     <div class="fenlei_top">
-      <div    class="fenlei_top_left">
-        <input type="text" v-model.trim="queryParam.actNo" placeholder="搜索货号" class="ins">
-      </div>
-      <div class="fenlei_top_right" >
+      <div    class="fenlei_top_left" style="width: 66vw;">
+        <input  type="text" v-model.trim="queryParam.actNo" placeholder="搜索货号" class="ins1">
         <mt-button
-          style="margin-left: -65px"
+          style="margin-left: -63px"
           type="primary"
           size="small"
           @click="search">搜索</mt-button>
+      </div>
+      <div style="font-size: 0.32rem;
+    color: #353535;
+    text-align: center;">
         <mt-button
           style="
            padding-top: 1.3px;
-           margin-left: 12px;
-           width: 67px;"
+           margin-left: 10px;"
           type="primary"
           size="small"
           @click="isShowDialog2 = true">  <img style="margin-left: -10px;" src="../../static/img/choose.png" height="20" width="20" slot="icon">
           <span style="margin-left: -5px;">筛选</span>
           </mt-button>
+         <img @click="isShowDialog3 = true" style="margin-bottom: 3px;height: 25px;width: 23px;"src="../../static/img/sort.png">
       </div>
     </div>
     <mt-loadmore
@@ -157,6 +159,27 @@
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
       </section>
     </mt-popup>
+    <mt-popup
+      position="bottom"
+      v-model="isShowDialog3">
+      <mt-header title="排序" >
+        <div slot="right">
+          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px"> 重置（关闭）</mt-button>
+        </div>
+        <div slot="left">
+          <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
+        </div>
+      </mt-header>
+      <section style="height: 80vw;width: 100vw">
+        <mt-field label="状态" style="margin-top: 11vw;">
+            <select class="select100" v-model="queryParam.inventory" @change="changeSystem" >
+               <option :disabled="true" value="" selected>请选择状态</option>
+              <option v-for="x in inventoryToList" :value="x.fieldValue">{{x.fieldName}}</option>
+            </select>
+        </mt-field>
+        <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
+      </section>
+    </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
         <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">
@@ -231,6 +254,7 @@
         isShowDialog1: false,
         orderData2: '',
         isShowDialog2: false,
+        isShowDialog3: false,
         pictureZoomShow: false,
         imageZoom: '',
         fileUrl: fileUrl,
@@ -392,6 +416,15 @@
             return false
           }
         })
+      },
+      search() {
+        if (!this.queryParam.actNo ) {
+          this.$toast('请输入货号')
+          return
+        }
+        this.queryParam.pageNum = 1
+        this.allLoaded = false;
+        this.getPage()
       },
       search() {
         if (!this.queryParam.actNo ) {
@@ -799,7 +832,7 @@
     width: 2rem;
     text-align: center;
   }
-  .ins {
+  .ins1 {
     writing-mode: horizontal-tb !important;
     font-style: ;
     font-variant-ligatures: ;
@@ -832,8 +865,7 @@
     border-image: initial;
     border: 0;
     outline: none;
-    width: 76vw;
-    /*width: 5.7rem;*/
+    width: 67vw;
     padding: 0.2rem;
 
   }
