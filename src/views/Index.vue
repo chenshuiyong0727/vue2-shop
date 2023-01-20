@@ -7,21 +7,59 @@
     <v-section1 :form="form" :countDay="countDay" :count="count" />
 <!--    <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/>-->
     <v-orderNum :orderIofo ="orderIofo"/>
-    <div style="padding: 10px;border-left:1px solid #DCDFE6; background-color: #fff">
-<!--      <el-date-picker-->
-<!--        style="float: right;z-index: 1"-->
-<!--        size="small"-->
-<!--        v-model="createTime"-->
-<!--        type="monthrange"-->
-<!--        align="right"-->
-<!--        unlink-panels-->
-<!--        range-separator="至"-->
-<!--        start-placeholder="开始日期"-->
-<!--        end-placeholder="结束日期"-->
-<!--        @change="handleDateChange"-->
-<!--      >-->
-<!--      </el-date-picker>-->
-      <div>
+    <div style="margin-top: 17px;border-left:1px solid #DCDFE6; background-color: #fff;    height: 390px;">
+      <h1 class="index-title">
+        销售走势
+      </h1>
+      <div style="
+      margin-left: 2.5vw;
+      display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95vw;">
+          <el-date-picker style="width: 35vw;"
+                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
+                          type="month" placeholder="时间开始">
+          </el-date-picker>
+          <span style="    font-size: 15px;margin-left: 1vw;">至</span>
+          <el-date-picker style="width: 35vw"
+                          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
+                          type="month" placeholder="时间结束">
+          </el-date-picker>
+          <mt-button
+            type="primary"
+            size="small"
+            @click="getData1">搜索</mt-button>
+      </div>
+      <ul class="index-list" >
+        <li>
+          <router-link :to="{name:'销售报表'}">
+            <p class="color-danger"><strong>{{orderData.successNum}}</strong> </p>
+            <p class="section1name" >本月订单总数</p>
+            <p :class="orderData.successNumRate<0 ? 'color-success' : 'color-danger'" >{{orderData.successNumRate}} %</p>
+            <p class="section1name" >同比上月</p>
+          </router-link>
+        </li>
+        <li>
+          <router-link :to="{name:'销售报表'}">
+            <p class="color-danger"><strong>{{orderData.profitsAmount}}</strong> </p>
+            <p class="section1name" >本月订单利润</p>
+            <p :class="orderData.profitsAmountRate<0 ? 'color-success' : 'color-danger'" >{{orderData.profitsAmountRate}} %</p>
+            <p class="section1name" >同比上月</p>
+          </router-link>
+        </li>
+        <li>
+          <router-link :to="{name:'销售报表'}">
+            <p class="color-danger"><strong>{{orderData.orderAmount}}</strong> </p>
+            <p class="section1name" >本月销售总额</p>
+            <p :class="orderData.orderAmountRate<0 ? 'color-success' : 'color-danger'" >{{orderData.orderAmountRate}} %</p>
+            <p class="section1name" >同比上月</p>
+          </router-link>
+        </li>
+      </ul>
+
+      <div style="margin-top: -40px;
+    margin-bottom: -10px;">
         <ve-line
           height="250px"
           :data="chartData"
@@ -215,4 +253,59 @@ export default {
     padding-bottom: 14vw;
     background-color: #F8FCFF;
 }
+  .index-title {
+    .bt();
+    background-color: #ffffff;
+    text-align: center;
+    padding: 3vw 0;
+    margin-top: 4vw;
+    .fz(font-size, 40);
+    color: #333;
+    position: relative;
+
+    i {
+      position: absolute;
+      right: 6vw;
+      top: 50%;
+      .fz(font-size, 36);
+      .fz(margin-top,-16);
+
+      &::before {
+        color: rgb(159, 159, 159);
+      }
+    }
+  }
+  .section1name{
+    color: black;
+  }
+  .index-list {
+    display: -ms-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    /*display: flex;*/
+    flex-wrap: wrap;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    padding: 2vw 2vw 4vw 2vw;
+    li {
+      text-align: center;
+      /*border-style: groove;*/
+      background-color: #EEF2F7;
+      width: 31%;
+      padding: 1vw;
+      color: #333;
+      margin: 1.1vw;
+      font-size: 4.5vw;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      a,
+      img {
+        width: 100%;
+        display: block;
+      }
+      p{
+        padding-top: 1vw;
+      }
+    }
+  }
 </style>
