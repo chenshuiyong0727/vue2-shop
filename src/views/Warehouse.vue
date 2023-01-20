@@ -6,27 +6,25 @@
       </div>
     </mt-header>
     <div class="fenlei_top">
-      <div    class="fenlei_top_left" style="width: 66vw;">
-        <input  type="text" v-model.trim="queryParam.actNo" placeholder="搜索货号" class="ins1">
+      <div    class="fenlei_top_left">
+        <input type="text" v-model.trim="queryParam.actNo" placeholder="搜索货号" class="ins">
+      </div>
+      <div class="fenlei_top_right" >
         <mt-button
-          style="margin-left: -63px"
+          style="margin-left: -65px"
           type="primary"
           size="small"
           @click="search">搜索</mt-button>
-      </div>
-      <div style="font-size: 0.32rem;
-    color: #353535;
-    text-align: center;">
         <mt-button
           style="
            padding-top: 1.3px;
-           margin-left: 10px;"
+           margin-left: 12px;
+           width: 67px;"
           type="primary"
           size="small"
           @click="isShowDialog2 = true">  <img style="margin-left: -10px;" src="../../static/img/choose.png" height="20" width="20" slot="icon">
           <span style="margin-left: -5px;">筛选</span>
-          </mt-button>
-         <img @click="isShowDialog3 = true" style="margin-bottom: 3px;height: 25px;width: 23px;"src="../../static/img/sort.png">
+        </mt-button>
       </div>
     </div>
     <mt-loadmore
@@ -150,30 +148,15 @@
         </div>
       </mt-header>
       <section style="height: 80vw;width: 100vw">
-        <mt-field label="状态" style="margin-top: 11vw;">
-            <select class="select100" v-model="queryParam.inventory" @change="changeSystem" >
-               <option :disabled="true" value="" selected>请选择状态</option>
-              <option v-for="x in inventoryToList" :value="x.fieldValue">{{x.fieldName}}</option>
+        <mt-field label="排序" style="margin-top: 11vw;">
+            <select class="select100" v-model="queryParam.sort" @change="changeSystem" >
+          <option :disabled="true" value="" selected>请选择排序</option>
+              <option v-for="x in sortList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
         </mt-field>
-        <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
-      </section>
-    </mt-popup>
-    <mt-popup
-      position="bottom"
-      v-model="isShowDialog3">
-      <mt-header title="排序" >
-        <div slot="right">
-          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px"> 重置（关闭）</mt-button>
-        </div>
-        <div slot="left">
-          <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
-        </div>
-      </mt-header>
-      <section style="height: 80vw;width: 100vw">
-        <mt-field label="状态" style="margin-top: 11vw;">
+        <mt-field label="状态">
             <select class="select100" v-model="queryParam.inventory" @change="changeSystem" >
-               <option :disabled="true" value="" selected>请选择状态</option>
+          <option :disabled="true" value="" selected>请选择状态</option>
               <option v-for="x in inventoryToList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
         </mt-field>
@@ -254,13 +237,13 @@
         isShowDialog1: false,
         orderData2: '',
         isShowDialog2: false,
-        isShowDialog3: false,
         pictureZoomShow: false,
         imageZoom: '',
         fileUrl: fileUrl,
         queryParam: {
           id: '',
           inventory: 1,
+          sort:'',
           inventoryFrom: '',
           inventoryTo: '',
           size: '',
@@ -303,6 +286,18 @@
         inventoryToList: [
           { fieldValue: 1, fieldName: '现货' }, { fieldValue: 0, fieldName: '售空' },
           { fieldValue: 2, fieldName: '未上架' }
+        ],
+        sortList: [
+          { fieldValue: 'c.size asc ,', fieldName: '尺码升序' },
+          { fieldValue: 'c.size desc ,', fieldName: '尺码降序' },
+          { fieldValue: 'a.price asc ,', fieldName: '入库价升序' },
+          { fieldValue: 'a.price desc ,', fieldName: '入库价降序' },
+          { fieldValue: 'a.dw_price asc ,', fieldName: '得物价升序' },
+          { fieldValue: 'a.dw_price desc ,', fieldName: '得物价降序' },
+          { fieldValue: 'a.inventory asc ,', fieldName: '库存升序' },
+          { fieldValue: 'a.inventory desc ,', fieldName: '库存降序' },
+          { fieldValue: 'a.create_time asc ,', fieldName: '创建时间升序' },
+          { fieldValue: 'a.create_time desc ,', fieldName: '创建时间降序' },
         ],
         statusList: [],
         dataStatusList: [],
@@ -426,15 +421,6 @@
         this.allLoaded = false;
         this.getPage()
       },
-      search() {
-        if (!this.queryParam.actNo ) {
-          this.$toast('请输入货号')
-          return
-        }
-        this.queryParam.pageNum = 1
-        this.allLoaded = false;
-        this.getPage()
-      },
       // 日期
       open(picker) {
         this.$refs[picker].open();
@@ -454,6 +440,7 @@
       resetHandle() {
         this.queryParam = {
           id: '',
+          sort:'',
           inventory: 1,
           inventoryFrom: '',
           inventoryTo: '',
@@ -727,9 +714,9 @@
   /*  font-size: 3.5vw;*/
   /*  margin-top: -1vw;*/
   /*}*/
-/*
- -----分割线---
-*/
+  /*
+   -----分割线---
+  */
   * {
     margin: 0;
     padding: 0;
@@ -832,7 +819,7 @@
     width: 2rem;
     text-align: center;
   }
-  .ins1 {
+  .ins {
     writing-mode: horizontal-tb !important;
     font-style: ;
     font-variant-ligatures: ;
@@ -865,7 +852,8 @@
     border-image: initial;
     border: 0;
     outline: none;
-    width: 67vw;
+    width: 76vw;
+    /*width: 5.7rem;*/
     padding: 0.2rem;
 
   }
