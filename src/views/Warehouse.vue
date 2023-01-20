@@ -72,7 +72,13 @@
                 size="small"
                 @click="changeStatusDialog1(item)">上架</mt-button>
               <mt-button
-                :style="item.inventory <= item.galleryCount ? 'margin-left: 20.5vw;' : 'margin-left: 1vw;'"
+                v-else
+                style="margin-left: 4.1vw;"
+                type="primary"
+                size="small"
+                @click="jumpactNo(item.actNo)">订单</mt-button>
+              <mt-button
+                style="margin-left: 1vw;"
                 type="primary"
                 size="small"
                 @click="handleClick(item)">修改</mt-button>
@@ -574,6 +580,9 @@
             this.isShowDialog1 = false
           }
         })
+      },
+      jumpactNo(actNo) {
+        this.$router.push({ path: '/order', query: { actNo } })
       },
       changeStatusDialog1(row) {
         this.orderData1 = row

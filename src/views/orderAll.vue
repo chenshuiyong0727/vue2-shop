@@ -63,10 +63,13 @@
             </div>
             <div class="dingdans_con_right_down_1">
               <mt-button
-                style="margin-left: -15vw;"
                 type="primary"
                 size="small"
-                @click="goDetail(item)">查看</mt-button>
+                @click="jumpactNo(item.actNo)">查看库存</mt-button>
+              <mt-button
+                type="primary"
+                size="small"
+                @click="goDetail(item)">详情</mt-button>
               <mt-button
                 type="primary"
                 size="small"
@@ -537,6 +540,9 @@
 
         this.isShowDialog1 = true
       },
+      jumpactNo(actNo) {
+        this.$router.push({ path: '/store', query: { actNo } })
+      },
       goDetail(item) {
         this.$router.push({ path: '/orderDetail', query: { item } })
       },
@@ -658,7 +664,7 @@
     margin-bottom: 2vw;
   }
   .dingdans_con_right_down_1 {
-    margin-left: 55vw;
+    margin-left: 15vw;
     margin-bottom: -7vw;
     font-size: 3.5vw;
   }
