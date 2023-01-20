@@ -12,6 +12,8 @@ import Mint from 'mint-ui';    //移动端UI
 import 'mint-ui/lib/style.css'
 import { Popup } from 'mint-ui';
 import VCharts from 'v-charts-v2'
+import vcharts from 'v-charts'
+Vue.use(vcharts )
 // set ElementUI lang to EN
 // Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明

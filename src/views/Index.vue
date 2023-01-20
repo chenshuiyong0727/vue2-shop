@@ -4,7 +4,7 @@
     <mt-header title="首页">
     </mt-header>
 <!--    <v-service :countDay="countDay" :count="count"/>-->
-    <v-section1 :form="form" :countDay="countDay" :count="count" />
+    <v-section1 :form="form" :countDay="countDay" :count="count":chartData1="chartData1" :chartSettings1="chartSettings1" />
 <!--    <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/>-->
     <v-orderNum :orderIofo ="orderIofo"/>
     <div style="margin-top: 17px;border-left:1px solid #DCDFE6; background-color: #fff;    height: 390px;">
@@ -130,6 +130,12 @@ export default {
         columns: ['months', 'successNum', 'orderAmount', 'profitsAmount'],
         rows: []
       },
+      chartSettings1: { type: 'pie' },
+      chartData1: {
+        columns: ['key', 'value'],
+        rows: [
+        ]
+      },
       countDay: 0, // 倒计时
       count: '', // 倒计时
       seconds: 0, // 10天的秒数
@@ -155,8 +161,8 @@ export default {
   },
 
   created(){
-    this.initTime()
-    this.time()
+    // this.initTime()
+    // this.time()
     this.getData()
     this.getData1()
     // this.getData()
@@ -212,6 +218,13 @@ export default {
             this.form.inventoryNum / this.form.goodsPutInNum * 100).toFixed(2)
           this.form.profitsProportion = parseFloat(
             this.form.profitsAverage / this.form.costAverage * 100).toFixed(2)
+          // let  inventoryNum = {key: "22", value: 1393  }
+          // let  successNum = {key: "23", value: 1393  }
+          let  successNum = {key: "成功数量", value: this.form.successNum }
+          let  inventoryNum = {key: "库存总数", value: this.form.inventoryNum }
+          // let  successNum = {key: "successNum", value: this.form.successNum }
+          this.chartData1.rows.push(inventoryNum)
+          this.chartData1.rows.push(successNum)
         } else {
           this.$toast(res.subMsg)
         }
