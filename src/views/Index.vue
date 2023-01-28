@@ -147,19 +147,6 @@ export default {
       dataEmpty: false
     }
   },
-  beforeCreate() {
-    // this.getData()
-    // this.getData1()
-    // this.$api({
-    //   method: 'post',
-    //   url: '/index'
-    // }).then((response) => {
-    //   this.datas = response.data;
-    // }).catch(function(error) {
-    //   console.info(error)
-    // })
-  },
-
   created(){
     this.initTime()
     this.time()
