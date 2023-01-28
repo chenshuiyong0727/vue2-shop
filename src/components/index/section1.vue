@@ -8,12 +8,12 @@
         :data="chartData1" :settings="chartSettings1" ></ve-pie>
     </div>
     <ul class="section1-list" style="display: ">
-<!--      <li style="width: 47%" v-if="countDay > 0">-->
-<!--        <router-link :to="{name:''}">-->
-<!--          <p><strong class="color-danger"> {{countDay}}</strong>{{count}}</p>-->
-<!--          <p class="section1name">春节倒计时</p>-->
-<!--        </router-link>-->
-<!--      </li>-->
+      <li style="width: 47%" v-if="countDay > 0">
+        <router-link :to="{name:''}">
+          <p><strong class="color-danger"> {{countDay}}</strong>{{count}}</p>
+          <p class="section1name">春节倒计时</p>
+        </router-link>
+      </li>
       <li>
         <router-link :to="{name:'仓库'}">
           <p class="color-danger">{{form.inventoryNum}}</p>

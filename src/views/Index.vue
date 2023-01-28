@@ -161,8 +161,8 @@ export default {
   },
 
   created(){
-    // this.initTime()
-    // this.time()
+    this.initTime()
+    this.time()
     this.getData()
     this.getData1()
     // this.getData()
@@ -171,7 +171,7 @@ export default {
   methods: {
     initTime() {
       let myDate = new Date().getTime()
-      let endTime = '2023-01-22 00:00:00'
+      let endTime = '2024-02-10 00:00:00'
       let timestamp2 = Date.parse(new Date(endTime))
       this.seconds = (timestamp2 - myDate) / 1000
     },
@@ -185,7 +185,7 @@ export default {
         m = m < 10 ? '0' + m : m
         let s = parseInt(this.seconds % 60);
         s = s < 10 ? '0' + s : s
-        this.count = '天 ' + h + '时' + m + '分' + s + '秒'
+        this.count = '天' + h + '时' + m + '分' + s + '秒'
       }
       this.countDay = d
     },

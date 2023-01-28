@@ -30,11 +30,17 @@ var webpackConfig = merge(baseWebpackConfig, {
       'process.env': env
     }),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
+      output: {
+        comments: false, // 去掉注释
       },
+      compress: {
+        warnings: false,
+        pure_funcs: ["console.log"], //移除console
+      },
+      exclude: /(node_modules|static)/,// 排除static文件夹 !!! (仅添加这一行代码即可,如果你也使用了UglifyJsPlugin)
       sourceMap: true
     }),
+
     // extract css into its own file
     new ExtractTextPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css')

@@ -27,6 +27,36 @@
         </mt-button>
       </div>
     </div>
+<!--    <div style="margin-top: 17px;border-left:1px solid #DCDFE6; background-color: #fff;    height: 390px;">-->
+<!--    <div style="-->
+<!--      margin-left: 2.5vw;-->
+<!--      display: flex;-->
+<!--    align-items: center;-->
+<!--    justify-content: space-between;-->
+<!--    width: 95vw;">-->
+<!--      <ul class="store-list" >-->
+<!--        <li>-->
+<!--          <router-link :to="{name:'销售报表'}">-->
+<!--            <p class="color-danger"><strong>1</strong> </p>-->
+<!--            <p class="section1name" >本月订单总数</p>-->
+<!--            <p class="section1name" >同比上月</p>-->
+<!--          </router-link>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <router-link :to="{name:'销售报表'}">-->
+<!--            <p class="section1name" >本月订单利润</p>-->
+<!--            <p class="section1name" >同比上月</p>-->
+<!--          </router-link>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <router-link :to="{name:'销售报表'}">-->
+<!--            <p class="section1name" >本月销售总额</p>-->
+<!--            <p class="section1name" >同比上月</p>-->
+<!--          </router-link>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--    </div>-->
     <mt-loadmore
       style="padding-top: 0.86rem"
       :top-method="loadTop"
@@ -865,5 +895,38 @@
     /*width: 5.7rem;*/
     padding: 0.2rem;
 
+  }
+  .store-list {
+    display: -ms-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    /*display: flex;*/
+    flex-wrap: wrap;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    padding: 2vw 2vw 4vw 2vw;
+  li {
+    text-align: center;
+    /*border-style: groove;*/
+    background-color: #EEF2F7;
+    width: 31%;
+    padding: 1vw;
+    color: #333;
+    margin: 1.1vw;
+    font-size: 4.5vw;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  a,
+  img {
+    width: 100%;
+    display: block;
+  }
+  p{
+    padding-top: 1vw;
+  }
+  }
+  }
+  .section1name{
+    color: black;
   }
 </style>
