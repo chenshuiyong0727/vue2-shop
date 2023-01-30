@@ -75,13 +75,8 @@
 </template>
 
 <script>
-// import Header from '@/components/index/header.vue'
 import orderNum from '@/components/index/orderNum.vue'
-// import Service from '@/components/index/service.vue'
 import Section1 from '@/components/index/section1.vue'
-// import Section2 from '@/components/index/section2.vue'
-// import Section3 from '@/components/index/section3.vue'
-// import Section4 from '@/components/index/section4.vue'
 import Baseline from '@/common/_baseline.vue'
 import Footer from '@/common/_footer.vue'
 // import index from '@/http/mock.js' //模拟数据

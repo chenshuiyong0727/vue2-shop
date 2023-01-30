@@ -4,12 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router);
 //按需加载,当渲染其他页面时才加载其组件,并缓存,减少首屏加载时间
 const Index = resolve => require(['@/views/Index.vue'], resolve)
-const Category = resolve => require(['@/views/Category.vue'], resolve)
-const CategoryMain = resolve => require(['@/components/category/main.vue'], resolve)
-const Car = resolve => require(['@/views/Car.vue'],resolve)
 const User = resolve => require(['@/views/User.vue'], resolve)
-const Detail = resolve => require(['@/views/Detail.vue'], resolve)
-const Search = resolve => require(['@/views/Search.vue'], resolve)
 const Order = resolve => require(['@/views/OrderAll.vue'], resolve)
 const orderDetail = resolve => require(['@/views/orderDetail.vue'], resolve)
 const putin = resolve => require(['@/views/putin.vue'], resolve)
@@ -22,8 +17,6 @@ const GoodsAdd = resolve => require(['@/views/goodsAdd.vue'], resolve)
 const GoodsBase = resolve => require(['@/views/GoodsBase.vue'], resolve)
 const Warehouse = resolve => require(['@/views/Warehouse.vue'], resolve)
 const OpenWarehouse = resolve => require(['@/views/OpenWarehouse.vue'], resolve)
-// const Order = resolve => require(['@/views/Order.vue'], resolve)
-const Pay = resolve => require(['@/components/car/pay/pay.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
 const logout = resolve => require(['@/views/logout.vue'], resolve)
 
@@ -47,53 +40,12 @@ export default new Router({
       },
     },
     {
-      path: '/category',
-      name: '分类页',
-      redirect: '/category/all',
-      component: Category,
-      children: [{
-        path: '/category/:tab',
-        component:CategoryMain
-      }],
-      meta: {
-        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
-      },
-    }, {
-      path: '/car',
-      name: '购物车页',
-      component: Car,
-      meta: {
-        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
-      },
-    }, {
-      path: '/car/pay',
-      name: '支付页',
-      component: Pay,
-      meta: {
-        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
-      },
-    },
-    {
       path: '/user',
       name: '用户页',
       component: User,
       meta: {
            requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
        },
-    }, {
-      path: '/detail',
-      name: '详情页',
-      component: Detail,
-      meta: {
-        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
-      },
-    }, {
-      path: '/search',
-      name: '搜索页',
-      component: Search,
-      meta: {
-        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
-      },
     }, {
       path: '/order',
       name: '订单',

@@ -4,7 +4,7 @@ import router from './router'
 import store from '@/vuex/store.js'   //vuex
 import api from '@/http/api.js'       //http请求
 import '@/utils/filter'
-import ElementUI from 'element-ui'
+// import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Mint from 'mint-ui';    //移动端UI
 import 'mint-ui/lib/style.css'
@@ -13,15 +13,28 @@ import 'mint-ui/lib/style.css'
 // import { VeLine } from 'v-charts-v2/lib/index.esm'
 import VeLine from 'v-charts-v2/lib/line'
 import VePie  from 'v-charts/lib/pie'
-
-
-// 挂载到vue实例中
+import {
+  Button,
+  Upload,
+  Input,
+  Cascader,
+  Table,
+  TableColumn,
+  DatePicker,
+} from 'element-ui';
 // Vue.prototype.$echarts = echarts
 // import VCharts from 'v-charts-v2'
 // import vcharts from 'v-charts'
 // Vue.use(vcharts )
 // Vue.use(VCharts);
-Vue.use(ElementUI)
+Vue.use(Upload)
+Vue.use(Button)
+Vue.use(Input)
+Vue.use(Cascader);
+Vue.use(Table);
+Vue.use(TableColumn);
+Vue.use(DatePicker);
+
 Vue.use(Mint);
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
