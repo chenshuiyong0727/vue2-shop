@@ -8,7 +8,7 @@
         :data="chartData1" :settings="chartSettings1" ></ve-pie>
     </div>
     <ul class="section1-list" style="display: ">
-      <li style="width: 47%" v-if="countDay > 0">
+      <li style="width: 47%" v-if="countDay > 0" @click="chunjie">
         <router-link :to="{name:''}">
           <p><strong class="color-danger"> {{countDay}}</strong>{{count}}</p>
           <p class="section1name">春节倒计时</p>
@@ -155,6 +155,12 @@ export default {
     count: {
       type: String,
       default: ''
+    }
+  },
+  methods:{
+    chunjie(){
+      var url = 'http://www.093700.com/chunjie.html'
+      window.location.href = url
     }
   }
 }
