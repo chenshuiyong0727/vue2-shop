@@ -5,7 +5,7 @@
     <div style="
     font-size: 10px;
     padding-top: 13.4vw;
-    padding-left: 4vw;
+    padding-left: 0vw;
     max-width: 264px!important;
     max-height: 494px!important;
     margin: 42px auto!important;
@@ -17,8 +17,8 @@
 " >
       <div>
         <img style="
-        margin-left: 74px;
-        margin-top: 10px;
+        margin-left: 72px;
+        margin-top: 20px;
     margin-bottom: -3px;
     width: 14.2vw;
     display: block;
@@ -46,59 +46,11 @@
           :readonly='!toggle'
           :disableClear = '!toggle'>
         </el-input>
-
-<!--        <mt-field-->
-<!--          label="账号"-->
-<!--          placeholder="请输入账号"-->
-<!--          type = "text"-->
-<!--          v-model = "loginForm.loginAccount"-->
-<!--          :readonly = '!toggle'-->
-<!--          :disableClear = '!toggle'-->
-<!--        ></mt-field>-->
-<!--        <mt-field-->
-<!--          label="密码"-->
-<!--          placeholder="请输入密码"-->
-<!--          type="password"-->
-<!--          v-model="loginForm.loginPassword"-->
-<!--          :readonly='!toggle'-->
-<!--          :disableClear = '!toggle'-->
-<!--        ></mt-field>-->
       </section>
       <div class="clearfix btm-distance">
         <el-button style="margin-top: 25px;    width: 50vw;" type="primary" @click="login" v-if='toggle'>登录</el-button>
-<!--                  <el-button  @click="comfirm1">忘记密码</el-button>-->
                 </div>
               </div>
-
-
-          <!--    <section>-->
-<!--      <mt-field-->
-<!--       label="账号"-->
-<!--        placeholder="请输入账号"-->
-<!--        type = "text"-->
-<!--        v-model = "loginForm.loginAccount"-->
-<!--        :readonly = '!toggle'-->
-<!--        :disableClear = '!toggle'-->
-<!--        ></mt-field>-->
-<!--      <mt-field-->
-<!--       label="密码"-->
-<!--       placeholder="请输入密码"-->
-<!--       type="password"-->
-<!--       v-model="loginForm.loginPassword"-->
-<!--       :readonly='!toggle'-->
-<!--       :disableClear = '!toggle'-->
-<!--        ></mt-field>-->
-<!--    </section>-->
-<!--    <mt-button-->
-<!--     plain-->
-<!--     size="large"-->
-<!--     @click="login"-->
-<!--     v-if='toggle'>登录</mt-button>-->
-<!--    <mt-button-->
-<!--     plain-->
-<!--     size="large"-->
-<!--     @click="logout"-->
-<!--     v-else>退出登录</mt-button>-->
 
   </div>
 </template>
@@ -273,7 +225,6 @@ export default {
 .login {
   >section {
     .tip {
-      padding: 6vw 3vw;
       color:rgb(224, 145, 71);
       letter-spacing: 2px;
       font-size: 16px;
