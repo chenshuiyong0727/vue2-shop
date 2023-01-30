@@ -8,7 +8,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Mint from 'mint-ui';    //移动端UI
 import 'mint-ui/lib/style.css'
-import { Popup } from 'mint-ui';
+// import { Popup } from 'mint-ui';
 // 引入echarts
 // import { VeLine } from 'v-charts-v2/lib/index.esm'
 import VeLine from 'v-charts-v2/lib/line'
@@ -25,7 +25,7 @@ Vue.use(ElementUI)
 Vue.use(Mint);
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
-Vue.component(Popup.name, Popup);
+// Vue.component(Popup.name, Popup);
 Vue.component(VeLine.name, VeLine)
 Vue.component(VePie.name, VePie)
 // if (localStorage.getItem('org_token_auth')) {
