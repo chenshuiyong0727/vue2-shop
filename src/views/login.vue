@@ -125,17 +125,18 @@ export default {
       },
       // account:'',
       // password:'',
-      flag: '',
+      // flag: '',
       toggle:!this.$store.state.login.token
     }
   },
-  created() {
-    const { flag } = this.$route.query
-    this.flag = flag
-  },
+  // created() {
+  //   const { flag } = this.$route.query
+  //   this.flag = flag
+  // },
   mounted() {
-    if (this.flag ===1 || this.flag === '1') {
-      Toast('请先登录');
+    if (localStorage.getItem('org_token_auth')) {
+      Toast('您处于登录状态，自动为您跳转到首页');
+      this.$router.push({ path: '/'})
     }
   },
   methods:{
