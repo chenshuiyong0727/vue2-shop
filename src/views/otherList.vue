@@ -125,7 +125,7 @@
     </div>
     <div style="
     right: 15px;
-    bottom: 20vw;
+    bottom: 10vw;
     position: absolute;
     text-align: center;
     ">
@@ -137,7 +137,7 @@
         <img src="../../static/img/add.png" height="30" width="30" slot="icon">
       </mt-button>
     </div>
-    <v-footer></v-footer>
+<!--    <v-footer></v-footer>-->
   </div>
 </template>
 <script>
