@@ -10,6 +10,9 @@ import Mint from 'mint-ui';    //移动端UI
 import 'mint-ui/lib/style.css'
 import VeLine from 'v-charts-v2/lib/line'
 import VePie  from 'v-charts/lib/pie'
+// todo import Vconsole from 'vconsole'
+// let vConsole = new Vconsole()
+// Vue.use(vConsole);
 Vue.use(ElementUI);
 Vue.use(Mint);
 Vue.config.productionTip = false

@@ -7,8 +7,12 @@
       <ve-pie height="320px"
         :data="chartData1" :settings="chartSettings1" ></ve-pie>
     </div>
-    <ul class="section1-list" style="display: ">
-      <li style="width: 47%" v-if="countDay > 0" @click="chunjie">
+    <ul class="section1-list" style="
+    display: -webkit-box;
+    flex-wrap: wrap;
+    margin-left: 1.5vw;
+    padding: 0vw 1vw;">
+      <li style="width: 47%"  @click="chunjie">
         <router-link :to="{name:''}">
           <p><strong class="color-danger"> {{countDay}}</strong>{{count}}</p>
           <p class="section1name">春节倒计时</p>
@@ -26,7 +30,13 @@
           <p class="section1name">利润总额</p>
         </router-link>
       </li>
-      <li>
+    </ul>
+    <ul class="section1-list" style="
+    display: -webkit-box;
+    flex-wrap: wrap;
+    margin-left: 1.5vw;
+    padding: 0vw 1vw;">
+    <li>
         <router-link :to="{name:'销售报表'}">
           <p class="color-danger">{{form.profitsAverage}}</p>
           <p class="section1name">平均利润</p>
@@ -51,6 +61,12 @@
           <p class="section1name">商品款式</p>
         </router-link>
       </li>
+    </ul>
+    <ul class="section1-list" style="
+    display: -webkit-box;
+    flex-wrap: wrap;
+    margin-left: 1.5vw;
+    padding: 0vw 1vw;">
       <li>
         <router-link :to="{name:'入库报表'}">
           <p>{{form.goodsPutInNum}}</p>
@@ -75,6 +91,12 @@
           <p class="section1name">成功总额</p>
         </router-link>
       </li>
+    </ul>
+    <ul class="section1-list" style="
+    display: -webkit-box;
+    flex-wrap: wrap;
+    margin-left: 1.5vw;
+    padding: 0vw 1vw;">
       <li>
         <router-link :to="{ path: '/order?status=7'}">
           <p>{{form.freight}}</p>
@@ -99,6 +121,12 @@
           <p class="section1name">库存均价</p>
         </router-link>
       </li>
+    </ul>
+    <ul class="section1-list" style="
+    display: -webkit-box;
+    flex-wrap: wrap;
+    margin-left: 1.5vw;
+    padding: 0vw 1vw;">
       <li>
         <router-link :to="{name:'销售报表'}">
           <p>{{form.orderAmountAverage}}</p>
