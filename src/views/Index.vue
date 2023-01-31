@@ -7,30 +7,10 @@
     <v-section1 :form="form" :countDay="countDay" :count="count":chartData1="chartData1" :chartSettings1="chartSettings1" />
 <!--    <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/>-->
     <v-orderNum :orderIofo ="orderIofo"/>
-    <div style="margin-top: 17px;border-left:1px solid #DCDFE6; background-color: #fff;    height: 390px;">
+    <div style="margin-top: 17px;border-left:1px solid #DCDFE6; background-color: #fff;    height: 500px;">
       <h1 class="index-title">
         销售走势
       </h1>
-      <div style="
-      margin-left: 2.5vw;
-      display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 95vw;">
-          <el-date-picker style="width: 35vw;"
-                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
-                          type="month" placeholder="时间开始">
-          </el-date-picker>
-          <span style="    font-size: 15px;margin-left: 1vw;">至</span>
-          <el-date-picker style="width: 35vw"
-                          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
-                          type="month" placeholder="时间结束">
-          </el-date-picker>
-          <mt-button
-            type="primary"
-            size="small"
-            @click="getData1">搜索</mt-button>
-      </div>
       <ul class="index-list" >
         <li>
           <router-link :to="{name:'销售报表'}">
@@ -57,9 +37,63 @@
           </router-link>
         </li>
       </ul>
-
-      <div style="margin-top: -40px;
-    margin-bottom: -10px;">
+<!--      <router-link class="my-indent-2" :to="{ name: '订单'}">-->
+<!--        <span class="my-indent-2-left">利润统计数据盘</span>-->
+        <div style="
+            margin-left: 30vw;
+    height: 13vw;
+    line-height: 6vw;">
+<!--          <span style="-->
+<!--    display: inline-block;-->
+<!--    font-size: 14px;-->
+<!--    color: rgba(0, 0, 0, 0.4);-->
+<!--    position: relative;">-->
+<!--          </span>-->
+          <el-button :type="mouthLl" @click="profitData(1)" size="small" round>月利润</el-button>
+          <el-button :type="dayLl" @click="profitData(0)" size="small" round>日利润</el-button>
+        </div>
+<!--      </router-link>-->
+<!--      <div v-if="dateType == 'month'" style="-->
+<!--      margin-left: 2.5vw;-->
+<!--      display: flex;-->
+<!--    align-items: center;-->
+<!--    justify-content: space-between;-->
+<!--    width: 95vw;">-->
+<!--        <el-date-picker style="width: 35vw;"-->
+<!--                        v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"-->
+<!--                        type="month" placeholder="时间开始">-->
+<!--        </el-date-picker>-->
+<!--        <span style="    font-size: 15px;margin-left: 1vw;">至</span>-->
+<!--        <el-date-picker style="width: 35vw"-->
+<!--                        v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"-->
+<!--                        type="month" placeholder="时间结束">-->
+<!--        </el-date-picker>-->
+<!--        <mt-button-->
+<!--          type="primary"-->
+<!--          size="small"-->
+<!--          @click="getData1">搜索1</mt-button>-->
+<!--      </div>-->
+      <div style="
+      margin-left: 2.5vw;
+      display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95vw;">
+        <el-date-picker style="width: 35vw;"
+                        v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
+                        :type="dateType" placeholder="时间开始">
+        </el-date-picker>
+        <span style="    font-size: 15px;margin-left: 1vw;">至</span>
+        <el-date-picker style="width: 35vw"
+                        v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
+                        :type="dateType" placeholder="时间结束">
+        </el-date-picker>
+        <mt-button
+          type="primary"
+          size="small"
+          @click="getData1">搜索</mt-button>
+      </div>
+      <div>
         <ve-line
           height="250px"
           :data="chartData"
@@ -107,6 +141,7 @@ export default {
       form: {},
       orderIofo: {},
       queryParam: {
+        dataType: 1,
         createTimeFrom: '',
         createTimeTo: ''
       },
@@ -138,6 +173,9 @@ export default {
       nowTime: '',
       nowWeek: '',
       orderData: {},
+      dateType: 'month',
+      dayLl: 'default',
+      mouthLl: 'primary',
       loading: false,
       dataEmpty: false
     }
@@ -212,6 +250,23 @@ export default {
         }
       })
     },
+    profitData(dataType) {
+     this.queryParam = {
+        dataType: dataType,
+        createTimeFrom: '',
+        createTimeTo: ''
+      }
+      if (dataType == 1) {
+        this.mouthLl = 'primary'
+        this.dayLl = 'default'
+        this.dateType = 'month'
+      } else {
+        this.mouthLl = 'default'
+        this.dayLl = 'primary'
+        this.dateType = 'date'
+      }
+      this.getData1()
+    },
     getData1() {
       goodsOrderApi.indexOrderData(this.queryParam).then(res => {
         if (res.subCode === 1000) {
@@ -270,6 +325,28 @@ export default {
       }
     }
   }
+  .index-title-2 {
+    .bt();
+    background-color: #ffffff;
+    text-align: center;
+    padding: 3vw 0;
+    margin-top: 4vw;
+    .fz(font-size, 40);
+    color: #333;
+    position: relative;
+
+    i {
+      position: absolute;
+      right: 6vw;
+      top: 50%;
+      .fz(font-size, 36);
+      .fz(margin-top,-16);
+
+      &::before {
+        color: rgb(159, 159, 159);
+      }
+    }
+  }
   .section1name{
     color: black;
   }
@@ -281,7 +358,7 @@ export default {
     flex-wrap: wrap;
     -ms-flex-pack: distribute;
     justify-content: space-around;
-    padding: 2vw 2vw 4vw 2vw;
+    padding: 0vw 2vw 4vw 2vw;
     li {
       text-align: center;
       /*border-style: groove;*/
@@ -301,6 +378,24 @@ export default {
       p{
         padding-top: 1vw;
       }
+    }
+  }
+  .my-indent-right-2 {
+    /*font-size: 16px;*/
+    /*color: #333;*/
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0 5vw;
+    height: 10vw;
+    line-height: 6vw;
+    background-color: #fff;
+    .bd();
+    &:active {
+      background-color: rgb(224, 227, 230)
     }
   }
 </style>
