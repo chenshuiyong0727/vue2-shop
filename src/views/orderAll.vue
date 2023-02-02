@@ -69,7 +69,7 @@
               <mt-button
                 type="primary"
                 size="small"
-                @click="goDetail(item)">详情</mt-button>
+                @click="goDetail(item.id)">详情</mt-button>
               <mt-button
                 type="primary"
                 size="small"
@@ -543,8 +543,8 @@
       jumpactNo(actNo) {
         this.$router.push({ path: '/store', query: { actNo } })
       },
-      goDetail(item) {
-        this.$router.push({ path: '/orderDetail', query: { item } })
+      goDetail(id) {
+        this.$router.push({ path: '/orderDetail', query: { id } })
       },
       handleClick(orderData) {
         this.orderData = orderData

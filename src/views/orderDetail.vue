@@ -46,33 +46,40 @@
       <mt-field :disabled="true " label="补贴" type = "text" v-model = "form.subsidiesPrice"></mt-field>
       <mt-field :disabled="true " label="到手价" type = "text" v-model = "form.theirPrice"></mt-field>
       <mt-field :disabled="true " label="实际利润" type = "text" v-model = "form.profits"></mt-field>
-      <mt-field label="利润比">
-        <span v-if="form.profits && form.price " style="margin-right: 160px;" >{{(form.profits / form.price ) * 100 | numFilter}} %</span>
-      </mt-field>
-      <mt-field label="预估利润">
-        <span v-if="form.theirPrice && form.price " style="margin-right: 180px;" > {{(form.theirPrice - form.price - 10 ) | numFilter}}</span>
-      </mt-field>
+      <mt-field :disabled="true " label="利润比" type = "text" v-model = "form.profitsThan"></mt-field>
+      <mt-field :disabled="true " label="预估利润" type = "text" v-model = "form.forecastProfits"></mt-field>
+<!--      <mt-field label="利润比">-->
+<!--        <span v-if="form.profits && form.price " style="margin-right: 160px;" >{{(form.profits / form.price ) * 100 | numFilter}} %</span>-->
+<!--      </mt-field>-->
+<!--      <mt-field label="预估利润">-->
+<!--        <span v-if="form.theirPrice && form.price " style="margin-right: 180px;" > {{(form.theirPrice - form.price - 10 ) | numFilter}}</span>-->
+<!--      </mt-field>-->
 
-      <mt-field :disabled="true " label="利润比3333" type = "text" v-model = "form.orderNo"></mt-field>
-      <mt-field :disabled="true " label="预估利润3333" type = "text" v-model = "form.orderNo"></mt-field>
+<!--      <mt-field :disabled="true " label="利润比3333" type = "text" v-model = "form.orderNo"></mt-field>-->
+<!--      <mt-field :disabled="true " label="预估利润3333" type = "text" v-model = "form.orderNo"></mt-field>-->
       <mt-field label="地址">
           <select class="select100" v-model="form.addressId"  :disabled="true ">
             <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>
           </select>
       </mt-field>
       <mt-field :disabled="true " label="运单编号" type = "text" v-model = "form.waybillNo"></mt-field>
-      <mt-field label="出售时间">
-         <span style="margin-right: 80px;" >{{form.sellTime | formateTime }}</span>
-      </mt-field>
-      <mt-field label="交易成功时间">
-         <span style="margin-right: 80px;" >{{form.successTime | formateTime }}</span>
-      </mt-field>
-      <mt-field label="创建时间">
-         <span style="margin-right: 80px;" >{{form.createTime | formateTime }}</span>
-      </mt-field>
-      <mt-field label="更新时间">
-         <span style="margin-right: 80px;" >{{form.updateTime | formateTime }}</span>
-      </mt-field>
+      <mt-field :disabled="true " label="出售时间" type = "text" v-model = "form.sellTime"></mt-field>
+      <mt-field :disabled="true " label="交易成功时间" type = "text" v-model = "form.successTime"></mt-field>
+      <mt-field :disabled="true " label="创建时间" type = "text" v-model = "form.createTime"></mt-field>
+      <mt-field :disabled="true " label="更新时间" type = "text" v-model = "form.updateTime"></mt-field>
+
+      <!--      <mt-field label="出售时间">-->
+<!--         <span style="margin-right: 80px;" >{{form.sellTime | formateTime }}</span>-->
+<!--      </mt-field>-->
+<!--      <mt-field label="交易成功时间">-->
+<!--         <span style="margin-right: 80px;" >{{form.successTime | formateTime }}</span>-->
+<!--      </mt-field>-->
+<!--      <mt-field label="创建时间">-->
+<!--         <span style="margin-right: 80px;" >{{form.createTime | formateTime }}</span>-->
+<!--      </mt-field>-->
+<!--      <mt-field label="更新时间">-->
+<!--         <span style="margin-right: 80px;" >{{form.updateTime | formateTime }}</span>-->
+<!--      </mt-field>-->
     </section>
     <div style="    margin-left: 28vw;
     margin-top: 20px;">
@@ -90,6 +97,7 @@
 <script>
 import Header from '@/common/_header.vue'
 import { goodsOrderApi } from '@/api/goodsOrder'
+import { parseTime } from '@/utils'
 
 export default {
   components:{
@@ -108,30 +116,53 @@ export default {
     }
   },
   created() {
-    const { item } = this.$route.query
-    this.form = item
+    const { id } = this.$route.query
+    // this.form = id
+    if (id) {
+      this.getDetailById(id)
+    }
   },
   mounted() {
     this.listSysDict()
   },
   methods:{
-    // getDetailById(id) {
-    //   if (id) {
-    //     goodsOrderApi.getDetailById(id).then(res => {
-    //       if (res.subCode === 1000) {
-    //         this.form = res.data ? res.data : {}
-    //       } else {
-    //         this.$toast(res.subMsg)
-    //       }
-    //     })
-    //   }
+    getDetailById(id) {
+      if (id) {
+        goodsOrderApi.getDetailById(id).then(res => {
+          if (res.subCode === 1000) {
+            this.form = res.data ? res.data : {}
+            if(this.form.profits && this.form.price) {
+              // 利润比
+              let profitsThan = (this.form.profits / this.form.price ) * 100
+              this.form.profitsThan = parseFloat(profitsThan).toFixed(2)
+              this.form.profitsThan = this.form.profitsThan + '%'
+            }else {
+              this.form.profitsThan = ''
+            }
+            if(this.form.theirPrice && this.form.price) {
+              // 预估利润
+              let forecastProfits = this.form.theirPrice - this.form.price - 10
+              this.form.forecastProfits = parseFloat(forecastProfits).toFixed(2)
+            }else {
+              this.form.forecastProfits = ''
+            }
+            this.form.sellTime = this.form.sellTime ? parseTime(this.form.sellTime) : ''
+            this.form.successTime = this.form.successTime ? parseTime(this.form.successTime) : ''
+            this.form.createTime = this.form.createTime ? parseTime(this.form.createTime) : ''
+            this.form.updateTime = this.form.updateTime ? parseTime(this.form.updateTime) : ''
+
+          } else {
+            this.$toast(res.subMsg)
+          }
+        })
+      }
+    },
+    // goEdit() {
+    //   this.type = 2
     // },
-    goEdit() {
-      this.type = 2
-    },
-    gotoAdd(id, type) {
-      this.$router.push({ path: '/goodsAdd', query: { id, type } })
-    },
+    // gotoAdd(id, type) {
+    //   this.$router.push({ path: '/goodsAdd', query: { id, type } })
+    // },
     gotoIndex() {
       this.$router.push({ path: '/'})
     },
@@ -163,5 +194,4 @@ export default {
     }
   }
 }
-
 </style>
