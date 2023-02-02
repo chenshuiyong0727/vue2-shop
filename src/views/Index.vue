@@ -367,7 +367,7 @@ export default {
       padding: 1vw;
       color: #333;
       margin: 1.1vw;
-      font-size: 4.5vw;
+      font-size: 4.2vw;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       a,

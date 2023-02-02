@@ -10,9 +10,13 @@
     <ul class="section1-list" style="
     display: -webkit-box;
     flex-wrap: wrap;
-    margin-left: 1.5vw;
-    padding: 0vw 1vw;">
-      <li style="width: 47%"  @click="chunjie">
+    margin-left: 0.5vw;
+    padding-top: 0vw;
+    padding-right: 1vw;
+    padding-bottom: 0vw;
+    padding-left: 1vw;
+">
+      <li style="width: 48%"  @click="chunjie">
         <router-link :to="{name:''}">
           <p><strong class="color-danger"> {{countDay}}</strong>{{count}}</p>
           <p class="section1name">春节倒计时</p>
@@ -32,10 +36,11 @@
       </li>
     </ul>
     <ul class="section1-list" style="
-    display: -webkit-box;
-    flex-wrap: wrap;
-    margin-left: 1.5vw;
-    padding: 0vw 1vw;">
+        margin-left: 0.5vw;
+    padding-top: 0vw;
+    padding-right: 1vw;
+    padding-bottom: 0vw;
+    padding-left: 1vw;">
     <li>
         <router-link :to="{name:'销售报表'}">
           <p class="color-danger">{{form.profitsAverage}}</p>
@@ -65,7 +70,7 @@
     <ul class="section1-list" style="
     display: -webkit-box;
     flex-wrap: wrap;
-    margin-left: 1.5vw;
+    margin-left: 0.5vw;
     padding: 0vw 1vw;">
       <li>
         <router-link :to="{name:'入库报表'}">
@@ -95,7 +100,7 @@
     <ul class="section1-list" style="
     display: -webkit-box;
     flex-wrap: wrap;
-    margin-left: 1.5vw;
+    margin-left: 0.5vw;
     padding: 0vw 1vw;">
       <li>
         <router-link :to="{ path: '/order?status=7'}">
@@ -125,7 +130,7 @@
     <ul class="section1-list" style="
     display: -webkit-box;
     flex-wrap: wrap;
-    margin-left: 1.5vw;
+    margin-left: 0.5vw;
     padding: 0vw 1vw;">
       <li>
         <router-link :to="{name:'销售报表'}">
@@ -233,7 +238,7 @@ export default {
     li {
       border-radius: 10px;
       background-color: #EEF2F7;
-      width: 22.5%;
+      width: 22.9%;
       padding: 1.6vw;
       color: #333;
       margin: 1vw;
