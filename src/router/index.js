@@ -16,6 +16,7 @@ const storeAdd = resolve => require(['@/views/storeAdd.vue'], resolve)
 const GoodsAdd = resolve => require(['@/views/goodsAdd.vue'], resolve)
 const GoodsBase = resolve => require(['@/views/GoodsBase.vue'], resolve)
 const Warehouse = resolve => require(['@/views/Warehouse.vue'], resolve)
+const WarehouseDetail = resolve => require(['@/views/WarehouseDetail.vue'], resolve)
 const OpenWarehouse = resolve => require(['@/views/OpenWarehouse.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
 const logout = resolve => require(['@/views/logout.vue'], resolve)
@@ -85,6 +86,13 @@ export default new Router({
       path: '/storeAdd',
       name: '库存添加',
       component: storeAdd,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
+    }, {
+      path: '/WarehouseDetail',
+      name: '库存明细',
+      component: WarehouseDetail,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },

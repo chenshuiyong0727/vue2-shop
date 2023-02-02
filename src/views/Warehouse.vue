@@ -70,10 +70,10 @@
       <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top">
           <div class="dingdans_top_left">
-            货号：<strong> {{item.actNo}} </strong>
+            货号：<strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl )" style="color: #409EFF"> {{item.actNo}} </strong>
           </div>
           <div class="dingdans_top_right">
-            尺码：<strong>{{item.size }}</strong>
+            尺码：<strong class="color-danger">{{item.size }}</strong>
           </div>
         </div>
         <div class="dingdans_con">
@@ -243,8 +243,6 @@
         allLoaded: false,
         mockArr: [],
         imageZoom: '',
-
-        pictureZoomShow: true,
         requestParam1: {
           poundage: '',
           theirPrice: '',
@@ -614,6 +612,9 @@
       jumpactNo(actNo) {
         this.$router.push({ path: '/order', query: { actNo } })
       },
+      WarehouseDetail(goodsId , actNo,imgUrl) {
+        this.$router.push({ path: '/WarehouseDetail', query: {goodsId, actNo ,imgUrl} })
+      },
       changeStatusDialog1(row) {
         this.orderData1 = row
         this.requestParam1.inventoryId = this.orderData1.id
@@ -735,7 +736,7 @@
   .dingdans_con_left img {
     width: 100%;
     margin: auto;
-    /*height: 100%;*/
+    border-radius: 10px;
   }
 
   .diangdans_con_right {

@@ -1,0 +1,362 @@
+<template>
+  <div class="hello">
+    <mt-header :title="actNo">
+      <div slot="left">
+        <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
+      </div>
+    </mt-header>
+    <div class="fenlei_top_1">
+      <ul class="store-list-1" >
+        <li  style="display:flex ;align-items:center;" class="store-list-1-li">
+          <div>
+            <img
+              v-if="imgUrl"
+              :src="fileUrl + imgUrl"
+              style="width: 100%;border-radius: 10px;"
+              @click="avatarShow(imgUrl)"
+            />
+          </div>
+        </li>
+        <li  class="store-list-1-li">
+          <div class="overview1">
+            <p><strong>库存数量</strong></p>
+            <p>{{inventoryData.inventory}} / {{inventoryData.oldInventory}}</p>
+          </div>
+          <div class="overview2">
+            <p><strong>库存成本</strong></p>
+            <p>{{inventoryData.price}}</p>
+          </div>
+        </li>
+        <li  class="store-list-1-li">
+          <div class="overview1">
+            <p><strong>入库总额</strong></p>
+            <p>{{inventoryData.inputPrice}}</p>
+          </div>
+          <div class="overview2">
+            <p><strong>市值总额</strong></p>
+            <p>{{inventoryData.dwPrice}}</p>
+          </div>
+        </li>
+        <li  class="store-list-1-li">
+          <div class="overview1">
+            <p><strong>实际利润</strong></p>
+            <p>{{inventoryData.profits}}</p>
+          </div>
+          <div class="overview2">
+            <p><strong>利润比例</strong></p>
+            <p>{{(inventoryData.profits / inventoryData.inputPrice ) * 100 | numFilter}} %</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div style="padding-top: 2rem">
+      <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index">
+        <div class="dingdans_top">
+          <div class="dingdans_top_left">
+            <strong>尺码：</strong> <strong class="color-danger"> {{item.size}} </strong>
+          </div>
+        </div>
+        <div class="dingdans_con">
+          <div class="diangdans_con_right">
+            <div class="dingdans_con_right_top">
+              预计利润：<strong
+              :style="(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) > 50 ? 'color: #F56C6C' : ''"
+              >{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong>
+              入库时间：<strong >{{item.createTime | formateTime }}</strong>
+            </div>
+              <div class="dingdans_con_right_top">
+              原始库存：<strong >{{item.oldInventory}}</strong>
+              剩余库存：<strong >{{item.inventory}}</strong>
+              成功数：<strong >{{item.successCount}}</strong>
+              上架数：<strong >{{item.galleryCount}}</strong>
+              </div>
+            <div class="dingdans_con_right_top">
+              入库价：<strong >{{item.price}}</strong>
+              得物价：<strong >{{item.dwPrice}}</strong>
+              成功数：<strong >{{item.successCount}}</strong>
+              手续费：<strong >{{(item.dwPrice * 0.075 + 38 + 8.5) | numFilter}}</strong>
+            </div>
+            <div class="dingdans_con_right_top">
+              到手单价：<strong >{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5)) | numFilter}}</strong>
+              总入库价：<strong >{{item.price * item.oldInventory}}</strong>
+              <strong @click="jumpactNo(actNo)" style="margin-left: 14.1vw;color: #409EFF;">查看订单</strong>
+            </div>
+<!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
+<!--              <span v-if="item.successNum">销售均价：<strong >{{item.orderAmount / item.successNum  | numFilter}}</strong></span>-->
+<!--              <span v-else>销售均价：<strong >0</strong></span>-->
+<!--              <span v-if="item.successNum">平均利润：<strong >{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>-->
+<!--              <span v-else>平均利润：<strong >0</strong></span>-->
+<!--            </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
+      <div class="imageShow">
+        <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">
+      </div>
+    </div>
+    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
+  </div>
+</template>
+<script>
+  import Baseline from '@/common/_baseline.vue'
+  import Footer from '@/common/_footer.vue'
+  import { goodsInventoryApi } from '@/api/goodsInventory'
+
+  export default {
+    components: {
+      'v-baseline': Baseline,
+      'v-footer': Footer
+    },
+    name: "HelloWorld",
+    data() {
+      return {
+        titleName: '销售报表',
+        emtityMsg: '人家是有底线的 -.-',
+        imageZoom: '',
+        pictureZoomShow: false,
+        queryParam: {
+          goodsId: '',
+          pageSize: 20,
+          pageNum: 1
+        },
+        actNo: '',
+        fileUrl: fileUrl,
+        imgUrl: '',
+        tableData: [],
+        inventoryData: {
+          profits: '',
+          inventory: '',
+          oldInventory: '',
+          inventoryCost: '',
+          dwPrice: ''
+        }
+      }
+    },
+    created() {
+      const { goodsId , actNo,imgUrl } = this.$route.query
+      this.actNo = actNo
+      this.imgUrl = imgUrl
+      this.queryParam.goodsId = goodsId
+      if (this.queryParam.goodsId) {
+        this.getPage()
+      }
+    },
+    methods: {
+      jumpactNo(actNo) {
+        this.$router.push({ path: '/order', query: { actNo } })
+      },
+      avatarShow(e) {
+        this.imageZoom = e
+        this.pictureZoomShow = true
+      },
+      getPage() {
+        goodsInventoryApi.pageGoods(this.queryParam).then(res => {
+          if (res.subCode === 1000) {
+            this.tableData = res.data ? res.data.list : []
+            this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
+            this.inventoryData = res.data.goodsInventoryPageVo ? res.data.goodsInventoryPageVo
+              : this.inventoryData
+            console.info(res.data.goodsInventoryPageVo)
+            if (this.totalCount == 0) {
+              this.emtityMsg = '暂无相关数据 -.-'
+            } else {
+              this.emtityMsg = '人家是有底线的 -.-'
+            }
+          } else {
+            this.$toast(res.subMsg)
+          }
+        })
+      }
+    }
+  };
+</script>
+
+<style>
+
+  @import '../assets/index/style.css';
+  strong{
+    font-weight: 600;
+  }
+  .dingdans_item {
+    padding: 2.4vw 1.2vw;
+    background: #ffffff;
+    border-bottom: 1vw solid #eee;
+    padding-right: 3%;
+    padding-left: 3%;
+  }
+
+  .dingdans_top {
+    font-size: 3.68vw;
+    height: 3.88vw;
+    line-height: 3.88vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .dingdans_con {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.3vw 0;
+  }
+
+  .dingdans_con_left {
+    width: 20vw;
+    height: 20vw;
+    display: flex;
+  }
+
+  .dingdans_con_left img {
+    width: 100%;
+    margin: auto;
+    border-radius: 10px;
+  }
+
+  .diangdans_con_right {
+    padding-left: 1.3vw;
+  }
+
+  .dingdans_con_right_down {
+    margin-top: 1.4vw;
+    font-size: 13px;
+    margin-bottom: 2vw;
+  }
+  /*.dingdans_con_right_down_1 {*/
+  /*  !*margin-left: 55vw;*!*/
+  /*  margin-bottom: -7vw;*/
+  /*  font-size: 3.5vw;*/
+  /*  margin-top: -1vw;*/
+  /*}*/
+  /*
+   -----分割线---
+  */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  /* 这里直接设置 1rem = 50px begin */
+  html {
+    font-size: 50px;
+  }
+  /* 这里直接设置 1rem = 50px end */
+  html,
+  body {
+  }
+  /* 给要上拉的容器设置 begin */
+  .hello {
+    background-color: #F8FCFF;
+    padding-top: 12vw;
+    font-size: 13px;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .fenlei_top_1 {
+    border-bottom: 1vw solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 2rem;
+    padding: 0.1rem 0.2rem;
+    width: 100vw;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    margin-top:11.6vw;
+    /*margin-top:0.85rem;*/
+  }
+
+  .fenlei_top_right {
+    font-size: 0.32rem;
+    color: #353535;
+    width: 2rem;
+    text-align: center;
+  }
+  .ins {
+    writing-mode: horizontal-tb !important;
+    font-style: ;
+    font-variant-ligatures: ;
+    font-variant-caps: ;
+    font-variant-numeric: ;
+    font-variant-east-asian: ;
+    font-weight: ;
+    font-stretch: ;
+    font-size: ;
+    font-family: ;
+    text-rendering: auto;
+    color: fieldtext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    background-color: field;
+    margin: 0em;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+    border: 0;
+    outline: none;
+    width: 76vw;
+    /*width: 5.7rem;*/
+    padding: 0.2rem;
+
+  }
+  .clearfix11 {
+  &:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+   }
+  }
+  .btm-distance11 {
+    margin-bottom: 15px;
+  }
+  .overview1 {
+    padding-top: 5px;
+    padding-right: 3px;
+    padding-bottom: 0px;
+    padding-left: 3px;
+  }
+  .overview2 {
+    padding: 3px;
+  }
+  .store-list-1 {
+    display: -webkit-box;
+  }
+  .store-list-1-li {
+    border-radius: 10px;
+    text-align: center;
+    background-color: #EEF2F7;
+    width: 22%;
+    color: #333;
+    font-size: 13px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 0vw;
+    margin-right: 2vw;
+    margin-bottom: 0vw;
+    margin-left: 1vw;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+  }
+</style>

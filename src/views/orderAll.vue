@@ -54,7 +54,7 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
-              货号：<strong>{{item.actNo}} </strong> 尺码：<strong>{{item.size}}</strong> 售价：<strong>{{item.shelvesPrice}}</strong>
+              货号：<strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong> 尺码：<strong>{{item.size}}</strong> 售价：<strong>{{item.shelvesPrice}}</strong>
             </div>
             <div class="dingdans_con_right_down">
               <span v-if="item.profits">利润：<strong class="color-danger">{{item.profits}}</strong></span>
@@ -651,7 +651,7 @@
   .dingdans_con_left img {
     width: 100%;
     margin: auto;
-    /*height: 100%;*/
+    border-radius: 10px;
   }
 
   .diangdans_con_right {

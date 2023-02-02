@@ -629,7 +629,7 @@
   .dingdans_con_left img {
     width: 100%;
     margin: auto;
-    /*height: 100%;*/
+    border-radius: 10px;
   }
 
   .diangdans_con_right {

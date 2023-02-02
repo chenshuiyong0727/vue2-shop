@@ -361,7 +361,7 @@ export default {
     padding: 0vw 2vw 4vw 2vw;
     li {
       text-align: center;
-      /*border-style: groove;*/
+      border-radius: 10px;
       background-color: #EEF2F7;
       width: 31%;
       padding: 1vw;

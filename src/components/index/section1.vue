@@ -226,13 +226,12 @@ export default {
     display: -ms-flex;
     display: -webkit-box;
     display: -ms-flexbox;
-    /*display: flex;*/
     flex-wrap: wrap;
     -ms-flex-pack: distribute;
     justify-content: space-around;
     padding: 2vw 2vw 4vw 2vw;
     li {
-      /*border-style: groove;*/
+      border-radius: 10px;
       background-color: #EEF2F7;
       width: 22.5%;
       padding: 1.6vw;
