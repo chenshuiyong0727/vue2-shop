@@ -197,6 +197,8 @@
             </select>
         </mt-field>
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
+        <mt-field label="入库开始时间" type="date" placeholder="入库开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>
+        <mt-field label="入库结束时间" type="date" placeholder="入库结束时间"  v-model="queryParam.createTimeTo" ></mt-field>
       </section>
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
@@ -275,6 +277,8 @@
         imageZoom: '',
         fileUrl: fileUrl,
         queryParam: {
+          createTimeFrom: '',
+          createTimeTo: '',
           id: '',
           inventory: 1,
           sort:'',
@@ -473,6 +477,8 @@
       },
       resetHandle() {
         this.queryParam = {
+          createTimeFrom: '',
+          createTimeTo: '',
           id: '',
           sort:'',
           inventory: 1,
