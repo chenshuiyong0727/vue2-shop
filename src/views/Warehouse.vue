@@ -384,10 +384,16 @@
     //   }, 200);
     // },
     created() {
-      const { actNo,size } = this.$route.query
+      const { actNo,size,months } = this.$route.query
       this.queryParam.size = size
       this.queryParam.actNo = actNo
-      if (this.queryParam.actNo || this.queryParam.size) {
+      this.months = months
+      if (this.queryParam.actNo || this.queryParam.size || this.months) {
+        if (this.months) {
+          this.queryParam.createTimeFrom = this.months
+          this.queryParam.createTimeTo = this.months
+          this.titleName = this.months + ' ' + this.titleName
+        }
         this.search1()
       }
     },

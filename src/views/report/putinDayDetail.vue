@@ -7,7 +7,7 @@
     </mt-header>
     <div class="fenlei_top">
       <div class="fenlei_top_left">
-        <el-date-picker style="width: 35vw"
+        <el-date-picker style="width: 42vw"
                         v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
                         type="date" placeholder="时间开始">
         </el-date-picker>
@@ -16,47 +16,81 @@
         <span style="margin-left: 1vw;">至</span>
       </div>
       <div class="fenlei_top_left">
-        <el-date-picker style="width: 35vw"
+        <el-date-picker style="width: 42vw"
                         v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
                         type="date" placeholder="时间结束">
         </el-date-picker>
       </div>
-      <div class="fenlei_top_right">
-        <mt-button
-          type="primary"
-          size="small"
-          @click="getPage">搜索
-        </mt-button>
-      </div>
+<!--      <div class="fenlei_top_right">-->
+<!--      </div>-->
     </div>
     <div style="padding-top: 0.86rem">
       <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
-        <div class="dingdans_top">
-          <div class="dingdans_top_left">
-            <strong>月份：</strong>
-            <a>
-              <strong
-                @click="jumpDetail(item.months )"
-                :style="item.months == '合计' ? '' : 'color: #409EFF;'"> {{item.months}} </strong>
-            </a>
-            <!--            <strong>月份：</strong> <strong class="color-danger"> {{item.months}} </strong>-->
+        <div v-if="item.actNo == '合计'"  style="    height: 50px;
+    padding-top: 20px;">
+          <div class="dingdans_top" >
+            <div class="dingdans_top_left" style="    padding-left: 5px;
+    font-size: 15px;">
+             <p>
+               <span>合计入库 ：</span> <strong>{{item.oldInventory}}</strong>
+<!--               <span  style="margin-left: 20px">合计入库金额 ：</span> <strong>{{item.inventoryAmount}}</strong>-->
+             </p>
+              <p style="margin-top: 5px">
+                <span>合计入库金额 ：</span> <strong>{{item.inventoryAmount}}</strong>
+                <mt-button style="margin-left: 40px;"
+                  type="primary"
+                  size="small"
+                  @click="getPage"> 搜索
+                </mt-button>
+                <mt-button
+                  type="primary"
+                  size="small"
+                  @click="jumpDetail(months )">库存
+                </mt-button>
+              </p>
+            </div>
+<!--            <div class="dingdans_top_right">-->
+<!--              尺码：<strong class="color-danger">{{item.size }}</strong>-->
+<!--            </div>-->
           </div>
         </div>
-        <div class="dingdans_con">
-          <div class="diangdans_con_right">
-            <div class="dingdans_con_right_top">
-              入库数：<strong>{{item.successNum}}</strong>
-              入库总额：<strong>{{item.orderAmount}}</strong>
-              市价总额：<strong>{{item.profitsAmount}}</strong>
+        <div v-else>
+          <div class="dingdans_top">
+            <div class="dingdans_top_left">
+              货号：<strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl )" style="color: #409EFF"> {{item.actNo}} </strong>
             </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">
-              <span v-if="item.successNum">入库均价：<strong>{{item.orderAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>入库均价：<strong>0</strong></span>
-              <span v-if="item.successNum">市价均价：<strong>{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>市价均价：<strong>0</strong></span>
+            <div class="dingdans_top_right">
+              尺码：<strong class="color-danger">{{item.size }}</strong>
+            </div>
+          </div>
+          <div class="dingdans_con">
+            <div class="dingdans_con_left" @click="avatarShow(item.imgUrl)">
+              <img v-bind:src="fileUrl + item.imgUrl" alt="" >
+            </div>
+            <div class="diangdans_con_right">
+              <div class="dingdans_con_right_top">
+                原库存：<strong>{{item.oldInventory}} </strong> 库存：<strong>{{item.inventory}}</strong> 成功：<strong>{{item.successCount}}</strong> 上架：<strong>{{item.galleryCount}}</strong>
+              </div>
+              <div class="dingdans_con_right_down">
+                入库价：<strong>{{item.price}}</strong>
+                入库总额：<strong>{{item.inventoryAmount}}</strong>
+                入库价：<strong>{{item.dwPrice}}</strong>
+              </div>
+              <div style="
+            margin-bottom: -7vw;
+    font-size: 3.5vw;
+    margin-top: -1vw;">
+                <span >预计利润：<strong class="color-danger">{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong></span>
+                <strong> {{item.createTime |formateTime }}</strong>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
+      <div class="imageShow">
+        <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
     <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
@@ -75,6 +109,9 @@
     name: "HelloWorld",
     data() {
       return {
+        pictureZoomShow: false,
+        imageZoom: '',
+        fileUrl: fileUrl,
         months: '',
         titleName: '入库报表',
         emtityMsg: '人家是有底线的 -.-',
@@ -93,42 +130,24 @@
       this.months = months
       if (this.months) {
         this.titleName = this.months + ' ' + this.titleName
-        this.months = this.months + '-01'
-        let to = this.getNextMonth(this.months)
         this.queryParam.createTimeFrom = this.months
-        this.queryParam.createTimeTo = to
+        this.queryParam.createTimeTo = this.months
         this.getPage()
       }
     },
     methods: {
-      getNextMonth(date) {
-        let arr = date.split('-')
-        let year = arr[0] // 获取当前日期的年份
-        let month = arr[1] // 获取当前日期的月份
-        let day = arr[2] // 获取当前日期的日
-        let year2 = year
-        let month2 = parseInt(month) + 1
-        if (month2 === 13) {
-          year2 = parseInt(year2) + 1
-          month2 = 1
-        }
-        let day2 = day
-        let days2 = new Date(year2, month2, 0)
-        days2 = days2.getDate()
-        if (day2 > days2) {
-          day2 = days2
-        }
-        if (month2 < 10) {
-          month2 = '0' + month2
-        }
-        let m = year2 + '-' + month2 + '-' + day2
-        return m
+      avatarShow(e) {
+        this.imageZoom = e
+        this.pictureZoomShow = true
+      },
+      WarehouseDetail(goodsId , actNo,imgUrl) {
+        this.$router.push({ path: '/WarehouseDetail', query: {goodsId, actNo ,imgUrl} })
       },
       jumpDetail(months) {
-        this.$router.push({ path: '/putinDayDetail', query: { months }})
+        this.$router.push({ path: '/store', query: { months }})
       },
       getPage() {
-        reportApi.putInStorageDay(this.queryParam).then(res => {
+        reportApi.putInStorageDayDetail(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data : []
             if (this.tableData.length == 0) {
@@ -255,7 +274,11 @@
     width: 2rem;
     text-align: center;
   }
-
+  .mint-header-button{
+    -webkit-box-flex: .5;
+    -ms-flex: .5;
+    flex: 0;
+  }
   .ins {
     writing-mode: horizontal-tb !important;
     font-style: ;

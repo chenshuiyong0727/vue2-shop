@@ -332,7 +332,6 @@
           this.queryParam.successTimeFrom = this.months
           this.queryParam.successTimeTo = this.months
           this.titleName = this.months + ' 订单'
-          this.getPage()
         }
         this.search1()
       }

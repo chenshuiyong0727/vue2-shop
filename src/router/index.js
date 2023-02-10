@@ -10,7 +10,7 @@ const orderDetail = resolve => require(['@/views/orderDetail.vue'], resolve)
 const putin = resolve => require(['@/views/report/putin.vue'], resolve)
 const sellListDetail = resolve => require(['@/views/report/sellListDetail.vue'], resolve)
 const putinDetail = resolve => require(['@/views/report/putinDetail.vue'], resolve)
-const putinDayDetail = resolve => require(['@/views/report/putinDetail.vue'], resolve)
+const putinDayDetail = resolve => require(['@/views/report/putinDayDetail.vue'], resolve)
 const sellList = resolve => require(['@/views/report/sellList.vue'], resolve)
 const otherList = resolve => require(['@/views/otherList.vue'], resolve)
 const otherAdd = resolve => require(['@/views/otherAdd.vue'], resolve)
@@ -131,6 +131,13 @@ export default new Router({
       path: '/putinDetail',
       name: '月度入库报表',
       component: putinDetail,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
+    }, {
+      path: '/putinDayDetail',
+      name: '当日入库报表',
+      component: putinDayDetail,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },
