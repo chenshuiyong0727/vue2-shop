@@ -65,7 +65,7 @@
               <mt-button
                 type="primary"
                 size="small"
-                @click="jumpactNo(item.actNo)">查看库存</mt-button>
+                @click="jumpactNo(item.actNo)">库存</mt-button>
               <mt-button
                 type="primary"
                 size="small"
@@ -74,6 +74,10 @@
                 type="primary"
                 size="small"
                 @click="handleClick(item)">修改</mt-button>
+              <mt-button
+                type="danger"
+                size="small"
+                @click="goDel(item.id)">删除</mt-button>
 <!--              <mt-button-->
 <!--                type="primary"-->
 <!--                size="small"-->
@@ -546,6 +550,38 @@
       goDetail(id) {
         this.$router.push({ path: '/orderDetail', query: { id } })
       },
+      // goDel(id) {
+      //   this.$confirm('是否删除', '提示', {
+      //     confirmButtonText: '确定',
+      //     cancelButtonText: '取消',
+      //     type: 'warning'
+      //   }).then(() => {
+      //     goodsOrderApi.delById(id).then(res => {
+      //       if (res.subCode === 1000) {
+      //         this.$message.success(res.subMsg)
+      //         this.getPage()
+      //       } else {
+      //         this.$message.error(res.subMsg)
+      //       }
+      //     })
+      //   })
+      // },
+      goDel(id) {
+        this.$messagebox.confirm('是否删除',"提示",{
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type:"warning",
+        }).then(() => {
+          goodsOrderApi.delById(id).then(res => {
+            this.$toast(res.subMsg)
+            if (res.subCode === 1000) {
+              this.getPage()
+            }
+          })
+        }).catch(() => {
+        })
+      },
+
       handleClick(orderData) {
         this.orderData = orderData
         this.requestParam.id = this.orderData.id
@@ -664,7 +700,7 @@
     margin-bottom: 2vw;
   }
   .dingdans_con_right_down_1 {
-    margin-left: 15vw;
+    margin-left: 9vw;
     margin-bottom: -7vw;
     font-size: 3.5vw;
   }
