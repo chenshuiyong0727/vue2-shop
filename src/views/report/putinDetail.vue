@@ -147,7 +147,7 @@
 
 <style>
 
-  @import '../assets/index/style.css';
+  @import '../../assets/index/style.css';
 
   strong {
     font-weight: 600;

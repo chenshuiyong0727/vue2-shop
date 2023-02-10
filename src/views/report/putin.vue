@@ -2,69 +2,71 @@
   <div class="hello">
     <mt-header :title="titleName">
       <div slot="left">
-        <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
+        <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
     </mt-header>
     <div class="fenlei_top">
-      <div    class="fenlei_top_left">
+      <div class="fenlei_top_left">
         <el-date-picker style="width: 35vw"
-          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
-          type="month" placeholder="时间开始">
+                        v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
+                        type="month" placeholder="时间开始">
         </el-date-picker>
       </div>
-      <div  style="width: 8vw"  class="fenlei_top_left">
+      <div style="width: 8vw" class="fenlei_top_left">
         <span style="margin-left: 1vw;">至</span>
       </div>
-      <div    class="fenlei_top_left">
+      <div class="fenlei_top_left">
         <el-date-picker style="width: 35vw"
-          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
-          type="month" placeholder="时间结束">
+                        v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
+                        type="month" placeholder="时间结束">
         </el-date-picker>
       </div>
-      <div class="fenlei_top_right" >
+      <div class="fenlei_top_right">
         <mt-button
           type="primary"
           size="small"
-          @click="getPage">搜索</mt-button>
+          @click="getPage">搜索
+        </mt-button>
       </div>
     </div>
-     <div style="padding-top: 0.86rem">
-      <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index">
+    <div style="padding-top: 0.86rem">
+      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top">
           <div class="dingdans_top_left">
-<!--           <strong>月份：</strong> <strong class="color-danger"> {{item.months}} </strong>-->
             <strong>月份：</strong>
             <a>
               <strong
-                @click="sellListDetail(item.months )"
+                @click="jumpDetail(item.months )"
                 :style="item.months == '合计' ? '' : 'color: #409EFF;'"> {{item.months}} </strong>
             </a>
+            <!--            <strong>月份：</strong> <strong class="color-danger"> {{item.months}} </strong>-->
           </div>
         </div>
         <div class="dingdans_con">
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
-              销售数：<strong >{{item.successNum}}</strong>
-              销售金额：<strong >{{item.orderAmount}}</strong>
-              利润：<strong >{{item.profitsAmount}}</strong>
+              入库数：<strong>{{item.successNum}}</strong>
+              入库总额：<strong>{{item.orderAmount}}</strong>
+              市价总额：<strong>{{item.profitsAmount}}</strong>
             </div>
             <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">
-              <span v-if="item.successNum">销售均价：<strong >{{item.orderAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>销售均价：<strong >0</strong></span>
-              <span v-if="item.successNum">平均利润：<strong >{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>平均利润：<strong >0</strong></span>
+              <span v-if="item.successNum">入库均价：<strong>{{item.orderAmount / item.successNum  | numFilter}}</strong></span>
+              <span v-else>入库均价：<strong>0</strong></span>
+              <span v-if="item.successNum">市价均价：<strong>{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>
+              <span v-else>市价均价：<strong>0</strong></span>
             </div>
           </div>
         </div>
       </div>
-     </div>
+    </div>
     <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
   </div>
 </template>
 <script>
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
-  import { reportApi } from '@/api/report'
+  import {reportApi} from '@/api/report'
+
   export default {
     components: {
       'v-baseline': Baseline,
@@ -73,7 +75,7 @@
     name: "HelloWorld",
     data() {
       return {
-        titleName: '销售报表',
+        titleName: '入库报表',
         emtityMsg: '人家是有底线的 -.-',
         queryParam: {
           createTimeFrom: '',
@@ -86,11 +88,11 @@
       this.getPage()
     },
     methods: {
-      sellListDetail(months) {
-        this.$router.push({ path: '/sellListDetail', query: { months }})
+      jumpDetail(months) {
+        this.$router.push({ path: '/putinDetail', query: { months }})
       },
       getPage() {
-        reportApi.sellList(this.queryParam).then(res => {
+        reportApi.putInStorage(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data : []
             if (this.tableData.length == 0) {
@@ -109,10 +111,12 @@
 
 <style>
 
-  @import '../assets/index/style.css';
-  strong{
+  @import '../../assets/index/style.css';
+
+  strong {
     font-weight: 600;
   }
+
   .dingdans_item {
     padding: 2.4vw 1.2vw;
     background: #ffffff;
@@ -158,28 +162,32 @@
     font-size: 13px;
     margin-bottom: 2vw;
   }
+
   /*.dingdans_con_right_down_1 {*/
   /*  !*margin-left: 55vw;*!*/
   /*  margin-bottom: -7vw;*/
   /*  font-size: 3.5vw;*/
   /*  margin-top: -1vw;*/
   /*}*/
-/*
- -----分割线---
-*/
+  /*
+   -----分割线---
+  */
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
+
   /* 这里直接设置 1rem = 50px begin */
   html {
     font-size: 50px;
   }
+
   /* 这里直接设置 1rem = 50px end */
   html,
   body {
   }
+
   /* 给要上拉的容器设置 begin */
   .hello {
     background-color: #F8FCFF;
@@ -201,7 +209,7 @@
     top: 0;
     left: 0;
     z-index: 99;
-    margin-top:11.6vw;
+    margin-top: 11.6vw;
     /*margin-top:0.85rem;*/
   }
 
@@ -211,6 +219,7 @@
     width: 2rem;
     text-align: center;
   }
+
   .ins {
     writing-mode: horizontal-tb !important;
     font-style: ;
