@@ -45,15 +45,15 @@
         <div class="dingdans_con">
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
-              入库数：<strong>{{item.successNum}}</strong>
-              入库总额：<strong>{{item.orderAmount}}</strong>
-              市价总额：<strong>{{item.profitsAmount}}</strong>
+              销售数：<strong >{{item.successNum}}</strong>
+              销售金额：<strong >{{item.orderAmount}}</strong>
+              利润：<strong >{{item.profitsAmount}}</strong>
             </div>
             <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">
-              <span v-if="item.successNum">入库均价：<strong>{{item.orderAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>入库均价：<strong>0</strong></span>
-              <span v-if="item.successNum">市价均价：<strong>{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>市价均价：<strong>0</strong></span>
+              <span v-if="item.successNum">销售均价：<strong >{{item.orderAmount / item.successNum  | numFilter}}</strong></span>
+              <span v-else>销售均价：<strong >0</strong></span>
+              <span v-if="item.successNum">平均利润：<strong >{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>
+              <span v-else>平均利润：<strong >0</strong></span>
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@
     data() {
       return {
         months: '',
-        titleName: '入库报表',
+        titleName: '销售报表',
         emtityMsg: '人家是有底线的 -.-',
         queryParam: {
           createTimeFrom: '',
@@ -125,10 +125,10 @@
         return m
       },
       jumpDetail(months) {
-        this.$router.push({ path: '/putin/putinDetail', query: { months }})
+        this.$router.push({ path: '/order', query: { months }})
       },
       getPage() {
-        reportApi.putInStorageDay(this.queryParam).then(res => {
+        reportApi.sellListDay(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data : []
             if (this.tableData.length == 0) {
@@ -147,7 +147,7 @@
 
 <style>
 
-  @import '../assets/index/style.css';
+  @import '../../assets/index/style.css';
 
   strong {
     font-weight: 600;

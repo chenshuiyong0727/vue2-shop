@@ -303,6 +303,7 @@
         startDate: new Date(),
         createTime: '',
         updateTime: '',
+        months: '',
         status: '',
         selectedId: [],
         ids: [],
@@ -318,13 +319,20 @@
     //   }, 200);
     // },
     created() {
-      const { actNo,status } = this.$route.query
+      const { actNo,status,months } = this.$route.query
       this.queryParam.keyword = actNo
       this.status = status
       this.queryParam.status = status
-      if (this.queryParam.keyword || this.queryParam.status) {
+      this.months = months
+      if (this.queryParam.keyword || this.queryParam.status || this.months) {
         if(this.queryParam.status){
           this.changeSystem()
+        }
+        if (this.months) {
+          this.queryParam.successTimeFrom = this.months
+          this.queryParam.successTimeTo = this.months
+          this.titleName = this.months + ' 订单'
+          this.getPage()
         }
         this.search1()
       }

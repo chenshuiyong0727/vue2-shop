@@ -32,7 +32,13 @@
       <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top">
           <div class="dingdans_top_left">
-           <strong>月份：</strong> <strong class="color-danger"> {{item.months}} </strong>
+<!--           <strong>月份：</strong> <strong class="color-danger"> {{item.months}} </strong>-->
+            <strong>月份：</strong>
+            <a>
+              <strong
+                @click="sellListDetail(item.months )"
+                :style="item.months == '合计' ? '' : 'color: #409EFF;'"> {{item.months}} </strong>
+            </a>
           </div>
         </div>
         <div class="dingdans_con">
@@ -80,6 +86,9 @@
       this.getPage()
     },
     methods: {
+      sellListDetail(months) {
+        this.$router.push({ path: '/sellListDetail', query: { months }})
+      },
       getPage() {
         reportApi.sellList(this.queryParam).then(res => {
           if (res.subCode === 1000) {
