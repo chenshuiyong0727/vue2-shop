@@ -114,13 +114,13 @@
 <!--        </div>-->
 <!--      </mt-header>-->
 <!--      <section style="height: 130vw;width: 80vw">-->
-<!--        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :readonly="true"></mt-field>-->
-<!--        <mt-field label="尺码" v-model="orderData.size" :readonly="true"></mt-field>-->
+<!--        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :disabled="true"></mt-field>-->
+<!--        <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>-->
 <!--        <mt-field label="入库价" placeholder="请输入入库价" @keyup.native="keyup1($event)" type="number" v-model="requestParam.price"></mt-field>-->
 <!--        <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup1($event)" type="number" v-model="requestParam.dwPrice"></mt-field>-->
-<!--        <mt-field label="手续费" :readonly="true" v-model="requestParam.poundage"></mt-field>-->
-<!--        <mt-field label="到手价" :readonly="true" v-model="requestParam.theirPrice"></mt-field>-->
-<!--        <mt-field label="利润" :readonly="true" v-model="requestParam.profits"></mt-field>-->
+<!--        <mt-field label="手续费" :disabled="true" v-model="requestParam.poundage"></mt-field>-->
+<!--        <mt-field label="到手价" :disabled="true" v-model="requestParam.theirPrice"></mt-field>-->
+<!--        <mt-field label="利润" :disabled="true" v-model="requestParam.profits"></mt-field>-->
 <!--      </section>-->
 <!--    </mt-popup>-->
 <!--    <mt-popup-->
@@ -134,16 +134,16 @@
 <!--        </div>-->
 <!--      </mt-header>-->
 <!--      <section style="height: 130vw;width: 80vw">-->
-<!--        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData1.actNo" :readonly="true"></mt-field>-->
-<!--        <mt-field label="尺码" v-model="orderData1.size" :readonly="true"></mt-field>-->
-<!--        <mt-field label="当前库存" v-model="orderData1.inventory" :readonly="true"></mt-field>-->
-<!--        <mt-field label="已上架数量" v-model="orderData1.galleryCount" :readonly="true"></mt-field>-->
-<!--        <mt-field label="入库价" v-model="orderData1.price" :readonly="true"></mt-field>-->
+<!--        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData1.actNo" :disabled="true"></mt-field>-->
+<!--        <mt-field label="尺码" v-model="orderData1.size" :disabled="true"></mt-field>-->
+<!--        <mt-field label="当前库存" v-model="orderData1.inventory" :disabled="true"></mt-field>-->
+<!--        <mt-field label="已上架数量" v-model="orderData1.galleryCount" :disabled="true"></mt-field>-->
+<!--        <mt-field label="入库价" v-model="orderData1.price" :disabled="true"></mt-field>-->
 <!--        <mt-field label="上架数量" placeholder="请输入上架数量"  @keyup.native="keyup2($event)" type="number" v-model="requestParam1.num"></mt-field>-->
 <!--        <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup2($event)" type="number" v-model="requestParam1.shelvesPrice"></mt-field>-->
-<!--        <mt-field label="手续费" :readonly="true" v-model="requestParam1.poundage"></mt-field>-->
-<!--        <mt-field label="到手价" :readonly="true" v-model="requestParam1.theirPrice"></mt-field>-->
-<!--        <mt-field label="利润" :readonly="true" v-model="requestParam1.profits"></mt-field>-->
+<!--        <mt-field label="手续费" :disabled="true" v-model="requestParam1.poundage"></mt-field>-->
+<!--        <mt-field label="到手价" :disabled="true" v-model="requestParam1.theirPrice"></mt-field>-->
+<!--        <mt-field label="利润" :disabled="true" v-model="requestParam1.profits"></mt-field>-->
 <!--      </section>-->
 <!--    </mt-popup>-->
     <mt-popup

@@ -154,13 +154,13 @@
         </div>
       </mt-header>
       <section style="height: 80vw;width: 80vw">
-        <mt-field label="尺码" style="margin-top: 11vw;"  v-model="orderData1.size" :readonly="true"></mt-field>
-        <mt-field label="库存" v-model="orderData1.inventory" :readonly="true"></mt-field>
-        <mt-field label="进价" v-model="orderData1.price" :readonly="true"></mt-field>
-        <mt-field label="售价" v-model="orderData1.dwPrice" :readonly="true"></mt-field>
-        <mt-field label="手续费" :readonly="true" v-model="orderData1.poundage"></mt-field>
-        <mt-field label="到手价" :readonly="true" v-model="orderData1.theirPrice"></mt-field>
-        <mt-field label="利润" :readonly="true" v-model="orderData1.profits"></mt-field>
+        <mt-field label="尺码" style="margin-top: 11vw;"  v-model="orderData1.size" :disabled="true"></mt-field>
+        <mt-field label="库存" v-model="orderData1.inventory" :disabled="true"></mt-field>
+        <mt-field label="进价" v-model="orderData1.price" :disabled="true"></mt-field>
+        <mt-field label="售价" v-model="orderData1.dwPrice" :disabled="true"></mt-field>
+        <mt-field label="手续费" :disabled="true" v-model="orderData1.poundage"></mt-field>
+        <mt-field label="到手价" :disabled="true" v-model="orderData1.theirPrice"></mt-field>
+        <mt-field label="利润" :disabled="true" v-model="orderData1.profits"></mt-field>
       </section>
     </mt-popup>
     <div style="    margin-left: 20vw;

@@ -106,8 +106,8 @@
         </div>
       </mt-header>
       <section style="height: 130vw;width: 80vw">
-        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :readonly="true"></mt-field>
-        <mt-field label="尺码" v-model="orderData.size" :readonly="true"></mt-field>
+        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :disabled="true"></mt-field>
+        <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam.waybillNo"></mt-field>
         <mt-field label="地址">
             <select class="select80" v-model="requestParam.addressId">

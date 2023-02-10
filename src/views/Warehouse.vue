@@ -140,13 +140,15 @@
         </div>
       </mt-header>
       <section style="height: 130vw;width: 80vw">
-        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :readonly="true"></mt-field>
-        <mt-field label="尺码" v-model="orderData.size" :readonly="true"></mt-field>
+        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :disabled="true"></mt-field>
+        <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
+        <mt-field label="原始库存" placeholder="请输入原始库存" type="number" v-model="requestParam.oldInventory"></mt-field>
+        <mt-field label="剩余库存" placeholder="请输入剩余库存" type="number" v-model="requestParam.inventory"></mt-field>
         <mt-field label="入库价" placeholder="请输入入库价" @keyup.native="keyup1($event)" type="number" v-model="requestParam.price"></mt-field>
         <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup1($event)" type="number" v-model="requestParam.dwPrice"></mt-field>
-        <mt-field label="手续费" :readonly="true" v-model="requestParam.poundage"></mt-field>
-        <mt-field label="到手价" :readonly="true" v-model="requestParam.theirPrice"></mt-field>
-        <mt-field label="利润" :readonly="true" v-model="requestParam.profits"></mt-field>
+        <mt-field label="手续费" :disabled="true" v-model="requestParam.poundage"></mt-field>
+        <mt-field label="到手价" :disabled="true" v-model="requestParam.theirPrice"></mt-field>
+        <mt-field label="利润" :disabled="true" v-model="requestParam.profits"></mt-field>
       </section>
     </mt-popup>
     <mt-popup
@@ -160,16 +162,16 @@
         </div>
       </mt-header>
       <section style="height: 130vw;width: 80vw">
-        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData1.actNo" :readonly="true"></mt-field>
-        <mt-field label="尺码" v-model="orderData1.size" :readonly="true"></mt-field>
-        <mt-field label="当前库存" v-model="orderData1.inventory" :readonly="true"></mt-field>
-        <mt-field label="已上架数量" v-model="orderData1.galleryCount" :readonly="true"></mt-field>
-        <mt-field label="入库价" v-model="orderData1.price" :readonly="true"></mt-field>
+        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData1.actNo" :disabled="true"></mt-field>
+        <mt-field label="尺码" v-model="orderData1.size" :disabled="true"></mt-field>
+        <mt-field label="当前库存" v-model="orderData1.inventory" :disabled="true"></mt-field>
+        <mt-field label="已上架数量" v-model="orderData1.galleryCount" :disabled="true"></mt-field>
+        <mt-field label="入库价" v-model="orderData1.price" :disabled="true"></mt-field>
         <mt-field label="上架数量" placeholder="请输入上架数量"  @keyup.native="keyup2($event)" type="number" v-model="requestParam1.num"></mt-field>
         <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup2($event)" type="number" v-model="requestParam1.shelvesPrice"></mt-field>
-        <mt-field label="手续费" :readonly="true" v-model="requestParam1.poundage"></mt-field>
-        <mt-field label="到手价" :readonly="true" v-model="requestParam1.theirPrice"></mt-field>
-        <mt-field label="利润" :readonly="true" v-model="requestParam1.profits"></mt-field>
+        <mt-field label="手续费" :disabled="true" v-model="requestParam1.poundage"></mt-field>
+        <mt-field label="到手价" :disabled="true" v-model="requestParam1.theirPrice"></mt-field>
+        <mt-field label="利润" :disabled="true" v-model="requestParam1.profits"></mt-field>
       </section>
     </mt-popup>
     <mt-popup
@@ -256,6 +258,8 @@
         },
         requestParam: {
           id: '',
+          oldInventory: '',
+          inventory: '',
           price: '',
           dwPrice: '',
           poundage: '',
@@ -589,20 +593,17 @@
         })
       },
       confirmHandle() {
-        // 利润= 到手价-运费-原价
-        // // 出售
-        // goodsOrderApi.sellGoods(this.requestParam).then(res => {
-        //   this.$toast(res.subMsg)
-        //   if (res.subCode === 1000) {
-        //     this.getPage()
-        //     this.isShowDialog = false
-        //   }
-        // })
+        if (this.requestParam.oldInventory < this.requestParam.inventory) {
+          this.$messagebox('原始库存小于剩余库存')
+          return
+        }
         goodsInventoryApi.update(this.requestParam).then(res => {
-          this.$toast(res.subMsg)
           if (res.subCode === 1000) {
+            this.$toast(res.subMsg)
             this.getPage()
             this.isShowDialog = false
+          }else {
+            this.$messagebox(res.subMsg);
           }
         })
       },
@@ -612,6 +613,8 @@
           if (res.subCode === 1000) {
             this.getPage()
             this.isShowDialog1 = false
+          }else {
+            this.$messagebox(res.subMsg);
           }
         })
       },
@@ -642,6 +645,8 @@
       handleClick(orderData) {
         this.orderData = orderData
         this.requestParam.id = this.orderData.id
+        this.requestParam.oldInventory = this.orderData.oldInventory
+        this.requestParam.inventory = this.orderData.inventory
         this.requestParam.price = this.orderData.price
         this.requestParam.dwPrice = this.orderData.dwPrice
         this.requestParam.waybillNo = this.orderData.waybillNo
