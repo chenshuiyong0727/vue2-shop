@@ -95,23 +95,35 @@
     font-size: 3.5vw;
     margin-top: -1vw;">
               <strong> {{item.createTime |formateTime }}</strong>
-              <mt-button
-                v-if="item.inventory > item.galleryCount"
-                style="margin-left: 4.1vw;"
-                type="primary"
-                size="small"
-                @click="changeStatusDialog1(item)">上架</mt-button>
-              <mt-button
-                v-else
-                style="margin-left: 4.1vw;"
-                type="primary"
-                size="small"
-                @click="jumpactNo(item.actNo)">订单</mt-button>
-              <mt-button
-                style="margin-left: 1vw;"
-                type="primary"
-                size="small"
-                @click="handleClick(item)">修改</mt-button>
+<!--              <mt-button-->
+<!--                v-if="item.inventory > item.galleryCount"-->
+<!--                style="margin-left: 4.1vw;"-->
+<!--                type="primary"-->
+<!--                size="small"-->
+<!--                @click="changeStatusDialog1(item)">上架</mt-button>-->
+<!--              <mt-button-->
+<!--                v-else-->
+<!--                style="margin-left: 4.1vw;"-->
+<!--                type="primary"-->
+<!--                size="small"-->
+<!--                @click="jumpactNo(item.actNo)">订单</mt-button>-->
+<!--              <mt-button-->
+<!--                style="margin-left: 1vw;"-->
+<!--                type="primary"-->
+<!--                size="small"-->
+<!--                @click="handleClick(item)">修改</mt-button>-->
+              <el-dropdown trigger="click" style="margin-left: 20vw;">
+                <span class="el-dropdown-link">
+                  操作<i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>
+                      <el-dropdown-item type="text" @click.native="goDel(item.id)">删除</el-dropdown-item>
+                      <el-dropdown-item type="text" @click.native="jumpactNo(item.actNo)">订单</el-dropdown-item>
+                      <el-dropdown-item type="text" @click.native="changeStatusDialog1(item)">上架</el-dropdown-item>
+                      <el-dropdown-item type="text" @click.native="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl )">库存</el-dropdown-item>
+                    </el-dropdown-menu>
+              </el-dropdown>
             </div>
           </div>
         </div>
@@ -228,12 +240,9 @@
 <script>
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
-  import { goodsOrderApi } from '@/api/goodsOrder'
-  import { goodsInventoryApi } from '@/api/goodsInventory'
+  import {goodsOrderApi} from '@/api/goodsOrder'
+  import {goodsInventoryApi} from '@/api/goodsInventory'
 
-  import {
-    MessageBox
-  } from "mint-ui";
   export default {
     components: {
       'v-baseline': Baseline,
@@ -641,6 +650,38 @@
           - this.orderData1.price
         this.requestParam1.profits = parseFloat(profits).toFixed(2)
         this.isShowDialog1 = true
+      },
+      goDel(id) {
+        this.$messagebox.confirm('是否删除',"提示",{
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type:"warning",
+        }).then(() => {
+          goodsInventoryApi.delById(id).then(res => {
+            this.$toast(res.subMsg)
+            if (res.subCode === 1000) {
+              this.getPage()
+            }
+          })
+        }).catch(() => {
+          // alert(" b" + id)
+          // this.goBack()
+        })
+        // this.$confirm('是否删除', '提示', {
+        //   confirmButtonText: '确定',
+        //   cancelButtonText: '取消',
+        //   type: 'warning'
+        // }).then(() => {
+        //   alert(id)
+        //   // goodsInventoryApi.delById(id).then(res => {
+        //   //   if (res.subCode === 1000) {
+        //   //     this.$message.success(res.subMsg)
+        //   //     this.pageGoods()
+        //   //   } else {
+        //   //     this.$message.error(res.subMsg)
+        //   //   }
+        //   // })
+        // })
       },
       handleClick(orderData) {
         this.orderData = orderData

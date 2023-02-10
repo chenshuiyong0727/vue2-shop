@@ -81,7 +81,18 @@
 .icon-set:before {
   content: "\e901";
 }
-
+.el-dropdown {
+  font-weight: 600;
+  color: #409eff !important;
+}
+.el-dropdown-menu__item {
+  font-weight: 600;
+  list-style: none;
+  line-height: 36px;
+  margin: 0;
+  color: #409eff !important;
+  outline: 0;
+}
 .color-danger {
   color: #F56C6C;
 }
