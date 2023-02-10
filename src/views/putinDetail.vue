@@ -9,7 +9,7 @@
       <div class="fenlei_top_left">
         <el-date-picker style="width: 35vw"
                         v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
-                        type="month" placeholder="时间开始">
+                        type="date" placeholder="时间开始">
         </el-date-picker>
       </div>
       <div style="width: 8vw" class="fenlei_top_left">
@@ -18,7 +18,7 @@
       <div class="fenlei_top_left">
         <el-date-picker style="width: 35vw"
                         v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
-                        type="month" placeholder="时间结束">
+                        type="date" placeholder="时间结束">
         </el-date-picker>
       </div>
       <div class="fenlei_top_right">
@@ -84,15 +84,50 @@
         tableData: [],
       }
     },
-    mounted() {
-      this.getPage()
+    // mounted() {
+    //   this.getPage()
+    // },
+    created() {
+      const { months } = this.$route.query
+      this.months = months
+      if (this.months) {
+        this.titleName = this.months + ' ' + this.titleName
+        this.months = this.months + '-01'
+        let to = this.getNextMonth(this.months)
+        this.queryParam.createTimeFrom = this.months
+        this.queryParam.createTimeTo = to
+        this.getPage()
+      }
     },
     methods: {
+      getNextMonth(date) {
+        let arr = date.split('-')
+        let year = arr[0] // 获取当前日期的年份
+        let month = arr[1] // 获取当前日期的月份
+        let day = arr[2] // 获取当前日期的日
+        let year2 = year
+        let month2 = parseInt(month) + 1
+        if (month2 === 13) {
+          year2 = parseInt(year2) + 1
+          month2 = 1
+        }
+        let day2 = day
+        let days2 = new Date(year2, month2, 0)
+        days2 = days2.getDate()
+        if (day2 > days2) {
+          day2 = days2
+        }
+        if (month2 < 10) {
+          month2 = '0' + month2
+        }
+        let m = year2 + '-' + month2 + '-' + day2
+        return m
+      },
       jumpDetail(months) {
-        this.$router.push({ path: '/putinDetail', query: { months }})
+        this.$router.push({ path: '/putin/putinDetail', query: { months }})
       },
       getPage() {
-        reportApi.putInStorage(this.queryParam).then(res => {
+        reportApi.putInStorageDay(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data : []
             if (this.tableData.length == 0) {
