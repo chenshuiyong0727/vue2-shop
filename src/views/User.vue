@@ -133,7 +133,8 @@
               <router-link :to="{ name: '入库报表'}" class="my-settle-top">
                   <div>
 <!--                    <span class="icon2-f"></span>-->
-                    <img style="width: 5.8vw" src="../../static/img/putin1.png" ></img>
+                    <img style="width: 27px;
+    margin-bottom: 10px;" src="../../static/img/putin1.png" ></img>
                   </div>
 
                   <p>
@@ -142,7 +143,8 @@
               </router-link>
               <router-link :to="{ name: '销售报表'}"  class="my-settle-bottom">
                 <div>
-                  <img style="width: 5.2vw" src="../../static/img/sell2.png" ></img>
+                  <img style="width: 25px;margin-left: 2px;
+    margin-bottom: 10px;" src="../../static/img/sell2.png" ></img>
                   <!--                  <span class="icon2-settle"></span>-->
 <!--                  <img style="width: 5.2vw" src="../../static/img/lagout.png" ></img>-->
                 </div>
@@ -156,7 +158,8 @@
               <router-link :to="{ name: '其他收支'}" class="my-settle-top">
                   <div>
 <!--                    <span class="icon2-f"></span>-->
-                    <img style="width: 6.2vw" src="../../static/img/other1.png" ></img>
+                    <img style="width: 29px;
+    margin-bottom: 7px;" src="../../static/img/other1.png" ></img>
                   </div>
 
                   <p>
@@ -165,7 +168,8 @@
               </router-link>
               <router-link :to="{ path: '/logout?type=1'}"  class="my-settle-bottom">
                 <div>
-                  <img style="width: 6.2vw" src="../../static/img/setting0.png" ></img>
+                  <img style="width: 29px;
+    margin-bottom: 7px;" src="../../static/img/setting0.png" ></img>
                   <!--                  <span class="icon2-settle"></span>-->
 <!--                  <img style="width: 5.2vw" src="../../static/img/lagout.png" ></img>-->
                 </div>
