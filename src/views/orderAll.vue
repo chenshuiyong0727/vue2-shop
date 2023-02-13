@@ -519,12 +519,15 @@
         this.requestParam.profits = parseFloat(profits).toFixed(2)
       },
       confirmHandle() {
+        if(this.requestParam.status == 7 && !this.requestParam.freight) {
+          this.$messagebox('请输入运费')
+          return
+        }
         // 利润= 到手价-运费-原价
         let profits = this.requestParam.theirPrice - this.requestParam.freight
           - this.requestParam.price
         this.requestParam.profits = parseFloat(profits).toFixed(2)
 
-        // 出售
         goodsOrderApi.sellGoods(this.requestParam).then(res => {
           this.$toast(res.subMsg)
           if (res.subCode === 1000) {
