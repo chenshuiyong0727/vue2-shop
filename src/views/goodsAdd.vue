@@ -35,6 +35,13 @@
           >
         </el-upload>
       </mt-field>
+<!--      <button @click="uploadMaterial()">-->
+<!--       <input type="file" capture="user" accept="image/*" style="display:none;" ref="file" @click="e => {e.target.value = '';} " @change="getFileData"/>-->
+<!--      </button>-->
+      <el-button type="primary"  size="small" @click="uploadMaterial">拍摄图片</el-button>
+      <input type="file" capture="user" accept="image/*" style="display:none" ref="file" @click="e => {e.target.value = '';} " @change="getFileData"/>
+
+<!--      <input type="file" id="photo" capture="user" accept="image/*" name="photo" :data="uploadData" @change="handleImageSuccess" />-->
       <mt-field label="类型">
           <select class="select100" v-model="form.type"  :disabled="type == 1 ">
             <option :disabled="true" value="" selected>请选择类型</option>
@@ -111,6 +118,8 @@
 import Header from '@/common/_header.vue'
 import { fileApi } from '@/api/file'
 import { goodsBaseApi } from '@/api/goodsBase'
+import axios from 'axios'
+
 export default {
   components:{
     'v-header':Header
@@ -152,6 +161,144 @@ export default {
     this.init()
   },
   methods:{
+    uploadMaterial() {
+      this.$refs.file.dispatchEvent(new MouseEvent("click"));
+    },
+    // 触发上传材料文件
+    getFileData() {
+      const inputFile = this.$refs.file.files[0];
+      let filename = inputFile.name;
+      // 此处应向后台请求 后台保存上传文件名称返回fileId作为文件标识
+      let param = {
+        fileId: 123,
+        file: inputFile
+      };
+      // this.uploadFile(param);
+      this.uploadImg(param);
+    },
+    uploadImg(param) {
+      let formData = new FormData();
+      formData.set("actNo", param.fileId);
+      formData.set("file", param.file);
+      // Promise.all(this.promise).then(() => {
+        let reopt = {
+          method: 'post',
+          url: '/gw/op/v1/file/uploadFileMinio',
+          headers: {
+            'Content-Type' : 'multipart/form-data'
+          },
+          data: formData
+        }
+        axios.request(reopt).then(res => {
+          console.info(res)
+          if (res.status === 200) {
+            let data = res.data
+        // console.info(data.code)
+        // console.info(data.sub_code)
+            if (data.code !== 1 ||data.sub_code != 1000) {
+              this.$toast('上传失败')
+            } else {
+              this.$toast(data.sub_msg)
+              this.form.imgUrl = data.data
+            }
+            // let picNetPath = res.request.responseURL.split('?')[0]
+            // this.$emit('uploadSuccess', picNetPath)
+            // 添加日志信息
+            // this.uploadDoLog(picNetPath)
+          } else {
+            this.$toast('上传失败')
+            // this.uploadError()
+          }
+        })
+      // })
+    },
+    // 最后上传
+    uploadFile(param) {
+      let formData = new FormData();
+      formData.set("actNo", param.fileId);
+      formData.set("file", param.file);
+      fileApi.upload({ formData }).then(res => {
+        if (res.subCode === 1000) {
+          this.$toast(res.subMsg)
+          this.form.imgUrl = res.data.url
+        } else {
+          this.$toast(res.subMsg)
+        }
+      })
+      // fileApi.upload({
+      //   formData
+      // }).then((res) => {
+      //   console.info(res)
+      //   this.$toast(res.subMsg);
+      //   // if (res.subCode === 1000) {
+      //   //   this.form = res.data ? res.data : {}
+      //   //   this.form.sizeList = []
+      //   //   this.sizeList = res.data.sizeListList
+      //   //   for (let i = 0; i < res.data.sizeListList.length; i++) {
+      //   //     this.form.sizeList.push(res.data.sizeListList[i][1])
+      //   //   }
+      //   // } else {
+      //   //   this.$toast(res.subMsg)
+      //   // }
+      // });
+    },
+
+//     selectPhoto() {
+//       let _this = this;
+//       let file = document.getElementById("photo").files[0];
+//       let content = null;
+//       let readfile = new FileReader();
+//       if (file != undefined) {
+//         content = readfile.readAsDataURL(file, "UTF-8");
+//         readfile.onload = function(event) {
+//           content = event.target.result;
+//           let blod = _this.base64ToFile(
+//             content,
+//             new Date().getTime() + ".png"
+//           );
+// //blod   手机相机拍的图片  fileChange()方法上传图片
+//           _this.fileChange(blod);
+//         };
+//         readfile.onerror = function(event) {
+//           console.log("err");
+//         };
+//       } else {
+//         console.log("未拍照");
+//       }
+//     },
+//
+// //转为文件
+//     base64ToFile(urlData, fileName) {
+//       let arr = urlData.split(",");
+//       let mime = arr[0].match(/:(.*?);/)[1];
+//       let bytes = atob(arr[1]);
+//       let n = bytes.length;
+//       let ia = new Uint8Array(n);
+//       while (n--) {
+//         ia[n] = bytes.charCodeAt(n);
+//       }
+//       return new File([ia], fileName, { type: mime });
+//     },
+// //上传
+//     async fileChange(file) {
+//       if (file) {
+//         let formData = new FormData();
+//         formData.append("file", file);
+//         formData.append("filePath", "/basicGovernance/informationAdd");
+//         let { details, code } = await fileUpload(formData);
+//         if (code == 200) {
+//           this.idCardIdentify(details.data.filePath);
+//         }
+//       } else {
+//         let formData = new FormData();
+//         formData.append("file", this.$refs.fileUpload.files[0]);
+//         formData.append("filePath", "/basicGovernance/informationAdd");
+//         let { details, code } = await fileUpload(formData);
+//         if (code == 200) {
+//           this.idCardIdentify(details.data.filePath);
+//         }
+//       }
+//     },
     getDetailById(id) {
       if (id) {
         goodsBaseApi.getDetailById(id).then(res => {
@@ -277,6 +424,8 @@ export default {
       })
     },
     async handleImageSuccess(res, file) {
+      console.info(res)
+      console.info(file)
       this.$toast('上传成功')
       this.form.imgUrl = res.data
     },
