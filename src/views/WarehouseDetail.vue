@@ -57,6 +57,11 @@
           </div>
         </div>
         <div class="dingdans_con">
+<!--          <div style="width: 18px;"><checkbox :checked="item.checked" @click="changeChecked(item.id)"></checkbox></div>-->
+          <div style="width: 18px;">
+            <input type="checkbox" :checked="item.checked" @click="changeChecked(item.id)">
+
+          </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
               预计利润：<strong
@@ -97,11 +102,29 @@
       </div>
     </div>
     <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
+    <div style="
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+    ">
+<!--      <mt-button  @click="goGoodsBase"  style="margin-left: 5px;-->
+<!--    border-radius: 100%;-->
+<!--    margin-top: 0px;-->
+<!--    height: 55px;-->
+<!--    width: 55px;" type="primary">-->
+<!--        <img src="../../static/img/add.png" height="30" width="30" slot="icon">-->
+<!--      </mt-button>-->
+      <el-button v-if="checkAll" v-model="checkAll" @click="checkedAll" style="    margin-left: 115px;margin-bottom: 10px;" type="primary">反选</el-button>
+      <el-button v-else v-model="checkAll" @click="checkedAll" style="    margin-left: 115px;margin-bottom: 10px;" type="primary">全选</el-button>
+      <el-button  type="primary" @click="" >移动仓库</el-button>
+<!--      <el-button  @click="$router.go(-1)" >取消</el-button>-->
+    </div>
   </div>
 </template>
 <script>
+  import Footer from '@/components/goodsBase/store_footer.vue'
   import Baseline from '@/common/_baseline.vue'
-  import Footer from '@/common/_footer.vue'
+  // import Footer from '@/common/_footer.vue'
   import { goodsInventoryApi } from '@/api/goodsInventory'
 
   export default {
@@ -112,6 +135,7 @@
     name: "HelloWorld",
     data() {
       return {
+        checkAll: false,
         titleName: '销售报表',
         emtityMsg: '人家是有底线的 -.-',
         imageZoom: '',
@@ -121,6 +145,7 @@
           pageSize: 20,
           pageNum: 1
         },
+        ids: [],
         actNo: '',
         fileUrl: fileUrl,
         imgUrl: '',
@@ -144,6 +169,11 @@
       }
     },
     methods: {
+      checkedAll() {
+        this.checkAll = !this.checkAll
+        this.tableData= []
+        this.getPage(1)
+      },
       jumpactNo(actNo) {
         this.$router.push({ path: '/order', query: { actNo } })
       },
@@ -151,10 +181,36 @@
         this.imageZoom = e
         this.pictureZoomShow = true
       },
-      getPage() {
+      delItem(id) {
+        for (let i = 0; i < this.ids.length; i++) {
+          if (this.ids[i].id == id) {
+            this.ids.splice(i, 1)
+          }
+        }
+      },
+      changeChecked(id) {
+        this.tableData.map(item => {
+          if(item.id === id) {
+            if (item.checked) {
+              this.ids.push[id]
+            } else {
+              this.delItem(id)
+            }
+            item.checked = !item.checked
+          }
+        })
+        console.info(this.ids)
+      },
+      getPage(type) {
         goodsInventoryApi.pageGoods(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
+            // 将列表parkList进行遍历动态添加checked为false
+            if (type) {
+              this.tableData.map(item => {
+                this.$set(item, 'checked', this.checkAll)
+              })
+            }
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             this.inventoryData = res.data.goodsInventoryPageVo ? res.data.goodsInventoryPageVo
               : this.inventoryData
