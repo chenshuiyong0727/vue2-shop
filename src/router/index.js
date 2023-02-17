@@ -21,6 +21,7 @@ const GoodsBase = resolve => require(['@/views/GoodsBase.vue'], resolve)
 const Warehouse = resolve => require(['@/views/Warehouse.vue'], resolve)
 const WarehouseDetail = resolve => require(['@/views/WarehouseDetail.vue'], resolve)
 const OpenWarehouse = resolve => require(['@/views/OpenWarehouse.vue'], resolve)
+const scanCode = resolve => require(['@/views/scanCode.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
 const logout = resolve => require(['@/views/logout.vue'], resolve)
 
@@ -55,6 +56,8 @@ export default new Router({
       name: '订单',
       component: Order,
       meta: {
+        keepAlive: true, // 此组件需要被缓存
+        isBack:false, //用于判断上一个页面是哪个
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },
     }, {
@@ -69,6 +72,8 @@ export default new Router({
       name: '仓库',
       component: Warehouse,
       meta: {
+        keepAlive: true, // 此组件需要被缓存
+        isBack:false, //用于判断上一个页面是哪个
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },
     }, {
@@ -177,6 +182,10 @@ export default new Router({
       path: '/login',
       name: '登录页',
       component: Login
+    },{
+      path: '/scanCode',
+      name: '扫码',
+      component: scanCode
     },{
       path: '/logout',
       name: '退出登录',

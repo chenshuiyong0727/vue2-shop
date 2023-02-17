@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello" ref="hello">
     <mt-header :title="titleName">
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
@@ -260,6 +260,7 @@
     name: "HelloWorld",
     data() {
       return {
+        curScrollTop: 0, //记录滚动条位置对象
         topStatus: "",
         bottomStatus: "",
         allLoaded: false,
@@ -397,10 +398,60 @@
         this.search1()
       }
     },
-    mounted() {
-      this.getPage()
-      this.handleChange()
-      this.listSysDict()
+    // mounted() {
+    //   this.getPage()
+    //   this.handleChange()
+    //   this.listSysDict()
+    // },
+    activated() {
+      // 新开的页面
+      if (!this.$route.meta.isBack) {
+        this.handleChange()
+        this.listSysDict()
+        this.resetData()
+        //isBack 时添加中router中的元信息，判读是否要缓存
+        // const { actNo,status,months } = this.$route.query
+        // this.queryParam.keyword = actNo
+        // this.status = status
+        // this.queryParam.status = status
+        // this.months = months
+        // if (this.queryParam.keyword || this.queryParam.status || this.months) {
+        //   if(this.queryParam.status){
+        //     this.changeSystem()
+        //   }
+        //   if (this.months) {
+        //     this.queryParam.successTimeFrom = this.months
+        //     this.queryParam.successTimeTo = this.months
+        //     this.titleName = this.months + ' 订单'
+        //   }
+        //   // this.search1()
+        // }
+        const { actNo,size,months } = this.$route.query
+        this.queryParam.size = size
+        this.queryParam.actNo = actNo
+        this.months = months
+        if (this.queryParam.actNo || this.queryParam.size || this.months) {
+          if (this.months) {
+            this.queryParam.createTimeFrom = this.months
+            this.queryParam.createTimeTo = this.months
+            this.titleName = this.months + ' ' + this.titleName
+          }
+          // this.search1()
+        }
+        this.getPage()
+      }else {
+        this.$refs.hello.scrollTop = this.curScrollTop
+      }
+    },
+    beforeRouteLeave(to, from, next) {
+      if (to.path == "/goodsBase" || to.path  =="/order" ||  to.path  =="/WarehouseDetail" ) {
+        from.meta.isBack = true;
+        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+      }else {
+        this.curScrollTop = 0
+        from.meta.isBack = false;
+      }
+      next()
     },
     methods: {
       handleChange() {
@@ -410,7 +461,7 @@
           }
         })
       },
-      goGoodsBase(row) {
+      goGoodsBase() {
         this.$router.push({ path: '/goodsBase'})
       },
       successTimeChange() {
@@ -513,6 +564,24 @@
         this.allLoaded = false;
         this.isShowDialog2 = false
         this.getPage()
+      },
+      resetData() {
+        this.queryParam = {
+          createTimeFrom: '',
+          createTimeTo: '',
+          id: '',
+          sort:'',
+          inventory: 1,
+          inventoryFrom: '',
+          inventoryTo: '',
+          size: '',
+          actNo: '',
+          goodsId: '',
+          pageSize: 10,
+          pageNum: 1
+        }
+        this.allLoaded = false;
+        this.isShowDialog2 = false
       },
       resetHandle() {
         this.queryParam = {

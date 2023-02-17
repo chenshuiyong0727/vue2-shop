@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello" ref="hello">
     <mt-header :title="titleName">
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
@@ -225,6 +225,7 @@
     name: "HelloWorld",
     data() {
       return {
+        curScrollTop: 0, //记录滚动条位置对象
         topStatus: "",
         bottomStatus: "",
         allLoaded: false,
@@ -318,32 +319,123 @@
     //     this.loadData('refresh');
     //   }, 200);
     // },
-    created() {
-      const { actNo,status,months } = this.$route.query
-      this.queryParam.keyword = actNo
-      this.status = status
-      this.queryParam.status = status
-      this.months = months
-      if (this.queryParam.keyword || this.queryParam.status || this.months) {
-        if(this.queryParam.status){
-          this.changeSystem()
+    // created() {
+    //   const { actNo,status,months } = this.$route.query
+    //   this.queryParam.keyword = actNo
+    //   this.status = status
+    //   this.queryParam.status = status
+    //   this.months = months
+    //   if (this.queryParam.keyword || this.queryParam.status || this.months) {
+    //     if(this.queryParam.status){
+    //       this.changeSystem()
+    //     }
+    //     if (this.months) {
+    //       this.queryParam.successTimeFrom = this.months
+    //       this.queryParam.successTimeTo = this.months
+    //       this.titleName = this.months + ' 订单'
+    //     }
+    //     this.search1()
+    //   }
+    //   // console.info(1)
+    //   // let timer = setTimeout(_ => {
+    //   //   clearTimeout(timer);
+    //   //   this.loadData('refresh');
+    //   // }, 200);
+    // },
+    // mounted() {
+    //   // console.info(2)
+    //   this.getPage()
+    //   this.listSysDict()
+    // },
+    activated() {
+      // 新开的页面
+      if (!this.$route.meta.isBack) {
+        this.listSysDict()
+        this.resetData()
+        //isBack 时添加中router中的元信息，判读是否要缓存
+        const { actNo,status,months } = this.$route.query
+        this.queryParam.keyword = actNo
+        this.status = status
+        this.queryParam.status = status
+        this.months = months
+        if (this.queryParam.keyword || this.queryParam.status || this.months) {
+          if(this.queryParam.status){
+            this.changeSystem()
+          }
+          if (this.months) {
+            this.queryParam.successTimeFrom = this.months
+            this.queryParam.successTimeTo = this.months
+            this.titleName = this.months + ' 订单'
+          }
+          // this.search1()
         }
-        if (this.months) {
-          this.queryParam.successTimeFrom = this.months
-          this.queryParam.successTimeTo = this.months
-          this.titleName = this.months + ' 订单'
-        }
-        this.search1()
+        this.getPage()
+      }else {
+        this.$refs.hello.scrollTop = this.curScrollTop
       }
-      // let timer = setTimeout(_ => {
-      //   clearTimeout(timer);
-      //   this.loadData('refresh');
-      // }, 200);
     },
-    mounted() {
-      this.getPage()
-      this.listSysDict()
+    // beforeRouteEnter(to, from, next) {
+    //   // console.info('beforeRouteEnter')
+    //   this.$refs.loadmore.scrollTo(0, 1000);
+    //
+    //   // next(vm => {
+    //   //   console.info('beforeRouteEnter')
+    //   //   // window.scroll(0, 1000 )
+    //   //   this.$refs.loadmore.scrollTo(0, 1000);
+    //   //
+    //   //   // document.documentElement.scrollTop = 10000
+    //   //   // 回到原来的位置
+    //   //   // const position = JSON.parse(localStorage.getItem('position'))
+    //   //   // console.info(position)
+    //   //   // // document.querySelector('.dingdans_item').scrollTop = position
+    //   //   // // let recruitScrollY = this.$store.state.recruitScrollY
+    //   //   // window.scroll(0, position)
+    //   // })
+    // },
+    // beforeRouteLeave(to, from, next) {
+    //   console.info('beforeRouteLeave')
+    //   // 保存离开页面时的位置
+    //   const position = document.querySelector('.dingdans_item').scrollTop
+    //   window.sessionStorage.setItem('position', JSON.stringify(position))
+    //   next()
+    // },
+    beforeRouteLeave(to, from, next) {
+      // let position = window.scrollY //记录离开页面的位置
+      // console.info("position1" , position)
+      // if (position == null)
+      // position = document.querySelector('.dingdans_item').scrollTop
+      // console.info("position2" , position)
+      // localStorage.setItem('position', JSON.stringify(position)
+      // this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      // this.curScrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop || 0
+
+      // console.info('beforeRouteLeave' , document.documentElement.scrollTop )
+      // console.info('beforeRouteLeave' , window.pageYOffset )
+      // console.info('beforeRouteLeave' , document.body.scrollTop )
+      // var scrollTop = document.querySelector(".mint-loadmore").scrollTop;
+      // let clientHeight = document.querySelector(".mint-loadmore").clientHeight;
+      // var scrollview = document.querySelector('.mint-loadmore').scrollHeight;
+      // console.log(scrollTop,"scrollTop");
+      // console.log(clientHeight,"clientHeight");
+      // console.log(scrollview,"scrollview");
+      if (to.path == "/store" || to.path  =="/orderDetail") {
+        //当离开的时候是去库存页的时候开启缓存
+        from.meta.isBack = true;
+        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+      }else {
+        this.curScrollTop = 0
+        from.meta.isBack = false;
+      }
+      // this.$store.commit('changeRecruitScrollY', position) //离开路由时把位置存起来
+      next()
     },
+    // beforeRouteEnter(to, from, next) {
+    //   console.info('beforeRouteEnter' +to.name )
+    //   // if (to.name === 'NewRecruit') {//跳转的的页面的名称是"NewRecruit",这里就相当于我们listview页面，或者原始页面
+    //     let recruitScrollY = this.$store.state.recruitScrollY
+    //     window.scroll(0, recruitScrollY)
+    //   // }
+    // },
     methods: {
       successTimeChange() {
         if (this.successTime) {
@@ -428,6 +520,38 @@
         this.isShowDialog2 = false
         this.getPage()
       },
+      resetData() {
+        this.queryParam.pageNum ={
+          id: '',
+          size: '',
+          keyword: '',
+          orderNo: '',
+          inventoryId: '',
+          status: '',
+          shelvesPriceFrom: '',
+          shelvesPriceTo: '',
+          freightFrom: '',
+          freightTo: '',
+          poundageFrom: '',
+          poundageTo: '',
+          theirPriceFrom: '',
+          theirPriceTo: '',
+          addressId: '',
+          waybillNo: '',
+          createTimeFrom: '',
+          createTimeTo: '',
+          updateTimeFrom: '',
+          updateTimeTo: '',
+          sellTimeFrom: '',
+          sellTimeTo: '',
+          successTimeFrom: '',
+          successTimeTo: '',
+          pageSize: 10,
+          pageNum: 1
+         }
+        this.allLoaded = false;
+        this.isShowDialog2 = false
+      },
       resetHandle() {
         this.queryParam = {
           id: '',
@@ -435,7 +559,7 @@
           size: '',
           orderNo: '',
           inventoryId: '',
-          status: this.status,
+          status: '',
           shelvesPriceFrom: '',
           shelvesPriceTo: '',
           freightFrom: '',
@@ -743,7 +867,9 @@
     padding-top: 12vw;
     font-size: 13px;
     height: 100vh;
-    overflow-y: auto;
+    /*overflow:hidden;*/
+
+  overflow-y: auto;
   }
   /* 给要上拉的容器设置 end */
   /*.fl {*/
