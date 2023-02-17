@@ -14,6 +14,8 @@
     "crypto-js": "^4.1.1",
     "echarts": "^4.9.0",
     "element-ui": "^2.15.12",
+    "image-compressor": "^2.0.3",
+    "image-conversion": "^2.1.1",
     "js-cookie": "^3.0.1",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
