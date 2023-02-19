@@ -122,15 +122,14 @@
   </div>
 </template>
 <script>
-  import Footer from '@/components/goodsBase/store_footer.vue'
+  // import Footer from '@/components/goodsBase/store_footer.vue'
   import Baseline from '@/common/_baseline.vue'
   // import Footer from '@/common/_footer.vue'
   import { goodsInventoryApi } from '@/api/goodsInventory'
 
   export default {
     components: {
-      'v-baseline': Baseline,
-      'v-footer': Footer
+      'v-baseline': Baseline
     },
     name: "HelloWorld",
     data() {
@@ -183,7 +182,7 @@
       },
       delItem(id) {
         for (let i = 0; i < this.ids.length; i++) {
-          if (this.ids[i].id == id) {
+          if (this.ids[i] === id) {
             this.ids.splice(i, 1)
           }
         }
@@ -192,14 +191,15 @@
         this.tableData.map(item => {
           if(item.id === id) {
             if (item.checked) {
-              this.ids.push[id]
-            } else {
               this.delItem(id)
+            } else {
+              this.ids.push(id)
             }
             item.checked = !item.checked
           }
         })
-        console.info(this.ids)
+        alert(this.ids)
+        // console.info("id" ,this.ids)
       },
       getPage(type) {
         goodsInventoryApi.pageGoods(this.queryParam).then(res => {
@@ -209,8 +209,14 @@
             if (type) {
               this.tableData.map(item => {
                 this.$set(item, 'checked', this.checkAll)
+                if ( this.checkAll) {
+                  this.ids.push(item.id)
+                } else {
+                  this.delItem(item.id)
+                }
               })
             }
+            alert(this.ids)
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             this.inventoryData = res.data.goodsInventoryPageVo ? res.data.goodsInventoryPageVo
               : this.inventoryData
