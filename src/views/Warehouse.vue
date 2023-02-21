@@ -260,6 +260,7 @@
     name: "HelloWorld",
     data() {
       return {
+        isBack: false, //记录滚动条位置对象
         curScrollTop: 0, //记录滚动条位置对象
         topStatus: "",
         bottomStatus: "",
@@ -404,6 +405,7 @@
     //   this.listSysDict()
     // },
     activated() {
+      this.isBack = false
       // 新开的页面
       if (!this.$route.meta.isBack) {
         this.handleChange()
@@ -445,7 +447,7 @@
     },
     beforeRouteLeave(to, from, next) {
       if (to.path == "/goodsBase" || to.path  =="/order" ||  to.path  =="/WarehouseDetail" ) {
-        from.meta.isBack = true;
+        from.meta.isBack = this.isBack;
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
       }else {
         this.curScrollTop = 0
@@ -462,6 +464,7 @@
         })
       },
       goGoodsBase() {
+        this.isBack = true
         this.$router.push({ path: '/goodsBase'})
       },
       successTimeChange() {
@@ -723,9 +726,11 @@
         })
       },
       jumpactNo(actNo) {
+        this.isBack = true
         this.$router.push({ path: '/order', query: { actNo } })
       },
       WarehouseDetail(goodsId , actNo,imgUrl) {
+        this.isBack = true
         this.$router.push({ path: '/WarehouseDetail', query: {goodsId, actNo ,imgUrl} })
       },
       changeStatusDialog1(row) {

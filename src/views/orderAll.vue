@@ -225,6 +225,7 @@
     name: "HelloWorld",
     data() {
       return {
+        isBack: false, //记录滚动条位置对象
         curScrollTop: 0, //记录滚动条位置对象
         topStatus: "",
         bottomStatus: "",
@@ -348,6 +349,7 @@
     //   this.listSysDict()
     // },
     activated() {
+      this.isBack = false
       // 新开的页面
       if (!this.$route.meta.isBack) {
         this.listSysDict()
@@ -419,8 +421,9 @@
       // console.log(clientHeight,"clientHeight");
       // console.log(scrollview,"scrollview");
       if (to.path == "/store" || to.path  =="/orderDetail") {
+        console.info(this.isBack)
         //当离开的时候是去库存页的时候开启缓存
-        from.meta.isBack = true;
+        from.meta.isBack = this.isBack;
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
       }else {
         this.curScrollTop = 0
@@ -679,9 +682,11 @@
         this.isShowDialog1 = true
       },
       jumpactNo(actNo) {
+        this.isBack = true
         this.$router.push({ path: '/store', query: { actNo } })
       },
       goDetail(id) {
+        this.isBack = true
         this.$router.push({ path: '/orderDetail', query: { id } })
       },
       // goDel(id) {
