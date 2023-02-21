@@ -49,6 +49,13 @@ export const goodsInventoryApi = {
     method: 'post',
     data: body
   }),
+  // 批量更新状态
+  batchupdateStatus: (body) =>
+    request({
+      url: '/gw/op/v1/goodsInventory/batch/updateStatus',
+      method: 'put',
+      data: body
+    }),
   // 更新
   update: (body) => request({
     url: '/gw/op/v1/goodsInventory',

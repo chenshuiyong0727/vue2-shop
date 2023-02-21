@@ -55,23 +55,33 @@
           <div class="dingdans_top_left">
             <strong>尺码：</strong> <strong class="color-danger"> {{item.size}} </strong>
           </div>
+          <div class="dingdans_top_right">
+            <strong>{{ item.warehouseId | dictToDescTypeValue(40) }} </strong>
+          </div>
         </div>
         <div class="dingdans_con">
-<!--          <div style="width: 18px;"><checkbox :checked="item.checked" @click="changeChecked(item.id)"></checkbox></div>-->
-          <div style="width: 18px;">
-            <input type="checkbox" :checked="item.checked" @click="changeChecked(item.id)">
 
+<!--          <div style="width: 18px;"><checkbox :checked="item.checked" @click="changeChecked(item.id)"></checkbox></div>-->
+          <div style="width: 25px;   display: flex;align-items: center;">
+<!--            <input type="checkbox" :checked="item.checked" @click="changeChecked(item.id)">-->
+            <el-checkbox :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
+            <strong style="margin-left: 6px;">{{index + 1}}</strong>
           </div>
+<!--          <div style="width: 10px;">-->
+<!--            <strong>{{index + 1}}</strong>-->
+<!--          </div>-->
+<!--          <div style="width: 18px;">-->
+<!--          </div>-->
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
               预计利润：<strong
-              :style="(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) > 50 ? 'color: #F56C6C' : ''"
-              >{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong>
+              :style="(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) > 50 ? 'color: #F56C6C' : ''">
+              {{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong>
               入库时间：<strong >{{item.createTime | formateTime }}</strong>
             </div>
               <div class="dingdans_con_right_top">
-              原始库存：<strong >{{item.oldInventory}}</strong>
-              剩余库存：<strong >{{item.inventory}}</strong>
+                剩余库存：<strong :style="item.inventory ? 'color: #0fbe8f' : 'color: #F56C6C'">{{item.inventory}}</strong>
+                原始库存：<strong >{{item.oldInventory}}</strong>
               成功数：<strong >{{item.successCount}}</strong>
               上架数：<strong >{{item.galleryCount}}</strong>
               </div>
@@ -101,7 +111,7 @@
         <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
-    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
+    <p style="padding: 1.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
     <div style="
     bottom: 0;
     position: absolute;
@@ -116,9 +126,29 @@
 <!--      </mt-button>-->
       <el-button v-if="checkAll" v-model="checkAll" @click="checkedAll" style="    margin-left: 115px;margin-bottom: 10px;" type="primary">反选</el-button>
       <el-button v-else v-model="checkAll" @click="checkedAll" style="    margin-left: 115px;margin-bottom: 10px;" type="primary">全选</el-button>
-      <el-button  type="primary" @click="" >移动仓库</el-button>
+      <el-button  type="primary" @click="handleClick" >移动仓库</el-button>
 <!--      <el-button  @click="$router.go(-1)" >取消</el-button>-->
     </div>
+    <mt-popup
+      v-model="isShowDialog">
+      <mt-header title="移动仓库">
+        <div slot="right">
+          <mt-button size="normal"  @click="isShowDialog = false" style="font-size: 16px">关闭</mt-button>
+        </div>
+        <div slot="left">
+          <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>
+        </div>
+      </mt-header>
+      <section style="height: 50vw;width: 80vw">
+        <mt-field label="选中数" style="margin-top: 11vw;" v-model="ids.length" :disabled="true"></mt-field>
+        <mt-field label="仓库">
+            <select  class="select80" v-model="requestParam.warehouseId">
+              <option  value="" selected>请选择仓库</option>
+              <option v-for="x in warehouseList" :value="x.fieldValue">{{x.fieldName}}</option>
+            </select>
+        </mt-field>
+      </section>
+    </mt-popup>
   </div>
 </template>
 <script>
@@ -134,6 +164,11 @@
     name: "HelloWorld",
     data() {
       return {
+        requestParam: {
+          ids: [],
+          warehouseId: 2
+        },
+        isShowDialog: false,
         checkAll: false,
         titleName: '销售报表',
         emtityMsg: '人家是有底线的 -.-',
@@ -144,6 +179,7 @@
           pageSize: 20,
           pageNum: 1
         },
+        warehouseList: [],
         ids: [],
         actNo: '',
         fileUrl: fileUrl,
@@ -159,6 +195,7 @@
       }
     },
     created() {
+      this.listSysDict()
       const { goodsId , actNo,imgUrl } = this.$route.query
       this.actNo = actNo
       this.imgUrl = imgUrl
@@ -168,6 +205,32 @@
       }
     },
     methods: {
+      listSysDict() {
+        let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
+          localStorage.getItem('sysDictList')) : []
+        this.warehouseList = sysDictList.filter(item => item.typeValue == 40)
+      },
+      confirmHandle() {
+        // let data = {}
+        // data.ids = this.ids
+        // data.status = this.form.type
+        // data.remark = this.form.remark
+        goodsInventoryApi.batchupdateStatus(this.requestParam).then((res) => {
+          this.$toast(res.subMsg)
+          if (res.subCode === 1000) {
+            this.getPage()
+            this.isShowDialog = false
+          }
+        })
+      },
+      handleClick() {
+        this.requestParam.ids = this.ids
+        if (!this.ids.length ) {
+          this.$toast('请选择尺码')
+          return
+        }
+        this.isShowDialog = true
+      },
       checkedAll() {
         this.checkAll = !this.checkAll
         this.tableData= []
@@ -193,12 +256,14 @@
             if (item.checked) {
               this.delItem(id)
             } else {
-              this.ids.push(id)
+              if (!this.ids.includes(id)) {
+                this.ids.push(id)
+              }
             }
             item.checked = !item.checked
           }
         })
-        alert(this.ids)
+        // alert(this.ids)
         // console.info("id" ,this.ids)
       },
       getPage(type) {
@@ -216,7 +281,6 @@
                 }
               })
             }
-            alert(this.ids)
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             this.inventoryData = res.data.goodsInventoryPageVo ? res.data.goodsInventoryPageVo
               : this.inventoryData

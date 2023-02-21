@@ -11,9 +11,9 @@
         <img style="width: 6.9vw"  :src="order_img" ></img>
         <p :style="blue2">订单</p>
       </mt-tab-item>
-      <mt-tab-item id="扫码">
-        <img style="width: 11vw"  src="../../static/img/score3.png" ></img>
-      </mt-tab-item>
+<!--      <mt-tab-item id="扫码">-->
+<!--        <img style="width: 11vw"  src="../../static/img/score3.png" ></img>-->
+<!--      </mt-tab-item>-->
       <mt-tab-item id="仓库">
         <img style="width: 6.9vw" :src="store_img"></img>
         <p :style="blue3">仓库</p>
