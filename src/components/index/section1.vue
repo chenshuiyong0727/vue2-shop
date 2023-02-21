@@ -49,21 +49,51 @@
       </li>
       <li>
         <router-link :to="{name:'仓库'}">
-          <p>{{form.inventoryCost}}</p>
+          <p class="color-danger">{{form.inventoryCost}}</p>
           <p  class="section1name">库存成本</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{name:'仓库'}">
-          <p v-if="form.inventoryNum  && form.goodsPutInNum">{{form.inventoryRatio}}%</p>
+          <p class="color-danger" v-if="form.inventoryNum  && form.goodsPutInNum">{{form.inventoryRatio}}%</p>
           <p v-else> 0%</p>
-          <p class="section1name">库存比例</p>
+          <p  class="section1name">库存比例</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{name:'商品基本信息'}">
-          <p>{{form.goodsNum}}</p>
+          <p class="color-danger">{{form.goodsNum}}</p>
           <p class="section1name">商品款式</p>
+        </router-link>
+      </li>
+    </ul>
+    <ul class="section1-list" style="
+    display: -webkit-box;
+    flex-wrap: wrap;
+    margin-left: 0.5vw;
+    padding: 0vw 1vw;">
+      <li>
+        <router-link :to="{ path: '/store?warehouseId=2'}">
+          <p class="color-danger">{{form.ytInventory}}</p>
+          <p class="section1name">云头库存</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{ path: '/store?warehouseId=2'}">
+          <p class="color-danger">{{form.ytAmount}}</p>
+          <p class="section1name">云头货值</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{ path: '/store?warehouseId=1'}">
+          <p class="color-danger">{{form.qpInventory}}</p>
+          <p class="section1name">前埔库存</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{ path: '/store?warehouseId=1'}">
+          <p class="color-danger">{{form.qpAmount}}</p>
+          <p class="section1name">前埔货值</p>
         </router-link>
       </li>
     </ul>
@@ -156,7 +186,6 @@
           <p class="section1name">利润比例</p>
         </router-link>
       </li>
-
     </ul>
 <!--  <router-link :to="{ name: '详情页'}"  class="section1-banner">-->
 <!--    <img v-lazy="banner">-->

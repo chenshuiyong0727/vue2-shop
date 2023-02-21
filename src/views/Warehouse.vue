@@ -94,8 +94,9 @@
             margin-bottom: -7vw;
     font-size: 3.5vw;
     margin-top: -1vw;">
+              <strong class="color-danger"> {{ item.warehouseId | dictToDescTypeValue(40) }} </strong>
               <strong> {{item.createTime |formateTime }}</strong>
-<!--              <mt-button-->
+              <!--              <mt-button-->
 <!--                v-if="item.inventory > item.galleryCount"-->
 <!--                style="margin-left: 4.1vw;"-->
 <!--                type="primary"-->
@@ -112,7 +113,7 @@
 <!--                type="primary"-->
 <!--                size="small"-->
 <!--                @click="handleClick(item)">修改</mt-button>-->
-              <el-dropdown trigger="click" style="margin-left: 20vw;">
+              <el-dropdown trigger="click" style="margin-left: 10vw;">
                 <span class="el-dropdown-link">
                   操作<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
@@ -213,8 +214,14 @@
         </mt-field>
         <mt-field label="状态">
             <select class="select100" v-model="queryParam.inventory" @change="changeSystem" >
-          <option :disabled="true" value="" selected>请选择状态</option>
+              <option :disabled="true" value="" selected>请选择状态</option>
               <option v-for="x in inventoryToList" :value="x.fieldValue">{{x.fieldName}}</option>
+            </select>
+        </mt-field>
+        <mt-field label="仓库">
+            <select class="select100" v-model="queryParam.warehouseId" @change="changeSystem" >
+              <option :disabled="true" value="" selected>请选择仓库</option>
+              <option v-for="x in warehouseList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
         </mt-field>
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
@@ -265,7 +272,6 @@
         topStatus: "",
         bottomStatus: "",
         allLoaded: false,
-        mockArr: [],
         imageZoom: '',
         requestParam1: {
           poundage: '',
@@ -307,6 +313,7 @@
           createTimeFrom: '',
           createTimeTo: '',
           id: '',
+          warehouseId: '',
           inventory: 1,
           sort:'',
           inventoryFrom: '',
@@ -346,7 +353,7 @@
         topStatus: "",
         bottomStatus: "",
         allLoaded: false,
-        mockArr: [],
+        warehouseList: [],
         addressList: [],
         inventoryToList: [
           { fieldValue: 1, fieldName: '现货' }, { fieldValue: 0, fieldName: '售空' },
@@ -428,17 +435,23 @@
         //   }
         //   // this.search1()
         // }
-        const { actNo,size,months } = this.$route.query
+        const { actNo,size,months ,warehouseId} = this.$route.query
         this.queryParam.size = size
         this.queryParam.actNo = actNo
+        this.queryParam.warehouseId = warehouseId
         this.months = months
-        if (this.queryParam.actNo || this.queryParam.size || this.months) {
+        if (this.queryParam.actNo || this.queryParam.size || this.queryParam.warehouseId || this.months) {
           if (this.months) {
             this.queryParam.createTimeFrom = this.months
             this.queryParam.createTimeTo = this.months
             this.titleName = this.months + ' ' + this.titleName
           }
           // this.search1()
+        }
+        if (this.queryParam.warehouseId == 1) {
+          this.titleName = '前埔库存'
+        }else if (this.queryParam.warehouseId == 2) {
+          this.titleName = '云头库存'
         }
         this.getPage()
       }else {
@@ -509,6 +522,7 @@
         this.addressList = sysDictList.filter(item => item.typeValue == 38)
         this.statusList = sysDictList.filter(item => item.typeValue == 37)
         this.dataStatusList = sysDictList.filter(item => item.typeValue == 36)
+        this.warehouseList = sysDictList.filter(item => item.typeValue == 40)
       },
       loadData(p_status) {
         // 第一次加载或者下拉刷新最新数据
@@ -570,6 +584,7 @@
       },
       resetData() {
         this.queryParam = {
+          warehouseId: '',
           createTimeFrom: '',
           createTimeTo: '',
           id: '',
@@ -588,6 +603,7 @@
       },
       resetHandle() {
         this.queryParam = {
+          warehouseId: '',
           createTimeFrom: '',
           createTimeTo: '',
           id: '',
