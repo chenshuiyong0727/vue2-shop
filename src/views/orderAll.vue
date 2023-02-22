@@ -350,6 +350,7 @@
     // },
     activated() {
       // 新开的页面
+      this.isBack = false
       if (!this.$route.meta.isBack) {
         this.listSysDict()
         this.resetData()
@@ -371,7 +372,6 @@
           // this.search1()
         }
         this.getPage()
-        this.isBack = false
       }else {
         this.$refs.hello.scrollTop = this.curScrollTop
       }
@@ -421,10 +421,10 @@
       // console.log(clientHeight,"clientHeight");
       // console.log(scrollview,"scrollview");
       if (to.path == "/store" || to.path  =="/orderDetail") {
-        console.info(this.isBack)
+        // console.info(this.isBack)
         //当离开的时候是去库存页的时候开启缓存
         from.meta.isBack = this.isBack;
-        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        // this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
       }else {
         this.curScrollTop = 0
         from.meta.isBack = false;
@@ -683,10 +683,12 @@
       },
       jumpactNo(actNo) {
         this.isBack = true
+        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
         this.$router.push({ path: '/store', query: { actNo } })
       },
       goDetail(id) {
         this.isBack = true
+        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
         this.$router.push({ path: '/orderDetail', query: { id } })
       },
       // goDel(id) {
