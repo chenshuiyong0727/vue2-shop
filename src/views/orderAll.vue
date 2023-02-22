@@ -349,7 +349,6 @@
     //   this.listSysDict()
     // },
     activated() {
-      this.isBack = false
       // 新开的页面
       if (!this.$route.meta.isBack) {
         this.listSysDict()
@@ -372,6 +371,7 @@
           // this.search1()
         }
         this.getPage()
+        this.isBack = false
       }else {
         this.$refs.hello.scrollTop = this.curScrollTop
       }
@@ -524,7 +524,7 @@
         this.getPage()
       },
       resetData() {
-        this.queryParam.pageNum ={
+        this.queryParam ={
           id: '',
           size: '',
           keyword: '',

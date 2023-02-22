@@ -412,7 +412,6 @@
     //   this.listSysDict()
     // },
     activated() {
-      this.isBack = false
       // 新开的页面
       if (!this.$route.meta.isBack) {
         this.handleChange()
@@ -454,6 +453,7 @@
           this.titleName = '云头库存'
         }
         this.getPage()
+        this.isBack = false
       }else {
         this.$refs.hello.scrollTop = this.curScrollTop
       }
