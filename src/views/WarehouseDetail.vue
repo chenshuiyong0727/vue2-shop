@@ -175,6 +175,7 @@
         imageZoom: '',
         pictureZoomShow: false,
         queryParam: {
+          sort: ' c.size asc ,',
           goodsId: '',
           pageSize: 20,
           pageNum: 1
