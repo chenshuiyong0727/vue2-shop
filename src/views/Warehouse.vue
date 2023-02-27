@@ -85,7 +85,7 @@
               原库存：<strong>{{item.oldInventory}} </strong> 库存：<strong>{{item.inventory}}</strong> 成功：<strong>{{item.successCount}}</strong> 上架：<strong>{{item.galleryCount}}</strong>
             </div>
             <div class="dingdans_con_right_down">
-              <span >预计利润：<strong class="color-danger">{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong></span>
+              <span >利润：<strong class="color-danger">{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong></span>
               <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
               入库价：<strong>{{item.price}}</strong>
               得物价：<strong>{{item.dwPrice}}</strong>
@@ -915,7 +915,7 @@
 
   .diangdans_con_right {
     width: 130vw;
-    padding-left: 1.3vw;
+    padding-left: 10px;
   }
 
   .dingdans_con_right_down {

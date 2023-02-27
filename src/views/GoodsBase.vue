@@ -50,8 +50,11 @@
 <!--          </div>-->
 <!--        </div>-->
         <div class="dingdans_con">
-          <div class="dingdans_con_left" @click="avatarShow(item.imgUrl)">
-            <img v-bind:src="fileUrl + item.imgUrl" alt="" >
+          <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">
+            <img :src="item.img">
+          </div>
+          <div v-if="!item.img && item.imgUrl" :src="item.img" class="dingdans_con_left" @click="avatarShow(fileUrl+ item.imgUrl)">
+            <img :src="fileUrl + item.imgUrl">
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
@@ -175,7 +178,7 @@
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
-        <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">
+        <img :src="imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
     <v-footer></v-footer>
@@ -645,7 +648,7 @@
 
   .diangdans_con_right {
     width: 130vw;
-    padding-left: 1.3vw;
+    padding-left: 10px;
   }
 
   .dingdans_con_right_down {
