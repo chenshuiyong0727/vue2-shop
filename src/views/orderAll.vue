@@ -7,7 +7,7 @@
     </mt-header>
     <div class="fenlei_top">
       <div    class="fenlei_top_left">
-        <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索货号" class="ins">
+        <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）" class="ins">
       </div>
       <div class="fenlei_top_right" >
         <mt-button
