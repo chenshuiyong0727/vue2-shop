@@ -70,15 +70,18 @@
       <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top">
           <div class="dingdans_top_left">
-            货号：<strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl )" style="color: #409EFF"> {{item.actNo}} </strong>
+            货号：<strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl,item.img )" style="color: #409EFF"> {{item.actNo}} </strong>
           </div>
           <div class="dingdans_top_right">
             尺码：<strong class="color-danger">{{item.size }}</strong>
           </div>
         </div>
         <div class="dingdans_con">
-          <div class="dingdans_con_left" @click="avatarShow(item.imgUrl)">
-            <img v-bind:src="fileUrl + item.imgUrl" alt="" >
+          <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">
+            <img :src="item.img">
+          </div>
+          <div v-if="!item.img && item.imgUrl" :src="item.img" class="dingdans_con_left" @click="avatarShow(fileUrl+ item.imgUrl)">
+            <img :src="fileUrl + item.imgUrl">
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
@@ -231,7 +234,7 @@
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
-        <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">
+        <img :src="imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
     <div style="
@@ -746,10 +749,10 @@
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
         this.$router.push({ path: '/order', query: { actNo } })
       },
-      WarehouseDetail(goodsId , actNo,imgUrl) {
+      WarehouseDetail(goodsId , actNo,imgUrl,img) {
         this.isBack = true
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
-        this.$router.push({ path: '/WarehouseDetail', query: {goodsId, actNo ,imgUrl} })
+        this.$router.push({ path: '/WarehouseDetail', query: {goodsId, actNo ,imgUrl,img} })
       },
       changeStatusDialog1(row) {
         this.orderData1 = row

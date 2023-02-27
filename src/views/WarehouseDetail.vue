@@ -10,11 +10,23 @@
         <li  style="display:flex ;align-items:center;" class="store-list-1-li">
           <div>
             <img
-              v-if="imgUrl"
+              v-if="img"
+              :src="img"
+              style="width: 100%;border-radius: 10px;"
+              @click="avatarShow(img)"
+            />
+            <img
+              v-if="!img && imgUrl"
               :src="fileUrl + imgUrl"
               style="width: 100%;border-radius: 10px;"
-              @click="avatarShow(imgUrl)"
+              @click="avatarShow(fileUrl + imgUrl)"
             />
+<!--            <div v-if="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">-->
+<!--              <img :src="item.img">-->
+<!--            </div>-->
+<!--            <div v-if="!item.img && item.imgUrl" class="dingdans_con_left" @click="avatarShow(fileUrl+ item.imgUrl)">-->
+<!--              <img :src="fileUrl + item.imgUrl">-->
+<!--            </div>-->
           </div>
         </li>
         <li  class="store-list-1-li">
@@ -108,7 +120,7 @@
     </div>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
-        <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">
+        <img :src="imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
     <p style="padding: 1.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
@@ -185,6 +197,7 @@
         actNo: '',
         fileUrl: fileUrl,
         imgUrl: '',
+        img: '',
         tableData: [],
         inventoryData: {
           profits: '',
@@ -197,9 +210,10 @@
     },
     created() {
       this.listSysDict()
-      const { goodsId , actNo,imgUrl } = this.$route.query
+      const { goodsId , actNo,imgUrl ,img} = this.$route.query
       this.actNo = actNo
       this.imgUrl = imgUrl
+      this.img = img
       this.queryParam.goodsId = goodsId
       if (this.queryParam.goodsId) {
         this.getPage()
