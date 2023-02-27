@@ -40,7 +40,7 @@
       :autoFill="false"
       ref="loadmore"
     >
-      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
+      <div class="dingdans_item" style="padding-top: 0vw;padding-bottom: 7vw;" v-for="(item,index) in tableData" :key="index">
 <!--        <div class="dingdans_top">-->
 <!--          <div class="dingdans_top_left">-->
 <!--            货号：<strong> {{item.actNo}} </strong>-->
@@ -56,14 +56,19 @@
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
               <span v-if="item.name"><strong>{{item.name}} </strong></span>
-              货号：<strong>{{item.actNo}} </strong>
             </div>
+<!--            <div class="dingdans_con_right_top">-->
+<!--              货号：<strong>{{item.actNo}} </strong>-->
+<!--            </div>-->
             <div class="dingdans_con_right_down">
-              品牌：<strong>{{item.brand}}</strong>
-              类型：<strong>{{ item.type | dictToDescTypeValue(20221108) }}</strong>
+              货号：
+              <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
+              <strong> {{item.brand}}</strong>
+              <strong> {{ item.type | dictToDescTypeValue(20221108) }}</strong>
             </div>
             <div style="
             margin-bottom: -7vw;
+            margin-left: -7vw;
     font-size: 3.5vw;
     margin-top: -1vw;">
               <mt-button
@@ -75,7 +80,7 @@
                 style="margin-left: 1vw;"
                 type="primary"
                 size="small"
-                @click="jumpactNo(item)">库存</mt-button>
+                @click="jumpactNo(item.actNo)">库存</mt-button>
               <mt-button
                 style="margin-left: 1vw;"
                 type="primary"
@@ -307,12 +312,7 @@
       storeAdd(goodsId) {
         this.$router.push({ path: '/storeAdd', query: { goodsId } })
       },
-      jumpactNo(row) {
-        let actNo = row.actNo
-        if (!actNo) {
-          this.$toast('没有选中数据')
-          return
-        }
+      jumpactNo(actNo) {
         this.$router.push({ path: '/store', query: { actNo } })
       },
       getPage() {
@@ -632,7 +632,7 @@
   }
 
   .dingdans_con_left {
-    width: 20vw;
+    width: 35vw;
     height: 20vw;
     display: flex;
   }
@@ -644,6 +644,7 @@
   }
 
   .diangdans_con_right {
+    width: 130vw;
     padding-left: 1.3vw;
   }
 

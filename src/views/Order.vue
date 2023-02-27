@@ -491,6 +491,7 @@
   }
 
   .diangdans_con_right {
+    width: 130vw;
     padding-left: 1.3vw;
   }
 

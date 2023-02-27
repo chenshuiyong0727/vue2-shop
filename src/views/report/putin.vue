@@ -142,7 +142,7 @@
   }
 
   .dingdans_con_left {
-    width: 20vw;
+    width: 35vw;
     height: 20vw;
     display: flex;
   }
@@ -154,6 +154,7 @@
   }
 
   .diangdans_con_right {
+    width: 130vw;
     padding-left: 1.3vw;
   }
 

@@ -94,7 +94,7 @@
             <div class="dingdans_con_right_top">
               到手单价：<strong >{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5)) | numFilter}}</strong>
               总入库价：<strong >{{item.price * item.oldInventory}}</strong>
-              <strong @click="jumpactNo(actNo)" style="margin-left: 15vw;color: #409EFF;">查看订单</strong>
+              <strong @click="jumpactNo(actNo)" style="margin-left: 10vw;color: #409EFF;">查看订单</strong>
             </div>
 <!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
 <!--              <span v-if="item.successNum">销售均价：<strong >{{item.orderAmount / item.successNum  | numFilter}}</strong></span>-->
@@ -331,7 +331,7 @@
   }
 
   .dingdans_con_left {
-    width: 20vw;
+    width: 35vw;
     height: 20vw;
     display: flex;
   }
@@ -343,6 +343,7 @@
   }
 
   .diangdans_con_right {
+    width: 130vw;
     padding-left: 1.3vw;
   }
 
