@@ -30,4 +30,14 @@ Vue.filter('numFilter', (value) => {
   let realVal = parseFloat(value).toFixed(2)
   return realVal
 })
+Vue.filter('sizeFilter', (value) => {
+  // 截取当前数据到小数点后两位
+  if (!value || value.length < 30) {
+    return value
+  }
+  let realVal = value.substring(0,30) + '...'
+  return realVal
+})
+
+
 Vue.filter('formateTime', parseTime)

@@ -67,16 +67,23 @@
       :autoFill="false"
       ref="loadmore"
     >
-      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
+      <div class="dingdans_item" style="padding-top: 3.8vw;padding-bottom: 3.8vw;" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top">
           <div class="dingdans_top_left">
-            货号：<strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl,item.img )" style="color: #409EFF"> {{item.actNo}} </strong>
+            <strong v-if="item.goodsName"
+                    @click="scanCode(item.goodsId, 1) "
+                    style="color: #409EFF">
+              {{item.goodsName | sizeFilter }}
+            </strong>
+            <strong v-else  @click="scanCode(item.goodsId, 1) " style="color: #409EFF">
+              {{item.actNo}}
+            </strong>
           </div>
           <div class="dingdans_top_right">
             尺码：<strong class="color-danger">{{item.size }}</strong>
           </div>
         </div>
-        <div class="dingdans_con">
+        <div class="dingdans_con" style="margin-top: -8px;">
           <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">
             <img :src="item.img">
           </div>
@@ -85,13 +92,16 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
+              货号：<strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl,item.img )" style="color: #409EFF"> {{item.actNo}} </strong>
+              <span >利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong></span>
+            </div>
+            <div class="dingdans_con_right_top">
               原库存：<strong>{{item.oldInventory}} </strong> 库存：<strong>{{item.inventory}}</strong> 成功：<strong>{{item.successCount}}</strong> 上架：<strong>{{item.galleryCount}}</strong>
             </div>
             <div class="dingdans_con_right_down">
-              <span >利润：<strong class="color-danger">{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong></span>
-              <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
+              <span v-if="item.thisTimeThePrice">到手：<strong>{{item.thisTimeThePrice}}</strong></span>
               入库价：<strong>{{item.price}}</strong>
-              得物价：<strong>{{item.dwPrice}}</strong>
+              得物价：<strong>{{item.thisTimePrice}}</strong>
             </div>
             <div style="
             margin-bottom: -7vw;
@@ -367,12 +377,15 @@
           { fieldValue: 'c.size desc ,', fieldName: '尺码降序' },
           { fieldValue: 'a.price asc ,', fieldName: '入库价升序' },
           { fieldValue: 'a.price desc ,', fieldName: '入库价降序' },
-          { fieldValue: 'a.dw_price asc ,', fieldName: '得物价升序' },
-          { fieldValue: 'a.dw_price desc ,', fieldName: '得物价降序' },
+          { fieldValue: 'g.price asc ,', fieldName: '市场价升序' },
+          { fieldValue: 'g.price desc ,', fieldName: '市场价降序' },
           { fieldValue: 'a.inventory asc ,', fieldName: '库存升序' },
           { fieldValue: 'a.inventory desc ,', fieldName: '库存降序' },
           { fieldValue: 'a.create_time asc ,', fieldName: '创建时间升序' },
-          { fieldValue: 'a.create_time desc ,', fieldName: '创建时间降序' },
+          { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5),2 ) asc ,', fieldName: '到手升序' },
+          { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5),2 ) desc ,', fieldName: '到手降序' },
+          { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5) - a.price - 10 , 2 ) asc ,', fieldName: '利润升序' },
+          { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5) - a.price - 10 , 2 ) desc ,', fieldName: '利润降序' },
         ],
         statusList: [],
         dataStatusList: [],
@@ -462,7 +475,7 @@
       }
     },
     beforeRouteLeave(to, from, next) {
-      if (to.path == "/goodsBase" || to.path  =="/order" ||  to.path  =="/WarehouseDetail" ) {
+      if (to.path == "/goodsBase" || to.path  =="/order" ||  to.path  =="/WarehouseDetail" || to.path  =="/scanCode") {
         from.meta.isBack = this.isBack;
         // this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
       }else {
@@ -748,6 +761,11 @@
         this.isBack = true
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
         this.$router.push({ path: '/order', query: { actNo } })
+      },
+      scanCode(id, type) {
+        this.isBack = true
+        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.$router.push({ path: '/scanCode', query: { id, type } })
       },
       WarehouseDetail(goodsId , actNo,imgUrl,img) {
         this.isBack = true

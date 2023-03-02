@@ -149,9 +149,6 @@
               </el-table-column>
 <!--              <el-table-column align="center" prop="size"  width="51" label="尺码" />-->
               <el-table-column align="center" prop="price"  width="51" label="价格" />
-<!--              <el-table-column align="center" prop="oldInventory" width="51" label="原库存" />-->
-              <el-table-column align="center" prop="inventory" width="51" label="库存" />
-              <el-table-column align="center" prop="inPrice" width="51" label="入库" />
               <el-table-column align="center" prop=""  label="到手">
                 <template scope="scope">
                  <span  v-if="scope.row.price">
@@ -159,6 +156,9 @@
                  </span>
                 </template>
               </el-table-column>
+<!--              <el-table-column align="center" prop="oldInventory" width="51" label="原库存" />-->
+              <el-table-column align="center" prop="inventory" width="51" label="库存" />
+              <el-table-column align="center" prop="inPrice" width="51" label="入库" />
               <el-table-column align="center" prop="" width="65"  fixed="right" label="利润">
                 <template scope="scope">
                 <span  v-if="scope.row.inPrice"
@@ -460,7 +460,9 @@
               }
             }
             if (totalCount < this.form.sizeList.length) {
-              this.getPage()
+              setTimeout(()=>{
+                this.getPage()
+              },1000)
             }
           } else {
             this.$toast(res.subMsg)
