@@ -24,7 +24,7 @@
         >
           <img
             :disabled="type == 1 "
-            style="height: 62vw"
+            style="margin-bottom: 20px;"
             class="select100"
             v-if="form.imgUrl"
             :src="fileUrl + form.imgUrl"

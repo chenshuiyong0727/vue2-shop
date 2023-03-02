@@ -88,7 +88,7 @@
                 style="margin-left: 1vw;"
                 type="primary"
                 size="small"
-                @click="goDetail(item.id,1)">查看</mt-button>
+                @click="scanCode(item.id,1)">查看</mt-button>
               <mt-button
                 style="margin-left: 1vw;"
                 type="primary"
@@ -309,6 +309,9 @@
       this.listSysDict()
     },
     methods: {
+      scanCode(id, type) {
+        this.$router.push({ path: '/scanCode', query: { id, type } })
+      },
       goDetail(id, type) {
         this.$router.push({ path: '/goodsAdd', query: { id, type } })
       },
