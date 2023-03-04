@@ -281,7 +281,7 @@
         <img :src="form.img" alt="" width="100%" height="100%">
       </div>
     </div>
-    <v-footer></v-footer>
+    <v-footer v-if="!flag"></v-footer>
   </div>
 </template>
 
@@ -368,7 +368,8 @@
       }
     },
     created() {
-      const {id, type} = this.$route.query
+      const {id, type,flag} = this.$route.query
+      this.flag = flag
       this.id = id
       this.type = type
       this.form.id = id

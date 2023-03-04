@@ -108,7 +108,7 @@
     font-size: 3.5vw;
     margin-top: -1vw;">
               <strong class="color-danger"> {{ item.warehouseId | dictToDescTypeValue(40) }} </strong>
-              <strong> {{item.createTime |formateTime }}</strong>
+              <strong> {{item.syncTime |formateTime }}</strong>
               <!--              <mt-button-->
 <!--                v-if="item.inventory > item.galleryCount"-->
 <!--                style="margin-left: 4.1vw;"-->
