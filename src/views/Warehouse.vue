@@ -218,7 +218,7 @@
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 80vw;width: 100vw">
+      <section style="height: 100vw;width: 100vw">
         <mt-field label="排序" style="margin-top: 11vw;">
             <select class="select100" v-model="queryParam.sort" @change="changeSystem" >
           <option :disabled="true" value="" selected>请选择排序</option>
@@ -238,6 +238,8 @@
             </select>
         </mt-field>
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
+        <mt-field label="同步开始时间" type="date" placeholder="同步开始时间"  v-model="queryParam.syncTimeFrom" ></mt-field>
+        <mt-field label="同步结束时间" type="date" placeholder="同步结束时间"  v-model="queryParam.syncTimeTo" ></mt-field>
         <mt-field label="入库开始时间" type="date" placeholder="入库开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>
         <mt-field label="入库结束时间" type="date" placeholder="入库结束时间"  v-model="queryParam.createTimeTo" ></mt-field>
       </section>
@@ -323,6 +325,8 @@
         imageZoom: '',
         fileUrl: fileUrl,
         queryParam: {
+          syncTimeFrom: '',
+          syncTimeTo: '',
           createTimeFrom: '',
           createTimeTo: '',
           id: '',
@@ -337,32 +341,6 @@
           pageSize: 10,
           pageNum: 1
         },
-        // queryParam: {
-        //   id: '',
-        //   size: '',
-        //   keyword: '',
-        //   orderNo: '',
-        //   inventoryId: '',
-        //   status: '',
-        //   dwPriceFrom: '',
-        //   dwPriceTo: '',
-        //   poundageFrom: '',
-        //   poundageTo: '',
-        //   theirPriceFrom: '',
-        //   theirPriceTo: '',
-        //   addressId: '',
-        //   waybillNo: '',
-        //   createTimeFrom: '',
-        //   createTimeTo: '',
-        //   updateTimeFrom: '',
-        //   updateTimeTo: '',
-        //   sellTimeFrom: '',
-        //   sellTimeTo: '',
-        //   successTimeFrom: '',
-        //   successTimeTo: '',
-        //   pageSize: 10,
-        //   pageNum: 1
-        // },
         topStatus: "",
         bottomStatus: "",
         allLoaded: false,
@@ -603,6 +581,8 @@
           warehouseId: '',
           createTimeFrom: '',
           createTimeTo: '',
+          syncTimeFrom: '',
+          syncTimeTo: '',
           id: '',
           sort:'',
           inventory: 1,
@@ -620,6 +600,8 @@
       resetHandle() {
         this.queryParam = {
           warehouseId: '',
+          syncTimeFrom: '',
+          syncTimeTo: '',
           createTimeFrom: '',
           createTimeTo: '',
           id: '',
