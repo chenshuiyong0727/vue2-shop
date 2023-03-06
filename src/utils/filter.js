@@ -32,10 +32,10 @@ Vue.filter('numFilter', (value) => {
 })
 Vue.filter('sizeFilter', (value) => {
   // 截取当前数据到小数点后两位
-  if (!value || value.length < 30) {
+  if (!value || value.length < 27) {
     return value
   }
-  let realVal = value.substring(0,30) + '...'
+  let realVal = value.substring(0,27) + '...'
   return realVal
 })
 

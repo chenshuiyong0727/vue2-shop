@@ -61,7 +61,7 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="{name:'商品基本信息'}">
+        <router-link :to="{name:'商品'}">
           <p class="color-danger">{{form.goodsNum}}</p>
           <p class="section1name">商品款式</p>
         </router-link>

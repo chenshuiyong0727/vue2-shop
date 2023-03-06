@@ -111,49 +111,6 @@
       </div>
     </mt-loadmore>
     <p v-if="allLoaded" class="to-the-bottom">{{emtityMsg}}</p>
-<!--    <mt-popup-->
-<!--      v-model="isShowDialog">-->
-<!--      <mt-header title="修改">-->
-<!--        <div slot="right">-->
-<!--          <mt-button size="normal"  @click="isShowDialog = false" style="font-size: 16px">关闭</mt-button>-->
-<!--        </div>-->
-<!--        <div slot="left">-->
-<!--          <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>-->
-<!--        </div>-->
-<!--      </mt-header>-->
-<!--      <section style="height: 130vw;width: 80vw">-->
-<!--        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :disabled="true"></mt-field>-->
-<!--        <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>-->
-<!--        <mt-field label="入库价" placeholder="请输入入库价" @keyup.native="keyup1($event)" type="number" v-model="requestParam.price"></mt-field>-->
-<!--        <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup1($event)" type="number" v-model="requestParam.dwPrice"></mt-field>-->
-<!--        <mt-field label="手续费" :disabled="true" v-model="requestParam.poundage"></mt-field>-->
-<!--        <mt-field label="到手价" :disabled="true" v-model="requestParam.theirPrice"></mt-field>-->
-<!--        <mt-field label="利润" :disabled="true" v-model="requestParam.profits"></mt-field>-->
-<!--      </section>-->
-<!--    </mt-popup>-->
-<!--    <mt-popup-->
-<!--      v-model="isShowDialog1">-->
-<!--      <mt-header title="上架">-->
-<!--        <div slot="right">-->
-<!--          <mt-button size="normal"  @click="isShowDialog1 = false" style="font-size: 16px">关闭</mt-button>-->
-<!--        </div>-->
-<!--        <div slot="left">-->
-<!--          <mt-button size="normal" @click="confirmHandle1" style="font-size: 16px">确定</mt-button>-->
-<!--        </div>-->
-<!--      </mt-header>-->
-<!--      <section style="height: 130vw;width: 80vw">-->
-<!--        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData1.actNo" :disabled="true"></mt-field>-->
-<!--        <mt-field label="尺码" v-model="orderData1.size" :disabled="true"></mt-field>-->
-<!--        <mt-field label="当前库存" v-model="orderData1.inventory" :disabled="true"></mt-field>-->
-<!--        <mt-field label="已上架数量" v-model="orderData1.galleryCount" :disabled="true"></mt-field>-->
-<!--        <mt-field label="入库价" v-model="orderData1.price" :disabled="true"></mt-field>-->
-<!--        <mt-field label="上架数量" placeholder="请输入上架数量"  @keyup.native="keyup2($event)" type="number" v-model="requestParam1.num"></mt-field>-->
-<!--        <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup2($event)" type="number" v-model="requestParam1.shelvesPrice"></mt-field>-->
-<!--        <mt-field label="手续费" :disabled="true" v-model="requestParam1.poundage"></mt-field>-->
-<!--        <mt-field label="到手价" :disabled="true" v-model="requestParam1.theirPrice"></mt-field>-->
-<!--        <mt-field label="利润" :disabled="true" v-model="requestParam1.profits"></mt-field>-->
-<!--      </section>-->
-<!--    </mt-popup>-->
     <mt-popup
       position="bottom"
       v-model="isShowDialog2">
@@ -181,12 +138,27 @@
         <img :src="imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
+    <div style="
+    right: 15px;
+    bottom: 20vw;
+    position: absolute;
+    text-align: center;
+    ">
+      <mt-button  @click="scanCode(null,3)"  style="margin-left: 5px;
+    border-radius: 100%;
+    margin-top: 0px;
+    height: 55px;
+    width: 55px;" type="primary">
+        <img src="../../static/img/add.png" height="30" width="30" slot="icon">
+      </mt-button>
+    </div>
     <v-footer></v-footer>
   </div>
 </template>
 <script>
   import Baseline from '@/common/_baseline.vue'
-  import Footer from '@/components/goodsBase/_footer.vue'
+  import Footer from '@/common/_footer.vue'
+  // import Footer from '@/components/goodsBase/_footer.vue'
   // import { goodsOrderApi } from '@/api/goodsOrder'
   import { goodsBaseApi } from '@/api/goodsBase'
   import {
@@ -376,10 +348,6 @@
         this.allLoaded = false;
         this.getPage()
       },
-      // 日期
-      // open(picker) {
-      //   this.$refs[picker].open();
-      // },
       changeSystem() {
         let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
           localStorage.getItem('sysDictList')) : []

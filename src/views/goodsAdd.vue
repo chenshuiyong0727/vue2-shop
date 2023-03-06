@@ -72,6 +72,22 @@
       </mt-field>
       <mt-field
         :disabled="type == 1 "
+        label="发售日期"
+        placeholder="请输入发售日期"
+        type="text"
+        v-model="form.sellDate"
+      >
+      </mt-field>
+      <mt-field
+        :disabled="type == 1 "
+        label="发售价格"
+        placeholder="请输入发售价格"
+        type="text"
+        v-model="form.sellPrice"
+      >
+      </mt-field>
+      <mt-field
+        :disabled="type == 1 "
         label="备注"
         placeholder="请输入备注"
         type = "textarea"
@@ -133,7 +149,9 @@
           actNo: '',
           name: '',
           imgUrl: '',
-          brand: '耐克',
+          sellPrice: '',
+          sellDate: '',
+          brand: 'Nike',
           remark: '',
           sizeList: []
         },

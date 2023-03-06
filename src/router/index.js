@@ -78,7 +78,7 @@ export default new Router({
       },
     }, {
       path: '/goodsBase',
-      name: '商品基本信息',
+      name: '商品',
       component: GoodsBase,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的

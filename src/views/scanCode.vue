@@ -202,7 +202,7 @@
     </section>
     <el-dialog
       center
-      style="margin-top:5vh "
+      style="margin-top:1vh "
       width="100vw"
       :title="sizeTitle"
       :visible.sync="isShowDialog2"
@@ -272,14 +272,29 @@
         :data-empty="dataEmpty"
         :settings="chartSettings"></ve-line>
       <span slot="footer" class="dialog-footer">
-      <el-button @click="isShowDialog2 = false" size="small">取 消</el-button>
-      <el-button type="primary" @click="isShowDialog2 = false" size="small">确 定</el-button>
+<!--      <el-button @click="isShowDialog2 = false" size="small">取 消</el-button>-->
+<!--      <el-button type="primary" @click="isShowDialog2 = false" size="small">确 定</el-button>-->
     </span>
     </el-dialog>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
         <img :src="form.img" alt="" width="100%" height="100%">
       </div>
+    </div>
+    <div v-if="type==3" style="
+      right: 15px;
+      bottom: 20vw;
+      position: absolute;
+      text-align: center;
+    ">
+      <mt-button  @click="gotoAdd(null,3)"  style="margin-left: 5px;
+      border-radius: 100%;
+      margin-top: 0px;
+      height: 55px;
+      width: 55px;"
+                  type="primary">
+        <img src="../../static/img/handleAdd.png" height="30" width="30" slot="icon">
+      </mt-button>
     </div>
     <v-footer v-if="!flag"></v-footer>
   </div>
@@ -381,6 +396,9 @@
       this.handleChange()
     },
     methods: {
+      gotoAdd(id, type) {
+        this.$router.push({ path: '/goodsAdd', query: {id,type } })
+      },
       profitData(dayNum) {
         if (dayNum == 30) {
           this.type30 = 'primary'
@@ -660,9 +678,6 @@
       gotoAdd(id, type) {
         this.$router.push({path: '/goodsAdd', query: {id, type}})
       },
-      gotoAdd() {
-        this.isShowDialog2 = false
-      },
       gotoIndex(row) {
         this.$router.push({path: '/'})
       },
@@ -753,32 +768,14 @@
     display: -webkit-box;
     margin-top: -15px;
     margin-bottom: 20px;
-    text-align: center
+    text-align: center;
+    margin-left: -11px;
   }
   .store-list-1-li-1 {
-    /*border-radius: 10px;*/
-    /*text-align: center;*/
-    /*background-color: #EEF2F7;*/
-    /*width: 22%;*/
-    /*color: #333;*/
-    /*font-size: 16px;*/
-    /*-webkit-box-sizing: border-box;*/
-    /*box-sizing: border-box;*/
-    /*margin-top: 0vw;*/
-    /*margin-right: 2vw;*/
-    /*margin-bottom: 0vw;*/
-    /*margin-left: 1vw;*/
-    /*padding: 5px;*/
-
-    /*padding-top: 0px;*/
-    /*padding-right: 0px;*/
-    /*padding-bottom: 0px;*/
-    /*padding-left: 0px;*/
-
     border-radius: 10px;
     text-align: center;
     background-color: #EEF2F7;
-    width: 23%;
+    width: 24%;
     color: #333;
     font-size: 16px;
     box-sizing: border-box;
