@@ -64,6 +64,11 @@ export const goodsOrderApi = {
     url: 'gw/op/v1/goodsOrder/indexOrderData',
     method: 'get',
     params: body
+  }),
+  todaySync: (body) => request({
+    url: 'gw/op/v1/goodsOrder/todaySync',
+    method: 'get',
+    params: body
   })
   // indexOrderData: (body) => request({
   //   url: 'http://114.132.243.79:28087/gw/op/v1/goodsOrder/indexOrderData',

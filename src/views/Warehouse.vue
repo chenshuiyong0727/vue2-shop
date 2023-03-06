@@ -325,6 +325,7 @@
         imageZoom: '',
         fileUrl: fileUrl,
         queryParam: {
+          today: '',
           syncTimeFrom: '',
           syncTimeTo: '',
           createTimeFrom: '',
@@ -387,15 +388,25 @@
     //   }, 200);
     // },
     created() {
-      const { actNo,size,months } = this.$route.query
+      const { actNo,size,months,today } = this.$route.query
       this.queryParam.size = size
       this.queryParam.actNo = actNo
+      this.queryParam.today = today
       this.months = months
-      if (this.queryParam.actNo || this.queryParam.size || this.months) {
+      if (this.queryParam.actNo || this.queryParam.size || this.months ||  this.queryParam.today ) {
         if (this.months) {
           this.queryParam.createTimeFrom = this.months
           this.queryParam.createTimeTo = this.months
           this.titleName = this.months + ' ' + this.titleName
+        }
+        if (this.queryParam.today == 1) {
+          this.titleName = '今日更新'
+        }
+        if (this.queryParam.today == 2) {
+          this.titleName = '待上架商品'
+        }
+        if (this.queryParam.today == 3) {
+          this.titleName = '待移库商品'
         }
         this.search1()
       }
@@ -429,12 +440,13 @@
         //   }
         //   // this.search1()
         // }
-        const { actNo,size,months ,warehouseId} = this.$route.query
+        const { actNo,size,months ,warehouseId,today} = this.$route.query
         this.queryParam.size = size
         this.queryParam.actNo = actNo
         this.queryParam.warehouseId = warehouseId
+        this.queryParam.today = today
         this.months = months
-        if (this.queryParam.actNo || this.queryParam.size || this.queryParam.warehouseId || this.months) {
+        if (this.queryParam.actNo || this.queryParam.size || this.queryParam.warehouseId || this.months||  this.queryParam.today) {
           if (this.months) {
             this.queryParam.createTimeFrom = this.months
             this.queryParam.createTimeTo = this.months
@@ -446,6 +458,15 @@
           this.titleName = '前埔库存'
         }else if (this.queryParam.warehouseId == 2) {
           this.titleName = '云头库存'
+        }
+        if (this.queryParam.today == 1) {
+          this.titleName = '今日更新'
+        }
+        if (this.queryParam.today == 2) {
+          this.titleName = '待上架商品'
+        }
+        if (this.queryParam.today == 3) {
+          this.titleName = '待移库商品'
         }
         this.getPage()
       }else {

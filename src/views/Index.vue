@@ -6,7 +6,7 @@
 <!--    <v-service :countDay="countDay" :count="count"/>-->
     <v-section1 :form="form" :countDay="countDay" :count="count":chartData1="chartData1" :chartSettings1="chartSettings1" />
 <!--    <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/>-->
-    <v-orderNum :orderIofo ="orderIofo"/>
+    <v-orderNum :orderIofo ="orderIofo" :storeData ="storeData"/>
     <div style="margin-top: 17px;border-left:1px solid #DCDFE6; background-color: #fff;    height: 500px;">
       <h1 class="index-title">
         销售走势
@@ -173,6 +173,7 @@ export default {
       nowTime: '',
       nowWeek: '',
       orderData: {},
+      storeData: {},
       dateType: 'month',
       dayLl: 'default',
       mouthLl: 'primary',
@@ -185,6 +186,7 @@ export default {
     this.time()
     this.getData()
     this.getData1()
+    this.getData2()
     // this.getData()
     // this.getData1()
   },
@@ -285,6 +287,15 @@ export default {
               (this.orderData.orderAmount - this.orderData.orderAmountLast)
               / this.orderData.orderAmountLast * 100).toFixed(2)
           }
+        } else {
+          this.$toast(res.subMsg)
+        }
+      })
+    },
+    getData2() {
+      goodsOrderApi.todaySync(this.queryParam).then(res => {
+        if (res.subCode === 1000) {
+          this.storeData = res.data
         } else {
           this.$toast(res.subMsg)
         }
