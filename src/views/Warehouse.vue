@@ -79,8 +79,10 @@
               {{item.actNo}}
             </strong>
           </div>
-          <div class="dingdans_top_right">
-            尺码：<strong class="color-danger">{{item.size }}</strong>
+          <div class="dingdans_top_right" v-if="item.difference && item.thisTimePrice">
+             加入后
+            <strong v-if="item.difference > 0" class="color-danger"> +{{item.difference }}</strong>
+            <strong v-else class="color-success">{{item.difference }}</strong>
           </div>
         </div>
         <div class="dingdans_con" style="margin-top: -8px;">
@@ -92,16 +94,21 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
-              货号：<strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl,item.img )" style="color: #409EFF"> {{item.actNo}} </strong>
-              <span >利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong></span>
+              <strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl,item.img )" style="color: #409EFF"> {{item.actNo}} </strong>
+              尺码：<strong class="color-danger">{{item.size }}</strong>
+              <span v-if="item.thisTimePrice" >利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong></span>
+              <span v-else>利润：<strong class="color-danger">{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong></span>
             </div>
             <div class="dingdans_con_right_top">
               原库存：<strong>{{item.oldInventory}} </strong> 库存：<strong>{{item.inventory}}</strong> 成功：<strong>{{item.successCount}}</strong> 上架：<strong>{{item.galleryCount}}</strong>
             </div>
             <div class="dingdans_con_right_down">
-              <span v-if="item.thisTimeThePrice">到手：<strong>{{item.thisTimeThePrice}}</strong></span>
+              <span v-if="item.thisTimePrice">到手：<strong>{{item.thisTimeThePrice}}</strong></span>
+              <span v-if="!item.thisTimePrice && item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
               入库价：<strong>{{item.price}}</strong>
-              得物价：<strong>{{item.thisTimePrice}}</strong>
+              得物价：
+              <strong v-if="item.thisTimePrice">{{item.thisTimePrice}}</strong>
+              <strong v-else>{{item.dwPrice}}</strong>
             </div>
             <div style="
             margin-bottom: -7vw;
@@ -109,23 +116,6 @@
     margin-top: -1vw;">
               <strong class="color-danger"> {{ item.warehouseId | dictToDescTypeValue(40) }} </strong>
               <strong> {{item.syncTime |formateTime }}</strong>
-              <!--              <mt-button-->
-<!--                v-if="item.inventory > item.galleryCount"-->
-<!--                style="margin-left: 4.1vw;"-->
-<!--                type="primary"-->
-<!--                size="small"-->
-<!--                @click="changeStatusDialog1(item)">上架</mt-button>-->
-<!--              <mt-button-->
-<!--                v-else-->
-<!--                style="margin-left: 4.1vw;"-->
-<!--                type="primary"-->
-<!--                size="small"-->
-<!--                @click="jumpactNo(item.actNo)">订单</mt-button>-->
-<!--              <mt-button-->
-<!--                style="margin-left: 1vw;"-->
-<!--                type="primary"-->
-<!--                size="small"-->
-<!--                @click="handleClick(item)">修改</mt-button>-->
               <el-dropdown trigger="click" style="margin-left: 10vw;">
                 <span class="el-dropdown-link">
                   操作<i class="el-icon-arrow-down el-icon--right"></i>
@@ -235,6 +225,12 @@
             <select class="select100" v-model="queryParam.warehouseId" @change="changeSystem" >
               <option :disabled="true" value="" selected>请选择仓库</option>
               <option v-for="x in warehouseList" :value="x.fieldValue">{{x.fieldName}}</option>
+            </select>
+        </mt-field>
+        <mt-field label="特殊条件">
+            <select class="select100" v-model="queryParam.today" @change="changeSystem" >
+              <option :disabled="true" value="" selected>请选择特殊条件</option>
+              <option v-for="x in todayList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
         </mt-field>
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
@@ -347,11 +343,21 @@
         allLoaded: false,
         warehouseList: [],
         addressList: [],
+        todayList: [
+          { fieldValue: 1, fieldName: '今日更新' },
+          { fieldValue: 2, fieldName: '待上架商品' },
+          { fieldValue: 3, fieldName: '待移库商品' },
+          { fieldValue: 4, fieldName: '涨价商品' },
+          { fieldValue: 5, fieldName: '降价商品' },
+          { fieldValue: 6, fieldName: '售空商品' }
+        ],
         inventoryToList: [
           { fieldValue: 1, fieldName: '现货' }, { fieldValue: 0, fieldName: '售空' },
           { fieldValue: 2, fieldName: '未上架' }
         ],
         sortList: [
+          { fieldValue: '(g.price - a.dw_price ) desc  ,', fieldName: '涨价降序' },
+          { fieldValue: '(g.price - a.dw_price ) asc  ,', fieldName: '降价降序' },
           { fieldValue: 'c.size asc ,', fieldName: '尺码升序' },
           { fieldValue: 'c.size desc ,', fieldName: '尺码降序' },
           { fieldValue: 'a.price asc ,', fieldName: '入库价升序' },
@@ -360,11 +366,11 @@
           { fieldValue: 'g.price desc ,', fieldName: '市场价降序' },
           { fieldValue: 'a.inventory asc ,', fieldName: '库存升序' },
           { fieldValue: 'a.inventory desc ,', fieldName: '库存降序' },
-          { fieldValue: 'a.create_time asc ,', fieldName: '创建时间升序' },
-          { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5),2 ) asc ,', fieldName: '到手升序' },
           { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5),2 ) desc ,', fieldName: '到手降序' },
-          { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5) - a.price - 10 , 2 ) asc ,', fieldName: '利润升序' },
+          { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5),2 ) asc ,', fieldName: '到手升序' },
           { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5) - a.price - 10 , 2 ) desc ,', fieldName: '利润降序' },
+          { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5) - a.price - 10 , 2 ) asc ,', fieldName: '利润升序' },
+          { fieldValue: 'a.create_time asc ,', fieldName: '创建时间升序' },
         ],
         statusList: [],
         dataStatusList: [],
@@ -407,6 +413,15 @@
         }
         if (this.queryParam.today == 3) {
           this.titleName = '待移库商品'
+        }
+        if (this.queryParam.today == 4) {
+          this.titleName = '涨价商品'
+        }
+        if (this.queryParam.today == 5) {
+          this.titleName = '降价商品'
+        }
+        if (this.queryParam.today == 6) {
+          this.titleName = '售空商品'
         }
         this.search1()
       }
@@ -467,6 +482,15 @@
         }
         if (this.queryParam.today == 3) {
           this.titleName = '待移库商品'
+        }
+        if (this.queryParam.today == 4) {
+          this.titleName = '涨价商品'
+        }
+        if (this.queryParam.today == 5) {
+          this.titleName = '降价商品'
+        }
+        if (this.queryParam.today == 6) {
+          this.titleName = '售空商品'
         }
         this.getPage()
       }else {

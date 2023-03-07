@@ -72,74 +72,6 @@
               </el-button>
             </template>
           </el-table-column>
-          <!--          <el-table-column align="center" prop="dwPrice" label="售3价">-->
-<!--            <template scope="scope">-->
-<!--              <div class="input-box">-->
-<!--                {{scope.row.price * scope.row.inventory }}-->
-<!--&lt;!&ndash;                <input class="elInput1" type="number"  value="scope.row.dwPrice"></input>&ndash;&gt;-->
-<!--              </div>-->
-<!--            </template>-->
-<!--          </el-table-column>-->
-<!--          <el-table-column align="center" prop="" label="到手单价">-->
-<!--&lt;!&ndash;            <template v-if="scope.row.dwPrice" slot-scope="scope">{{(scope.row.dwPrice - &ndash;&gt;-->
-<!--&lt;!&ndash;              (scope.row.dwPrice * 0.075 + 38 + 8.5)) | numFilter}}&ndash;&gt;-->
-<!--&lt;!&ndash;            </template>&ndash;&gt;-->
-<!--          </el-table-column>-->
-<!--          <el-table-column align="center" prop="" label="预计利润">-->
-<!--            <template v-if="scope.row.dwPrice" slot-scope="scope">{{(scope.row.dwPrice - -->
-<!--              (scope.row.dwPrice * 0.075 + 38 + 8.5) - scope.row.price - 10) | numFilter}}-->
-<!--            </template>-->
-<!--          </el-table-column>-->
-          <!--          <el-table-column type="selection" width="55"></el-table-column>-->
-<!--          <el-table-column label="序号" type="index" width="50" align="center"></el-table-column>-->
-<!--          <el-table-column align="center" prop="size" label="尺码"/>-->
-<!--          <el-table-column align="center" prop="inventory" label="库存">-->
-<!--            <template scope="scope">-->
-<!--              <div class="input-box">-->
-<!--                <el-input v-input-validation size="small" v-model="scope.row.inventory"></el-input>-->
-<!--              </div>-->
-<!--            </template>-->
-<!--          </el-table-column>-->
-<!--          <el-table-column align="center" prop="price" label="入库价">-->
-<!--            <template scope="scope">-->
-<!--              <div class="input-box">-->
-<!--                <el-input size="small" v-model="scope.row.price"></el-input>-->
-<!--              </div>-->
-<!--            </template>-->
-<!--          </el-table-column>-->
-<!--          <el-table-column align="center" prop="" label="总入库价">-->
-<!--            <template v-if="scope.row.price && scope.row.inventory" slot-scope="scope">-->
-<!--              {{scope.row.price * scope.row.inventory }}-->
-<!--            </template>-->
-<!--          </el-table-column>-->
-<!--          <el-table-column align="center" prop="dwPrice" label="得物价">-->
-<!--            <template scope="scope">-->
-<!--              <div class="input-box">-->
-<!--                <el-input size="small" v-model="scope.row.dwPrice"></el-input>-->
-<!--              </div>-->
-<!--            </template>-->
-<!--          </el-table-column>-->
-<!--          <el-table-column align="center" prop="" label="手续费">-->
-<!--            <template v-if="scope.row.dwPrice" slot-scope="scope">{{(scope.row.dwPrice * 0.075 + 38 +-->
-<!--              8.5) | numFilter}}-->
-<!--            </template>-->
-<!--          </el-table-column>-->
-<!--          <el-table-column align="center" prop="" label="到手单价">-->
-<!--            <template v-if="scope.row.dwPrice" slot-scope="scope">{{(scope.row.dwPrice - -->
-<!--              (scope.row.dwPrice * 0.075 + 38 + 8.5)) | numFilter}}-->
-<!--            </template>-->
-<!--          </el-table-column>-->
-<!--          <el-table-column align="center" prop="" label="预计利润">-->
-<!--            <template v-if="scope.row.dwPrice" slot-scope="scope">{{(scope.row.dwPrice - -->
-<!--              (scope.row.dwPrice * 0.075 + 38 + 8.5) - scope.row.price - 10) | numFilter}}-->
-<!--            </template>-->
-<!--          </el-table-column>-->
-<!--          <el-table-column fixed="right" align="center" label="操作" width="60">-->
-<!--            <template slot-scope="scope">-->
-<!--              <el-button type="text" @click="goDel(scope.row.sizeIndex,scope.row)">删除-->
-<!--              </el-button>-->
-<!--            </template>-->
-<!--          </el-table-column>-->
         </el-table>
       </div>
     </div>
@@ -317,7 +249,9 @@ export default {
           let data1 = this.tableData[0]
           item.inventory = data1.inventory
           item.price = data1.price
-          item.dwPrice = data1.dwPrice
+          if (!item.dwPrice) {
+            item.dwPrice = data1.dwPrice
+          }
         }
         this.tableData.push(item)
       } else {

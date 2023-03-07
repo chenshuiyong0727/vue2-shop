@@ -86,9 +86,11 @@
 <!--          </div>-->
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
-              预计利润：<strong
-              :style="item.thisTimeProfits > 50 ? 'color: #F56C6C' : ''">
-              {{item.thisTimeProfits}}</strong>
+<!--              预计利润：<strong-->
+<!--              :style="item.thisTimeProfits > 50 ? 'color: #F56C6C' : ''">-->
+<!--              {{item.thisTimeProfits}}</strong>-->
+              <span v-if="item.thisTimePrice" >预计利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong></span>
+              <span v-else>预计利润：<strong class="color-danger">{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong></span>
               入库时间：<strong >{{item.createTime | formateTime }}</strong>
             </div>
               <div class="dingdans_con_right_top">
@@ -99,12 +101,15 @@
               </div>
             <div class="dingdans_con_right_top">
               入库价：<strong >{{item.price}}</strong>
-              得物价：<strong >{{item.thisTimePrice}}</strong>
+              得物价：
+              <strong v-if="item.thisTimePrice">{{item.thisTimePrice}}</strong>
+              <strong v-else>{{item.dwPrice}}</strong>
               成功数：<strong >{{item.successCount}}</strong>
               手续费：<strong >{{(item.dwPrice * 0.075 + 38 + 8.5) | numFilter}}</strong>
             </div>
             <div class="dingdans_con_right_top">
-              到手单价：<strong >{{item.thisTimeThePrice}}</strong>
+              <span v-if="item.thisTimePrice">到手：<strong>{{item.thisTimeThePrice}}</strong></span>
+              <span v-if="!item.thisTimePrice && item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
               总入库价：<strong >{{item.price * item.oldInventory}}</strong>
               <strong @click="jumpactNo(actNo)" style="margin-left: 10vw;color: #409EFF;">查看订单</strong>
             </div>

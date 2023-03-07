@@ -54,11 +54,12 @@
             <img :src="fileUrl + item.imgUrl">
           </div>
           <div class="diangdans_con_right">
-            <div class="dingdans_con_right_top">
+            <div class="dingdans_con_right_top" style="font-size: 18px;" >
                库存：<strong class="color-danger">{{item.inventory}}</strong>
             </div>
-            <div class="dingdans_con_right_down" v-if="isShowPrice">
-              得物价：<strong class="color-danger">{{item.dwPrice}}</strong>
+            <div class="dingdans_con_right_down" style="font-size: 18px;" v-if="isShowPrice">
+              得物价：<strong v-if="item.thisTimePrice" class="color-danger">{{item.thisTimePrice}}</strong>
+              <strong v-else class="color-danger">{{item.dwPrice}}</strong>
             </div>
           </div>
         </div>
