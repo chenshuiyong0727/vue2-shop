@@ -32,16 +32,6 @@
       <mt-field
         label="图片"
       >
-        <!--        <el-upload-->
-        <!--          :disabled="type == 1 "-->
-        <!--          class="avatar-uploader"-->
-        <!--          action="/gw/op/v1/file/uploadFileMinio"-->
-        <!--          :show-file-list="false"-->
-        <!--          :on-error="handleImageError"-->
-        <!--          :on-success="handleImageSuccess"-->
-        <!--          :before-upload="beforeImageUpload"-->
-        <!--          :data="uploadData"-->
-        <!--        >-->
         <img
           :disabled="type == 1 "
           style="margin-bottom: 20px;"
@@ -50,8 +40,6 @@
           :src="form.img"
           @click="pictureZoomShow = true"
         />
-        <!--          <el-button :disabled="type == 1 " type="primary"  v-if="!form.imgUrl" size="small">上传图片</el-button >-->
-        <!--          <el-button :disabled="type == 1 " type="primary"  v-if="form.imgUrl"  size="small">重新上传</el-button >-->
         <el-button class="select100"
                    :disabled="type == 1 " type="primary" v-if="!form.imgUrl" size="small"
                    @click="uploadMaterial">拍摄获取
@@ -65,23 +53,6 @@
       <input type="file" capture="user" accept="image/*" style="display:none" ref="file1"
              @click="e => {e.target.value = '';} " @change="getFileData"/>
       <div v-if="form.id">
-        <!--      <button @click="uploadMaterial()">-->
-        <!--       <input type="file" capture="user" accept="image/*" style="display:none;" ref="file" @click="e => {e.target.value = '';} " @change="getFileData"/>-->
-        <!--      </button>-->
-
-        <!--      <input type="file" id="photo" capture="user" accept="image/*" name="photo" :data="uploadData" @change="handleImageSuccess" />-->
-        <!--      <mt-field style="margin-top: 5px;" label="类型">-->
-        <!--          <select class="select100" v-model="form.type"  :disabled="type == 1 ">-->
-        <!--            <option :disabled="true" value="" selected>请选择类型</option>-->
-        <!--            <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
-        <!--          </select>-->
-        <!--      </mt-field>-->
-        <!--      <mt-field label="尺码">-->
-        <!--          <select class="select100" v-model="form.sizeId">-->
-        <!--           <option :disabled="true" value="" selected>请选择</option>-->
-        <!--            <option v-for="x in sizeList" :value="x.id">{{x.size}}</option>-->
-        <!--          </select>-->
-        <!--      </mt-field>-->
         <mt-field
           :disabled="type == 1 "
           label="品牌"
@@ -106,14 +77,6 @@
           v-model="form.sellPrice"
         >
         </mt-field>
-        <!--      <mt-field-->
-        <!--        :disabled="type == 1 "-->
-        <!--       label="名称"-->
-        <!--        placeholder="请输入名称"-->
-        <!--        type = "text"-->
-        <!--        v-model = "form.name"-->
-        <!--        >-->
-        <!--      </mt-field>-->
         <mt-field
           :disabled="type == 1 "
           label="名称"
@@ -147,7 +110,6 @@
                   <a style="color: #20a0ff" @click="rowClick(scope.row)"> {{ scope.row.size }}</a>
                 </template>
               </el-table-column>
-<!--              <el-table-column align="center" prop="size"  width="51" label="尺码" />-->
               <el-table-column align="center" prop="price"  width="51" label="价格" />
               <el-table-column align="center" prop=""  label="到手">
                 <template scope="scope">
@@ -156,7 +118,6 @@
                  </span>
                 </template>
               </el-table-column>
-<!--              <el-table-column align="center" prop="oldInventory" width="51" label="原库存" />-->
               <el-table-column align="center" prop="inventory" width="51" label="库存" />
               <el-table-column align="center" prop="inPrice" width="51" label="入库" />
               <el-table-column align="center" prop="" width="65"  fixed="right" label="利润">
@@ -168,12 +129,6 @@
               </span>
                 </template>
               </el-table-column>
-<!--              <el-table-column fixed="right" align="center" label="操作" width="55">-->
-<!--                <template scope="scope">-->
-<!--                  <el-button type="text" @click="changeStatusDialog1(scope.row.sizeIndex,scope.row)">详情-->
-<!--                  </el-button>-->
-<!--                </template>-->
-<!--              </el-table-column>-->
             </el-table>
         </div>
         <div style="    margin-left: 35vw;
@@ -191,14 +146,6 @@
           </mt-button>
         </div>
       </div>
-      <!--      <mt-field-->
-      <!--       label="尺码"-->
-      <!--        >-->
-      <!--        <el-cascader  ref="owner" :disabled="type == 1 " v-model="sizeList"-->
-      <!--                     :options="options" @change="getSize" :show-all-levels="true"-->
-      <!--                     :props="props" size="small"-->
-      <!--                     style="width: 62vw;display:inline-block"></el-cascader>-->
-      <!--      </mt-field>-->
     </section>
     <el-dialog
       center
@@ -208,16 +155,6 @@
       :visible.sync="isShowDialog2"
     >
               <ul style="" class="store-list-1-1" >
-<!--              <li  class="store-list-1-li">-->
-<!--                <div class="overview1">-->
-<!--                  <p><strong>当前尺码</strong></p>-->
-<!--                  <p>{{sizeTitle}}</p>-->
-<!--                </div>-->
-<!--                <div class="overview2">-->
-<!--                  <p><strong>更新日期</strong></p>-->
-<!--                  <p>{{priceData.date}}</p>-->
-<!--                </div>-->
-<!--              </li>-->
               <li  class="store-list-1-li-1">
                 <div class="overview1">
                   <p><strong>当前价格</strong></p>
@@ -272,8 +209,6 @@
         :data-empty="dataEmpty"
         :settings="chartSettings"></ve-line>
       <span slot="footer" class="dialog-footer">
-<!--      <el-button @click="isShowDialog2 = false" size="small">取 消</el-button>-->
-<!--      <el-button type="primary" @click="isShowDialog2 = false" size="small">确 定</el-button>-->
     </span>
     </el-dialog>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
@@ -281,7 +216,7 @@
         <img :src="form.img" alt="" width="100%" height="100%">
       </div>
     </div>
-    <div v-if="type==3" style="
+    <div v-if="type==3 && !form.id" style="
       right: 15px;
       bottom: 20vw;
       position: absolute;
@@ -326,15 +261,6 @@
         queryParam: {
           goodsId: ''
         },
-        // chartSettings: {
-        //   xAxisType: 'time',
-        //   area: false,
-        //   scale: [true],
-        //   axisSite: { right: ['date'] },
-        //   labelAlias: {
-        //     'price': '价格'
-        //   }
-        // },
         type30: 'primary',
         type180: 'default',
         type365: 'default',
@@ -357,7 +283,6 @@
         queryParam1: {
           goodsId: '',
           sizeId: '',
-          // pageSize: 10,
           dayNum: 30
         },
         loading: false,
@@ -502,32 +427,19 @@
         console.info(overSize)
         if (overSize > 1) {
           inputFile = await imageConversion.compressAccurately(inputFile, 200)
-          // inputFile = blob
-          // this.$toast('上传文件大小不能超过'+this.fileSize+'MB!')
         }
         overSize = inputFile.size / 1024 / 1024
         console.info(overSize)
-
-        // let index = filename.lastIndexOf(".");
-        // let suffix = filename.substring(index,filename.length).toLowerCase();
-        // let isMarch = this.acceptType.indexOf(suffix) !== -1;
-        // // let overSize = file.size / 1024 / 1024 < this.fileSize;
-        // if (!isMarch) {
-        //   this.$toast(this.typeDesc)
-        // }
-        // 此处应向后台请求 后台保存上传文件名称返回fileId作为文件标识
         let param = {
           fileId: filename,
           file: inputFile
         };
-        // this.uploadFile(param);
         this.uploadImg(param);
       },
       uploadImg(param) {
         let formData = new FormData();
         formData.set("actNo", param.fileId);
         formData.set("file", param.file);
-        // Promise.all(this.promise).then(() => {
         let reopt = {
           method: 'post',
           url: '/gw/op/v1/file/uploadFileStore',
@@ -556,93 +468,6 @@
           }
         })
       },
-      // 最后上传
-      // uploadFile(param) {
-      //   let formData = new FormData();
-      //   formData.set("actNo", param.fileId);
-      //   formData.set("file", param.file);
-      //   fileApi.upload({ formData }).then(res => {
-      //     if (res.subCode === 1000) {
-      //       this.$toast(res.subMsg)
-      //       this.form.imgUrl = res.data.url
-      //     } else {
-      //       this.$toast(res.subMsg)
-      //     }
-      //   })
-      //   // fileApi.upload({
-      //   //   formData
-      //   // }).then((res) => {
-      //   //   console.info(res)
-      //   //   this.$toast(res.subMsg);
-      //   //   // if (res.subCode === 1000) {
-      //   //   //   this.form = res.data ? res.data : {}
-      //   //   //   this.form.sizeList = []
-      //   //   //   this.sizeList = res.data.sizeListList
-      //   //   //   for (let i = 0; i < res.data.sizeListList.length; i++) {
-      //   //   //     this.form.sizeList.push(res.data.sizeListList[i][1])
-      //   //   //   }
-      //   //   // } else {
-      //   //   //   this.$toast(res.subMsg)
-      //   //   // }
-      //   // });
-      // },
-
-//     selectPhoto() {
-//       let _this = this;
-//       let file = document.getElementById("photo").files[0];
-//       let content = null;
-//       let readfile = new FileReader();
-//       if (file != undefined) {
-//         content = readfile.readAsDataURL(file, "UTF-8");
-//         readfile.onload = function(event) {
-//           content = event.target.result;
-//           let blod = _this.base64ToFile(
-//             content,
-//             new Date().getTime() + ".png"
-//           );
-// //blod   手机相机拍的图片  fileChange()方法上传图片
-//           _this.fileChange(blod);
-//         };
-//         readfile.onerror = function(event) {
-//           console.log("err");
-//         };
-//       } else {
-//         console.log("未拍照");
-//       }
-//     },
-//
-// //转为文件
-//     base64ToFile(urlData, fileName) {
-//       let arr = urlData.split(",");
-//       let mime = arr[0].match(/:(.*?);/)[1];
-//       let bytes = atob(arr[1]);
-//       let n = bytes.length;
-//       let ia = new Uint8Array(n);
-//       while (n--) {
-//         ia[n] = bytes.charCodeAt(n);
-//       }
-//       return new File([ia], fileName, { type: mime });
-//     },
-// //上传
-//     async fileChange(file) {
-//       if (file) {
-//         let formData = new FormData();
-//         formData.append("file", file);
-//         formData.append("filePath", "/basicGovernance/informationAdd");
-//         let { details, code } = await fileUpload(formData);
-//         if (code == 200) {
-//           this.idCardIdentify(details.data.filePath);
-//         }
-//       } else {
-//         let formData = new FormData();
-//         formData.append("file", this.$refs.fileUpload.files[0]);
-//         formData.append("filePath", "/basicGovernance/informationAdd");
-//         let { details, code } = await fileUpload(formData);
-//         if (code == 200) {
-//           this.idCardIdentify(details.data.filePath);
-//         }
-//       }
-//     },
       getDetailById(id) {
         if (id) {
           goodsBaseApi.getDetailById(id).then(res => {
@@ -706,9 +531,6 @@
           }
         })
       },
-      // avatarShow() {
-      //   this.pictureZoomShow = true
-      // },
       async handleImageSuccess(res, file) {
         console.info(res)
         console.info(file)
@@ -730,7 +552,6 @@
         }
         const fileName = file.name
         const fileType = fileName.substring(fileName.lastIndexOf('.'))
-        // jpeg,.png,.jpg,.bmp,.gif
         if (
           fileType === '.jpg' ||
           fileType === '.png' ||

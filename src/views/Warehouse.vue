@@ -370,7 +370,9 @@
           { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5),2 ) asc ,', fieldName: '到手升序' },
           { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5) - a.price - 10 , 2 ) desc ,', fieldName: '利润降序' },
           { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5) - a.price - 10 , 2 ) asc ,', fieldName: '利润升序' },
-          { fieldValue: 'a.create_time asc ,', fieldName: '创建时间升序' },
+          { fieldValue: 'a.create_time asc ,', fieldName: '入库时间升序' },
+          { fieldValue: 'a.create_time desc ,', fieldName: '入库时间降序' },
+
         ],
         statusList: [],
         dataStatusList: [],
