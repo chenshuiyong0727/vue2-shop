@@ -3,56 +3,83 @@
     <!--    <v-header>-->
     <!--      <h1 slot="title">商品详情</h1>-->
     <!--    </v-header>-->
-    <mt-header title="商品详情">
+    <mt-header title="商品信息">
       <div slot="left">
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
     </mt-header>
-    <section style="padding-top:50px">
-      <mt-field
-        :disabled="type == 1 "
-        label="* 货号"
-        placeholder="请输入货号"
-        type="text"
-        v-model="form.actNo"
-      >
-        <mt-button
-          :disabled="type == 1 "
-          size="small"
-          type="primary"
-          @click="getImgUrl">手动获取
-        </mt-button>
-      </mt-field>
-<!--      <mt-field label="* 尺码">-->
-<!--          <select class="select100" v-model="requestParam.sizeId">-->
-<!--            <option :disabled="true" value="" selected>请选择</option>-->
-<!--            <option v-for="x in sizeList" :value="x.id">{{x.size}}</option>-->
-<!--          </select>-->
-<!--      </mt-field>-->
-      <mt-field
-        label="图片"
-      >
-        <img
-          :disabled="type == 1 "
-          style="margin-bottom: 20px;"
-          class="select100"
-          v-if="form.img"
-          :src="form.img"
-          @click="pictureZoomShow = true"
-        />
-        <el-button class="select100"
-                   :disabled="type == 1 " type="primary" v-if="!form.imgUrl" size="small"
-                   @click="uploadMaterial">拍摄获取
-        </el-button>
-        <el-button class="select100"
-                   :disabled="type == 1 " type="primary" v-if="form.imgUrl" size="small"
-                   @click="uploadMaterial">重新拍摄
-        </el-button>
-        <!--        </el-upload>-->
-      </mt-field>
+    <div class="fenlei_top_2" v-if="type!=1">
       <input type="file" capture="user" accept="image/*" style="display:none" ref="file1"
              @click="e => {e.target.value = '';} " @change="getFileData"/>
+      <el-row style="
+       margin-top: 10px;
+       margin-bottom: 10px;
+      width: 100vw;display:flex;
+       flex-direction:row;
+      align-items:center;" >
+         <el-col :span="6" style="text-align: right"><span>根据货号获取</span></el-col>
+          <el-col :span="30" :offset="1">
+            <el-input v-model.trim="form.actNo" style="width: 243px;" size="small" placeholder="请输入货号">
+              <el-button type="primary" slot="append" size="small" @click="getImgUrl">手动获取</el-button>
+            </el-input>
+        </el-col>
+      </el-row>
+
+      <el-row style="width: 100vw;display:flex;flex-direction:row;align-items:center;" >
+         <el-col :span="6" style="text-align: right"><span>根据图片获取</span></el-col>
+          <el-col :span="6" :offset="1">
+            <el-upload
+              :disabled="type == 1 "
+              class="avatar-uploader"
+              action="/gw/op/v1/file/uploadFileStore"
+              :show-file-list="false"
+              :on-error="handleImageError"
+              :on-success="handleImageSuccess"
+              :before-upload="beforeImageUpload"
+              :data="uploadData"
+            >
+              <el-button
+                :disabled="type == 1 "
+                size="small"
+                type="primary">上传图片
+              </el-button>
+            </el-upload>
+        </el-col>
+        <el-col :span="6" >
+          <el-button
+            :disabled="type == 1 "
+            size="small"
+            type="primary"
+            @click="uploadMaterial"
+          >拍摄照片
+          </el-button>
+        </el-col>
+      </el-row>
+    </div>
+
+    <section  :style="type!=1 ? 'padding-top:138px;' : 'padding-top:42px;'">
+
       <div v-if="form.id">
+        <mt-field
+          label="商品图片"
+        >
+          <img
+            :disabled="type == 1 "
+            style="margin-bottom: 20px;"
+            class="select100"
+            v-if="form.img"
+            :src="form.img"
+            @click="pictureZoomShow = true"
+          />
+        </mt-field>
+        <mt-field
+          :disabled="type == 1 "
+          label="货号"
+          placeholder="请输入品牌"
+          type="text"
+          v-model="form.actNo"
+        >
+        </mt-field>
         <mt-field
           :disabled="type == 1 "
           label="品牌"
@@ -131,7 +158,7 @@
               </el-table-column>
             </el-table>
         </div>
-        <div style="    margin-left: 35vw;
+        <div  v-if="!flag" style="    margin-left: 35vw;
       margin-top: 20px;">
           <mt-button v-if="type != 1" style="bottom: 10px"
                      type="primary"
@@ -304,6 +331,7 @@
           actNo: ''
         },
         form: {
+          actNo: ''
         },
       }
     },
@@ -416,6 +444,29 @@
       uploadMaterial() {
         this.$refs.file1.dispatchEvent(new MouseEvent("click"));
       },
+      async beforeImageUpload(file) {
+        const fileName = file.name
+        const fileType = fileName.substring(fileName.lastIndexOf('.'))
+        if (
+          fileType === '.jpg' ||
+          fileType === '.png' ||
+          fileType === '.jpeg' ||
+          fileType === '.bmp' ||
+          fileType === '.gif'
+        ) {
+        } else {
+          this.$toast('不是,jpeg,.png,.jpg,.bmp,.gif文件,请上传正确的图片类型')
+          return false
+        }
+        let overSize = file.size / 1024 / 1024
+        console.info("size1",overSize)
+        if (overSize > 1) {
+          file = await imageConversion.compressAccurately(file, 200)
+        }
+        overSize = file.size / 1024 / 1024
+        console.info("size2",overSize)
+        return file
+      },
       // 触发上传材料文件
       async getFileData() {
         let inputFile = this.$refs.file1.files[0];
@@ -456,7 +507,7 @@
             if (data.code !== 1 || data.sub_code != 1000) {
               this.$toast('识别失败，请手动输入')
             } else {
-              this.$toast(data.sub_msg)
+              this.$toast("识别成功")
               this.form = res.data.data ? res.data.data : {}
               if (this.form.id){
                 this.queryParam.goodsId = this.form.id
@@ -531,42 +582,22 @@
           }
         })
       },
-      // async handleImageSuccess(res, file) {
-      //   console.info(res)
-      //   console.info(file)
-      //   this.$toast('上传成功')
-      //   this.form.imgUrl = res.data
-      // },
-      // async handleImageError(res, file) {
-      //   this.$toast('上传失败')
-      // },
-      beforeImageUpload(file) {
-        if (!this.form.actNo) {
-          this.$toast('请输入货号')
-          return false
-        }
-        this.uploadData = {actNo: this.form.actNo} // 上传携带的参数名
-        if (!this.uploadData.actNo) {
-          this.$toast('请输入货号')
-          return false
-        }
-        const fileName = file.name
-        const fileType = fileName.substring(fileName.lastIndexOf('.'))
-        if (
-          fileType === '.jpg' ||
-          fileType === '.png' ||
-          fileType === '.jpeg' ||
-          fileType === '.bmp' ||
-          fileType === '.gif'
-        ) {
-          // 不处理
+      async handleImageSuccess(res, file) {
+        if (res.code !== 1 || res.sub_code != 1000) {
+          this.$toast('识别失败，请手动输入')
         } else {
-          this.$toast(
-            '不是,jpeg,.png,.jpg,.bmp,.gif文件,请上传正确的图片类型'
-          )
-          return false
+          this.$toast('识别成功')
+          this.form = res.data ? res.data : {}
+          if (this.form.id){
+            this.queryParam.goodsId = this.form.id
+            this.getPage()
+          }
         }
       },
+      async handleImageError(res, file) {
+        this.$toast('上传失败')
+      },
+
     }
   }
 
@@ -574,7 +605,9 @@
 
 <style lang="less" scoped>
   @import '../assets/index/style.css';
-
+  html {
+    font-size: 50px;
+  }
   .login {
     > section {
       .tip {
@@ -584,6 +617,62 @@
         font-size: 16px;
       }
     }
+  }
+
+  .fenlei_top_2 {
+    display: -ms-flexbox;
+    -ms-flex-align: center;
+    -ms-flex-pack: justify;
+    background: #eeeeee;
+    position: fixed;
+    height: 94px;
+    font-size: 14px;
+    z-index: 99;
+    margin-top: 11.6vw;
+  }
+  .ins {
+    writing-mode: horizontal-tb !important;
+    font-style: ;
+    font-variant-ligatures: ;
+    font-variant-caps: ;
+    font-variant-numeric: ;
+    font-variant-east-asian: ;
+    font-weight: ;
+    font-stretch: ;
+    font-size: ;
+    font-family: ;
+    text-rendering: auto;
+    color: fieldtext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    background-color: field;
+    margin: 0em;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+    border: 0;
+    outline: none;
+    width: 76vw;
+    /*width: 5.7rem;*/
+    padding: 0.2rem;
+
+  }
+  .fenlei_top_right {
+    font-size: 0.32rem;
+    color: #353535;
+    width: 2rem;
+    text-align: center;
   }
   .store-list-1-1 {
     display: -webkit-box;
