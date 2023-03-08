@@ -23,12 +23,12 @@
           @click="getImgUrl">手动获取
         </mt-button>
       </mt-field>
-      <mt-field label="* 尺码">
-          <select class="select100" v-model="requestParam.sizeId">
-            <option :disabled="true" value="" selected>请选择</option>
-            <option v-for="x in sizeList" :value="x.id">{{x.size}}</option>
-          </select>
-      </mt-field>
+<!--      <mt-field label="* 尺码">-->
+<!--          <select class="select100" v-model="requestParam.sizeId">-->
+<!--            <option :disabled="true" value="" selected>请选择</option>-->
+<!--            <option v-for="x in sizeList" :value="x.id">{{x.size}}</option>-->
+<!--          </select>-->
+<!--      </mt-field>-->
       <mt-field
         label="图片"
       >
@@ -318,7 +318,7 @@
       }
     },
     mounted() {
-      this.handleChange()
+      // this.handleChange()
     },
     methods: {
       gotoAdd(id, type) {
@@ -493,13 +493,13 @@
           this.form.sizeList.push(this.sizeList[i][1])
         }
       },
-      handleChange() {
-        goodsBaseApi.listDropDownSizes({type: ''}, false).then(res => {
-          if (res.subCode === 1000) {
-            this.sizeList = res.data
-          }
-        })
-      },
+      // handleChange() {
+      //   goodsBaseApi.listDropDownSizes({type: ''}, false).then(res => {
+      //     if (res.subCode === 1000) {
+      //       this.sizeList = res.data
+      //     }
+      //   })
+      // },
       gotoAdd(id, type) {
         this.$router.push({path: '/goodsAdd', query: {id, type}})
       },
