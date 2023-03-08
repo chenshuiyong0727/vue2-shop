@@ -454,7 +454,7 @@
           if (res.status === 200) {
             let data = res.data
             if (data.code !== 1 || data.sub_code != 1000) {
-              this.$toast('上传失败')
+              this.$toast('识别失败，请手动输入')
             } else {
               this.$toast(data.sub_msg)
               this.form = res.data.data ? res.data.data : {}
@@ -464,7 +464,7 @@
               }
             }
           } else {
-            this.$toast('上传失败')
+            this.$toast('识别失败，请手动输入')
           }
         })
       },
@@ -531,15 +531,15 @@
           }
         })
       },
-      async handleImageSuccess(res, file) {
-        console.info(res)
-        console.info(file)
-        this.$toast('上传成功')
-        this.form.imgUrl = res.data
-      },
-      async handleImageError(res, file) {
-        this.$toast('上传失败')
-      },
+      // async handleImageSuccess(res, file) {
+      //   console.info(res)
+      //   console.info(file)
+      //   this.$toast('上传成功')
+      //   this.form.imgUrl = res.data
+      // },
+      // async handleImageError(res, file) {
+      //   this.$toast('上传失败')
+      // },
       beforeImageUpload(file) {
         if (!this.form.actNo) {
           this.$toast('请输入货号')
