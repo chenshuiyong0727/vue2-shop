@@ -13,6 +13,7 @@ const putinDetail = resolve => require(['@/views/report/putinDetail.vue'], resol
 const putinDayDetail = resolve => require(['@/views/report/putinDayDetail.vue'], resolve)
 const sellList = resolve => require(['@/views/report/sellList.vue'], resolve)
 const giftList = resolve => require(['@/views/giftList.vue'], resolve)
+const goodsBusiness = resolve => require(['@/views/goodsBusiness.vue'], resolve)
 const otherList = resolve => require(['@/views/otherList.vue'], resolve)
 const otherAdd = resolve => require(['@/views/otherAdd.vue'], resolve)
 const resetPwd = resolve => require(['@/views/resetPwd.vue'], resolve)
@@ -172,6 +173,13 @@ export default new Router({
       path: '/giftList',
       name: '红包',
       component: giftList,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
+    }, {
+      path: '/goodsBusiness',
+      name: '营销',
+      component: goodsBusiness,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },

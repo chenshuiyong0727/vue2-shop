@@ -108,15 +108,24 @@
       </section>
 
       <section class="my-settle">
-        <router-link :to="{ name: '红包'}" class="my-settle-top">
+        <router-link :to="{ name: '营销'}" class="my-settle-top">
           <div>
             <img style="width: 29px;margin-bottom: 7px;" src="../../static/img/gift_1.png"></img>
           </div>
 
           <p>
-            <span>红包</span><i class="icon-go"></i>
+            <span>营销</span><i class="icon-go"></i>
           </p>
         </router-link>
+<!--        <router-link :to="{ name: '红包'}" class="my-settle-top">-->
+<!--          <div>-->
+<!--            <img style="width: 29px;margin-bottom: 7px;" src="../../static/img/gift_1.png"></img>-->
+<!--          </div>-->
+
+<!--          <p>-->
+<!--            <span>红包</span><i class="icon-go"></i>-->
+<!--          </p>-->
+<!--        </router-link>-->
         <router-link :to="{ name: '其他收支'}" class="my-settle-top">
           <div>
             <img style="width: 29px;margin-bottom: 7px;" src="../../static/img/other1.png"></img>
