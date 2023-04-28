@@ -62,14 +62,15 @@
           <div class="diangdans_con_right" style="    margin-top: 30px;">
             <div class="dingdans_con_right_top" style="margin-top: -28px;">
               货号：<strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
-              入库价：<strong  class="color-danger">{{item.inPutPrice}} </strong>
+              类型：<strong style="color: #409EFF" > {{ item.type | dictToDescTypeValue(20221108) }}</strong>
             </div>
             <div class="dingdans_con_right_down" style="margin-bottom: 0px;">
 <!--              <span>备注：<strong>{{item.remark}}</strong></span>-->
+              入库价：<strong  class="color-danger">{{item.inPutPrice}} </strong>
               得物价：<strong  class="color-danger">{{item.price}} </strong>
-              到手价：<strong  class="color-danger">{{item.thisTimeThePrice}} </strong>
             </div>
             <div class="dingdans_con_right_down"  style="margin-bottom: -10px;">
+              到手价：<strong  class="color-danger">{{item.thisTimeThePrice}} </strong>
               利润：<strong  class="color-danger">{{item.thisTimeProfits}} </strong>
             </div>
 <!--            <div style="-->
@@ -122,6 +123,12 @@
 <!--            </select>-->
 <!--        </mt-field>-->
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"  style="margin-top: 11vw;"></mt-field>
+        <mt-field label="类型" >
+            <select class="select100" v-model="queryParam.type" @change="changeSystem" >
+          <option :disabled="true" value="" selected>请选择类型</option>
+              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>
+            </select>
+        </mt-field>
         <mt-field label="利润开始"  placeholder="利润开始"  v-model="queryParam.priceFrom" ></mt-field>
         <mt-field label="利润结束"  placeholder="利润结束"  v-model="queryParam.priceTo" ></mt-field>
       </section>
@@ -168,6 +175,7 @@
         imageZoom: '',
         fileUrl: fileUrl,
         queryParam: {
+          type: '',
           keyword: '',
           goodsId: '',
           sizeId: '',
@@ -213,7 +221,7 @@
       listSysDict() {
         let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
           localStorage.getItem('sysDictList')) : []
-        this.typeList = sysDictList.filter(item => item.typeValue == 39)
+        this.typeList = sysDictList.filter(item => item.typeValue == 20221108)
       },
       loadData(p_status) {
         // 第一次加载或者下拉刷新最新数据
@@ -269,6 +277,7 @@
         this.queryParam = {
           keyword: '',
           goodsId: '',
+          type: '',
           sizeId: '',
           size: '',
           priceFrom: 50,
