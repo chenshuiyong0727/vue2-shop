@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <div class="car">
+  <div class="car" style="  padding-top: 12vw">
     <div class="main">
       <h1 class="section1-title">
         待处理事务

@@ -3,10 +3,8 @@
   <div class="index">
     <mt-header title="首页">
     </mt-header>
-<!--    <v-service :countDay="countDay" :count="count"/>-->
-    <v-section1 :form="form" :countDay="countDay" :count="count":chartData1="chartData1" :chartSettings1="chartSettings1" />
-<!--    <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/>-->
     <v-orderNum :orderIofo ="orderIofo" :storeData ="storeData"/>
+    <v-section1 :form="form" :countDay="countDay" :count="count":chartData1="chartData1" :chartSettings1="chartSettings1" />
     <div style="margin-top: 17px;border-left:1px solid #DCDFE6; background-color: #fff;    height: 500px;">
       <h1 class="index-title">
         销售走势

@@ -293,6 +293,7 @@ export default {
       height: 24vw;
     }
   }
+  padding-top: 6vw
 }
   .section1name{
     color: black;
