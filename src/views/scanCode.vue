@@ -288,6 +288,7 @@
         queryParam: {
           goodsId: ''
         },
+        reqCount: 0,
         type30: 'primary',
         type180: 'default',
         type365: 'default',
@@ -431,8 +432,10 @@
                 }
               }
             }
-            if (totalCount < this.form.sizeList.length) {
+            if (totalCount < this.form.sizeList.length && this.reqCount < 10) {
+              console.info(this.reqCount)
               setTimeout(()=>{
+                this.reqCount ++
                 this.getPage()
               },1000)
             }

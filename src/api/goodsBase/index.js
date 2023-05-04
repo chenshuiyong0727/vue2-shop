@@ -28,7 +28,7 @@ export const goodsBaseApi = {
 
   // 获取详情
   getDetailById: (id) => request({
-    url: '/gw/op/v1/goodsBase/' + id,
+    url: '/gw/op/v1/goodsBase/h5/' + id,
     method: 'get'
   }),
 

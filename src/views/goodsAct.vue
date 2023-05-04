@@ -7,7 +7,7 @@
     </mt-header>
     <div class="fenlei_top">
       <div    class="fenlei_top_left">
-        <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）" class="ins">
+        <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名，价格）" class="ins">
       </div>
       <div class="fenlei_top_right" >
         <mt-button
@@ -37,42 +37,52 @@
       :autoFill="false"
       ref="loadmore"
     >
-      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
-        <div class="dingdans_top">
-          <div class="dingdans_top_left">
-            <strong v-if="item.goodsName"
-                    @click="scanCode(item.goodsId, 1) "
-                    style="color: #409EFF">
-              {{item.goodsName | sizeFilter }}
-            </strong>
-            <strong v-else  @click="scanCode(item.goodsId, 1) " style="color: #409EFF">
-              {{item.actNo}}
-            </strong>
-          </div>
-          <div class="dingdans_top_right">
-            尺码：<strong
-            class="color-danger"
-          > {{item.size}}</strong>
-          </div>
-        </div>
-        <div class="dingdans_con">
+      <div class="dingdans_item_act" v-for="(item,index) in tableData" :key="index">
+<!--        <div class="dingdans_top">-->
+<!--          <div class="dingdans_top_left">-->
+<!--            <strong v-if="item.goodsName"-->
+<!--                    @click="scanCode(item.goodsId, 1) "-->
+<!--                    :style="item.goodsId ? 'color: #409EFF' : ''">-->
+<!--              {{item.goodsName | sizeFilter }}-->
+<!--            </strong>-->
+<!--            <strong v-else  @click="scanCode(item.goodsId, 1) " :style="item.goodsId ? 'color: #409EFF' : ''">-->
+<!--              {{item.actNo}}-->
+<!--            </strong>-->
+<!--          </div>-->
+<!--          <div class="dingdans_top_right">-->
+<!--            类型：<strong-->
+<!--            class="color-danger"-->
+<!--          > {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
+<!--          </div>-->
+<!--        </div>-->
+        <div class="dingdans_con_act">
           <div  :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">
             <img :src="item.img">
           </div>
           <div class="diangdans_con_right" style="    margin-top: 30px;">
             <div class="dingdans_con_right_top" style="margin-top: -28px;">
-              货号：<strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
-              类型：<strong style="color: #409EFF" > {{ item.type | dictToDescTypeValue(20221108) }}</strong>
+              <strong v-if="item.goodsName"
+                      @click="scanCode(item.goodsId, 1) "
+                      :style="item.goodsId ? 'color: #409EFF' : ''">
+                {{item.goodsName }}
+              </strong>
+<!--              货号：<strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>-->
+<!--              价格：<strong  class="color-danger">{{item.price}} </strong>-->
+<!--              类型：<strong class="color-danger"> {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
+              <!--              类型：<strong style="color: #409EFF" > {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
             </div>
             <div class="dingdans_con_right_down" style="margin-bottom: 0px;">
-<!--              <span>备注：<strong>{{item.remark}}</strong></span>-->
-              入库价：<strong  class="color-danger">{{item.inPutPrice}} </strong>
-              得物价：<strong  class="color-danger">{{item.price}} </strong>
+              货号：<strong class="color-danger" >{{item.actNo}} </strong>
+              类型：<strong class="color-danger"> {{ item.type | dictToDescTypeValue(20221108) }}</strong>
+              价格：<strong  class="color-danger">{{item.price}} </strong>
+              <!--              <span>备注：<strong>{{item.remark}}</strong></span>-->
+<!--              入库价：<strong  class="color-danger">{{item.inPutPrice}} </strong>-->
+<!--              得物价：<strong  class="color-danger">{{item.price}} </strong>-->
             </div>
-            <div class="dingdans_con_right_down"  style="margin-bottom: -10px;">
-              到手价：<strong  class="color-danger">{{item.thisTimeThePrice}} </strong>
-              利润：<strong  class="color-danger">{{item.thisTimeProfits}} </strong>
-            </div>
+<!--            <div class="dingdans_con_right_down"  style="margin-bottom: -10px;">-->
+<!--              到手价：<strong  class="color-danger">{{item.thisTimeThePrice}} </strong>-->
+<!--              利润：<strong  class="color-danger">{{item.thisTimeProfits}} </strong>-->
+<!--            </div>-->
 <!--            <div style="-->
 <!--            margin-bottom: -7vw;-->
 <!--    font-size: 3.5vw;-->
@@ -115,50 +125,49 @@
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 80vw;width: 100vw">
+      <section style="height: 70vw;width: 100vw">
 <!--        <mt-field label="状态" style="margin-top: 11vw;">-->
 <!--            <select class="select100" v-model="queryParam.type" @change="changeSystem" >-->
 <!--               <option :disabled="true" value="" selected>请选择类型</option>-->
 <!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
 <!--            </select>-->
 <!--        </mt-field>-->
-        <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"  style="margin-top: 11vw;"></mt-field>
-        <mt-field label="类型" >
+        <mt-field label="类型" style="margin-top: 11vw;">
             <select class="select100" v-model="queryParam.type" @change="changeSystem" >
           <option :disabled="true" value="" selected>请选择类型</option>
               <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
         </mt-field>
-        <mt-field label="利润开始"  placeholder="利润开始"  v-model="queryParam.priceFrom" ></mt-field>
-        <mt-field label="利润结束"  placeholder="利润结束"  v-model="queryParam.priceTo" ></mt-field>
+        <mt-field label="价格开始"  placeholder="价格开始"  v-model="queryParam.priceFrom" ></mt-field>
+        <mt-field label="价格结束"  placeholder="价格结束"  v-model="queryParam.priceTo" ></mt-field>
       </section>
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
-        <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">
+        <img :src="imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
-    <div style="
-    right: 15px;
-    bottom: 10vw;
-    position: absolute;
-    text-align: center;
-    ">
-      <mt-button  @click="goDetail(null,3)"  style="margin-left: 5px;
-    border-radius: 100%;
-    margin-top: 0px;
-    height: 55px;
-    width: 55px;" type="primary">
-        <img src="../../static/img/add.png" height="30" width="30" slot="icon">
-      </mt-button>
-    </div>
+<!--    <div style="-->
+<!--    right: 15px;-->
+<!--    bottom: 10vw;-->
+<!--    position: absolute;-->
+<!--    text-align: center;-->
+<!--    ">-->
+<!--      <mt-button  @click="goDetail(null,3)"  style="margin-left: 5px;-->
+<!--    border-radius: 100%;-->
+<!--    margin-top: 0px;-->
+<!--    height: 55px;-->
+<!--    width: 55px;" type="primary">-->
+<!--        <img src="../../static/img/add.png" height="30" width="30" slot="icon">-->
+<!--      </mt-button>-->
+<!--    </div>-->
 <!--    <v-footer></v-footer>-->
   </div>
 </template>
 <script>
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
-  import { goodsBusinessApi } from '@/api/goodsBusiness'
+  import { goodsActApi } from '@/api/goodsAct'
   export default {
     components: {
       'v-baseline': Baseline,
@@ -169,7 +178,7 @@
       return {
         orderData2: '',
         isShowDialog2: false,
-        titleName: '营销',
+        titleName: '活动',
         emtityMsg: '人家是有底线的 -.-',
         pictureZoomShow: false,
         imageZoom: '',
@@ -177,10 +186,7 @@
         queryParam: {
           type: '',
           keyword: '',
-          goodsId: '',
-          sizeId: '',
-          size: '',
-          priceFrom: 50,
+          priceFrom: '',
           priceTo: '',
           pageSize: 20,
           pageNum: 1
@@ -202,7 +208,7 @@
         this.$router.push({ path: '/otherAdd', query: { id, type } })
       },
       getPage() {
-        goodsBusinessApi.page(this.queryParam).then(res => {
+        goodsActApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
@@ -228,7 +234,7 @@
         if (p_status === "refresh") {
           this.tableData = [];
         }
-        goodsBusinessApi.page(this.queryParam).then(res => {
+        goodsActApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             let list =  res.data ? res.data.list : []
             if (list && list.length) {
@@ -280,12 +286,12 @@
           type: '',
           sizeId: '',
           size: '',
-          priceFrom: 50,
+          priceFrom: '',
           priceTo: '',
           pageSize: 20,
           pageNum: 1
         }
-        this.titleName = '营销'
+        this.titleName = '活动'
         this.changeSystem()
         this.search1()
       },
@@ -308,8 +314,8 @@
         this.allLoaded = false;
         this.$refs.loadmore.onTopLoaded();
       },
-      scanCode(id, type) {
-        this.$router.push({ path: '/scanCode', query: { id, type } })
+      scanCode(id, flag) {
+        this.$router.push({ path: '/scanCode', query: { id, flag } })
       },
       jumpactNo(actNo) {
         this.$router.push({ path: '/store', query: { actNo } })
@@ -333,8 +339,7 @@
     font-size: 4vw;
     height: 6vw;
   }
-  .dingdans_item {
-    padding: 2.4vw 1.2vw;
+  .dingdans_item_act {
     background: #ffffff;
     border-bottom: 1vw solid #eee;
     padding-right: 3%;
@@ -350,11 +355,10 @@
     justify-content: space-between;
   }
 
-  .dingdans_con {
+  .dingdans_con_act {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 1.3vw 0;
   }
 
   .dingdans_con_left {
