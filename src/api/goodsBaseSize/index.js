@@ -4,6 +4,7 @@ export const goodsBaseSizeApi = {
   page: (body) => request({
     url: '/gw/op/v1/goodsBaseSize',
     method: 'get',
+    loading: false,
     params: body
   }),
   // 批量删除

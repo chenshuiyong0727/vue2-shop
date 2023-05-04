@@ -11,11 +11,22 @@
     <div class="dingdans_item" style=" margin-top: 12vw;" >
       <div class="dingdans_con">
         <div class="dingdans_con_left" style="margin-left: 14vw;" >
-          <img v-bind:src="fileUrl + form.imgUrl" alt="" >
+          <img style="    width: 90px;
+    margin-left: -25px;" v-bind:src="form.img" alt="" >
         </div>
         <div class="diangdans_con_right" style="font-size: 16px;">
           <div class="dingdans_con_right_top">
-            货号：<strong class="color-danger">{{form.actNo}}</strong>
+
+            <p>
+              <strong v-if="form.id"
+                      @click="scanCode(form.id, 1) "
+                      :style="form.id ? 'font-size: 14px;color: #409EFF;' : 'font-size: 14px;'">
+                {{form.name }}
+              </strong>
+            </p>
+           <p>
+             货号：<strong class="color-danger">{{form.actNo}}</strong>
+           </p>
           </div>
         </div>
       </div>
@@ -121,8 +132,10 @@ export default {
     return {
       form: {
         sizeVoList: '',
+        name: '',
         actNo: '',
-        imgUrl: ''
+        imgUrl: '',
+        img: '',
       },
       isShowDialog1: false,
       orderData1: '',
@@ -238,6 +251,9 @@ export default {
         table1.push(data1)
       }
       this.tableData = table1
+    },
+    scanCode(id, flag) {
+      this.$router.push({ path: '/scanCode', query: { id, flag } })
     },
     addSizeHandle(item, index = 0) {
       if (!this.activeIndex.includes(index)) {

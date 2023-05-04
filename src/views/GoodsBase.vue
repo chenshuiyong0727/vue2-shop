@@ -58,7 +58,7 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
-              <span v-if="item.name"><strong>{{item.name}} </strong></span>
+              <span style="color: #409EFF;" @click="scanCode(item.id,1)" v-if="item.name"><strong>{{item.name}} </strong></span>
             </div>
 <!--            <div class="dingdans_con_right_top">-->
 <!--              货号：<strong>{{item.actNo}} </strong>-->

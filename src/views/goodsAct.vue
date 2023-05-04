@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello" ref="goodsAct">
     <mt-header :title="titleName">
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
@@ -176,6 +176,8 @@
     name: "HelloWorld",
     data() {
       return {
+        isBack: false, //记录滚动条位置对象
+        curScrollTop: 0, //记录滚动条位置对象
         orderData2: '',
         isShowDialog2: false,
         titleName: '活动',
@@ -199,14 +201,35 @@
         totalCount: 1
       }
     },
-    mounted() {
-      this.getPage()
-      this.listSysDict()
+    // mounted() {
+    //   this.getPage()
+    //   this.listSysDict()
+    // },
+    activated() {
+      // 新开的页面
+      this.isBack = false
+      if (!this.$route.meta.isBack) {
+        this.queryParam.pageNum = 1
+        this.getPage()
+        this.listSysDict()
+      } else {
+        this.$refs.goodsAct.scrollTop = this.curScrollTop
+      }
+    },
+    beforeRouteLeave(to, from, next) {
+      let path = to.path
+      if (path == "/scanCode") {
+        from.meta.isBack = true;
+      }else {
+        this.curScrollTop = 0
+        from.meta.isBack = false;
+      }
+      next()
     },
     methods: {
-      goDetail(id, type) {
-        this.$router.push({ path: '/otherAdd', query: { id, type } })
-      },
+      // goDetail(id, type) {
+      //   this.$router.push({ path: '/otherAdd', query: { id, type } })
+      // },
       getPage() {
         goodsActApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
@@ -315,11 +338,13 @@
         this.$refs.loadmore.onTopLoaded();
       },
       scanCode(id, flag) {
+        this.isBack = true
+        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
         this.$router.push({ path: '/scanCode', query: { id, flag } })
       },
-      jumpactNo(actNo) {
-        this.$router.push({ path: '/store', query: { actNo } })
-      },
+      // jumpactNo(actNo) {
+      //   this.$router.push({ path: '/store', query: { actNo } })
+      // },
       avatarShow(e) {
         this.imageZoom = e
         this.pictureZoomShow = true

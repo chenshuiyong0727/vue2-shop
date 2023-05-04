@@ -435,8 +435,8 @@
     // },
     activated() {
       // 新开的页面
-      this.isBack = false
-      if (!this.$route.meta.isBack) {
+        this.isBack = false
+        if (!this.$route.meta.isBack) {
         this.handleChange()
         this.listSysDict()
         this.resetData()

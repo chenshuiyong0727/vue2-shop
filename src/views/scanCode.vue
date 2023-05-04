@@ -137,7 +137,7 @@
                   <a style="color: #20a0ff" @click="rowClick(scope.row)"> {{ scope.row.size }}</a>
                 </template>
               </el-table-column>
-              <el-table-column align="center" prop="price"  width="51" label="价格" />
+              <el-table-column align="center" prop="price"  width="53" label="价格" />
               <el-table-column align="center" prop=""  label="到手">
                 <template scope="scope">
                  <span  v-if="scope.row.price">
@@ -432,12 +432,12 @@
                 }
               }
             }
-            if (totalCount < this.form.sizeList.length && this.reqCount < 10) {
+            if (totalCount < this.form.sizeList.length && this.reqCount < 5) {
               console.info(this.reqCount)
               setTimeout(()=>{
                 this.reqCount ++
                 this.getPage()
-              },1000)
+              },2000)
             }
           } else {
             this.$toast(res.subMsg)
@@ -529,6 +529,7 @@
               this.form = res.data ? res.data : {}
               this.queryParam.goodsId = this.form.id
               this.getPage()
+              this.getImgUrl()
             } else {
               this.$toast(res.subMsg)
             }
@@ -577,11 +578,12 @@
         }
         let data = {actNo: this.form.actNo , sizeId: this.form.sizeId }
         goodsBaseApi.getGoodsByActNoAndSize(data).then(res => {
-          this.$toast(res.subMsg)
           if (res.subCode === 1000) {
             this.form = res.data ? res.data : {}
             this.queryParam.goodsId = this.form.id
             this.getPage()
+          }else{
+            this.$toast(res.subMsg)
           }
         })
       },
