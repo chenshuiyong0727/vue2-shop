@@ -7,6 +7,11 @@ export const goodsBaseApi = {
     method: 'get',
     params: body
   }),
+  // 获取数据列表
+  syncOldPriceToNew: () => request({
+    url: '/gw/op/v2/goodsBase/syncOldPriceToNew',
+    method: 'get'
+  }),
   // 批量删除
   batchdelete: (body) => request({
     url: '/gw/op/v1/goodsBase/batch/remove',

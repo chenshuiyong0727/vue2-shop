@@ -144,6 +144,15 @@
             <span>设置</span><i class="icon-go"></i>
           </p>
         </router-link>
+        <a @click="syncOldPriceToNew1()"  class="my-settle-bottom">
+          <div >
+            <img style="width: 29px;
+                  margin-bottom: 7px;" src="../../static/img/up.png"></img>
+          </div>
+          <p>
+            <span>确认涨价</span><i class="icon-go"></i>
+          </p>
+        </a>
       </section>
     </div>
     <v-baseline></v-baseline>
@@ -153,7 +162,7 @@
 
 <script>
   // import * as mockData from '@/http/mock.js' //模拟数据
-  // import { userContainerApi } from '@/api/user'
+  import { goodsBaseApi } from '@/api/goodsBase'
   import {goodsOrderApi} from '@/api/goodsOrder'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
@@ -174,8 +183,10 @@
       this.getData()
     },
     methods: {
-      comfirm(type) {
-        this.$router.push({path: '/logout', query: {type}})
+      syncOldPriceToNew1() {
+        goodsBaseApi.syncOldPriceToNew().then(res => {
+          this.$toast(res.subMsg)
+        })
       },
       getData() {
         goodsOrderApi.indexData().then(res => {
