@@ -25,6 +25,7 @@ const Warehouse = resolve => require(['@/views/Warehouse.vue'], resolve)
 const WarehouseDetail = resolve => require(['@/views/WarehouseDetail.vue'], resolve)
 const OpenWarehouse = resolve => require(['@/views/OpenWarehouse.vue'], resolve)
 const scanCode = resolve => require(['@/views/scanCode.vue'], resolve)
+const scanCodeV2 = resolve => require(['@/views/scanCodeV2.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
 const logout = resolve => require(['@/views/logout.vue'], resolve)
 
@@ -211,6 +212,10 @@ export default new Router({
     },{
       path: '/scanCode',
       name: '扫码',
+      component: scanCodeV2
+    },{
+      path: '/scanCodeV1',
+      name: '扫码仓库',
       component: scanCode
     },{
       path: '/logout',

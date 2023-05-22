@@ -245,7 +245,7 @@
         },
         requestParam: {
           id: '',
-          status: 7,
+          status: '',
           price: '',
           shelvesPrice: '',
           subsidiesPrice: '',
@@ -735,6 +735,7 @@
         this.requestParam.freight = this.orderData.freight
         this.requestParam.waybillNo = this.orderData.waybillNo
         this.requestParam.addressId = this.orderData.addressId
+        this.requestParam.status = this.orderData.status + 1
         // let poundage = this.requestParam.shelvesPrice * 0.075 + 38 + 8.5
         // this.requestParam.poundage = parseFloat(poundage).toFixed(2)
         if (!this.orderData.poundage) {
