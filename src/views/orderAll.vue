@@ -209,6 +209,7 @@
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import { goodsOrderApi } from '@/api/goodsOrder'
+  import { parseTime } from '@/utils/index'
 
   export default {
     components: {
@@ -682,7 +683,7 @@
         this.requestParam.price = this.orderData.price
         this.requestParam.shelvesPrice = this.orderData.shelvesPrice
         this.requestParam.subsidiesPrice = this.orderData.subsidiesPrice
-        this.requestParam.deliveryDeadlineTime = this.orderData.deliveryDeadlineTime
+        this.requestParam.deliveryDeadlineTime = parseTime(this.orderData.deliveryDeadlineTime)
         this.requestParam.freight = this.orderData.freight
         this.requestParam.waybillNo = this.orderData.waybillNo
         this.requestParam.addressId = this.orderData.addressId
