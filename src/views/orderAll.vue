@@ -112,21 +112,27 @@
           <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 130vw;width: 80vw">
+      <section style="height: 150vw;width: 100vw">
         <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :disabled="true"></mt-field>
         <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam.waybillNo"></mt-field>
         <mt-field label="地址">
-            <select class="select80" v-model="requestParam.addressId">
+            <select class="select100" v-model="requestParam.addressId">
           <option :disabled="true" value="" selected>请选择</option>
               <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
         </mt-field>
         <mt-field label="状态">
-            <select  class="select80" v-model="requestParam.status">
+            <select  class="select100" v-model="requestParam.status">
               <option :disabled="true" value="" selected>请选择</option>
               <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
+        </mt-field>
+        <mt-field label="发货截止时间">
+          <el-date-picker class="select100" style="width: 62vw"
+                          type="datetime" placeholder="发货截止时间"
+                          v-model="requestParam.deliveryDeadlineTime"
+                          value-format="yyyy-MM-dd HH:mm:ss">></el-date-picker>
         </mt-field>
         <mt-field label="入库价" placeholder="请输入入库价" @keyup.native="keyup1($event)" type="number" v-model="requestParam.price"></mt-field>
         <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup1($event)" type="number" v-model="requestParam.shelvesPrice"></mt-field>
@@ -135,10 +141,6 @@
         <mt-field label="运费" placeholder="请输入运费" @keyup.native="keyup1($event)" type="number" v-model="requestParam.freight"></mt-field>
         <mt-field label="到手价" placeholder="请输入到手价" @keyup.native="keyup2($event)" type="number" v-model="requestParam.theirPrice"></mt-field>
         <mt-field label="利润" placeholder="请输入利润" @keyup.native="keyup1($event)" type="number" v-model="requestParam.profits"></mt-field>
-<!--        <div class="popupdiv" >-->
-<!--          <mt-button type="default" class="mt-button-div" size="normal"  @click="isShowDialog = false">取消</mt-button>-->
-<!--          <mt-button type="primary" class="mt-button-div" size="normal" @click="confirmHandle">确认</mt-button>-->
-<!--        </div>-->
       </section>
     </mt-popup>
     <mt-popup
@@ -188,18 +190,6 @@
               <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
         </mt-field>
-<!--        <mt-field label="成功开始时间">-->
-<!--          <mt-button-->
-<!--            type="primary"-->
-<!--            size="small"-->
-<!--            @click="open('picker1')">选择时间</mt-button>-->
-<!--        </mt-field>-->
-<!--        <mt-field label="成功结束时间">-->
-<!--          <mt-button-->
-<!--            type="primary"-->
-<!--            size="small"-->
-<!--            @click="open('picker1')">选择时间</mt-button>-->
-<!--        </mt-field>-->
         <mt-field label="成功开始时间" type="date" placeholder="成功开始时间"  v-model="queryParam.successTimeFrom" ></mt-field>
         <mt-field label="成功结束时间" type="date" placeholder="成功结束时间"  v-model="queryParam.successTimeTo" ></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="queryParam.waybillNo"></mt-field>
@@ -212,7 +202,7 @@
         <img :src="imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
-    <v-footer></v-footer>
+<!--    <v-footer></v-footer>-->
   </div>
 </template>
 <script>
@@ -248,6 +238,7 @@
           status: '',
           price: '',
           shelvesPrice: '',
+          deliveryDeadlineTime: '',
           subsidiesPrice: '',
           freight: '',
           poundage: '',
@@ -316,41 +307,6 @@
         totalCount: 1
       }
     },
-    // created() {
-    //   // ajax 模拟初始加载, 使用定时器默认ajax加载
-    //   let timer = setTimeout(_ => {
-    //     clearTimeout(timer);
-    //     this.loadData('refresh');
-    //   }, 200);
-    // },
-    // created() {
-    //   const { actNo,status,months } = this.$route.query
-    //   this.queryParam.keyword = actNo
-    //   this.status = status
-    //   this.queryParam.status = status
-    //   this.months = months
-    //   if (this.queryParam.keyword || this.queryParam.status || this.months) {
-    //     if(this.queryParam.status){
-    //       this.changeSystem()
-    //     }
-    //     if (this.months) {
-    //       this.queryParam.successTimeFrom = this.months
-    //       this.queryParam.successTimeTo = this.months
-    //       this.titleName = this.months + ' 订单'
-    //     }
-    //     this.search1()
-    //   }
-    //   // console.info(1)
-    //   // let timer = setTimeout(_ => {
-    //   //   clearTimeout(timer);
-    //   //   this.loadData('refresh');
-    //   // }, 200);
-    // },
-    // mounted() {
-    //   // console.info(2)
-    //   this.getPage()
-    //   this.listSysDict()
-    // },
     activated() {
       // 新开的页面
       this.isBack = false
@@ -619,16 +575,6 @@
         this.pictureZoomShow = true
       },
       keyup1() {
-        // let theirPrice =  this.requestParam.subsidiesPrice * 1
-        //   +  this.requestParam.shelvesPrice - (this.requestParam.shelvesPrice * 0.075 + 38 + 8.5)
-        // // let theirPrice = this.requestParam.theirPrice - this.requestParam.freight
-        // //   - this.theirPrice.price
-        // this.requestParam.profits = parseFloat(theirPrice).toFixed(2)
-        //
-        // let profits = this.requestParam.theirPrice - this.requestParam.freight
-        //   - this.requestParam.price
-        // this.requestParam.profits = parseFloat(profits).toFixed(2)
-
         let poundage = this.requestParam.shelvesPrice * 0.075 + 38 + 8.5
         this.requestParam.poundage = parseFloat(poundage).toFixed(2)
 
@@ -651,6 +597,10 @@
       confirmHandle() {
         if(this.requestParam.status == 7 && !this.requestParam.freight) {
           this.$messagebox('请输入运费')
+          return
+        }
+        if(this.requestParam.status == 3 && !this.requestParam.deliveryDeadlineTime) {
+          this.$messagebox('发货截止时间为空')
           return
         }
         // 利润= 到手价-运费-原价
@@ -732,12 +682,11 @@
         this.requestParam.price = this.orderData.price
         this.requestParam.shelvesPrice = this.orderData.shelvesPrice
         this.requestParam.subsidiesPrice = this.orderData.subsidiesPrice
+        this.requestParam.deliveryDeadlineTime = this.orderData.deliveryDeadlineTime
         this.requestParam.freight = this.orderData.freight
         this.requestParam.waybillNo = this.orderData.waybillNo
         this.requestParam.addressId = this.orderData.addressId
         this.requestParam.status = this.orderData.status + 1
-        // let poundage = this.requestParam.shelvesPrice * 0.075 + 38 + 8.5
-        // this.requestParam.poundage = parseFloat(poundage).toFixed(2)
         if (!this.orderData.poundage) {
           let poundage = this.requestParam.shelvesPrice * 0.075 + 38 + 8.5
           this.requestParam.poundage = parseFloat(poundage).toFixed(2)
@@ -956,6 +905,10 @@
     color: #353535;
     width: 2rem;
     text-align: center;
+  }
+  .el-date-picker.has-time .el-picker-panel__body-wrapper {
+    position: relative;
+    margin-right: 52px;
   }
   .ins {
     writing-mode: horizontal-tb !important;
