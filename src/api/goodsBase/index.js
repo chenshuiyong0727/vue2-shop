@@ -76,7 +76,6 @@ export const goodsBaseApi = {
   getGoodsByActNoAndSizeH5: (body) => request({
     url: '/gw/op/v2/goodsBase/getGoodsByActNoAndSizeH5',
     method: 'get',
-    loading: false,
     params: body
 
   })

@@ -103,6 +103,7 @@
     </mt-loadmore>
     <p v-if="allLoaded" class="to-the-bottom">{{emtityMsg}}</p>
     <mt-popup
+      position="bottom"
       v-model="isShowDialog">
       <mt-header title="修改">
         <div slot="right">
@@ -112,7 +113,7 @@
           <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 150vw;width: 100vw">
+      <section style="height: 137vw;width: 100vw">
         <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :disabled="true"></mt-field>
         <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam.waybillNo"></mt-field>
@@ -202,7 +203,7 @@
         <img :src="imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
-<!--    <v-footer></v-footer>-->
+    <v-footer></v-footer>
   </div>
 </template>
 <script>
