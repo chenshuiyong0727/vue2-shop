@@ -216,7 +216,7 @@
           name: '',
           brand: '',
           remark: '',
-          pageSize: 10,
+          pageSize: 20,
           pageNum: 1
         },
         // queryParam: {
@@ -242,7 +242,7 @@
         //   sellTimeTo: '',
         //   successTimeFrom: '',
         //   successTimeTo: '',
-        //   pageSize: 10,
+        //   pageSize: 20,
         //   pageNum: 1
         // },
         topStatus: "",
@@ -376,7 +376,7 @@
           name: '',
           brand: '',
           remark: '',
-          pageSize: 10,
+          pageSize: 20,
           pageNum: 1
         }
         this.titleName = '商品'

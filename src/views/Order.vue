@@ -214,7 +214,7 @@
         sellTimeTo: '',
         successTimeFrom: '',
         successTimeTo: '',
-        pageSize: 10,
+        pageSize: 20,
         pageNum: 1
       },
       topStatus: "",

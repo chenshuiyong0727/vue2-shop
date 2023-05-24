@@ -335,7 +335,7 @@
           size: '',
           actNo: '',
           goodsId: '',
-          pageSize: 10,
+          pageSize: 20,
           pageNum: 1
         },
         topStatus: "",
@@ -638,7 +638,7 @@
           size: '',
           actNo: '',
           goodsId: '',
-          pageSize: 10,
+          pageSize: 20,
           pageNum: 1
         }
         this.allLoaded = false;
@@ -659,7 +659,7 @@
           size: '',
           actNo: '',
           goodsId: '',
-          pageSize: 10,
+          pageSize: 20,
           pageNum: 1
         }
         this.titleName = '仓库'
