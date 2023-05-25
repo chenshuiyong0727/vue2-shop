@@ -138,7 +138,7 @@
         <a @click="syncOldPriceToNew1()"  class="my-settle-bottom">
           <div >
             <img style="width: 29px;
-                  margin-bottom: 7px;" src="../../static/img/up.png"></img>
+                  margin-bottom: 7px;" src="../../static/img/qrzj.png"></img>
           </div>
           <p>
             <span>确认涨价</span><i class="icon-go"></i>

@@ -54,6 +54,15 @@
               <span v-else>入库均价：<strong>0</strong></span>
               <span v-if="item.successNum">市价均价：<strong>{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>
               <span v-else>市价均价：<strong>0</strong></span>
+              剩余库存：<strong>{{item.inventory}}</strong>
+            </div>
+            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">
+              剩余库存总额：<strong>{{item.inventoryPrice}}</strong>
+              已售数量：<strong>{{item.saleNum}}</strong>
+            </div>
+            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">
+              出售金额：<strong>{{item.theirPrice}}</strong>
+              产生利润：<strong>{{item.profits}}</strong>
             </div>
           </div>
         </div>

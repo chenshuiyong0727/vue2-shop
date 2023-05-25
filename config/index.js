@@ -29,12 +29,22 @@ module.exports = {
     assetsPublicPath: '/',
     // proxyTable: {},
     proxyTable:{
-      "/gw": {
-        target: "http://localhost:28087/gw", //设置调用的接口域名和端口端口
-        // target: "http://114.132.243.79:28087/gw", //设置调用的接口域名和端口
+      // "/gw": {
+      //   // target: "http://localhost:28027/gw/op", // mono
+      //   target: "http://localhost:28087/gw", // gw
+      //   // target: "http://114.132.243.79:28087/gw", //设置调用的接口域名和端口
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     "^/gw": "" //用'/api' 代替 'http://218.78.187.216/api/v1'
+      //   }
+      // }
+      "/gw/op": {
+        // target: "http://localhost:28027/gw/op", // mono
+        target: "http://localhost:28027/gw/op", // gw
+        // target: "http://114.132.243.79:28027/gw/op", //设置调用的接口域名和端口
         changeOrigin: true,
         pathRewrite: {
-          "^/gw": "" //用'/api' 代替 'http://218.78.187.216/api/v1'
+          "^/gw/op": "" //用'/api' 代替 'http://218.78.187.216/api/v1'
         }
       }
     },
