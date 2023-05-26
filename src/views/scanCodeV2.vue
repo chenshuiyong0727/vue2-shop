@@ -31,7 +31,7 @@
           <el-upload
             :disabled="type == 1 "
             class="avatar-uploader"
-            action="/gw/op/v1/file/uploadFileStore"
+            action="/gw/op/v1/file/v2/uploadFileStore"
             :show-file-list="false"
             :on-error="handleImageError"
             :on-success="handleImageSuccess"
@@ -461,6 +461,7 @@
           this.$toast('不是,jpeg,.png,.jpg,.bmp,.gif文件,请上传正确的图片类型')
           return false
         }
+        showLoading()
         let overSize = file.size / 1024 / 1024
         console.info("size1",overSize)
         if (overSize > 1) {
@@ -496,7 +497,7 @@
         formData.set("file", param.file);
         let reopt = {
           method: 'post',
-          url: '/gw/op/v1/file/uploadFileStore',
+          url: '/gw/op/v1/file/v2/uploadFileStore',
           headers: {
             'Content-Type': 'multipart/form-data'
           },
@@ -608,6 +609,7 @@
       //   })
       // },
       async handleImageSuccess(res, file) {
+        hideLoading()
         if (res.code !== 1 || res.sub_code != 1000) {
           this.$toast('识别失败，请手动输入')
         } else {
@@ -620,6 +622,7 @@
         }
       },
       async handleImageError(res, file) {
+        hideLoading()
         this.$toast('上传失败')
       },
 

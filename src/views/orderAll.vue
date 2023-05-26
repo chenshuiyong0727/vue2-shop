@@ -64,6 +64,10 @@
               <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
               入库价：<strong>{{item.price}}</strong>
             </div>
+            <div  class="dingdans_con_right_down" v-if="item.addressId">
+              <strong  v-if="item.status == 3" style="font-size: 12px;" class="color-danger"> {{item.deliveryDeadlineTime |formateTime }}</strong>
+              <strong style="font-size: 12px;" >{{ item.addressId | dictToDescTypeValue(38) }} </strong>
+            </div>
             <div class="dingdans_con_right_down_1">
               <mt-button
                 type="primary"
@@ -798,7 +802,7 @@
   }
   .dingdans_con_right_down_1 {
     margin-left: 9vw;
-    margin-bottom: -7vw;
+    margin-bottom: -2vw;
     font-size: 3.5vw;
   }
 /*
