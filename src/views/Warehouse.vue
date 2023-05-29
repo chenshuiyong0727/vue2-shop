@@ -351,15 +351,16 @@
         allLoaded: false,
         warehouseList: [],
         addressList: [],
-        todayList: [
-          { fieldValue: 1, fieldName: '今日更新' },
-          { fieldValue: 2, fieldName: '待上架商品' },
-          { fieldValue: 3, fieldName: '待移库商品' },
-          { fieldValue: 4, fieldName: '涨价商品' },
-          { fieldValue: 5, fieldName: '降价商品' },
-          { fieldValue: 6, fieldName: '售空商品' },
-          { fieldValue: 7, fieldName: '变价商品' },
-        ],
+        todayList: [],
+        // todayList: [
+        //   { fieldValue: 1, fieldName: '今日更新' },
+        //   { fieldValue: 2, fieldName: '待上架商品' },
+        //   { fieldValue: 3, fieldName: '待移库商品' },
+        //   { fieldValue: 4, fieldName: '涨价商品' },
+        //   { fieldValue: 5, fieldName: '降价商品' },
+        //   { fieldValue: 6, fieldName: '售空商品' },
+        //   { fieldValue: 7, fieldName: '变价商品' },
+        // ],
         inventoryToList: [
           { fieldValue: 1, fieldName: '现货' }, { fieldValue: 0, fieldName: '售空' },
           { fieldValue: 2, fieldName: '未上架' }
@@ -434,6 +435,9 @@
         if (this.queryParam.today == 6) {
           this.titleName = '售空商品'
         }
+        if (this.queryParam.today == 7) {
+          this.titleName = '变价商品'
+        }
         this.search1()
       }
     },
@@ -503,6 +507,9 @@
         }
         if (this.queryParam.today == 6) {
           this.titleName = '售空商品'
+        }
+        if (this.queryParam.today == 7) {
+          this.titleName = '变价商品'
         }
         this.getPage()
       }else {
@@ -583,6 +590,7 @@
         this.statusList = sysDictList.filter(item => item.typeValue == 37)
         this.dataStatusList = sysDictList.filter(item => item.typeValue == 36)
         this.warehouseList = sysDictList.filter(item => item.typeValue == 40)
+        this.todayList = sysDictList.filter(item => item.typeValue == 44)
       },
       loadData(p_status) {
         // 第一次加载或者下拉刷新最新数据
