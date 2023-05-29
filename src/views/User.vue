@@ -156,7 +156,7 @@
 
       </section>
     </div>
-    <v-baseline></v-baseline>
+<!--    <v-baseline></v-baseline>-->
     <v-footer></v-footer>
   </div>
 </template>
