@@ -20,10 +20,9 @@
 <!--        >-->
           <img
             :disabled="true "
-            style="height: 62vw"
             class="select100"
-            v-if="form.imgUrl"
-            :src="fileUrl + form.imgUrl"
+            v-if="form.img"
+            :src="form.img"
           />
 <!--          <el-button :disabled="true " type="primary" class="select100" v-show="!form.imgUrl" size="small"-->
 <!--          >上传图片-->
@@ -63,6 +62,7 @@
           </select>
       </mt-field>
       <mt-field :disabled="true " label="运单编号" type = "text" v-model = "form.waybillNo"></mt-field>
+      <mt-field :disabled="true " label="最迟发货时间" type = "text" v-model = "form.deliveryDeadlineTime"></mt-field>
       <mt-field :disabled="true " label="出售时间" type = "text" v-model = "form.sellTime"></mt-field>
       <mt-field :disabled="true " label="交易成功时间" type = "text" v-model = "form.successTime"></mt-field>
       <mt-field :disabled="true " label="创建时间" type = "text" v-model = "form.createTime"></mt-field>
@@ -146,6 +146,7 @@ export default {
             }else {
               this.form.forecastProfits = ''
             }
+            this.form.deliveryDeadlineTime = this.form.deliveryDeadlineTime ? parseTime(this.form.deliveryDeadlineTime) : ''
             this.form.sellTime = this.form.sellTime ? parseTime(this.form.sellTime) : ''
             this.form.successTime = this.form.successTime ? parseTime(this.form.successTime) : ''
             this.form.createTime = this.form.createTime ? parseTime(this.form.createTime) : ''

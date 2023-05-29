@@ -20,12 +20,12 @@
       </router-link>
       </section>
       <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ path: '/store?today=4'}">
+        <router-link class="my-vip-bottom ho" :to="{ path: '/store?today=7'}">
           <div>
-            <img style="width: 6.9vw;margin-bottom: 5px;" src="../../../static/img/up.png" ></img>
+            <img style="width: 6.9vw;margin-bottom: 5px;" src="../../../static/img/shengjiang2.png" ></img>
           </div>
           <p>
-            <span>涨价商品</span>
+            <span>变价商品</span>
             <i><samp :class="storeData.upCout > 0 ? 'color-danger' : ''">{{storeData.upCout}}</samp>
               <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
             </i>

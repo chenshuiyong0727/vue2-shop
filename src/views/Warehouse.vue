@@ -251,12 +251,19 @@
     position: absolute;
     text-align: center;
     ">
-      <mt-button  @click="goGoodsBase"  style="margin-left: 5px;
+      <mt-button v-if="initToday !=7 "  @click="goGoodsBase"  style="margin-left: 5px;
     border-radius: 100%;
     margin-top: 0px;
     height: 55px;
     width: 55px;" type="primary">
         <img src="../../static/img/add.png" height="30" width="30" slot="icon">
+      </mt-button>
+      <mt-button v-else @click="syncOldPriceToNew1"  style="margin-left: 5px;
+    border-radius: 100%;
+    margin-top: 0px;
+    height: 55px;
+    width: 55px;" type="primary">
+        <img src="../../static/img/querenjiangjia.png" height="30" width="30" slot="icon">
       </mt-button>
     </div>
     <v-footer></v-footer>
@@ -320,6 +327,7 @@
         pictureZoomShow: false,
         imageZoom: '',
         fileUrl: fileUrl,
+        today: '',
         queryParam: {
           today: '',
           syncTimeFrom: '',
@@ -349,7 +357,8 @@
           { fieldValue: 3, fieldName: '待移库商品' },
           { fieldValue: 4, fieldName: '涨价商品' },
           { fieldValue: 5, fieldName: '降价商品' },
-          { fieldValue: 6, fieldName: '售空商品' }
+          { fieldValue: 6, fieldName: '售空商品' },
+          { fieldValue: 7, fieldName: '变价商品' },
         ],
         inventoryToList: [
           { fieldValue: 1, fieldName: '现货' }, { fieldValue: 0, fieldName: '售空' },
@@ -462,6 +471,7 @@
         this.queryParam.actNo = actNo
         this.queryParam.warehouseId = warehouseId
         this.queryParam.today = today
+        this.initToday = today
         this.months = months
         if (this.queryParam.actNo || this.queryParam.size || this.queryParam.warehouseId || this.months||  this.queryParam.today) {
           if (this.months) {
@@ -520,6 +530,15 @@
       goGoodsBase() {
         this.isBack = true
         this.$router.push({ path: '/goodsBase'})
+      },
+      syncOldPriceToNew1() {
+        goodsBaseApi.syncOldPriceToNew().then(res => {
+          this.$toast(res.subMsg)
+          if (res.subCode === 1000) {
+            this.getPage()
+            this.isShowDialog1 = false
+          }
+        })
       },
       successTimeChange() {
         if (this.successTime) {
