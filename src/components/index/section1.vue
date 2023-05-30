@@ -200,7 +200,7 @@
       </li>
       <li>
         <router-link :to="{ name:'销售报表'}">
-          <p>{{form.passRatio}}</p>
+          <p>{{form.passRatio}} % </p>
           <p class="section1name">通过比例</p>
         </router-link>
       </li>

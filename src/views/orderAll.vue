@@ -252,7 +252,7 @@
           theirPrice: '',
           profits: '',
           waybillNo: '',
-          reason: '',
+          reason: '色差',
           addressId: ''
         },
         // popupVisible: false,
@@ -693,7 +693,7 @@
         this.requestParam.id = this.orderData.id
         this.requestParam.price = this.orderData.price
         this.requestParam.shelvesPrice = this.orderData.shelvesPrice
-        this.requestParam.reason = this.orderData.reason
+
         this.requestParam.subsidiesPrice = this.orderData.subsidiesPrice
         this.requestParam.deliveryDeadlineTime = parseTime(this.orderData.deliveryDeadlineTime)
         this.requestParam.freight = this.orderData.freight
