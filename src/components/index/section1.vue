@@ -187,6 +187,24 @@
         </router-link>
       </li>
     </ul>
+    <ul class="section1-list" style="
+    display: -webkit-box;
+    flex-wrap: wrap;
+    margin-left: 0.5vw;
+    padding: 0vw 1vw;">
+      <li>
+        <router-link :to="{name:'销售报表'}">
+          <p>{{form.defectsNum}}</p>
+          <p class="section1name">瑕疵数</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{ name:'销售报表'}">
+          <p>{{form.passRatio}}</p>
+          <p class="section1name">通过比例</p>
+        </router-link>
+      </li>
+    </ul>
 <!--  <router-link :to="{ name: '详情页'}"  class="section1-banner">-->
 <!--    <img v-lazy="banner">-->
 <!--  </router-link>-->

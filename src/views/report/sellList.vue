@@ -43,16 +43,20 @@
         </div>
         <div class="dingdans_con">
           <div class="diangdans_con_right">
-            <div class="dingdans_con_right_top">
+            <div class="dingdans_con_right_top" style="margin-bottom: -1vw;">
               销售数：<strong >{{item.successNum}}</strong>
               销售金额：<strong >{{item.orderAmount}}</strong>
               利润：<strong >{{item.profitsAmount}}</strong>
             </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">
+            <div class="dingdans_con_right_down" style="margin-bottom: -1vw;">
               <span v-if="item.successNum">销售均价：<strong >{{item.orderAmount / item.successNum  | numFilter}}</strong></span>
               <span v-else>销售均价：<strong >0</strong></span>
               <span v-if="item.successNum">平均利润：<strong >{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>
               <span v-else>平均利润：<strong >0</strong></span>
+            </div>
+            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">
+              瑕疵数：<strong >{{item.saleNum}}</strong>
+              通过比例：<strong >{{item.theirPrice}} %</strong>
             </div>
           </div>
         </div>

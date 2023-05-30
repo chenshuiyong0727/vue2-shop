@@ -117,7 +117,7 @@
           <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 137vw;width: 100vw">
+      <section style="height: 147vw;width: 100vw">
         <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :disabled="true"></mt-field>
         <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam.waybillNo"></mt-field>
@@ -133,6 +133,7 @@
               <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
         </mt-field>
+        <mt-field label="瑕疵原因" v-if="requestParam.status == 8" placeholder="请输入瑕疵原因"  v-model="requestParam.reason"></mt-field>
         <mt-field label="发货截止时间">
           <el-date-picker class="select100" style="width: 62vw"
                           type="datetime" placeholder="发货截止时间"
@@ -251,6 +252,7 @@
           theirPrice: '',
           profits: '',
           waybillNo: '',
+          reason: '',
           addressId: ''
         },
         // popupVisible: false,
@@ -605,6 +607,10 @@
           this.$messagebox('请输入运费')
           return
         }
+        if(this.requestParam.status == 8 && !this.requestParam.reason) {
+          this.$messagebox('请输入瑕疵原因')
+          return
+        }
         if(this.requestParam.status == 3 && !this.requestParam.deliveryDeadlineTime) {
           this.$messagebox('发货截止时间为空')
           return
@@ -687,6 +693,7 @@
         this.requestParam.id = this.orderData.id
         this.requestParam.price = this.orderData.price
         this.requestParam.shelvesPrice = this.orderData.shelvesPrice
+        this.requestParam.reason = this.orderData.reason
         this.requestParam.subsidiesPrice = this.orderData.subsidiesPrice
         this.requestParam.deliveryDeadlineTime = parseTime(this.orderData.deliveryDeadlineTime)
         this.requestParam.freight = this.orderData.freight

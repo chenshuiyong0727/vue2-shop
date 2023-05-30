@@ -64,7 +64,7 @@
           <img style="width: 7.9vw;margin-left: -0.5vw;    margin-bottom: 5px;" src="../../../static/img/order_2.png" ></img>
         </div>
         <p>
-          <span>已上架商品</span>
+          <span>已上架订单</span>
           <i><samp>{{orderIofo.count2}} </samp>
             <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
           </i>
@@ -80,7 +80,7 @@
             <img style="width: 7vw; margin-bottom: 5px;margin-left: -0.2vw;" src="../../../static/img/order-3.png" ></img>
           </div>
           <p>
-            <span>待发货商品</span>
+            <span>待发货订单</span>
             <i><samp :class="orderIofo.count3 > 0 ? 'color-danger' : ''">{{orderIofo.count3}}</samp>
               <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
             </i>
@@ -93,7 +93,7 @@
             <img style="width: 8.4vw;margin-left: -0.9vw; margin-bottom: 5px;" src="../../../static/img/order-4.png" ></img>
           </div>
           <p>
-            <span>已发货商品</span>
+            <span>已发货订单</span>
             <i><samp :class="orderIofo.count4 > 0 ? 'color-danger' : ''">{{orderIofo.count4}}</samp>
               <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
             </i>
@@ -106,7 +106,7 @@
             <img style=" margin-bottom: 5px;margin-left: -0.7vw;width: 7.3vw" src="../../../static/img/order-5.png" ></img>
           </div>
           <p>
-            <span>已揽件商品</span>
+            <span>已揽件订单</span>
             <i><samp  :class="orderIofo.count5 > 0 ? 'color-danger' : ''">{{orderIofo.count5}}</samp>
               <img style=" width: 4.2vw;" src="../../../static/img/more.png" ></img>
             </i>
@@ -119,7 +119,7 @@
             <img style=" margin-bottom: 5px;width: 6.2vw" src="../../../static/img/order-6.png" ></img>
           </div>
           <p>
-            <span>已收货商品</span>
+            <span>已收货订单</span>
             <i><samp :class="orderIofo.count6 > 0 ? 'color-danger' : ''">{{orderIofo.count6}}</samp>
               <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
             </i>
@@ -132,7 +132,7 @@
             <img style="margin-bottom: 5px;width: 6.2vw" src="../../../static/img/xiaci.png" ></img>
           </div>
           <p>
-            <span>瑕疵商品</span>
+            <span>瑕疵订单</span>
             <i><samp :class="orderIofo.count8 > 0 ? 'color-danger' : ''">{{orderIofo.count8}}</samp>
               <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
             </i>
