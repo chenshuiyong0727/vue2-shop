@@ -135,15 +135,15 @@
             <span>其他收支</span><i class="icon-go"></i>
           </p>
         </router-link>
-        <a @click="syncOldPriceToNew1()"  class="my-settle-bottom">
-          <div >
-            <img style="width: 29px;
-                  margin-bottom: 7px;" src="../../static/img/qrzj.png"></img>
-          </div>
-          <p>
-            <span>确认涨价</span><i class="icon-go"></i>
-          </p>
-        </a>
+<!--        <a @click="syncOldPriceToNew1()"  class="my-settle-bottom">-->
+<!--          <div >-->
+<!--            <img style="width: 29px;-->
+<!--                  margin-bottom: 7px;" src="../../static/img/qrzj.png"></img>-->
+<!--          </div>-->
+<!--          <p>-->
+<!--            <span>确认涨价</span><i class="icon-go"></i>-->
+<!--          </p>-->
+<!--        </a>-->
         <router-link :to="{ path: '/logout?type=1'}" class="my-settle-bottom">
           <div>
             <img style="width: 29px;
@@ -184,6 +184,9 @@
       this.getData()
     },
     methods: {
+      comfirm(type){
+        this.$router.push({ path: '/logout', query: { type } })
+      },
       syncOldPriceToNew1() {
         goodsBaseApi.syncOldPriceToNew().then(res => {
           this.$toast(res.subMsg)

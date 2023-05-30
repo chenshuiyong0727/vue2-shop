@@ -80,7 +80,7 @@
             </strong>
           </div>
           <div class="dingdans_top_right" v-if="item.difference && item.thisTimePrice">
-             加入后
+             变更
             <strong v-if="item.difference > 0" class="color-danger"> +{{item.difference }}</strong>
             <strong v-else class="color-success">{{item.difference }}</strong>
           </div>

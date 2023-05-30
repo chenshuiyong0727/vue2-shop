@@ -5,20 +5,20 @@
       <h1 class="section1-title">
         待处理事务
       </h1>
-      <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ path: '/store?today=1'}">
-        <div>
-          <img style="width: 7.9vw;margin-left: -0.5vw;    margin-bottom: 5px;" src="../../../static/img/today.png" ></img>
-        </div>
-        <p>
-          <span>今日更新</span>
-          <i><samp :class="storeData.successNum > 0 ? 'color-danger' : ''">{{storeData.successNum}}</samp>
-            <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
-          </i>
-          <!--            <samp>{{orderIofo.count2}}</samp>-->
-        </p>
-      </router-link>
-      </section>
+<!--      <section class="my-vip" style="margin-top: 0">-->
+<!--        <router-link class="my-vip-bottom ho" :to="{ path: '/store?today=1'}">-->
+<!--        <div>-->
+<!--          <img style="width: 7.9vw;margin-left: -0.5vw;    margin-bottom: 5px;" src="../../../static/img/today.png" ></img>-->
+<!--        </div>-->
+<!--        <p>-->
+<!--          <span>今日更新</span>-->
+<!--          <i><samp :class="storeData.successNum > 0 ? 'color-danger' : ''">{{storeData.successNum}}</samp>-->
+<!--            <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>-->
+<!--          </i>-->
+<!--          &lt;!&ndash;            <samp>{{orderIofo.count2}}</samp>&ndash;&gt;-->
+<!--        </p>-->
+<!--      </router-link>-->
+<!--      </section>-->
       <section class="my-vip" style="margin-top: 0">
         <router-link class="my-vip-bottom ho" :to="{ path: '/store?today=7'}">
           <div>

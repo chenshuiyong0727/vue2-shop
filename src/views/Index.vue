@@ -77,19 +77,19 @@
     align-items: center;
     justify-content: space-between;
     width: 95vw;">
-        <el-date-picker style="width: 35vw;"
-                        v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
-                        :type="dateType" placeholder="时间开始">
+        <el-date-picker style="width: 42vw;"
+                        v-model="queryParam.createTimeFrom" :value-format="valueFormat"
+                        :type="dateType"  placeholder="时间开始" @change="getData1">
         </el-date-picker>
         <span style="    font-size: 15px;margin-left: 1vw;">至</span>
-        <el-date-picker style="width: 35vw"
-                        v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
-                        :type="dateType" placeholder="时间结束">
+        <el-date-picker style="width: 42vw"
+                        v-model="queryParam.createTimeTo" :value-format="valueFormat"
+                        :type="dateType" placeholder="时间结束" @change="getData1">
         </el-date-picker>
-        <mt-button
-          type="primary"
-          size="small"
-          @click="getData1">搜索</mt-button>
+<!--        <mt-button-->
+<!--          type="primary"-->
+<!--          size="small"-->
+<!--          @click="getData1">搜索</mt-button>-->
       </div>
       <div>
         <ve-line
@@ -173,6 +173,7 @@ export default {
       orderData: {},
       storeData: {},
       dateType: 'month',
+      valueFormat: 'yyyy-MM',
       dayLl: 'default',
       mouthLl: 'primary',
       loading: false,
@@ -260,10 +261,12 @@ export default {
         this.mouthLl = 'primary'
         this.dayLl = 'default'
         this.dateType = 'month'
+        this.valueFormat = 'yyyy-MM'
       } else {
         this.mouthLl = 'default'
         this.dayLl = 'primary'
         this.dateType = 'date'
+        this.valueFormat = 'yyyy-MM-dd'
       }
       this.getData1()
     },
