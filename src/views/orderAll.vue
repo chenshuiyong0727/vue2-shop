@@ -322,12 +322,13 @@
         this.listSysDict()
         this.resetData()
         //isBack 时添加中router中的元信息，判读是否要缓存
-        const { actNo,status,months } = this.$route.query
+        const { actNo,status,months,orderNo } = this.$route.query
+        this.queryParam.orderNo = orderNo
         this.queryParam.keyword = actNo
         this.status = status
         this.queryParam.status = status
         this.months = months
-        if (this.queryParam.keyword || this.queryParam.status || this.months) {
+        if (this.queryParam.keyword || this.queryParam.status || this.months || this.queryParam.orderNo ) {
           if(this.queryParam.status){
             this.changeSystem()
           }
@@ -336,7 +337,6 @@
             this.queryParam.successTimeTo = this.months
             this.titleName = this.months + ' 订单'
           }
-          // this.search1()
         }
         this.getPage()
       }else {

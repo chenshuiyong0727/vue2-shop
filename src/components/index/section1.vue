@@ -193,7 +193,7 @@
     margin-left: 0.5vw;
     padding: 0vw 1vw;">
       <li>
-        <router-link :to="{name:'销售报表'}">
+        <router-link :to="{name:'瑕疵商品'}">
           <p>{{form.defectsNum}}</p>
           <p class="section1name">瑕疵数</p>
         </router-link>

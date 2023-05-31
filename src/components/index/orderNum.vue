@@ -129,7 +129,9 @@
       <section class="my-vip" style="margin-top: 0">
         <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=8'}">
           <div>
-            <img style="margin-bottom: 5px;width: 6.2vw" src="../../../static/img/xiaci.png" ></img>
+            <img style="    margin-bottom: 5px;
+    width: 7.5vw;
+    margin-left: -2px;" src="../../../static/img/xiaci2.png" ></img>
           </div>
           <p>
             <span>瑕疵订单</span>

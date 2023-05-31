@@ -135,6 +135,17 @@
             <span>其他收支</span><i class="icon-go"></i>
           </p>
         </router-link>
+        <router-link :to="{ name: '瑕疵商品'}" class="my-settle-top">
+          <div>
+            <img style="    width: 33px;
+    margin-bottom: 7px;
+    margin-left: -2px;" src="../../static/img/xiaci1.png"></img>
+          </div>
+
+          <p>
+            <span>瑕疵商品</span><i class="icon-go"></i>
+          </p>
+        </router-link>
 <!--        <a @click="syncOldPriceToNew1()"  class="my-settle-bottom">-->
 <!--          <div >-->
 <!--            <img style="width: 29px;-->

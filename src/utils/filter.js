@@ -38,6 +38,14 @@ Vue.filter('sizeFilter', (value) => {
   let realVal = value.substring(0,27) + '...'
   return realVal
 })
+Vue.filter('sizeFilterNum', (value , num) => {
+  // 截取当前数据到小数点后两位
+  if (!value || value.length < num) {
+    return value
+  }
+  let realVal = value.substring(0,num) + '...'
+  return realVal
+})
 
 
 Vue.filter('formateTime', parseTime)
