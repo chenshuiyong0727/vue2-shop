@@ -109,8 +109,22 @@
         </mt-field>
         <mt-field label="订单号" placeholder="请输入订单号"  v-model="queryParam.orderNo"></mt-field>
         <mt-field label="原因" placeholder="请输入原因"  v-model="queryParam.reason"></mt-field>
-        <mt-field label="开始时间" type="date" placeholder="开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>
-        <mt-field label="结束时间" type="date" placeholder="结束时间"  v-model="queryParam.createTimeTo" ></mt-field>
+<!--        <mt-field label="开始时间" type="date" placeholder="开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>-->
+<!--        <mt-field label="结束时间" type="date" placeholder="结束时间"  v-model="queryParam.createTimeTo" ></mt-field>-->
+        <mt-field label="开始时间">
+          <el-date-picker class="select100"
+                          size="small"
+                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
+                          type="date" placeholder="开始时间">
+          </el-date-picker>
+        </mt-field>
+        <mt-field label="结束时间">
+          <el-date-picker class="select100"
+                          size="small"
+                          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
+                          type="date" placeholder="结束时间">
+          </el-date-picker>
+        </mt-field>
       </section>
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">

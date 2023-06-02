@@ -234,10 +234,24 @@
             </select>
         </mt-field>
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
-        <mt-field label="同步开始时间" type="date" placeholder="同步开始时间"  v-model="queryParam.syncTimeFrom" ></mt-field>
-        <mt-field label="同步结束时间" type="date" placeholder="同步结束时间"  v-model="queryParam.syncTimeTo" ></mt-field>
-        <mt-field label="入库开始时间" type="date" placeholder="入库开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>
-        <mt-field label="入库结束时间" type="date" placeholder="入库结束时间"  v-model="queryParam.createTimeTo" ></mt-field>
+        <mt-field label="入库开始时间">
+          <el-date-picker class="select100"
+                          size="small"
+                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
+                          type="date" placeholder="入库开始时间">
+          </el-date-picker>
+        </mt-field>
+        <mt-field label="入库结束时间">
+          <el-date-picker class="select100"
+                          size="small"
+                          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
+                          type="date" placeholder="入库结束时间">
+          </el-date-picker>
+        </mt-field>
+<!--        <mt-field label="同步开始时间" type="date" placeholder="同步开始时间"  v-model="queryParam.syncTimeFrom" ></mt-field>-->
+<!--        <mt-field label="同步结束时间" type="date" placeholder="同步结束时间"  v-model="queryParam.syncTimeTo" ></mt-field>-->
+<!--        <mt-field label="入库开始时间" type="date" placeholder="入库开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>-->
+<!--        <mt-field label="入库结束时间" type="date" placeholder="入库结束时间"  v-model="queryParam.createTimeTo" ></mt-field>-->
       </section>
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">

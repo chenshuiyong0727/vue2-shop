@@ -196,8 +196,22 @@
               <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
         </mt-field>
-        <mt-field label="成功开始时间" type="date" placeholder="成功开始时间"  v-model="queryParam.successTimeFrom" ></mt-field>
-        <mt-field label="成功结束时间" type="date" placeholder="成功结束时间"  v-model="queryParam.successTimeTo" ></mt-field>
+<!--        <mt-field label="成功开始时间" type="date" placeholder="成功开始时间"  v-model="queryParam.successTimeFrom" ></mt-field>-->
+<!--        <mt-field label="成功结束时间" type="date" placeholder="成功结束时间"  v-model="queryParam.successTimeTo" ></mt-field>-->
+        <mt-field label="成功开始时间">
+          <el-date-picker class="select100"
+                          size="small"
+                          v-model="queryParam.successTimeFrom" value-format="yyyy-MM-dd"
+                          type="date" placeholder="成功开始时间">
+          </el-date-picker>
+        </mt-field>
+        <mt-field label="成功结束时间">
+          <el-date-picker class="select100"
+                          size="small"
+                          v-model="queryParam.successTimeTo" value-format="yyyy-MM-dd"
+                          type="date" placeholder="成功结束时间">
+          </el-date-picker>
+        </mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="queryParam.waybillNo"></mt-field>
         <mt-field label="订单号" placeholder="请输入订单号"  v-model="queryParam.orderNo"></mt-field>
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
