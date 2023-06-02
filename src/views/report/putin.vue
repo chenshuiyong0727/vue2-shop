@@ -56,7 +56,8 @@
               剩余库存总额：<strong>{{item.inventoryPrice}}</strong>
               已售数量：<strong>{{item.saleNum}}</strong>
               出售金额：<strong>{{item.theirPrice}}</strong>
-              产生利润：<strong>{{item.profits}}</strong>
+              已产生利润：<strong>{{item.profits}}</strong>
+              预估利润：<strong>{{item.thisTimeProfits}}</strong>
             </div>
 <!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
 <!--              <span v-if="item.successNum">入库均价：<strong>{{item.orderAmount / item.successNum  | numFilter}}</strong></span>-->

@@ -115,7 +115,7 @@
     font-size: 3.5vw;
     margin-top: -1vw;">
               <strong class="color-danger"> {{ item.warehouseId | dictToDescTypeValue(40) }} </strong>
-              <strong> {{item.syncTime |formateTime }}</strong>
+              <strong> {{item.createTime |formateTime }}</strong>
               <el-dropdown trigger="click" style="margin-left: 10vw;">
                 <span class="el-dropdown-link">
                   操作<i class="el-icon-arrow-down el-icon--right"></i>
@@ -366,6 +366,8 @@
           { fieldValue: 2, fieldName: '未上架' }
         ],
         sortList: [
+          { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5) - a.price - 10 , 2 ) asc ,', fieldName: '利润升序' },
+          { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5) - a.price - 10 , 2 ) desc ,', fieldName: '利润降序' },
           { fieldValue: '(g.price - a.dw_price ) desc  ,', fieldName: '涨价降序' },
           { fieldValue: '(g.price - a.dw_price ) asc  ,', fieldName: '降价降序' },
           { fieldValue: 'c.size asc ,', fieldName: '尺码升序' },
@@ -378,8 +380,6 @@
           { fieldValue: 'a.inventory desc ,', fieldName: '库存降序' },
           { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5),2 ) desc ,', fieldName: '到手降序' },
           { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5),2 ) asc ,', fieldName: '到手升序' },
-          { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5) - a.price - 10 , 2 ) desc ,', fieldName: '利润降序' },
-          { fieldValue: ' TRUNCATE(g.price - (g.price * 0.075 + 38 + 8.5) - a.price - 10 , 2 ) asc ,', fieldName: '利润升序' },
           { fieldValue: 'a.create_time asc ,', fieldName: '入库时间升序' },
           { fieldValue: 'a.create_time desc ,', fieldName: '入库时间降序' },
 
