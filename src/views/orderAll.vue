@@ -621,6 +621,10 @@
           this.$messagebox('请输入运费')
           return
         }
+        if(this.requestParam.status == 3 && !this.requestParam.addressId) {
+          this.$messagebox('请选择地址')
+          return
+        }
         if(this.requestParam.status == 8 && !this.requestParam.reason) {
           this.$messagebox('请输入瑕疵原因')
           return
