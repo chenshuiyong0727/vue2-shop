@@ -40,7 +40,8 @@
       <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top">
           <div class="dingdans_top_left">
-            <strong>{{item.orderNo}}</strong>
+            <strong>{{item.orderNo }}</strong>
+            <strong  v-if="item.saleType != 1" class="color-danger">{{ item.saleType | dictToDescTypeValue(46) }}</strong>
           </div>
           <div class="dingdans_top_right">
             <strong v-if="item.status == 7" class="color-success" >{{ item.status | dictToDescTypeValue(37) }} </strong>
@@ -49,8 +50,13 @@
           </div>
         </div>
         <div class="dingdans_con">
-          <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">
+          <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap" @click="avatarShow(item.img)">
             <img :src="item.img">
+            <p class="mark" v-if="item.saleType != 1">
+              <span class="text" >
+                {{ item.saleType | dictToDescTypeValue(46) }}
+              </span>
+            </p>
           </div>
           <div v-if="!item.img && item.imgUrl" :src="item.img" class="dingdans_con_left" @click="avatarShow(fileUrl+ item.imgUrl)">
             <img :src="fileUrl + item.imgUrl">
@@ -122,20 +128,31 @@
         <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam.waybillNo"></mt-field>
         <mt-field label="地址">
-            <select class="select100" v-model="requestParam.addressId">
-          <option :disabled="true" value="" selected>请选择</option>
-              <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>
-            </select>
+            <el-select size="small" class="select100" v-model="requestParam.addressId">
+            <el-option :disabled="true" value="" selected>请选择</el-option>
+            <el-option
+              v-for="item in addressList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+            </el-option>
+<!--              <el-option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</el-option>-->
+            </el-select>
         </mt-field>
         <mt-field label="状态">
-            <select  class="select100" v-model="requestParam.status">
-              <option :disabled="true" value="" selected>请选择</option>
-              <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>
-            </select>
+          <el-select size="small" class="select100" v-model="requestParam.status">
+            <el-option label="状态" value=""></el-option>
+            <el-option
+              v-for="item in statusList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+            </el-option>
+          </el-select>
         </mt-field>
         <mt-field label="瑕疵原因" v-if="requestParam.status == 8" placeholder="请输入瑕疵原因"  v-model="requestParam.reason"></mt-field>
         <mt-field label="发货截止时间">
-          <el-date-picker class="select100" style="width: 62vw"
+          <el-date-picker size="small" class="select100" style="width: 62vw"
                           type="datetime" placeholder="发货截止时间"
                           v-model="requestParam.deliveryDeadlineTime"
                           value-format="yyyy-MM-dd HH:mm:ss">></el-date-picker>
@@ -165,10 +182,16 @@
         <mt-field label="运费" placeholder="请输入运费"  type="number" v-model="requestParam1.freight"></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam1.waybillNo"></mt-field>
         <mt-field label="地址">
-            <select class="select80" v-model="requestParam1.addressId">
-              <option :disabled="true" value="" selected>请选择</option>
-              <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>
-            </select>
+            <el-select size="small"class="select80" v-model="requestParam1.addressId">
+              <el-option :disabled="true" value="" selected>请选择</el-option>
+<!--              <el-option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</el-option>-->
+              <el-option
+                v-for="item in addressList"
+                :key="item.fieldValue"
+                :label="item.fieldName"
+                :value="+item.fieldValue">
+              </el-option>
+            </el-select>
         </mt-field>
       </section>
     </mt-popup>
@@ -183,18 +206,40 @@
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 80vw;width: 100vw">
-        <mt-field label="状态" style="margin-top: 11vw;">
-            <select class="select100" v-model="queryParam.status" @change="changeSystem">
-               <option :disabled="true" value="" selected>请选择状态</option>
-              <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>
-            </select>
+      <section style="height: 90vw;width: 100vw">
+        <mt-field label="状态" style="margin-top: 12vw;">
+          <el-select size="small" class="select100" v-model="queryParam.status" @change="changeSystem">
+            <el-option  label="状态" value=""></el-option>
+            <el-option
+              v-for="item in statusList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+            </el-option>
+          </el-select>
         </mt-field>
         <mt-field label="地址">
-            <select class="select100" v-model="queryParam.addressId">
-               <option :disabled="true" value="" selected>请选择地址</option>
-              <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>
-            </select>
+            <el-select size="small" class="select100" v-model="queryParam.addressId">
+               <el-option :disabled="true" value="" selected>请选择地址</el-option>
+<!--              <el-option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</el-option>-->
+              <el-option
+                v-for="item in addressList"
+                :key="item.fieldValue"
+                :label="item.fieldName"
+                :value="+item.fieldValue">
+              </el-option>
+            </el-select>
+        </mt-field>
+        <mt-field label="销售类型">
+          <el-select size="small" class="select100" v-model="queryParam.saleType" @change="changeSystem1">
+            <el-option  label="销售类型" value=""></el-option>
+            <el-option
+              v-for="item in saleTypeList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+            </el-option>
+          </el-select>
         </mt-field>
 <!--        <mt-field label="成功开始时间" type="date" placeholder="成功开始时间"  v-model="queryParam.successTimeFrom" ></mt-field>-->
 <!--        <mt-field label="成功结束时间" type="date" placeholder="成功结束时间"  v-model="queryParam.successTimeTo" ></mt-field>-->
@@ -246,7 +291,6 @@
         allLoaded: false,
         mockArr: [],
         imageZoom: '',
-
         pictureZoomShow: true,
         requestParam1: {
           id: '',
@@ -257,6 +301,7 @@
         requestParam: {
           id: '',
           status: '',
+          saleType: '',
           price: '',
           shelvesPrice: '',
           deliveryDeadlineTime: '',
@@ -281,9 +326,11 @@
         pictureZoomShow: false,
         imageZoom: '',
         fileUrl: fileUrl,
+        saleType: '',
         queryParam: {
           id: '',
           size: '',
+          saleType: '',
           keyword: '',
           orderNo: '',
           inventoryId: '',
@@ -316,6 +363,7 @@
         addressList: [],
         statusList: [],
         dataStatusList: [],
+        saleTypeList: [],
         sellTime: '',
         successTime: '',
         startDate: new Date(),
@@ -336,13 +384,17 @@
         this.listSysDict()
         this.resetData()
         //isBack 时添加中router中的元信息，判读是否要缓存
-        const { actNo,status,months,orderNo } = this.$route.query
+        const { actNo,status,months,orderNo ,saleType} = this.$route.query
+        if (saleType ) {
+          this.saleType = saleType
+          this.queryParam.saleType = saleType
+        }
         this.queryParam.orderNo = orderNo
         this.queryParam.keyword = actNo
         this.status = status
         this.queryParam.status = status
         this.months = months
-        if (this.queryParam.keyword || this.queryParam.status || this.months || this.queryParam.orderNo ) {
+        if (this.queryParam.keyword || this.queryParam.status || this.months || this.queryParam.orderNo|| this.queryParam.saleType) {
           if(this.queryParam.status){
             this.changeSystem()
           }
@@ -453,6 +505,7 @@
         this.addressList = sysDictList.filter(item => item.typeValue == 38)
         this.statusList = sysDictList.filter(item => item.typeValue == 37)
         this.dataStatusList = sysDictList.filter(item => item.typeValue == 36)
+        this.saleTypeList = sysDictList.filter(item => item.typeValue == 46)
       },
       loadData(p_status) {
         // 第一次加载或者下拉刷新最新数据
@@ -497,6 +550,9 @@
           item => item.typeValue == 37 && item.fieldValue == this.queryParam.status)
         this.titleName = res.length ? res[0].fieldName : ''
         this.titleName = this.titleName + '订单'
+      },
+      changeSystem1() {
+        this.$forceUpdate()
       },
       search1() {
         this.queryParam.pageNum = 1
@@ -570,6 +626,9 @@
         this.updateTime = ''
         this.sellTime = ''
         this.successTime = ''
+        if(this.saleType) {
+          this.queryParam.saleType = this.saleType
+        }
         this.changeSystem()
         this.search1()
       },
@@ -978,5 +1037,40 @@
     /*width: 5.7rem;*/
     padding: 0.2rem;
 
+  }
+  .wrap {
+    position: relative;
+  }
+  .mark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+  }
+
+  .mark:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-width: 30px;
+    border-bottom-width: 16px;
+    border-left-width: 20px;
+  }
+
+  .text {
+    color: white;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    font-size: 11px;
+    text-transform: uppercase;
+    width: 51px;
+    text-align: center;
   }
 </style>
