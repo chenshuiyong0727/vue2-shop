@@ -41,7 +41,6 @@
         <div class="dingdans_top">
           <div class="dingdans_top_left">
             <strong>{{item.orderNo }}</strong>
-            <strong  v-if="item.saleType != 1" class="color-danger">{{ item.saleType | dictToDescTypeValue(46) }}</strong>
           </div>
           <div class="dingdans_top_right">
             <strong v-if="item.status == 7" class="color-success" >{{ item.status | dictToDescTypeValue(37) }} </strong>
@@ -51,7 +50,7 @@
         </div>
         <div class="dingdans_con">
           <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap" @click="avatarShow(item.img)">
-            <img :src="item.img">
+            <img :src="item.img" style="margin-top: 25px;">
             <p class="mark" v-if="item.saleType != 1">
               <span class="text" >
                 {{ item.saleType | dictToDescTypeValue(46) }}
