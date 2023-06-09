@@ -1071,5 +1071,6 @@
     text-transform: uppercase;
     width: 51px;
     text-align: center;
+    margin-top: 2.1px;
   }
 </style>
