@@ -68,7 +68,7 @@
                  售价：<strong>{{item.shelvesPrice}}</strong>
               </span>
             </div>
-            <div class="dingdans_con_right_down">
+            <div class="dingdans_con_right_down" style="margin-bottom: 1vw;margin-top: 1vw;">
               <div  v-if="[2,11].includes(item.status)">
                 最低售价：<strong class="color-danger">{{item.thisTimePrice}}</strong>
                 预估利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong>
@@ -79,15 +79,15 @@
               <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
               入库价：<strong>{{item.price}}</strong>
             </div>
-            <div  class="dingdans_con_right_down" v-if="item.addressId">
+            <div  class="dingdans_con_right_down" style="margin-bottom: 1vw;margin-top: 1vw;" v-if="item.addressId">
               <strong  v-if="item.status == 3" style="font-size: 12px;" class="color-danger"> {{item.deliveryDeadlineTime |formateTime }}</strong>
               <strong style="font-size: 12px;" >{{ item.addressId | dictToDescTypeValue(38) }} </strong>
             </div>
             <div class="dingdans_con_right_down_1">
-              <mt-button
-                type="primary"
-                size="small"
-                @click="jumpactNo(item.actNo)">库存</mt-button>
+<!--              <mt-button-->
+<!--                type="primary"-->
+<!--                size="small"-->
+<!--                @click="jumpactNo(item.actNo)">库存</mt-button>-->
               <mt-button
                 type="primary"
                 size="small"
@@ -785,7 +785,11 @@
         this.requestParam.freight = this.orderData.freight
         this.requestParam.waybillNo = this.orderData.waybillNo
         this.requestParam.addressId = this.orderData.addressId
-        this.requestParam.status = this.orderData.status + 1
+        if (this.orderData.status != 11) {
+          this.requestParam.status = this.orderData.status + 1
+        } else{
+          this.requestParam.status = 6
+        }
         if (!this.orderData.poundage) {
           let poundage = this.requestParam.shelvesPrice * 0.075 + 38 + 8.5
           this.requestParam.poundage = parseFloat(poundage).toFixed(2)
