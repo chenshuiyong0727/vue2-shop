@@ -72,6 +72,20 @@
         </p>
       </router-link>
       </section>
+      <section class="my-vip" style="margin-top: 0">
+        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=11'}">
+        <div>
+          <img style="width: 7.1vw;margin-left: -0.5vw;    margin-bottom: 5px;" src="../../../static/img/order_11.png" ></img>
+        </div>
+        <p>
+          <span>闪电直发入仓</span>
+          <i><samp :class="orderIofo.count11 > 0 ? 'color-danger' : ''">{{orderIofo.count11}} </samp>
+            <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
+          </i>
+          <!--            <samp>{{orderIofo.count2}}</samp>-->
+        </p>
+      </router-link>
+      </section>
 
 
       <section class="my-vip" style="margin-top: 0">

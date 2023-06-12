@@ -62,10 +62,20 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
-              货号：<strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong> 尺码：<strong>{{item.size}}</strong> 售价：<strong>{{item.shelvesPrice}}</strong>
+              货号：<strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
+              尺码：<strong>{{item.size}}</strong>
+              <span>
+                 售价：<strong>{{item.shelvesPrice}}</strong>
+              </span>
             </div>
             <div class="dingdans_con_right_down">
-              <span v-if="item.profits">利润：<strong class="color-danger">{{item.profits}}</strong></span>
+              <div  v-if="[2,11].includes(item.status)">
+                最低售价：<strong class="color-danger">{{item.thisTimePrice}}</strong>
+                预估利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong>
+              </div>
+              <div v-else>
+                <span v-if="item.profits">利润：<strong class="color-danger">{{item.profits}}</strong></span>
+              </div>
               <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
               入库价：<strong>{{item.price}}</strong>
             </div>
