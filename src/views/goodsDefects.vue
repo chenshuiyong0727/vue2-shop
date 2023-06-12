@@ -65,13 +65,17 @@
               <strong> {{item.createTime |formateTime }}</strong>
             </div>
             <div class="dingdans_top" style="margin-bottom: -5px;">
-              <el-tooltip  :content="item.reason" placement="top">
+              <el-tooltip style="width: 40vw;" :content="item.reason" placement="top">
                 <strong>{{item.reason | sizeFilterNum(12) }}</strong>
               </el-tooltip>
               <mt-button
                 type="primary"
                 size="small"
                 @click="handleClick(item)">修改</mt-button>
+              <mt-button
+                type="danger"
+                size="small"
+                @click="goDel(item.id)">删除</mt-button>
             </div>
           </div>
         </div>
@@ -367,6 +371,21 @@
       },
       jumpactOrder(orderNo) {
         this.$router.push({ path: '/order', query: { orderNo } })
+      },
+      goDel(id) {
+        this.$messagebox.confirm('是否删除',"提示",{
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type:"warning",
+        }).then(() => {
+          goodsDefectsApi.delById(id).then(res => {
+            this.$toast(res.subMsg)
+            if (res.subCode === 1000) {
+              this.getPage()
+            }
+          })
+        }).catch(() => {
+        })
       },
       handleClick(row) {
         this.orderData = row

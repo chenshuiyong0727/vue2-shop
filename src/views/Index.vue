@@ -4,7 +4,7 @@
     <mt-header title="首页">
     </mt-header>
     <v-orderNum :orderIofo ="orderIofo" :storeData ="storeData"/>
-    <v-section1 :form="form" :countDay="countDay" :count="count":chartData1="chartData1" :chartSettings1="chartSettings1" />
+    <v-section1 :form="form" :countDay="countDay" :count="count":chartData1="chartData1" :orderIofo ="orderIofo" :chartSettings1="chartSettings1" />
     <div style="margin-top: 17px;border-left:1px solid #DCDFE6; background-color: #fff;    height: 500px;">
       <h1 class="index-title">
         销售走势
@@ -14,6 +14,8 @@
           <router-link :to="{name:'销售报表'}">
             <p class="color-danger"><strong>{{orderData.successNum}}</strong> </p>
             <p class="section1name" >本月订单总数</p>
+            <p class="color-url"><strong>{{orderData.expectSuccessNum}}</strong> </p>
+            <p class="section1name" >预计本月总数</p>
             <p :class="orderData.successNumRate<0 ? 'color-success' : 'color-danger'" >{{orderData.successNumRate}} %</p>
             <p class="section1name" >同比上月</p>
           </router-link>
@@ -22,6 +24,8 @@
           <router-link :to="{name:'销售报表'}">
             <p class="color-danger"><strong>{{orderData.profitsAmount}}</strong> </p>
             <p class="section1name" >本月订单利润</p>
+            <p class="color-url"><strong>{{orderData.expectProfitsAmount}}</strong> </p>
+            <p class="section1name" >预计本月利润</p>
             <p :class="orderData.profitsAmountRate<0 ? 'color-success' : 'color-danger'" >{{orderData.profitsAmountRate}} %</p>
             <p class="section1name" >同比上月</p>
           </router-link>
@@ -30,6 +34,8 @@
           <router-link :to="{name:'销售报表'}">
             <p class="color-danger"><strong>{{orderData.orderAmount}}</strong> </p>
             <p class="section1name" >本月销售总额</p>
+            <p class="color-url"><strong>{{orderData.expectOrderAmount}}</strong> </p>
+            <p class="section1name" >预计本月总额</p>
             <p :class="orderData.orderAmountRate<0 ? 'color-success' : 'color-danger'" >{{orderData.orderAmountRate}} %</p>
             <p class="section1name" >同比上月</p>
           </router-link>
@@ -91,14 +97,16 @@
 <!--          size="small"-->
 <!--          @click="getData1">搜索</mt-button>-->
       </div>
-      <div>
+      <div style="margin-top: 20px;">
         <ve-line
+          v-if="dataType == 1"
           height="250px"
-          :data="chartData"
-          :legend-visible="false"
+          :data="chartData2"
+          :legend-visible="true"
           :loading="loading"
           :data-empty="dataEmpty"
           :settings="chartSettings"></ve-line>
+        <ve-histogram height="250px" v-else :data="chartData2" :extend="extend" :settings="chartSettings" :legend-visible="true"></ve-histogram>
       </div>
     </div>
     <v-baseline/>
@@ -143,6 +151,50 @@ export default {
         createTimeFrom: '',
         createTimeTo: ''
       },
+      dataType: 1,
+      extend: {
+        // x轴的文字倾斜
+        "xAxis.0.axisLabel.rotate": 45,
+        yAxis: {
+          //是否显示y轴线条
+          axisLine: {
+            show: true,
+          },
+          // 纵坐标网格线设置，同理横坐标
+          splitLine: {
+            show: false,
+          },
+          // 线条位置
+          position: "left",
+        },
+        xAxis: {
+          axisLine: {
+            show: true,
+          },
+        },
+        series: {
+          label: { show: true, position: "top" },
+        },
+        //数据过多时出现横向滚动条
+        dataZoom: [
+          {
+            show: true,
+            realtime: true,
+            start: 0,
+            end: 50,
+          },
+          {
+            type: "inside",
+            realtime: true,
+            start: 0,
+            end: 50,
+          },
+        ],
+      },
+      chartData2: {
+        columns: ['months', '订单数', '订单金额(千)', '利润(百)'],
+        rows: []
+      },
       createTime: '',
       chartSettings: {
         xAxisType: 'time',
@@ -150,8 +202,8 @@ export default {
         axisSite: { right: ['profitsAmount'] },
         labelAlias: {
           'successNum': '订单数',
-          'orderAmount': '订单金额',
-          'profitsAmount': '利润'
+          'orderAmount': '订单金额(千)',
+          'profitsAmount': '利润(百)'
         }
       },
       chartData: {
@@ -252,7 +304,8 @@ export default {
       })
     },
     profitData(dataType) {
-     this.queryParam = {
+      this.dataType = dataType
+      this.queryParam = {
         dataType: dataType,
         createTimeFrom: '',
         createTimeTo: ''
@@ -276,6 +329,7 @@ export default {
           this.dataEmpty = false
           this.loading = false
           this.chartData.rows = res.data.rows
+          this.chartData2.rows = res.data.rowsDate
           this.orderData = res.data
           if (this.orderData) {
             this.orderData.successNumRate = parseFloat(
@@ -287,6 +341,14 @@ export default {
             this.orderData.orderAmountRate = parseFloat(
               (this.orderData.orderAmount - this.orderData.orderAmountLast)
               / this.orderData.orderAmountLast * 100).toFixed(2)
+            var date = new Date()
+            let todaydate = date.getDate()
+            let expectSuccessNum = this.orderData.successNum / (todaydate/30)
+            this.orderData.expectSuccessNum = parseFloat(expectSuccessNum).toFixed(0)
+            let expectProfitsAmount = this.orderData.profitsAmount / (todaydate/30)
+            this.orderData.expectProfitsAmount = parseFloat(expectProfitsAmount).toFixed(2)
+            let expectOrderAmount = this.orderData.orderAmount / (todaydate/30)
+            this.orderData.expectOrderAmount = parseFloat(expectOrderAmount).toFixed(2)
           }
         } else {
           this.$toast(res.subMsg)

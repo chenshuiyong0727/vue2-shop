@@ -8,8 +8,11 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Mint from 'mint-ui';    //移动端UI
 import 'mint-ui/lib/style.css'
-import VeLine from 'v-charts-v2/lib/line'
+// import VeLine from 'v-charts-v2/lib/line'
+import VeLine from 'v-charts/lib/line'
 import VePie  from 'v-charts/lib/pie'
+import VeHistogram from 'v-charts/lib/histogram.common'
+
 // todo import Vconsole from 'vconsole'
 // let vConsole = new Vconsole()
 // Vue.use(vConsole);
@@ -19,6 +22,7 @@ Vue.config.productionTip = false
 Vue.prototype.$api = api;
 Vue.component(VeLine.name, VeLine)
 Vue.component(VePie.name, VePie)
+Vue.component(VeHistogram.name,VeHistogram)
 
 router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) {  // 需要权限,进一步进行判断

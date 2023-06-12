@@ -204,6 +204,18 @@
           <p class="section1name">通过比例</p>
         </router-link>
       </li>
+      <li>
+        <router-link :to="{  path: '/order?saleType=2'}">
+          <p>{{orderIofo.countSd}}</p>
+          <p class="section1name">闪电直发</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{  path: '/order?status=11'}">
+          <p>{{orderIofo.count11}}</p>
+          <p class="section1name">寄售入库</p>
+        </router-link>
+      </li>
     </ul>
 <!--  <router-link :to="{ name: '详情页'}"  class="section1-banner">-->
 <!--    <img v-lazy="banner">-->
@@ -225,6 +237,10 @@ export default {
       default: {}
     },
     form: {
+      type: Object,
+      default: {}
+    },
+    orderIofo: {
       type: Object,
       default: {}
     },

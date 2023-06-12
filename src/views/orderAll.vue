@@ -397,6 +397,7 @@
         if (saleType ) {
           this.saleType = saleType
           this.queryParam.saleType = saleType
+          this.changeOrder()
         }
         this.queryParam.orderNo = orderNo
         this.queryParam.keyword = actNo
@@ -557,6 +558,14 @@
           localStorage.getItem('sysDictList')) : []
         let res = sysDictList.filter(
           item => item.typeValue == 37 && item.fieldValue == this.queryParam.status)
+        this.titleName = res.length ? res[0].fieldName : ''
+        this.titleName = this.titleName + '订单'
+      },
+      changeOrder() {
+        let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
+          localStorage.getItem('sysDictList')) : []
+        let res = sysDictList.filter(
+          item => item.typeValue == 46 && item.fieldValue == this.queryParam.saleType)
         this.titleName = res.length ? res[0].fieldName : ''
         this.titleName = this.titleName + '订单'
       },
