@@ -107,11 +107,20 @@
         </div>
       </mt-header>
       <section style="height: 80vw;width: 100vw">
-        <mt-field label="状态" style="margin-top: 11vw;">
-            <select class="select100" v-model="queryParam.type" @change="changeSystem" >
-               <option :disabled="true" value="" selected>请选择类型</option>
-              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>
-            </select>
+        <mt-field label="类型" style="margin-top: 11vw;">
+<!--            <select class="select100" v-model="queryParam.type" @change="changeSystem" >-->
+<!--               <option :disabled="true" value="" selected>请选择类型</option>-->
+<!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
+<!--            </select>-->
+            <el-select size="small" class="select100" v-model="queryParam.type" @change="changeSystem" >
+          <el-option :disabled="true" value="" selected>请选择类型</el-option>
+          <el-option
+            v-for="item in typeList"
+            :key="item.fieldValue"
+            :label="item.fieldName"
+            :value="item.fieldValue">
+          </el-option>
+            </el-select>
         </mt-field>
         <mt-field label="品牌" placeholder="请输入品牌"  v-model="queryParam.brand"></mt-field>
 <!--        <mt-field label="开始时间" type="date" placeholder="开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>-->

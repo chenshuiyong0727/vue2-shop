@@ -31,9 +31,18 @@
 <!--        </el-upload>-->
       </mt-field>
       <mt-field label="状态">
-          <select class="select100" v-model="form.status"  :disabled="true ">
-            <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>
-          </select>
+<!--          <select class="select100" v-model="form.status"  :disabled="true ">-->
+<!--            <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>-->
+<!--          </select>-->
+          <el-select size="small" class="select100" v-model="form.status" :disabled="true " >
+        <el-option :disabled="true" value="" selected>状态</el-option>
+        <el-option
+          v-for="item in statusList"
+          :key="item.fieldValue"
+          :label="item.fieldName"
+          :value="+item.fieldValue">
+        </el-option>
+          </el-select>
       </mt-field>
       <mt-field :disabled="true " label="订单号" type = "text" v-model = "form.orderNo"></mt-field>
       <mt-field :disabled="true " label="货号" type = "text" v-model = "form.actNo"></mt-field>
@@ -57,9 +66,18 @@
 <!--      <mt-field :disabled="true " label="利润比3333" type = "text" v-model = "form.orderNo"></mt-field>-->
 <!--      <mt-field :disabled="true " label="预估利润3333" type = "text" v-model = "form.orderNo"></mt-field>-->
       <mt-field label="地址">
-          <select class="select100" v-model="form.addressId"  :disabled="true ">
-            <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>
-          </select>
+<!--          <select class="select100" v-model="form.addressId"  :disabled="true ">-->
+<!--            <option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</option>-->
+<!--          </select>-->
+          <el-select size="small" class="select100" v-model="form.addressId" :disabled="true " >
+            <el-option :disabled="true" value="" selected>请选择类型</el-option>
+            <el-option
+              v-for="item in addressList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+            </el-option>
+          </el-select>
       </mt-field>
       <mt-field :disabled="true " label="运单编号" type = "text" v-model = "form.waybillNo"></mt-field>
       <mt-field :disabled="true " label="最迟发货时间" type = "text" v-model = "form.deliveryDeadlineTime"></mt-field>

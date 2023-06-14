@@ -84,10 +84,10 @@
               <strong style="font-size: 12px;" >{{ item.addressId | dictToDescTypeValue(38) }} </strong>
             </div>
             <div class="dingdans_con_right_down_1">
-<!--              <mt-button-->
-<!--                type="primary"-->
-<!--                size="small"-->
-<!--                @click="jumpactNo(item.actNo)">库存</mt-button>-->
+              <mt-button
+                type="primary"
+                size="small"
+                @click="jumpactNo(item.actNo)">库存</mt-button>
               <mt-button
                 type="primary"
                 size="small"

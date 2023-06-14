@@ -159,10 +159,19 @@
       <section style="height: 50vw;width: 80vw">
         <mt-field label="选中数" style="margin-top: 11vw;" v-model="ids.length" :disabled="true"></mt-field>
         <mt-field label="仓库">
-            <select  class="select80" v-model="requestParam.warehouseId">
-              <option  value="" selected>请选择仓库</option>
-              <option v-for="x in warehouseList" :value="x.fieldValue">{{x.fieldName}}</option>
-            </select>
+<!--            <select  class="select80" v-model="requestParam.warehouseId">-->
+<!--              <option  value="" selected>请选择仓库</option>-->
+<!--              <option v-for="x in warehouseList" :value="x.fieldValue">{{x.fieldName}}</option>-->
+<!--            </select>-->
+            <el-select size="small" class="select80" v-model="requestParam.warehouseId"  >
+              <el-option :disabled="true" value="" selected>请选择仓库</el-option>
+              <el-option
+                v-for="item in warehouseList"
+                :key="item.fieldValue"
+                :label="item.fieldName"
+                :value="+item.fieldValue">
+              </el-option>
+            </el-select>
         </mt-field>
       </section>
     </mt-popup>

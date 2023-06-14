@@ -133,10 +133,19 @@
 <!--            </select>-->
 <!--        </mt-field>-->
         <mt-field label="类型" style="margin-top: 11vw;">
-            <select class="select100" v-model="queryParam.type" @change="changeSystem" >
-          <option :disabled="true" value="" selected>请选择类型</option>
-              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>
-            </select>
+<!--            <select class="select100" v-model="queryParam.type" @change="changeSystem" >-->
+<!--          <option :disabled="true" value="" selected>请选择类型</option>-->
+<!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
+<!--            </select>-->
+            <el-select size="small" class="select100" v-model="queryParam.type" @change="changeSystem" >
+          <el-option :disabled="true" value="" selected>请选择类型</el-option>
+          <el-option
+            v-for="item in typeList"
+            :key="item.fieldValue"
+            :label="item.fieldName"
+            :value="item.fieldValue">
+          </el-option>
+            </el-select>
         </mt-field>
         <mt-field label="价格开始"  placeholder="价格开始"  v-model="queryParam.priceFrom" ></mt-field>
         <mt-field label="价格结束"  placeholder="价格结束"  v-model="queryParam.priceTo" ></mt-field>
