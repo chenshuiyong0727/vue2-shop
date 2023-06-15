@@ -466,7 +466,7 @@ export default {
           if (res.subCode === 1000) {
             this.$toast('添加成功，即将返回列表')
             this.goBack()
-            // this.$messagebox.confirm('添加成功！是否继续添加商品',"提示",{
+            // this.$confirm('添加成功！是否继续添加商品',"提示",{
             //   confirmButtonText: '确定',
             //   cancelButtonText: '取消',
             //   type:"warning",

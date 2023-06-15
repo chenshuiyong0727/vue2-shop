@@ -39,9 +39,8 @@ module.exports = {
       //   }
       // }
       "/gw/op": {
-        // target: "http://localhost:28027/gw/op", // mono
-        // target: "http://localhost:28027/gw/op", // gw
-        target: "http://114.132.243.79:28027/gw/op", //设置调用的接口域名和端口
+        target: "http://localhost:28027/gw/op", // mono
+        // target: "http://114.132.243.79:28027/gw/op", //设置调用的接口域名和端口
         changeOrigin: true,
         pathRewrite: {
           "^/gw/op": "" //用'/api' 代替 'http://218.78.187.216/api/v1'

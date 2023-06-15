@@ -225,15 +225,15 @@
     methods: {
       confirmHandle() {
         if(!this.requestParam.status) {
-          this.$messagebox('请选择状态')
+          this.$toast('请选择状态')
           return
         }
         if(!this.requestParam.createTime) {
-          this.$messagebox('请输入创建时间')
+          this.$toast('请输入创建时间')
           return
         }
         if(!this.requestParam.reason) {
-          this.$messagebox('请输入瑕疵原因')
+          this.$toast('请输入瑕疵原因')
           return
         }
         goodsDefectsApi.update(this.requestParam).then(res => {
@@ -373,7 +373,7 @@
         this.$router.push({ path: '/order', query: { orderNo } })
       },
       goDel(id) {
-        this.$messagebox.confirm('是否删除',"提示",{
+        this.$confirm('是否删除',"提示",{
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type:"warning",

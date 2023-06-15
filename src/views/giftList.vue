@@ -217,24 +217,24 @@
       },
       confirmHandle() {
         if(!this.requestParam.name) {
-          this.$messagebox('请输入姓名')
+          this.$toast('请输入姓名')
           return
         }
         if(!this.requestParam.price) {
-          this.$messagebox('请输入价格')
+          this.$toast('请输入价格')
           return
         }
         if(!this.requestParam.type) {
-          this.$messagebox('请选择类型')
+          this.$toast('请选择类型')
           return
         }
         if(!this.requestParam.label) {
-          this.$messagebox('请选择关系')
+          this.$toast('请选择关系')
           return
         }
         if (this.requestParam.id) {
           giftApi.update(this.requestParam).then(res => {
-            this.$messagebox(res.subMsg)
+            this.$toast(res.subMsg)
             if (res.subCode === 1000) {
               this.getPage()
               this.isShowDialog = false

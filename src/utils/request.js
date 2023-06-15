@@ -1,10 +1,11 @@
 import axios from 'axios'
-import { Message, MessageBox } from 'element-ui'
+import { Message,MessageBox } from 'element-ui'
 import store from '@/store'
 import {formatParams , isTokenExpire } from '@/utils'
 import { hideLoading, showLoading } from '@/components/Loading/loading'
 // import { userContainerApi } from '@/api/user'
 import { Toast } from 'mint-ui'
+// import { MessageBox } from 'mint-ui'
 
 let tokenMsg = ''
 let loading = true
@@ -166,9 +167,9 @@ service.interceptors.response.use(
       // })
 
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.code === 800 || res.code === 801 || res.code === 802) {
+      if (res.code === 800 || res.code === 801 || res.code === 802 || res.code === 103) {
         // to re-login
-        MessageBox.confirm('TOKEN不存在或者已过期，请重新登录', '确认退出', {
+        MessageBox.confirm('登录过期，请重新登录', '确认退出', {
           confirmButtonText: '重新登录',
           cancelButtonText: '取消',
           type: 'warning'
@@ -177,7 +178,8 @@ service.interceptors.response.use(
           //   location.reload()
           // })
           localStorage.clear()
-          store.dispatch('user/logout')
+          // store.dispatch('user/logout')
+          location.reload()
         })
       } else if (res.code === 901) {
         // Message({

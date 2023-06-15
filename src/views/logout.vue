@@ -73,7 +73,7 @@ export default {
       })
     },
     comfirm(){
-      this.$messagebox.confirm('确认退出登录',"提示",{
+      this.$confirm('确认退出登录',"提示",{
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type:"warning",
@@ -85,7 +85,7 @@ export default {
       })
     },
     comfirm1(){
-      this.$messagebox.confirm('确认切换账号',"提示",{
+      this.$confirm('确认切换账号',"提示",{
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type:"warning",

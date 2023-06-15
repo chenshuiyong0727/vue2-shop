@@ -401,8 +401,10 @@
         }
         this.queryParam.orderNo = orderNo
         this.queryParam.keyword = actNo
-        this.status = + status
-        this.queryParam.status = + status
+        if (status){
+          this.status = + status
+          this.queryParam.status = + status
+        }
         this.months = months
         if (this.queryParam.keyword || this.queryParam.status || this.months || this.queryParam.orderNo|| this.queryParam.saleType) {
           if(this.queryParam.status){
@@ -695,19 +697,19 @@
       },
       confirmHandle() {
         if(this.requestParam.status == 7 && !this.requestParam.freight) {
-          this.$messagebox('请输入运费')
+          this.$toast('请输入运费')
           return
         }
         if(this.requestParam.status == 3 && !this.requestParam.addressId) {
-          this.$messagebox('请选择地址')
+          this.$toast('请选择地址')
           return
         }
         if(this.requestParam.status == 8 && !this.requestParam.reason) {
-          this.$messagebox('请输入瑕疵原因')
+          this.$toast('请输入瑕疵原因')
           return
         }
         if(this.requestParam.status == 3 && !this.requestParam.deliveryDeadlineTime) {
-          this.$messagebox('发货截止时间为空')
+          this.$toast('发货截止时间为空')
           return
         }
         // 利润= 到手价-运费-原价
@@ -768,7 +770,7 @@
       //   })
       // },
       goDel(id) {
-        this.$messagebox.confirm('是否删除',"提示",{
+        this.$confirm('是否删除',"提示",{
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type:"warning",

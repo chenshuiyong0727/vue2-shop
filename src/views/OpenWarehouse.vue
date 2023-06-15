@@ -475,12 +475,12 @@
       },
       confirmHandle1() {
         if (!this.requestParam1.num) {
-          this.$messagebox("上架数量错误");
+          this.$toast("上架数量错误");
           // this.$toast('上架数量错误')
           return
         }
         if (this.requestParam1.num > this.orderData1.inventory) {
-          this.$messagebox('上架数量大于当前库存')
+          this.$toast('上架数量大于当前库存')
           return
         }
         let data = {}

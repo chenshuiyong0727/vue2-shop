@@ -821,12 +821,12 @@
       },
       confirmHandle1() {
         if (!this.requestParam1.num) {
-          this.$messagebox("上架数量错误");
+          this.$toast("上架数量错误");
           // this.$toast('上架数量错误')
           return
         }
         if (this.requestParam1.num > this.orderData1.inventory) {
-          this.$messagebox('上架数量大于当前库存')
+          this.$toast('上架数量大于当前库存')
           return
         }
         let data = {}
@@ -844,7 +844,8 @@
       },
       confirmHandle() {
         if (this.requestParam.oldInventory < this.requestParam.inventory) {
-          this.$messagebox('原始库存小于剩余库存')
+          // this.$toast('原始库存小于剩余库存')
+          this.$toast('原始库存小于剩余库存')
           return
         }
         goodsInventoryApi.update(this.requestParam).then(res => {
@@ -853,7 +854,7 @@
             this.getPage()
             this.isShowDialog = false
           }else {
-            this.$messagebox(res.subMsg);
+            this.$toast(res.subMsg);
           }
         })
       },
@@ -864,7 +865,7 @@
             this.getPage()
             this.isShowDialog1 = false
           }else {
-            this.$messagebox(res.subMsg);
+            this.$toast(res.subMsg);
           }
         })
       },
@@ -902,7 +903,7 @@
         this.isShowDialog1 = true
       },
       goDel(id) {
-        this.$messagebox.confirm('是否删除',"提示",{
+        this.$confirm('是否删除',"提示",{
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type:"warning",
