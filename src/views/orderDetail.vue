@@ -44,6 +44,20 @@
         </el-option>
           </el-select>
       </mt-field>
+      <mt-field label="销售类型">
+<!--          <select class="select100" v-model="form.status"  :disabled="true ">-->
+<!--            <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>-->
+<!--          </select>-->
+          <el-select size="small" class="select100" v-model="form.saleType" :disabled="true " >
+        <el-option :disabled="true" value="" selected>状态</el-option>
+        <el-option
+          v-for="item in saleTypeList"
+          :key="item.fieldValue"
+          :label="item.fieldName"
+          :value="+item.fieldValue">
+        </el-option>
+          </el-select>
+      </mt-field>
       <mt-field :disabled="true " label="订单号" type = "text" v-model = "form.orderNo"></mt-field>
       <mt-field :disabled="true " label="货号" type = "text" v-model = "form.actNo"></mt-field>
       <mt-field :disabled="true " label="尺码" type = "text" v-model = "form.size"></mt-field>
@@ -83,6 +97,13 @@
       <mt-field :disabled="true " label="最迟发货时间" type = "text" v-model = "form.deliveryDeadlineTime"></mt-field>
       <mt-field :disabled="true " label="出售时间" type = "text" v-model = "form.sellTime"></mt-field>
       <mt-field :disabled="true " label="交易成功时间" type = "text" v-model = "form.successTime"></mt-field>
+
+      <mt-field :disabled="true " label="免仓储费天数" type = "text" v-model = "form.inStoreFreeDay"></mt-field>
+      <mt-field :disabled="true " label="剩余免费天数" type = "text" v-model = "form.surplusDay"></mt-field>
+      <mt-field :disabled="true " label="闪电入库时间" type = "text" v-model = "form.inStoreTime"></mt-field>
+      <mt-field :disabled="true " label="免费截止时间" type = "text" v-model = "form.inStoreTimeEnd"></mt-field>
+
+
       <mt-field :disabled="true " label="创建时间" type = "text" v-model = "form.createTime"></mt-field>
       <mt-field :disabled="true " label="更新时间" type = "text" v-model = "form.updateTime"></mt-field>
 
@@ -129,6 +150,7 @@ export default {
       dataStatusList: [],
       statusList: [],
       addressList: [],
+      saleTypeList: [],
       type: '',
       id: '',
     }
@@ -165,6 +187,8 @@ export default {
               this.form.forecastProfits = ''
             }
             this.form.deliveryDeadlineTime = this.form.deliveryDeadlineTime ? parseTime(this.form.deliveryDeadlineTime) : ''
+            this.form.inStoreTimeEnd = this.form.inStoreTimeEnd ? parseTime(this.form.inStoreTimeEnd) : ''
+            this.form.inStoreTime = this.form.inStoreTime ? parseTime(this.form.inStoreTime) : ''
             this.form.sellTime = this.form.sellTime ? parseTime(this.form.sellTime) : ''
             this.form.successTime = this.form.successTime ? parseTime(this.form.successTime) : ''
             this.form.createTime = this.form.createTime ? parseTime(this.form.createTime) : ''
@@ -194,6 +218,7 @@ export default {
       this.addressList = sysDictList.filter(item => item.typeValue == 38)
       this.dataStatusList = sysDictList.filter(item => item.typeValue == 36)
       this.statusList = sysDictList.filter(item => item.typeValue == 37)
+      this.saleTypeList = sysDictList.filter(item => item.typeValue == 46)
     },
   }
 }

@@ -49,6 +49,10 @@
           </div>
         </div>
         <div class="dingdans_con">
+          <div style="width: 30px;   display: flex;align-items: center;" v-if="showSd">
+            <el-checkbox :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
+<!--            <strong style="margin-left: 6px;">{{index + 1}}</strong>-->
+          </div>
           <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap" @click="avatarShow(item.img)">
             <img :src="item.img" style="margin-top: 25px;">
             <p class="mark" v-if="item.saleType != 1">
@@ -62,31 +66,33 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
-              货号：<strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
+              <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
               尺码：<strong>{{item.size}}</strong>
               <span>
                  售价：<strong>{{item.shelvesPrice}}</strong>
               </span>
             </div>
             <div class="dingdans_con_right_down" style="margin-bottom: 1vw;margin-top: 1vw;">
-              <div  v-if="[2,11].includes(item.status)">
-                最低售价：<strong class="color-danger">{{item.thisTimePrice}}</strong>
+              最低售价：<strong class="color-danger">{{item.thisTimePrice}}</strong>
+              <span  v-if="[2,11].includes(item.status)">
                 预估利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong>
-              </div>
-              <div v-else>
+              </span>
+              <span v-else>
                 <span v-if="item.profits">利润：<strong class="color-danger">{{item.profits}}</strong></span>
+              </span>
+              <div>
+                <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
+                入库价：<strong>{{item.price}}</strong>
               </div>
-              <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
-              入库价：<strong>{{item.price}}</strong>
             </div>
             <div  class="dingdans_con_right_down" style="margin-bottom: 1vw;margin-top: 1vw;" v-if="item.addressId">
               <strong  v-if="item.status == 3" style="font-size: 12px;" class="color-danger"> {{item.deliveryDeadlineTime |formateTime }}</strong>
               <strong style="font-size: 12px;" >{{ item.addressId | dictToDescTypeValue(38) }} </strong>
             </div>
-            <div class="dingdans_con_right_down_1">
+            <div class="dingdans_con_right_down_2">
               <el-button
                 type="text"
-                style="font-weight: 600;padding-left: 135px;"
+                style="font-weight: 600;padding-left: 115px;"
                 @click="handleClick(item)">修改</el-button>
               <el-dropdown trigger="click" style="margin-left: 2vw;">
                 <span class="el-dropdown-link">
@@ -264,10 +270,107 @@
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
       </section>
     </mt-popup>
+    <mt-popup
+      v-model="isShowDialog3">
+      <mt-header title="闪电直发">
+        <div slot="right">
+          <mt-button size="normal"  @click="isShowDialog3 = false" style="font-size: 16px">关闭</mt-button>
+        </div>
+        <div slot="left">
+          <mt-button size="normal" @click="confirmHandle3" style="font-size: 16px">确定</mt-button>
+        </div>
+      </mt-header>
+      <section style="height: 100vw;width: 100vw">
+        <mt-field label="选中数" style="margin-top: 11vw;" v-model="ids.length" :disabled="true"></mt-field>
+        <mt-field label="发货截止时间">
+          <el-date-picker size="small" class="select100" style="width: 62vw"
+                          type="datetime" placeholder="发货截止时间"
+                          v-model="requestParam3.deliveryDeadlineTime"
+                          value-format="yyyy-MM-dd HH:mm:ss">></el-date-picker>
+        </mt-field>
+        <mt-field label="地址">
+          <el-select size="small" class="select100" v-model="requestParam3.addressId"  >
+            <el-option :disabled="true" value="" selected>请选择仓库</el-option>
+            <el-option
+              v-for="item in addressList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+             </el-option>
+              </el-select>
+          </mt-field>
+        <mt-field label="销售类型">
+          <el-select size="small" class="select100" v-model="requestParam3.saleType"  >
+            <el-option :disabled="true" value="" selected>请选择销售类型</el-option>
+            <el-option
+              v-for="item in saleTypeList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+             </el-option>
+              </el-select>
+          </mt-field>
+        <mt-field label="状态">
+          <el-select size="small" class="select100" v-model="requestParam3.status"  >
+            <el-option :disabled="true" value="" selected>请选择状态</el-option>
+            <el-option
+              v-for="item in statusList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+             </el-option>
+              </el-select>
+          </mt-field>
+        <mt-field label="免仓储费天数" placeholder="请输入免仓储费天数" type="number"  v-model="requestParam3.inStoreFreeDay"></mt-field>
+        <mt-field label="寄售入仓时间">
+          <el-date-picker size="small" class="select100" style="width: 62vw"
+                          type="datetime" placeholder="闪电直发入仓时间"
+                          v-model="requestParam3.inStoreTime"
+                          value-format="yyyy-MM-dd HH:mm:ss">></el-date-picker>
+        </mt-field>
+        <mt-field label="运费" placeholder="请输入运费"  type="number" v-model="requestParam3.freight"></mt-field>
+        <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam3.waybillNo"></mt-field>
+
+      </section>
+    </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
         <img :src="imageZoom" alt="" width="100%" height="100%">
       </div>
+    </div>
+<!--    <div style="-->
+<!--    bottom: 120;-->
+<!--    position: absolute;-->
+<!--    text-align: center;-->
+<!--    ">-->
+<!--      &lt;!&ndash;      <mt-button  @click="goGoodsBase"  style="margin-left: 5px;&ndash;&gt;-->
+<!--      &lt;!&ndash;    border-radius: 100%;&ndash;&gt;-->
+<!--      &lt;!&ndash;    margin-top: 0px;&ndash;&gt;-->
+<!--      &lt;!&ndash;    height: 55px;&ndash;&gt;-->
+<!--      &lt;!&ndash;    width: 55px;" type="primary">&ndash;&gt;-->
+<!--      &lt;!&ndash;        <img src="../../static/img/add.png" height="30" width="30" slot="icon">&ndash;&gt;-->
+<!--      &lt;!&ndash;      </mt-button>&ndash;&gt;-->
+<!--      <el-button v-if="checkAll" v-model="checkAll" @click="checkedAll" style="    margin-left: 115px;margin-bottom: 10px;" type="primary">反选</el-button>-->
+<!--      <el-button v-else v-model="checkAll" @click="checkedAll" style="    margin-left: 115px;margin-bottom: 10px;" type="primary">全选</el-button>-->
+<!--      <el-button  type="primary" @click="sdzf" >闪电直发</el-button>-->
+<!--      &lt;!&ndash;      <el-button  @click="$router.go(-1)" >取消</el-button>&ndash;&gt;-->
+<!--    </div>-->
+    <div style="
+    right: 15px;
+    bottom: 20vw;
+    position: fixed;
+    text-align: center;
+    ">
+        <el-button v-if="showSd && checkAll" v-model="checkAll" @click="checkedAll">反选</el-button>
+        <el-button v-if="showSd && !checkAll" v-model="checkAll" @click="checkedAll" style="margin-bottom: 10px;" type="primary">全选</el-button>
+        <el-button v-if="showSd" type="primary" style="margin-right: 17px" @click="sdzf" >闪电直发</el-button>
+      <mt-button  @click="showSdClick()" :class="showSd ? 'zhihui' : ''"  style="margin-left: 5px;
+    border-radius: 100%;
+    margin-top: 0px;
+    height: 55px;
+    width: 55px;" type="primary">
+        <img src="../../static/img/sd1.png" height="30" width="30" slot="icon">
+      </mt-button>
     </div>
     <v-footer></v-footer>
   </div>
@@ -292,6 +395,8 @@
         bottomStatus: "",
         allLoaded: false,
         mockArr: [],
+        showSd: false,
+        checkAll: false,
         imageZoom: '',
         pictureZoomShow: true,
         requestParam1: {
@@ -299,6 +404,17 @@
           waybillNo: '',
           freight: '',
           addressId: ''
+        },
+        requestParam3: {
+          ids: '',
+          status: '',
+          saleType: 2,
+          addressId: '',
+          deliveryDeadlineTime: '',
+          inStoreFreeDay: '',
+          inStoreTime: '',
+          waybillNo: '',
+          freight: ''
         },
         requestParam: {
           id: '',
@@ -325,6 +441,7 @@
         isShowDialog1: false,
         orderData2: '',
         isShowDialog2: false,
+        isShowDialog3: false,
         pictureZoomShow: false,
         imageZoom: '',
         fileUrl: fileUrl,
@@ -478,6 +595,23 @@
     //   // }
     // },
     methods: {
+      getDetailById() {
+        let id = this.ids[0]
+        if (id) {
+          goodsOrderApi.getDetailById(id).then(res => {
+            if (res.subCode === 1000) {
+              this.requestParam3.deliveryDeadlineTime = res.data ? parseTime(res.data.deliveryDeadlineTime) : ''
+              this.requestParam3.inStoreTime = res.data ? parseTime(res.data.inStoreTime) : ''
+              this.requestParam3.addressId = res.data ? res.data.addressId : ''
+              this.requestParam3.inStoreFreeDay = res.data ? res.data.inStoreFreeDay : ''
+              this.requestParam3.freight = res.data ? res.data.freight : ''
+              this.requestParam3.waybillNo = res.data ? res.data.waybillNo : ''
+            } else {
+              this.$message.error(res.subMsg)
+            }
+          })
+        }
+      },
       successTimeChange() {
         if (this.successTime) {
           this.queryParam.successTimeFrom = this.successTime[0]
@@ -487,11 +621,35 @@
           this.queryParam.successTimeTo = null
         }
       },
-      getPage() {
+      changeChecked(id) {
+        this.tableData.map(item => {
+          if(item.id === id) {
+            if (item.checked) {
+              this.delItem(id)
+            } else {
+              if (!this.ids.includes(id)) {
+                this.ids.push(id)
+              }
+            }
+            item.checked = !item.checked
+          }
+        })
+      },
+      getPage(type) {
         goodsOrderApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
+            if (type) {
+              this.tableData.map(item => {
+                this.$set(item, 'checked', this.checkAll)
+                if ( this.checkAll) {
+                  this.ids.push(item.id)
+                } else {
+                  this.delItem(item.id)
+                }
+              })
+            }
             if (this.totalCount == 0) {
               this.allLoaded = true;
               this.emtityMsg = '暂无相关订单 -.-'
@@ -501,6 +659,32 @@
             }
           } else {
             this.$toast(res.subMsg)
+          }
+        })
+      },
+      confirmHandle3() {
+        if (!this.requestParam3.deliveryDeadlineTime) {
+          this.$toast('发货截止时间为空')
+          return
+        }
+        if (!this.requestParam3.addressId) {
+          this.$toast('发货地址为空')
+          return
+        }
+        if (this.requestParam3.status == 11 && !this.requestParam3.inStoreTime) {
+          this.$toast('闪电直发入仓 ，入仓时间不能为空')
+          return
+        }
+        if (this.requestParam3.status == 11 && !this.requestParam3.inStoreFreeDay) {
+          this.$toast('闪电直发入仓 ，免仓储费天数不能为空')
+          return
+        }
+        // 闪电直发
+        goodsOrderApi.updateSaleType(this.requestParam3).then(res => {
+          this.$toast(res.subMsg)
+          if (res.subCode === 1000) {
+            this.getPage()
+            this.isShowDialog3 = false
           }
         })
       },
@@ -777,7 +961,31 @@
         }).catch(() => {
         })
       },
-
+      delItem(id) {
+        for (let i = 0; i < this.ids.length; i++) {
+          if (this.ids[i] === id) {
+            this.ids.splice(i, 1)
+          }
+        }
+      },
+      checkedAll() {
+        this.checkAll = !this.checkAll
+        this.tableData= []
+        this.getPage(1)
+      },
+      showSdClick() {
+        this.showSd = !this.showSd
+      },
+      sdzf() {
+        this.requestParam3.ids = this.ids
+        this.requestParam3.status = 3
+        if (!this.ids.length ) {
+          this.$toast('请选择订单')
+          return
+        }
+        this.getDetailById()
+        this.isShowDialog3 = true
+      },
       handleClick(orderData) {
         this.orderData = orderData
         this.requestParam.id = this.orderData.id
@@ -901,7 +1109,7 @@
     font-size: 13px;
     margin-bottom: 2vw;
   }
-  .dingdans_con_right_down_1 {
+  .dingdans_con_right_down_2 {
     margin-left: 9vw;
     /* margin-bottom: -2vw; */
     font-size: 3.5vw;
@@ -1092,5 +1300,8 @@
     width: 51px;
     text-align: center;
     margin-top: 2.1px;
+  }
+  .zhihui{
+    background-color: #b8bbbf;
   }
 </style>

@@ -73,9 +73,7 @@
         </div>
         <div class="dingdans_con">
 
-<!--          <div style="width: 18px;"><checkbox :checked="item.checked" @click="changeChecked(item.id)"></checkbox></div>-->
           <div style="width: 25px;   display: flex;align-items: center;">
-<!--            <input type="checkbox" :checked="item.checked" @click="changeChecked(item.id)">-->
             <el-checkbox :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
             <strong style="margin-left: 6px;">{{index + 1}}</strong>
           </div>
