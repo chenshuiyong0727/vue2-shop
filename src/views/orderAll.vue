@@ -401,8 +401,8 @@
         }
         this.queryParam.orderNo = orderNo
         this.queryParam.keyword = actNo
-        this.status = status
-        this.queryParam.status = status
+        this.status = + status
+        this.queryParam.status = + status
         this.months = months
         if (this.queryParam.keyword || this.queryParam.status || this.months || this.queryParam.orderNo|| this.queryParam.saleType) {
           if(this.queryParam.status){
