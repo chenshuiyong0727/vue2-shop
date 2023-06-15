@@ -11,6 +11,7 @@ const putin = resolve => require(['@/views/report/putin.vue'], resolve)
 const sellListDetail = resolve => require(['@/views/report/sellListDetail.vue'], resolve)
 const putinDetail = resolve => require(['@/views/report/putinDetail.vue'], resolve)
 const putinDayDetail = resolve => require(['@/views/report/putinDayDetail.vue'], resolve)
+const areaSellList = resolve => require(['@/views/report/areaSellList.vue'], resolve)
 const sellList = resolve => require(['@/views/report/sellList.vue'], resolve)
 const giftList = resolve => require(['@/views/giftList.vue'], resolve)
 const goodsBusiness = resolve => require(['@/views/goodsBusiness.vue'], resolve)
@@ -155,6 +156,13 @@ export default new Router({
       path: '/sellList',
       name: '销售报表',
       component: sellList,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
+    }, {
+      path: '/areaSellList',
+      name: '区域销售报表',
+      component: areaSellList,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },

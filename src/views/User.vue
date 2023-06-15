@@ -105,6 +105,14 @@
             <span>销售报表</span><i class="icon-go"></i>
           </p>
         </router-link>
+        <router-link :to="{ name: '区域销售报表'}" class="my-settle-bottom">
+          <div>
+            <img style="width: 25px;margin-left: 2px;margin-bottom: 10px;" src="../../static/img/area6.png"></img>
+          </div>
+          <p>
+            <span>区域销售报表</span><i class="icon-go"></i>
+          </p>
+        </router-link>
       </section>
 
       <section class="my-settle">
