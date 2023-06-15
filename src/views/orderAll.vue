@@ -84,26 +84,19 @@
               <strong style="font-size: 12px;" >{{ item.addressId | dictToDescTypeValue(38) }} </strong>
             </div>
             <div class="dingdans_con_right_down_1">
-              <mt-button
-                type="primary"
-                size="small"
-                @click="jumpactNo(item.actNo)">库存</mt-button>
-              <mt-button
-                type="primary"
-                size="small"
-                @click="goDetail(item.id)">详情</mt-button>
-              <mt-button
-                type="primary"
-                size="small"
-                @click="handleClick(item)">修改</mt-button>
-              <mt-button
-                type="danger"
-                size="small"
-                @click="goDel(item.id)">删除</mt-button>
-<!--              <mt-button-->
-<!--                type="primary"-->
-<!--                size="small"-->
-<!--                @click="changeStatusDialog1(item)">修改地址</mt-button>-->
+              <el-button
+                type="text"
+                style="font-weight: 600;padding-left: 135px;"
+                @click="handleClick(item)">修改</el-button>
+              <el-dropdown trigger="click" style="margin-left: 2vw;">
+                <span class="el-dropdown-link">
+                  更多<i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item type="text" @click.native="goDel(item.id)">删除</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </div>
           </div>
         </div>
@@ -910,8 +903,10 @@
   }
   .dingdans_con_right_down_1 {
     margin-left: 9vw;
-    margin-bottom: -2vw;
+    /* margin-bottom: -2vw; */
     font-size: 3.5vw;
+    height: 16px;
+    margin-top: -13px;
   }
 /*
  -----分割线---
