@@ -19,9 +19,10 @@
       align-items:center;" >
         <el-col :span="6" style="text-align: right"><span>根据货号获取</span></el-col>
         <el-col :span="30" :offset="1">
-          <el-input v-model.trim="form.actNo" style="width: 243px;" size="small" placeholder="请输入货号">
-            <el-button type="primary" slot="append" size="small" @click="getImgUrl">手动获取</el-button>
+          <el-input v-model.trim="form.actNo" style="width: 153px;" size="small" placeholder="请输入货号">
+<!--            <el-button type="primary" slot="append" size="small" @click="getImgUrl">手动获取</el-button>-->
           </el-input>
+          <el-button type="primary" size="small" @click="getImgUrl()">获取资料</el-button>
         </el-col>
       </el-row>
 
@@ -530,7 +531,7 @@
               this.form = res.data ? res.data : {}
               this.queryParam.goodsId = this.form.id
               this.getPage()
-              this.getImgUrl()
+              // this.getImgUrl()
             } else {
               this.$toast(res.subMsg)
             }

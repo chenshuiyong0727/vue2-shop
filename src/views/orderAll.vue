@@ -607,7 +607,7 @@
               this.requestParam3.freight = res.data ? res.data.freight : ''
               this.requestParam3.waybillNo = res.data ? res.data.waybillNo : ''
             } else {
-              this.$message.error(res.subMsg)
+              this.$toast(res.subMsg)
             }
           })
         }

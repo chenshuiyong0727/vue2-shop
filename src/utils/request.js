@@ -228,9 +228,8 @@ service.interceptors.response.use(
       // })
       Toast(error.response.data.sub_msg)
     } else {
-      Message({
+      Toast({
         message: `${error.config.url}: ${error.response.data.msg}` || error,
-        type: 'error',
         duration: 2 * 1000
       })
     }
