@@ -55,6 +55,8 @@ service.interceptors.request.use(
       if (config.url !== '/gw/op/v1/goodsAct'
         && config.url !== '/gw/op/v1/sys/users/logout'
         && config.url !== '/gw/op/v1/base/sys/dict/listSysDict'
+        && config.url !== '/gw/op/v1/auth/regeditOrLogin'
+        && config.url !== '/gw/op/v1/auth/sendPhoneVal'
       ) {
         Toast('暂无权限')
         return

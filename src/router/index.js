@@ -29,6 +29,7 @@ const OpenWarehouse = resolve => require(['@/views/OpenWarehouse.vue'], resolve)
 const scanCode = resolve => require(['@/views/scanCode.vue'], resolve)
 const scanCodeV2 = resolve => require(['@/views/scanCodeV2.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
+const loginByCode = resolve => require(['@/views/loginByCode.vue'], resolve)
 const logout = resolve => require(['@/views/logout.vue'], resolve)
 
 
@@ -225,6 +226,10 @@ export default new Router({
       path: '/login',
       name: '登录页',
       component: Login
+    },{
+      path: '/loginByCode',
+      name: '验证码登录页',
+      component: loginByCode
     },{
       path: '/scanCode',
       name: '扫码',

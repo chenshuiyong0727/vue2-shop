@@ -1301,7 +1301,4 @@
     text-align: center;
     margin-top: 2.1px;
   }
-  .zhihui{
-    background-color: #b8bbbf;
-  }
 </style>

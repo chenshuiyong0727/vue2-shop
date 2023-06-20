@@ -49,8 +49,11 @@
       </section>
       <div class="clearfix btm-distance">
         <el-button style="margin-top: 25px;    width: 50vw;" type="primary" @click="login" v-if='toggle'>登录</el-button>
-                </div>
-              </div>
+      </div>
+      <div class="clearfix btm-distance">
+        <el-button style="margin-top: 15px;    width: 50vw;" type="text" @click="loginByCode" v-if='toggle'>验证码登录</el-button>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -93,6 +96,9 @@ export default {
   },
   methods:{
     // 登录按钮
+    loginByCode(){
+      this.$router.push({ path: '/loginByCode' })
+    },
     login(){
       if(this.loginForm.loginAccount=="" || this.loginForm.loginPassword=="") {
         // Toast('登录成功,存储token,跳转网页');

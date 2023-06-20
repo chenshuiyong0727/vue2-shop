@@ -7,6 +7,18 @@ export const userContainerApi = {
     method: 'post',
     data: body
   }),
+  // 用户登录
+  regeditOrLogin: (body) => request({
+    url: '/gw/op/v1/auth/regeditOrLogin',
+    method: 'post',
+    data: body
+  }),
+  // 获取验证码
+  sendPhoneVal: (body) => request({
+    url: '/gw/op/v1/auth/sendPhoneVal',
+    method: 'post',
+    data: body
+  }),
   // 获取验证码
   getVerificationCode: (body) => request({
     url: '/gw/op/v1/base/vc/login/getLoginVerityCode',

@@ -70,10 +70,10 @@
               </span>
             </p>
           </div>
-          <div class="diangdans_con_right" style="    margin-top: 30px;">
+          <div class="diangdans_con_right21" style="    margin-top: 30px;">
             <div class="dingdans_con_right_top" style="margin-top: -28px;">
               <strong v-if="item.goodsName"
-                      @click="scanCode(item.goodsId, 1) "
+                      @click="scanCode(item.goodsId, 1,item.spuId) "
                       :style="item.goodsId ? 'color: #409EFF' : ''">
                 {{item.goodsName }}
               </strong>
@@ -82,49 +82,26 @@
 <!--              类型：<strong class="color-danger"> {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
               <!--              类型：<strong style="color: #409EFF" > {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
             </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: 0px;">
+            <div class="dingdans_con_right_down"  style="margin-bottom: 0px;">
              <strong class="color-danger" >{{item.actNo}} </strong>
 <!--              <strong class="color-danger"> {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
               库存：<strong :class="item.num > 50 ? 'color-danger' : ''" >{{item.num}} </strong>
               价格：<strong  >{{item.price}} </strong>
             </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: 0px;">
+            <div class="dingdans_con_right_down" style="margin-bottom: 0px;" @click="gotoDw(item.spuId)" >
               周均价：<strong  >{{item.sevenAveragePrice}} </strong>
               到手：<strong  >{{item.thisTimeThePrice}} </strong>
             </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: 0px;">
+            <div class="dingdans_con_right_down" style="margin-bottom: 0px;" @click="gotoDw(item.spuId)" >
               利润：<strong :class="item.thisTimeProfits > 50 ? 'color-danger' : ''" >{{item.thisTimeProfits}} </strong>
               周销量：<strong :class="item.sevenSaleCount > 10 ? 'color-danger' : ''" >{{item.sevenSaleCount}} </strong>
               <span v-if="item.thisTimeProfits <= 0" style="margin-left: 20px;">垃圾</span>
-              <strong v-if="item.thisTimeProfits > 50 && item.sevenSaleCount > 10 && item.num > 50"
-                    class="color-danger" style="margin-left: 20px;font-size: 20px;">冲冲冲</strong>
-<!--              <span ></span>-->
-              <!--              月均价：<strong  class="color-danger">{{item.averagePrice}} </strong>-->
-<!--              月销量：<strong  class="color-danger">{{item.saleCount}} </strong>-->
-<!--              月利润：<strong  class="color-danger">{{item.thisTimeProfits}} </strong>-->
-              <!--              <span>备注：<strong>{{item.remark}}</strong></span>-->
-<!--              入库价：<strong  class="color-danger">{{item.inPutPrice}} </strong>-->
-<!--              得物价：<strong  class="color-danger">{{item.price}} </strong>-->
+              <strong v-if="item.thisTimeProfits >= 50 && item.sevenSaleCount >= 10 && item.num >= 50"
+                    class="color-danger" style="margin-left: 5px;font-size: 20px;">冲冲冲</strong>
             </div>
-<!--            <div class="dingdans_con_right_down"  style="margin-bottom: -10px;">-->
-<!--              到手价：<strong  class="color-danger">{{item.thisTimeThePrice}} </strong>-->
-<!--              利润：<strong  class="color-danger">{{item.thisTimeProfits}} </strong>-->
-<!--            </div>-->
-<!--            <div style="-->
-<!--            margin-bottom: -7vw;-->
-<!--    font-size: 3.5vw;-->
-<!--    margin-top: -1vw;">-->
-<!--              <strong> {{item.createTime |formateTime }}</strong>-->
-<!--              <mt-button-->
-<!--                style="margin-left: 5.1vw;"-->
-<!--                type="primary"-->
-<!--                size="small"-->
-<!--                @click="goDetail(item.id , 1)">查看</mt-button>-->
-<!--              <mt-button-->
-<!--                type="primary"-->
-<!--                size="small"-->
-<!--                @click="goDetail(item.id ,2)">修改</mt-button>-->
-<!--            </div>-->
+          </div>
+          <div class="diangdans_con_right22"  @click="gotoDw(item.spuId)"  style="margin-top: 10px;">
+            <img src="../../static/img/dw.png" height="30px;"width="30px;" >
           </div>
         </div>
       </div>
@@ -164,7 +141,7 @@
 <!--          <option :disabled="true" value="" selected>请选择类型</option>-->
 <!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
 <!--            </select>-->
-            <el-select size="small" class="select100" v-model="queryParam.type" @change="changeSystem" >
+            <el-select size="small" class="select100" v-model="queryParam.type"  >
           <el-option :disabled="true" value="" selected>请选择类型</el-option>
           <el-option
             v-for="item in typeList"
@@ -179,7 +156,7 @@
 <!--          <option :disabled="true" value="" selected>请选择类型</option>-->
 <!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
 <!--            </select>-->
-            <el-select size="small" class="select100" v-model="queryParam.sort" @change="changeSystem" >
+            <el-select size="small" class="select100" v-model="queryParam.sort" >
           <el-option :disabled="true" value="" selected>请选择类型</el-option>
           <el-option
             v-for="item in sortList"
@@ -204,20 +181,20 @@
         <img :src="imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
-<!--    <div style="-->
-<!--    right: 15px;-->
-<!--    bottom: 10vw;-->
-<!--    position: absolute;-->
-<!--    text-align: center;-->
-<!--    ">-->
-<!--      <mt-button  @click="goDetail(null,3)"  style="margin-left: 5px;-->
-<!--    border-radius: 100%;-->
-<!--    margin-top: 0px;-->
-<!--    height: 55px;-->
-<!--    width: 55px;" type="primary">-->
-<!--        <img src="../../static/img/add.png" height="30" width="30" slot="icon">-->
-<!--      </mt-button>-->
-<!--    </div>-->
+    <div style="
+    right: 15px;
+    bottom: 10vw;
+    position: absolute;
+    text-align: center;
+    ">
+      <mt-button  @click="goods" :class="showSd ? 'zhihui' : ''"  style="margin-left: 5px;
+    border-radius: 100%;
+    margin-top: 0px;
+    height: 55px;
+    width: 55px;" type="primary">
+        <img src="../../static/img/ccc.png" height="30" width="30" slot="icon">
+      </mt-button>
+    </div>
 <!--    <v-footer></v-footer>-->
   </div>
 </template>
@@ -242,6 +219,7 @@
         emtityMsg: '人家是有底线的 -.-',
         pictureZoomShow: false,
         imageZoom: '',
+        showSd: false,
         fileUrl: fileUrl,
         queryParam: {
           type: '',
@@ -303,6 +281,14 @@
       next()
     },
     methods: {
+      gotoDw(spuId) {
+        if (!spuId){
+          return
+        }
+        // let url = "https://www.dewu.com/router/product/ProductDetail?spuId=";
+        let url = "https://m.dewu.com/router/product/ProductDetail?spuId=";
+        window.location.href = url + spuId;
+      },
       // goDetail(id, type) {
       //   this.$router.push({ path: '/otherAdd', query: { id, type } })
       // },
@@ -397,7 +383,7 @@
           pageNum: 1
         }
         this.titleName = '活动'
-        this.changeSystem()
+        // this.changeSystem()
         this.search1()
       },
       handleTopChange(p_status) {
@@ -419,10 +405,25 @@
         this.allLoaded = false;
         this.$refs.loadmore.onTopLoaded();
       },
-      scanCode(id, flag) {
+      goods() {
+        this.showSd =  !this.showSd
+        if (this.showSd){
+          this.queryParam.profitsFrom = 50
+          this.queryParam.sevenSaleCountFrom = 10
+          this.queryParam.numFrom = 10
+          this.queryParam.pageNum = 1
+        } else{
+          this.queryParam.profitsFrom = ''
+          this.queryParam.sevenSaleCountFrom = ''
+          this.queryParam.numFrom = ''
+          this.queryParam.pageNum = 1
+        }
+        this.getPage()
+      },
+      scanCode(id, flag,spuId) {
         // let isActUser = localStorage.getItem('isActUser')
         if (this.isActUser == 1) {
-          return
+          this.gotoDw(spuId)
         }
         this.isBack = true
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
@@ -484,9 +485,12 @@
     border-radius: 10px;
   }
 
-  .diangdans_con_right {
-    width: 130vw;
+  .diangdans_con_right21 {
+    width: 110vw;
     padding-left: 10px;
+  }
+  .diangdans_con_right22 {
+    width: 15vw;
   }
 
   .dingdans_con_right_down {
