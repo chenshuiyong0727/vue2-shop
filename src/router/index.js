@@ -208,7 +208,7 @@ export default new Router({
       meta: {
         keepAlive: true, // 此组件需要被缓存
         isBack:false, //用于判断上一个页面是哪个
-        requireAuth: false,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },
     }, {
       path: '/otherAdd',

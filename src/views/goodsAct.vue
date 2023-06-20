@@ -1,8 +1,11 @@
 <template>
   <div class="hello" ref="goodsAct">
-    <mt-header :title="titleName">
-      <div slot="left">
+    <mt-header title="首创奥莱活动">
+      <div slot="left" v-if="isActUser !=1">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
+      </div>
+      <div slot="left" v-else>
+        <mt-button  icon="back" @click="$router.push({ path: '/logout?type=1' })"></mt-button>
       </div>
     </mt-header>
     <div class="fenlei_top">
@@ -56,8 +59,16 @@
 <!--          </div>-->
 <!--        </div>-->
         <div class="dingdans_con_act">
-          <div  :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">
-            <img :src="item.img">
+<!--          <div  :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">-->
+<!--            <img :src="item.img">-->
+<!--          </div>-->
+          <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap" @click="avatarShow(item.img)">
+            <img :src="item.img" style="margin-top: 25px;">
+            <p class="mark1">
+              <span class="text1" >
+                {{ item.type | dictToDescTypeValue(20221108) }}
+              </span>
+            </p>
           </div>
           <div class="diangdans_con_right" style="    margin-top: 30px;">
             <div class="dingdans_con_right_top" style="margin-top: -28px;">
@@ -72,9 +83,25 @@
               <!--              类型：<strong style="color: #409EFF" > {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
             </div>
             <div class="dingdans_con_right_down" style="margin-bottom: 0px;">
-              货号：<strong class="color-danger" >{{item.actNo}} </strong>
-              类型：<strong class="color-danger"> {{ item.type | dictToDescTypeValue(20221108) }}</strong>
-              价格：<strong  class="color-danger">{{item.price}} </strong>
+             <strong class="color-danger" >{{item.actNo}} </strong>
+<!--              <strong class="color-danger"> {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
+              库存：<strong :class="item.num > 50 ? 'color-danger' : ''" >{{item.num}} </strong>
+              价格：<strong  >{{item.price}} </strong>
+            </div>
+            <div class="dingdans_con_right_down" style="margin-bottom: 0px;">
+              周均价：<strong  >{{item.sevenAveragePrice}} </strong>
+              到手：<strong  >{{item.thisTimeThePrice}} </strong>
+            </div>
+            <div class="dingdans_con_right_down" style="margin-bottom: 0px;">
+              利润：<strong :class="item.thisTimeProfits > 50 ? 'color-danger' : ''" >{{item.thisTimeProfits}} </strong>
+              周销量：<strong :class="item.sevenSaleCount > 10 ? 'color-danger' : ''" >{{item.sevenSaleCount}} </strong>
+              <span v-if="item.thisTimeProfits <= 0" style="margin-left: 20px;">垃圾</span>
+              <strong v-if="item.thisTimeProfits > 50 && item.sevenSaleCount > 10 && item.num > 50"
+                    class="color-danger" style="margin-left: 20px;font-size: 20px;">冲冲冲</strong>
+<!--              <span ></span>-->
+              <!--              月均价：<strong  class="color-danger">{{item.averagePrice}} </strong>-->
+<!--              月销量：<strong  class="color-danger">{{item.saleCount}} </strong>-->
+<!--              月利润：<strong  class="color-danger">{{item.thisTimeProfits}} </strong>-->
               <!--              <span>备注：<strong>{{item.remark}}</strong></span>-->
 <!--              入库价：<strong  class="color-danger">{{item.inPutPrice}} </strong>-->
 <!--              得物价：<strong  class="color-danger">{{item.price}} </strong>-->
@@ -125,7 +152,7 @@
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 70vw;width: 100vw">
+      <section style="height: 120vw;width: 100vw">
 <!--        <mt-field label="状态" style="margin-top: 11vw;">-->
 <!--            <select class="select100" v-model="queryParam.type" @change="changeSystem" >-->
 <!--               <option :disabled="true" value="" selected>请选择类型</option>-->
@@ -147,8 +174,29 @@
           </el-option>
             </el-select>
         </mt-field>
-        <mt-field label="价格开始"  placeholder="价格开始"  v-model="queryParam.priceFrom" ></mt-field>
-        <mt-field label="价格结束"  placeholder="价格结束"  v-model="queryParam.priceTo" ></mt-field>
+        <mt-field label="排序">
+<!--            <select class="select100" v-model="queryParam.type" @change="changeSystem" >-->
+<!--          <option :disabled="true" value="" selected>请选择类型</option>-->
+<!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
+<!--            </select>-->
+            <el-select size="small" class="select100" v-model="queryParam.sort" @change="changeSystem" >
+          <el-option :disabled="true" value="" selected>请选择类型</el-option>
+          <el-option
+            v-for="item in sortList"
+            :key="item.fieldValue"
+            :label="item.fieldName"
+            :value="item.fieldValue">
+          </el-option>
+            </el-select>
+        </mt-field>
+        <mt-field label="价格开始"  placeholder="价格开始" type="NUMBER" v-model="queryParam.priceFrom" ></mt-field>
+        <mt-field label="价格结束"  placeholder="价格结束" type="NUMBER" v-model="queryParam.priceTo" ></mt-field>
+        <mt-field label="利润开始"  placeholder="利润开始" type="NUMBER" v-model="queryParam.profitsFrom" ></mt-field>
+        <mt-field label="利润结束"  placeholder="利润结束" type="NUMBER" v-model="queryParam.profitsTo" ></mt-field>
+        <mt-field label="库存开始"  placeholder="库存开始" type="NUMBER" v-model="queryParam.numFrom" ></mt-field>
+        <mt-field label="库存结束"  placeholder="库存结束" type="NUMBER" v-model="queryParam.numTo" ></mt-field>
+        <mt-field label="销量开始"  placeholder="销量开始" type="NUMBER" v-model="queryParam.sevenSaleCountFrom" ></mt-field>
+        <mt-field label="销量结束"  placeholder="销量结束" type="NUMBER" v-model="queryParam.sevenSaleCountTo" ></mt-field>
       </section>
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
@@ -188,21 +236,39 @@
         isBack: false, //记录滚动条位置对象
         curScrollTop: 0, //记录滚动条位置对象
         orderData2: '',
+        isActUser: '',
         isShowDialog2: false,
-        titleName: '活动',
+        titleName: '首创奥莱活动',
         emtityMsg: '人家是有底线的 -.-',
         pictureZoomShow: false,
         imageZoom: '',
         fileUrl: fileUrl,
         queryParam: {
           type: '',
+          sort: '',
           keyword: '',
           priceFrom: '',
           priceTo: '',
+          profitsFrom: '',
+          profitsTo: '',
+          numFrom: '',
+          numTo: '',
+          sevenSaleCountFrom: '',
+          sevenSaleCountTo: '',
           pageSize: 20,
           pageNum: 1
         },
         typeList: [],
+        sortList: [
+          { fieldValue: 1, fieldName: '利润降序' },
+          { fieldValue: 2, fieldName: '利润升序' },
+          { fieldValue: 3, fieldName: '销量降序' },
+          { fieldValue: 4, fieldName: '销量升序' },
+          { fieldValue: 5, fieldName: '库存降序' },
+          { fieldValue: 6, fieldName: '库存升序' },
+          { fieldValue: 7, fieldName: '价格降序' },
+          { fieldValue: 8, fieldName: '价格升序' }
+        ],
         topStatus: "",
         bottomStatus: "",
         allLoaded: false,
@@ -215,6 +281,7 @@
     //   this.listSysDict()
     // },
     activated() {
+      this.isActUser =  localStorage.getItem('isActUser')
       // 新开的页面
       this.isBack = false
       if (!this.$route.meta.isBack) {
@@ -320,6 +387,12 @@
           size: '',
           priceFrom: '',
           priceTo: '',
+          profitsFrom: '',
+          profitsTo: '',
+          numFrom: '',
+          numTo: '',
+          sevenSaleCountFrom: '',
+          sevenSaleCountTo: '',
           pageSize: 20,
           pageNum: 1
         }
@@ -347,6 +420,10 @@
         this.$refs.loadmore.onTopLoaded();
       },
       scanCode(id, flag) {
+        // let isActUser = localStorage.getItem('isActUser')
+        if (this.isActUser == 1) {
+          return
+        }
         this.isBack = true
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
         this.$router.push({ path: '/scanCode', query: { id, flag } })
@@ -565,5 +642,41 @@
     /*width: 5.7rem;*/
     padding: 0.2rem;
 
+  }
+  .wrap {
+    position: relative;
+  }
+  .mark1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+  }
+
+  .mark1:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-width: 10px;
+    border-bottom-width: 16px;
+    border-left-width: 20px;
+  }
+
+  .text1 {
+    color: white;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    font-size: 11px;
+    text-transform: uppercase;
+    width: 30px;
+    text-align: center;
+    margin-top: 2.1px;
   }
 </style>

@@ -44,10 +44,20 @@ service.interceptors.request.use(
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      if (config.url !== '/gw/op/v1/auth/login') {
+      if (config.url !== '/gw/op/v1/goodsAct') {
         config.headers['tokenAuth'] = localStorage.getItem('org_token_auth')
         // config.headers['xxlSsoSessionId'] = localStorage.getItem('session_id')
         config.headers['sign'] = 'sdfa454werwrw'
+      }
+    }
+    let isActUser = localStorage.getItem('isActUser')
+    if (isActUser == 1) {
+      if (config.url !== '/gw/op/v1/goodsAct'
+        && config.url !== '/gw/op/v1/sys/users/logout'
+        && config.url !== '/gw/op/v1/base/sys/dict/listSysDict'
+      ) {
+        Toast('暂无权限')
+        return
       }
     }
     let tokenExpireTime = localStorage.getItem('tokenExpireTime')

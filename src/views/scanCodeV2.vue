@@ -531,7 +531,7 @@
               this.form = res.data ? res.data : {}
               this.queryParam.goodsId = this.form.id
               this.getPage()
-              // this.getImgUrl()
+              this.getImgUrl()
             } else {
               this.$toast(res.subMsg)
             }

@@ -125,7 +125,14 @@ export default {
             localStorage.setItem('refresh_org_token_auth', data.refreshToken)
             localStorage.setItem('user_id', data.userId)
             localStorage.setItem('user_name', data.userAccount)
-            this.gotopath()
+            localStorage.setItem('isActUser', data.isActUser)
+            if (data.isActUser == 1) {
+              initSysDict().then(() => {
+                this.$router.push({ path: '/goodsAct' })
+              })
+            } else{
+              this.gotopath()
+            }
           }
         } else {
           Toast(res.subMsg)

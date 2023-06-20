@@ -40,7 +40,7 @@
       :autoFill="false"
       ref="loadmore"
     >
-      <div class="dingdans_item" style="padding-top: 0vw;padding-bottom: 7vw;" v-for="(item,index) in tableData" :key="index">
+      <div class="dingdans_item" style="padding-top: 0vw;padding-bottom: 4vw;" v-for="(item,index) in tableData" :key="index">
 <!--        <div class="dingdans_top">-->
 <!--          <div class="dingdans_top_left">-->
 <!--            货号：<strong> {{item.actNo}} </strong>-->
@@ -49,7 +49,7 @@
 <!--            尺码：<strong>{{item.size }}</strong>-->
 <!--          </div>-->
 <!--        </div>-->
-        <div class="dingdans_con">
+        <div class="dingdans_con" style="padding : 0 ;">
           <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">
             <img :src="item.img">
           </div>
@@ -57,7 +57,7 @@
             <img :src="fileUrl + item.imgUrl">
           </div>
           <div class="diangdans_con_right">
-            <div class="dingdans_con_right_top">
+            <div class="dingdans_con_right_top" style="margin-top: -10px">
               <span style="color: #409EFF;" @click="scanCode(item.id,1)" v-if="item.name"><strong>{{item.name}} </strong></span>
             </div>
 <!--            <div class="dingdans_con_right_top">-->
@@ -70,30 +70,26 @@
               <strong> {{ item.type | dictToDescTypeValue(20221108) }}</strong>
             </div>
             <div style="
-            margin-bottom: -7vw;
-            margin-left: -7vw;
-    font-size: 3.5vw;
-    margin-top: -1vw;">
-              <mt-button
-                style="margin-left: 7.1vw;"
-                type="danger"
-                size="small"
-                @click="storeAdd(item.id)">选择</mt-button>
-              <mt-button
-                style="margin-left: 1vw;"
-                type="primary"
-                size="small"
-                @click="jumpactNo(item.actNo)">库存</mt-button>
-              <mt-button
-                style="margin-left: 1vw;"
-                type="primary"
-                size="small"
-                @click="scanCode(item.id,1)">查看</mt-button>
-              <mt-button
-                style="margin-left: 1vw;"
-                type="primary"
-                size="small"
-                @click="goDetail(item.id,2)">编辑</mt-button>
+               margin-bottom: -12vw;
+    margin-left: 30vw;
+    margin-top: -3vw;">
+              <el-button
+                style="margin-left: 10.1vw;font-weight: 600;"
+                type="text"
+                class="color-danger"
+                @click="storeAdd(item.id)">选择</el-button>
+<!--              <el-button-->
+<!--                style="margin-left: 1vw;font-weight: 600;"-->
+<!--                type="text"-->
+<!--                @click="jumpactNo(item.actNo)">库存</el-button>-->
+              <el-button
+                style="margin-left: 1vw;font-weight: 600;"
+                type="text"
+                @click="scanCode(item.id,1)">查看</el-button>
+              <el-button
+                style="margin-left: 1vw;font-weight: 600;"
+                type="text"
+                @click="goDetail(item.id,2)">编辑</el-button>
             </div>
           </div>
         </div>

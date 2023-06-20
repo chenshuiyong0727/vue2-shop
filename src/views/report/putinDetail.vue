@@ -63,7 +63,7 @@
 <!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
               出售金额：<strong>{{item.theirPrice}}</strong>
               产生利润：<strong>{{item.profits}}</strong>
-              产生利润：<strong>{{item.thisTimeProfits}}</strong>
+              预计利润：<strong>{{item.thisTimeProfits}}</strong>
             </div>
           </div>
         </div>
