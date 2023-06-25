@@ -19,6 +19,17 @@ export const userContainerApi = {
     method: 'post',
     data: body
   }),
+  // 获取详情
+  getUcUser: () => request({
+    url: '/gw/op/v1/auth/getUcUser',
+    method: 'get'
+  }),
+  // 更新
+  update: (body) => request({
+    url: '/gw/op/v1/auth/update',
+    method: 'put',
+    data: body
+  }),
   // 获取验证码
   getVerificationCode: (body) => request({
     url: '/gw/op/v1/base/vc/login/getLoginVerityCode',

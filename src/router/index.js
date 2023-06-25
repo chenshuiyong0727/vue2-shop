@@ -5,6 +5,7 @@ Vue.use(Router);
 //按需加载,当渲染其他页面时才加载其组件,并缓存,减少首屏加载时间
 const Index = resolve => require(['@/views/Index.vue'], resolve)
 const User = resolve => require(['@/views/User.vue'], resolve)
+const userInfo = resolve => require(['@/views/userInfo.vue'], resolve)
 const Order = resolve => require(['@/views/OrderAll.vue'], resolve)
 const orderDetail = resolve => require(['@/views/orderDetail.vue'], resolve)
 const putin = resolve => require(['@/views/report/putin.vue'], resolve)
@@ -215,6 +216,13 @@ export default new Router({
       path: '/otherAdd',
       name: '其他收支详情',
       component: otherAdd,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
+    }, {
+      path: '/userInfo',
+      name: '用户详情',
+      component: userInfo,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },

@@ -15,11 +15,12 @@
     border-bottom-style: solid;
     border-bottom-width: 1px;"
     >
-      <div class="header-icon" style="margin-left: 6vw;">
-          <img style="width: 50px;height: 50px;border-radius: 100%;" src="../../static/img/userpic.jpg">
+      <div @click="userInfo" class="header-icon" style="margin-left: 6vw;">
+          <img v-if="form.imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" :src="fileUrl + form.imgUrl">
+          <img v-else style="width: 50px;height: 50px;border-radius: 100%;" src="../../static/img/userimg5.jpg">
       </div>
-      <span>{{
-       userRealName ? userRealName : userName ? userName : '系统用户'
+      <span  @click="userInfo">{{
+       form.userRealName ? form.userRealName : form.userAccount ? form.userAccount : '系统用户'
         }}</span>
       <div class="my-indent-right">
           <span style="
@@ -185,6 +186,7 @@
   import {goodsOrderApi} from '@/api/goodsOrder'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
+  import { userContainerApi } from '@/api/user'
 
   export default {
     components: {
@@ -193,16 +195,27 @@
     },
     data() {
       return {
+        fileUrl: fileUrl,
         orderIofo: {},
-        userName: localStorage.getItem('user_name'),
-        userRealName: localStorage.getItem('userRealName')
+        // userName: localStorage.getItem('user_name'),
+        // userRealName: localStorage.getItem('userRealName')
+        form: {
+          userAccount: '',
+          userMobile: '',
+          userRealName: '',
+          imgUrl: ''
+        }
       }
     },
 
     created() {
+      this.getUcUser()
       this.getData()
     },
     methods: {
+      userInfo(){
+        this.$router.push({ path: '/userInfo' })
+      },
       comfirm(type){
         this.$router.push({ path: '/logout', query: { type } })
       },
@@ -215,6 +228,15 @@
         goodsOrderApi.indexData().then(res => {
           if (res.subCode === 1000) {
             this.orderIofo = res.data ? res.data.countDto : {}
+          } else {
+            this.$toast(res.subMsg)
+          }
+        })
+      },
+      getUcUser() {
+        userContainerApi.getUcUser().then(res => {
+          if (res.subCode === 1000) {
+            this.form = res.data ? res.data : {}
           } else {
             this.$toast(res.subMsg)
           }

@@ -132,7 +132,7 @@ export default {
             localStorage.setItem('user_id', data.userId)
             localStorage.setItem('user_name', data.userAccount)
             localStorage.setItem('isActUser', data.isActUser)
-            localStorage.setItem('userRealName', data.userRealName)
+            // localStorage.setItem('userRealName', data.userRealName)
             if (data.isActUser == 1) {
               initSysDict().then(() => {
                 this.$router.push({ path: '/goodsAct' })
