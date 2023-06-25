@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <div class="car" style="  padding-top: 28px;">
+  <div class="car1" style="  padding-top: 28px;">
     <div class="main">
 <!--      <h1 class="section1-title">-->
 <!--        待处理事务-->
@@ -252,7 +252,7 @@
       }
     }
   }
-  .car {
+  .car1 {
     width: 100%;
     background-color: #F8FCFF;
     .header {

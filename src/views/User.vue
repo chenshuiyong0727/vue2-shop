@@ -15,16 +15,15 @@
     border-bottom-style: solid;
     border-bottom-width: 1px;"
     >
-      <div class="header-icon">
-              <span class="icon2-user">
-              </span>
-        <!--            <img src="../../static/img/userpic.jpg">-->
+      <div class="header-icon" style="margin-left: 6vw;">
+          <img style="width: 50px;height: 50px;border-radius: 100%;" src="../../static/img/userpic.jpg">
       </div>
       <span>{{
-         userName ? userName : '系统用户'
+       userRealName ? userRealName : userName ? userName : '系统用户'
         }}</span>
       <div class="my-indent-right">
           <span style="
+          margin-left: -10px;
     display: inline-block;
     font-size: 14px;
     color: rgba(0, 0, 0, 0.4);
@@ -195,7 +194,8 @@
     data() {
       return {
         orderIofo: {},
-        userName: localStorage.getItem('user_name')
+        userName: localStorage.getItem('user_name'),
+        userRealName: localStorage.getItem('userRealName')
       }
     },
 
@@ -252,7 +252,7 @@
     width: 100%;
     padding-bottom: 14vw;
     background-color: #F8FCFF;
-
+    border-top: 1vw solid #eee;
     .header {
       width: 100%;
       height: 16vw;
@@ -268,13 +268,11 @@
       align-items: center;
 
       .header-icon {
-        border: .4vw solid #ffffff;
-        background-color: @cl;
-        margin-left: 4vw;
+        /*border: .4vw solid #ffffff;*/
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
-        width: 14vw;
-        height: 14vw;
+        /*width: 14vw;*/
+        /*height: 14vw;*/
         line-height: 16vw;
         text-align: center;
         border-radius: 50%;
