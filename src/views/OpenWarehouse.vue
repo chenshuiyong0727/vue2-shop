@@ -798,7 +798,7 @@
     border-image: initial;
     border: 0;
     outline: none;
-    width: 76vw;
+    width: 84vw;
     /*width: 5.7rem;*/
     padding: 0.2rem;
 

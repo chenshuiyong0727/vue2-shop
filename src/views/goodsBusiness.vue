@@ -9,23 +9,26 @@
       <div    class="fenlei_top_left">
         <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）" class="ins">
       </div>
-      <div class="fenlei_top_right" >
+      <div class="fenlei_top_right" @click="isShowDialog2 = true">
+        <img src="../../static/img/search.png" height="30px;"width="30px;" >
+      </div>
+<!--      <div class="fenlei_top_right" >-->
+<!--&lt;!&ndash;        <mt-button&ndash;&gt;-->
+<!--&lt;!&ndash;          style="margin-left: -65px"&ndash;&gt;-->
+<!--&lt;!&ndash;          type="primary"&ndash;&gt;-->
+<!--&lt;!&ndash;          size="small"&ndash;&gt;-->
+<!--&lt;!&ndash;          @click="search">搜索</mt-button>&ndash;&gt;-->
 <!--        <mt-button-->
-<!--          style="margin-left: -65px"-->
+<!--          style="-->
+<!--           padding-top: 1.3px;-->
+<!--           margin-left: 6px;-->
+<!--           width: 67px;"-->
 <!--          type="primary"-->
 <!--          size="small"-->
-<!--          @click="search">搜索</mt-button>-->
-        <mt-button
-          style="
-           padding-top: 1.3px;
-           margin-left: 6px;
-           width: 67px;"
-          type="primary"
-          size="small"
-          @click="isShowDialog2 = true">  <img style="margin-left: -10px;" src="../../static/img/choose.png" height="20" width="20" slot="icon">
-          <span style="margin-left: -5px;">筛选</span>
-          </mt-button>
-      </div>
+<!--          @click="isShowDialog2 = true">  <img style="margin-left: -10px;" src="../../static/img/choose.png" height="20" width="20" slot="icon">-->
+<!--          <span style="margin-left: -5px;">筛选</span>-->
+<!--          </mt-button>-->
+<!--      </div>-->
     </div>
     <mt-loadmore
       style="padding-top: 0.86rem"
@@ -531,7 +534,7 @@
     border-image: initial;
     border: 0;
     outline: none;
-    width: 76vw;
+    width: 84vw;
     /*width: 5.7rem;*/
     padding: 0.2rem;
 
