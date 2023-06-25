@@ -126,7 +126,7 @@
         <img :src="imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
-    <p style="padding: 1.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
+    <p style="padding: 1.5rem 0;" class="to-the-bottom"></p>
     <div style="
     bottom: 0;
     position: absolute;

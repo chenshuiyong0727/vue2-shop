@@ -10,15 +10,15 @@
         <input type="text" v-model.trim="queryParam.name" placeholder="搜索商品名称" class="ins">
       </div>
       <div class="fenlei_top_right" >
-        <mt-button
-          style="margin-left: -65px"
-          type="primary"
-          size="small"
-          @click="search">搜索</mt-button>
+<!--        <mt-button-->
+<!--          style="margin-left: -65px"-->
+<!--          type="primary"-->
+<!--          size="small"-->
+<!--          @click="search">搜索</mt-button>-->
         <mt-button
           style="
            padding-top: 1.3px;
-           margin-left: 12px;
+           margin-left: 6px;
            width: 67px;"
           type="primary"
           size="small"
@@ -65,19 +65,20 @@
               <span>备注：<strong>{{item.remark}}</strong></span>
             </div>
             <div style="
-            margin-bottom: -7vw;
+            margin-bottom: -14vw;
     font-size: 3.5vw;
     margin-top: -1vw;">
               <strong> {{item.createTime |formateTime }}</strong>
-              <mt-button
-                style="margin-left: 5.1vw;"
-                type="primary"
+              <el-button
+                style="margin-left: 5.1vw;font-size: 3.5vw;font-weight: 600;"
+                type="text"
                 size="small"
-                @click="goDetail(item.id , 1)">查看</mt-button>
-              <mt-button
-                type="primary"
+                @click="goDetail(item.id , 1)">查看</el-button>
+              <el-button
+                type="text"
+                style="font-size: 3.5vw;font-weight: 600;"
                 size="small"
-                @click="goDetail(item.id ,2)">修改</mt-button>
+                @click="goDetail(item.id ,2)">修改</el-button>
             </div>
           </div>
         </div>

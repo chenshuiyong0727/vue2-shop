@@ -13,15 +13,16 @@
         <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名，价格）" class="ins">
       </div>
       <div class="fenlei_top_right" >
-        <mt-button
-          style="margin-left: -65px"
-          type="primary"
-          size="small"
-          @click="search">搜索</mt-button>
+<!--        <mt-button-->
+<!--          style="margin-left: -65px"-->
+<!--          type="primary"-->
+<!--          plain-->
+<!--          size="small"-->
+<!--          @click="search">搜索</mt-button>-->
         <mt-button
           style="
            padding-top: 1.3px;
-           margin-left: 12px;
+           margin-left: 6px;
            width: 67px;"
           type="primary"
           size="small"
@@ -73,8 +74,7 @@
           <div class="diangdans_con_right21" style="    margin-top: 30px;">
             <div class="dingdans_con_right_top" style="margin-top: -28px;">
               <strong v-if="item.goodsName"
-                      @click="scanCode(item.goodsId, 1,item.spuId) "
-                      :style="item.goodsId ? 'color: #409EFF' : ''">
+                      @click="scanCode(item.goodsId, 1,item.spuId) ">
                 {{item.goodsName }}
               </strong>
 <!--              货号：<strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>-->
@@ -83,7 +83,7 @@
               <!--              类型：<strong style="color: #409EFF" > {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
             </div>
             <div class="dingdans_con_right_down"  style="margin-bottom: 0px;">
-             <strong class="color-danger" @click="copyUrl(item.actNo)">{{item.actNo}} </strong>
+             <strong class="color-url" @click="copyUrl(item.actNo)">{{item.actNo}} </strong>
 <!--              <strong class="color-danger"> {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
               库存：<strong :class="item.num > 50 ? 'color-danger' : ''" >{{item.num}} </strong>
 <!--              价格：<strong  >{{item.price}} </strong>-->

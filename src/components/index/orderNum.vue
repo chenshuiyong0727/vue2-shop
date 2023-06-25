@@ -2,9 +2,9 @@
 
   <div class="car" style="  padding-top: 28px;">
     <div class="main">
-      <h1 class="section1-title">
-        待处理事务
-      </h1>
+<!--      <h1 class="section1-title">-->
+<!--        待处理事务-->
+<!--      </h1>-->
 <!--      <section class="my-vip" style="margin-top: 0">-->
 <!--        <router-link class="my-vip-bottom ho" :to="{ path: '/store?today=1'}">-->
 <!--        <div>-->
@@ -19,14 +19,14 @@
 <!--        </p>-->
 <!--      </router-link>-->
 <!--      </section>-->
-      <section class="my-vip" style="margin-top: 0">
+      <section class="my-vip" style="margin-top: 16px">
         <router-link class="my-vip-bottom ho" :to="{ path: '/store?today=7'}">
           <div>
             <img style="width: 6.9vw;margin-bottom: 5px;" src="../../../static/img/shengjiang2.png" ></img>
           </div>
           <p>
             <span>变价商品</span>
-            <i><samp :class="storeData.upCout > 0 ? 'color-danger' : ''">{{storeData.upCout}}</samp>
+            <i><samp :class="storeData.upCout > 0 ? 'color-url' : ''">{{storeData.upCout}}</samp>
               <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
             </i>
           </p>
@@ -39,7 +39,7 @@
         </div>
         <p>
           <span>待上架商品</span>
-          <i><samp :class="storeData.successNumLast > 0 ? 'color-danger' : ''">{{storeData.successNumLast}}</samp>
+          <i><samp :class="storeData.successNumLast > 0 ? 'color-url' : ''">{{storeData.successNumLast}}</samp>
             <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
           </i>
         </p>
@@ -52,7 +52,7 @@
         </div>
         <p>
           <span>待移库商品</span>
-          <i><samp :class="storeData.waitMoveCout > 0 ? 'color-danger' : ''">{{storeData.waitMoveCout}}</samp>
+          <i><samp :class="storeData.waitMoveCout > 0 ? 'color-url' : ''">{{storeData.waitMoveCout}}</samp>
             <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
           </i>
         </p>
@@ -79,7 +79,7 @@
         </div>
         <p>
           <span>闪电直发入仓</span>
-          <i><samp :class="orderIofo.count11 > 0 ? 'color-danger' : ''">{{orderIofo.count11}} </samp>
+          <i><samp :class="orderIofo.count11 > 0 ? 'color-url' : ''">{{orderIofo.count11}} </samp>
             <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
           </i>
           <!--            <samp>{{orderIofo.count2}}</samp>-->
@@ -95,7 +95,7 @@
           </div>
           <p>
             <span>待发货订单</span>
-            <i><samp :class="orderIofo.count3 > 0 ? 'color-danger' : ''">{{orderIofo.count3}}</samp>
+            <i><samp :class="orderIofo.count3 > 0 ? 'color-url' : ''">{{orderIofo.count3}}</samp>
               <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
             </i>
           </p>
@@ -108,7 +108,7 @@
           </div>
           <p>
             <span>已发货订单</span>
-            <i><samp :class="orderIofo.count4 > 0 ? 'color-danger' : ''">{{orderIofo.count4}}</samp>
+            <i><samp :class="orderIofo.count4 > 0 ? 'color-url' : ''">{{orderIofo.count4}}</samp>
               <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
             </i>
           </p>
@@ -121,7 +121,7 @@
           </div>
           <p>
             <span>已揽件订单</span>
-            <i><samp  :class="orderIofo.count5 > 0 ? 'color-danger' : ''">{{orderIofo.count5}}</samp>
+            <i><samp  :class="orderIofo.count5 > 0 ? 'color-url' : ''">{{orderIofo.count5}}</samp>
               <img style=" width: 4.2vw;" src="../../../static/img/more.png" ></img>
             </i>
           </p>
@@ -134,7 +134,7 @@
           </div>
           <p>
             <span>已收货订单</span>
-            <i><samp :class="orderIofo.count6 > 0 ? 'color-danger' : ''">{{orderIofo.count6}}</samp>
+            <i><samp :class="orderIofo.count6 > 0 ? 'color-url' : ''">{{orderIofo.count6}}</samp>
               <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
             </i>
           </p>
@@ -163,7 +163,7 @@
           </div>
           <p>
             <span>瑕疵订单</span>
-            <i><samp :class="orderIofo.count8 > 0 ? 'color-danger' : ''">{{orderIofo.count8}}</samp>
+            <i><samp :class="orderIofo.count8 > 0 ? 'color-url' : ''">{{orderIofo.count8}}</samp>
               <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
             </i>
           </p>
@@ -178,7 +178,7 @@
 <!--          <p>-->
 <!--            <span>瑕疵商品</span>-->
 <!--            <i> <samp-->
-<!--          :class="orderIofo.count8 > 0 ? 'color-danger' : ''"-->
+<!--          :class="orderIofo.count8 > 0 ? 'color-url' : ''"-->
 <!--          style="margin-left: 49vw">{{orderIofo.count8}} </samp>-->
 <!--              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>-->
 <!--            </i>-->

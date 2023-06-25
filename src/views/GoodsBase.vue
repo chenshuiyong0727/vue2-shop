@@ -13,15 +13,15 @@
         <input type="text" v-model.trim="queryParam.actNo" placeholder="搜索关键词（货号，商品名）" class="ins">
       </div>
       <div class="fenlei_top_right" >
-        <mt-button
-          style="margin-left: -65px"
-          type="primary"
-          size="small"
-          @click="search">搜索</mt-button>
+<!--        <mt-button-->
+<!--          style="margin-left: -65px"-->
+<!--          type="primary"-->
+<!--          size="small"-->
+<!--          @click="search">搜索</mt-button>-->
         <mt-button
           style="
            padding-top: 1.3px;
-           margin-left: 12px;
+           margin-left: 6px;
            width: 67px;"
           type="primary"
           size="small"
@@ -58,7 +58,7 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top" style="margin-top: -10px">
-              <span style="color: #409EFF;" @click="scanCode(item.id,1)" v-if="item.name"><strong>{{item.name}} </strong></span>
+              <span @click="scanCode(item.id,1)" v-if="item.name"><strong>{{item.name}} </strong></span>
             </div>
 <!--            <div class="dingdans_con_right_top">-->
 <!--              货号：<strong>{{item.actNo}} </strong>-->

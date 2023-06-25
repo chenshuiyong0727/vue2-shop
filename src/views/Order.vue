@@ -515,6 +515,7 @@
   .color-success {
     color: #0fbe8f;
   }
+
   .mint-loadmore-top,
   .mint-loadmore-bottom {
     font-size: 0.28rem;

@@ -454,7 +454,7 @@
     height: 12px;
     line-height: 12px;
     color: #fff;
-    background-color: #fc6666;
+    background-color: #409eff;
     font-size: 12px;
     top: 0;
     right: 0;

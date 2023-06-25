@@ -5,20 +5,23 @@
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
       </div>
     </mt-header>
+<!--    <div style=" width: 35px;height: 35px;position: fixed;left: 10px;top: 18px;z-index: 999;" @click="$router.go(-1)">-->
+<!--      <img width="100%" src="../../static/img/topBack.png" alt="" />-->
+<!--    </div>-->
     <div class="fenlei_top">
       <div    class="fenlei_top_left">
         <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）" class="ins">
       </div>
       <div class="fenlei_top_right" >
-        <mt-button
-          style="margin-left: -65px"
-          type="primary"
-          size="small"
-          @click="search">搜索</mt-button>
+<!--        <mt-button-->
+<!--          style="margin-left: -65px"-->
+<!--          type="primary"-->
+<!--          size="small"-->
+<!--          @click="search">搜索</mt-button>-->
         <mt-button
           style="
            padding-top: 1.3px;
-           margin-left: 12px;
+           margin-left: 6px;
            width: 67px;"
           type="primary"
           size="small"
@@ -99,7 +102,7 @@
                   更多<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item type="text" @click.native="goDel(item.id)">删除</el-dropdown-item>
+                  <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>

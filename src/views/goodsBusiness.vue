@@ -10,15 +10,15 @@
         <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）" class="ins">
       </div>
       <div class="fenlei_top_right" >
-        <mt-button
-          style="margin-left: -65px"
-          type="primary"
-          size="small"
-          @click="search">搜索</mt-button>
+<!--        <mt-button-->
+<!--          style="margin-left: -65px"-->
+<!--          type="primary"-->
+<!--          size="small"-->
+<!--          @click="search">搜索</mt-button>-->
         <mt-button
           style="
            padding-top: 1.3px;
-           margin-left: 12px;
+           margin-left: 6px;
            width: 67px;"
           type="primary"
           size="small"

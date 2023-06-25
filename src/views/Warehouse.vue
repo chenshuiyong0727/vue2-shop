@@ -10,15 +10,15 @@
         <input type="text" v-model.trim="queryParam.actNo" placeholder="搜索关键词（货号，商品名）" class="ins">
       </div>
       <div class="fenlei_top_right" >
-        <mt-button
-          style="margin-left: -65px"
-          type="primary"
-          size="small"
-          @click="search">搜索</mt-button>
+<!--        <mt-button-->
+<!--          style="margin-left: -65px"-->
+<!--          type="primary"-->
+<!--          size="small"-->
+<!--          @click="search">搜索</mt-button>-->
         <mt-button
           style="
            padding-top: 1.3px;
-           margin-left: 12px;
+           margin-left: 6px;
            width: 67px;"
           type="primary"
           size="small"
@@ -71,8 +71,7 @@
         <div class="dingdans_top">
           <div class="dingdans_top_left">
             <strong v-if="item.goodsName"
-                    @click="scanCode(item.goodsId, 1) "
-                    style="color: #409EFF">
+                    @click="scanCode(item.goodsId, 1) ">
               {{item.goodsName | sizeFilter }}
             </strong>
             <strong v-else  @click="scanCode(item.goodsId, 1) " style="color: #409EFF">
@@ -122,7 +121,7 @@
                 </span>
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>
-                      <el-dropdown-item type="text" @click.native="goDel(item.id)">删除</el-dropdown-item>
+                      <el-dropdown-item type="text"  class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="jumpactNo(item.actNo)">订单</el-dropdown-item>
                       <el-dropdown-item type="text" v-if="item.inventory > item.galleryCount" @click.native="changeStatusDialog1(item)">上架</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl )">库存</el-dropdown-item>

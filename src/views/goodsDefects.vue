@@ -10,15 +10,15 @@
         <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）" class="ins">
       </div>
       <div class="fenlei_top_right" >
-        <mt-button
-          style="margin-left: -65px"
-          type="primary"
-          size="small"
-          @click="search">搜索</mt-button>
+<!--        <mt-button-->
+<!--          style="margin-left: -65px"-->
+<!--          type="primary"-->
+<!--          size="small"-->
+<!--          @click="search">搜索</mt-button>-->
         <mt-button
           style="
            padding-top: 1.3px;
-           margin-left: 12px;
+           margin-left: 6px;
            width: 67px;"
           type="primary"
           size="small"
@@ -56,7 +56,7 @@
             <div class="dingdans_con_right_top" >
               <strong v-if="item.goodsName"
                       @click="scanCode(item.goodsId, 1) "
-                      style="color: #409EFF">
+                      >
                 {{item.goodsName}}
               </strong>
             </div>
@@ -68,14 +68,18 @@
               <el-tooltip style="width: 40vw;" :content="item.reason" placement="top">
                 <strong>{{item.reason | sizeFilterNum(12) }}</strong>
               </el-tooltip>
-              <mt-button
-                type="primary"
+
+              <el-button
+                type="text"
                 size="small"
-                @click="handleClick(item)">修改</mt-button>
-              <mt-button
-                type="danger"
+                class="color-danger"
+                style="font-size: 3.5vw;font-weight: 600;margin-left: 50px;"
+                @click="goDel(item.id)">删除</el-button>
+              <el-button
+                type="text"
                 size="small"
-                @click="goDel(item.id)">删除</mt-button>
+                style="font-size: 3.5vw;font-weight: 600;"
+                @click="handleClick(item)">修改</el-button>
             </div>
           </div>
         </div>

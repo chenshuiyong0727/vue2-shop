@@ -37,12 +37,13 @@
              </p>
               <p style="margin-top: 5px">
                 <span>合计入库金额 ：</span> <strong>{{item.inventoryAmount}}</strong>
-                <mt-button style="margin-left: 40px;"
-                  type="primary"
-                  size="small"
-                  @click="getPage"> 搜索
-                </mt-button>
+<!--                <mt-button style="margin-left: 40px;"-->
+<!--                  type="primary"-->
+<!--                  size="small"-->
+<!--                  @click="getPage"> 搜索-->
+<!--                </mt-button>-->
                 <mt-button
+                  style="margin-left: 40px;"
                   type="primary"
                   size="small"
                   @click="jumpDetail(months )">库存

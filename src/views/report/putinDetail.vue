@@ -21,13 +21,13 @@
                         type="date" placeholder="时间结束"  @change="getPage">
         </el-date-picker>
       </div>
-      <div class="fenlei_top_right">
-        <mt-button
-          type="primary"
-          size="small"
-          @click="getPage">搜索
-        </mt-button>
-      </div>
+<!--      <div class="fenlei_top_right">-->
+<!--        <mt-button-->
+<!--          type="primary"-->
+<!--          size="small"-->
+<!--          @click="getPage">搜索-->
+<!--        </mt-button>-->
+<!--      </div>-->
     </div>
     <div style="padding-top: 0.86rem">
       <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
