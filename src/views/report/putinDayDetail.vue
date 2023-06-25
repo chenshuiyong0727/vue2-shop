@@ -9,7 +9,7 @@
       <div class="fenlei_top_left">
         <el-date-picker style="width: 42vw"
                         v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
-                        type="date" placeholder="时间开始">
+                        type="date" placeholder="时间开始"  @change="getPage">
         </el-date-picker>
       </div>
       <div style="width: 8vw" class="fenlei_top_left">
@@ -18,7 +18,7 @@
       <div class="fenlei_top_left">
         <el-date-picker style="width: 42vw"
                         v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
-                        type="date" placeholder="时间结束">
+                        type="date" placeholder="时间结束"  @change="getPage">
         </el-date-picker>
       </div>
 <!--      <div class="fenlei_top_right">-->
@@ -139,6 +139,14 @@
       }
     },
     methods: {
+      keyupSubmit() {
+        document.onkeydown = (e) => {
+          let _key = window.event.keyCode
+          if (_key === 13) {
+            this.getPage()
+          }
+        }
+      },
       avatarShow(e) {
         this.imageZoom = e
         this.pictureZoomShow = true

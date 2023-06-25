@@ -223,6 +223,14 @@
       this.listSysDict()
     },
     methods: {
+      keyupSubmit() {
+        document.onkeydown = (e) => {
+          let _key = window.event.keyCode
+          if (_key === 13) {
+            this.getPage()
+          }
+        }
+      },
       confirmHandle() {
         if(!this.requestParam.status) {
           this.$toast('请选择状态')

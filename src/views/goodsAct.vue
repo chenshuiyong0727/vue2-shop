@@ -264,6 +264,7 @@
     //   this.listSysDict()
     // },
     activated() {
+      this.keyupSubmit()
       this.isActUser =  localStorage.getItem('isActUser')
       // 新开的页面
       this.isBack = false
@@ -286,6 +287,14 @@
       next()
     },
     methods: {
+      keyupSubmit() {
+        document.onkeydown = (e) => {
+          let _key = window.event.keyCode
+          if (_key === 13) {
+            this.getPage()
+          }
+        }
+      },
       // 复制链接
       copyUrl(url) {
         const input = document.createElement('input')

@@ -285,6 +285,14 @@
       this.listSysDict()
     },
     methods: {
+      keyupSubmit() {
+        document.onkeydown = (e) => {
+          let _key = window.event.keyCode
+          if (_key === 13) {
+            this.getPage()
+          }
+        }
+      },
       successTimeChange() {
         if (this.successTime) {
           this.queryParam.successTimeFrom = this.successTime[0]

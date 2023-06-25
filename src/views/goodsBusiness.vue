@@ -198,6 +198,14 @@
       this.listSysDict()
     },
     methods: {
+      keyupSubmit() {
+        document.onkeydown = (e) => {
+          let _key = window.event.keyCode
+          if (_key === 13) {
+            this.getPage()
+          }
+        }
+      },
       goDetail(id, type) {
         this.$router.push({ path: '/otherAdd', query: { id, type } })
       },

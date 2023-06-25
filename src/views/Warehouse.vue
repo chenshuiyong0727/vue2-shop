@@ -502,6 +502,8 @@
     //   this.listSysDict()
     // },
     activated() {
+      this.keyupSubmit()
+
       // 新开的页面
         this.isBack = false
         if (!this.$route.meta.isBack) {
@@ -582,6 +584,14 @@
       next()
     },
     methods: {
+      keyupSubmit() {
+        document.onkeydown = (e) => {
+          let _key = window.event.keyCode
+          if (_key === 13) {
+            this.getPage()
+          }
+        }
+      },
       handleChange() {
         goodsBaseApi.listDropDownSizes({ type: '' }, false).then(res => {
           if (res.subCode === 1000) {

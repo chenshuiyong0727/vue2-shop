@@ -197,6 +197,14 @@
       this.listSysDict()
     },
     methods: {
+      keyupSubmit() {
+        document.onkeydown = (e) => {
+          let _key = window.event.keyCode
+          if (_key === 13) {
+            this.getPage()
+          }
+        }
+      },
       handleClick(orderData) {
         this.requestParam.id = orderData.id
         this.requestParam.name = orderData.name

@@ -497,6 +497,7 @@
       }
     },
     activated() {
+      this.keyupSubmit()
       // 新开的页面
       this.isBack = false
       if (!this.$route.meta.isBack) {
@@ -595,6 +596,14 @@
     //   // }
     // },
     methods: {
+      keyupSubmit() {
+        document.onkeydown = (e) => {
+          let _key = window.event.keyCode
+          if (_key === 13) {
+            this.getPage()
+          }
+        }
+      },
       getDetailById() {
         let id = this.ids[0]
         if (id) {

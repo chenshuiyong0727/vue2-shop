@@ -7,7 +7,7 @@
     </mt-header>
     <div class="fenlei_top">
       <div class="fenlei_top_left">
-        <el-date-picker style="width: 35vw"
+        <el-date-picker style="width: 42vw"
                         v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
                         type="date" placeholder="时间开始">
         </el-date-picker>
@@ -16,18 +16,18 @@
         <span style="margin-left: 1vw;">至</span>
       </div>
       <div class="fenlei_top_left">
-        <el-date-picker style="width: 35vw"
+        <el-date-picker style="width: 42vw"
                         v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
-                        type="date" placeholder="时间结束">
+                        type="date" placeholder="时间结束"  @change="getPage">
         </el-date-picker>
       </div>
-      <div class="fenlei_top_right">
-        <mt-button
-          type="primary"
-          size="small"
-          @click="getPage">搜索
-        </mt-button>
-      </div>
+<!--      <div class="fenlei_top_right">-->
+<!--        <mt-button-->
+<!--          type="primary"-->
+<!--          size="small"-->
+<!--          @click="getPage">搜索-->
+<!--        </mt-button>-->
+<!--      </div>-->
     </div>
     <div style="padding-top: 0.86rem">
       <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
@@ -101,6 +101,14 @@
       }
     },
     methods: {
+      keyupSubmit() {
+        document.onkeydown = (e) => {
+          let _key = window.event.keyCode
+          if (_key === 13) {
+            this.getPage()
+          }
+        }
+      },
       getNextMonth(date) {
         let arr = date.split('-')
         let year = arr[0] // 获取当前日期的年份
