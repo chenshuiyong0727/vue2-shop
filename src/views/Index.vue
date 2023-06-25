@@ -1,7 +1,7 @@
 <template lang="html">
   <!-- 在首页父组件发送http请求,后将数据通过props传递给子组件,可减少请求次数,减少服务器压力 -->
   <div class="index">
-    <mt-header title="首页">
+    <mt-header title="移动端仓库">
     </mt-header>
     <v-orderNum :orderIofo ="orderIofo" :storeData ="storeData"/>
     <v-section1 :form="form" :countDay="countDay" :count="count":chartData1="chartData1" :orderIofo ="orderIofo" :chartSettings1="chartSettings1" />
