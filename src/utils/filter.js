@@ -30,6 +30,16 @@ Vue.filter('numFilter', (value) => {
   let realVal = parseFloat(value).toFixed(2)
   return realVal
 })
+Vue.filter('numFilter0', (value) => {
+  // 截取当前数据到小数点后两位
+  let realVal = parseFloat(value).toFixed(0)
+  let price1 = realVal.substring(0,realVal.length -1)
+  let price2 = realVal.substring(realVal.length - 1,realVal.length)
+  if (price2 != 9){
+    price2=9
+  }
+  return price1 +""+price2
+})
 Vue.filter('sizeFilter', (value) => {
   // 截取当前数据到小数点后两位
   if (!value || value.length < 27) {

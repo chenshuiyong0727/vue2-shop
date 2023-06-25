@@ -83,16 +83,20 @@
               <!--              类型：<strong style="color: #409EFF" > {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
             </div>
             <div class="dingdans_con_right_down"  style="margin-bottom: 0px;">
-             <strong class="color-danger" >{{item.actNo}} </strong>
+             <strong class="color-danger" @click="copyUrl(item.actNo)">{{item.actNo}} </strong>
 <!--              <strong class="color-danger"> {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
               库存：<strong :class="item.num > 50 ? 'color-danger' : ''" >{{item.num}} </strong>
-              价格：<strong  >{{item.price}} </strong>
+<!--              价格：<strong  >{{item.price}} </strong>-->
             </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: 0px;" @click="gotoDw(item.spuId)" >
+            <div class="dingdans_con_right_down" style="margin-bottom: 0px;"  >
+              折后价：<strong class="color-danger" >{{item.price}} </strong>
+              原价：<strong  >{{item.price/0.65  | numFilter0 }} </strong>
+            </div>
+            <div class="dingdans_con_right_down" style="margin-bottom: 0px;"  >
+              到手：<strong class="color-danger" >{{item.thisTimeThePrice}} </strong>
               周均价：<strong  >{{item.sevenAveragePrice}} </strong>
-              到手：<strong  >{{item.thisTimeThePrice}} </strong>
             </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: 0px;" @click="gotoDw(item.spuId)" >
+            <div class="dingdans_con_right_down" style="margin-bottom: 0px;"  >
               利润：<strong :class="item.thisTimeProfits > 50 ? 'color-danger' : ''" >{{item.thisTimeProfits}} </strong>
               周销量：<strong :class="item.sevenSaleCount > 10 ? 'color-danger' : ''" >{{item.sevenSaleCount}} </strong>
               <span v-if="item.thisTimeProfits <= 0" style="margin-left: 20px;">垃圾</span>
@@ -157,7 +161,7 @@
 <!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
 <!--            </select>-->
             <el-select size="small" class="select100" v-model="queryParam.sort" >
-          <el-option :disabled="true" value="" selected>请选择类型</el-option>
+          <el-option :disabled="true" value="" selected>请选择排序</el-option>
           <el-option
             v-for="item in sortList"
             :key="item.fieldValue"
@@ -223,7 +227,7 @@
         fileUrl: fileUrl,
         queryParam: {
           type: '',
-          sort: '',
+          sort: 1,
           keyword: '',
           priceFrom: '',
           priceTo: '',
@@ -238,6 +242,7 @@
         },
         typeList: [],
         sortList: [
+          { fieldValue: '', fieldName: '请选择排序' },
           { fieldValue: 1, fieldName: '利润降序' },
           { fieldValue: 2, fieldName: '利润升序' },
           { fieldValue: 3, fieldName: '销量降序' },
@@ -281,6 +286,18 @@
       next()
     },
     methods: {
+      // 复制链接
+      copyUrl(url) {
+        const input = document.createElement('input')
+        document.body.appendChild(input)
+        input.setAttribute('value', url)
+        input.select()
+        if (document.execCommand('copy')) {
+          document.execCommand('copy')
+        }
+        document.body.removeChild(input)
+        this.$toast('已复制至系统剪切板')
+      },
       gotoDw(spuId) {
         if (!spuId){
           return
@@ -366,11 +383,9 @@
       },
       resetHandle() {
         this.queryParam = {
-          keyword: '',
-          goodsId: '',
           type: '',
-          sizeId: '',
-          size: '',
+          sort: 1,
+          keyword: '',
           priceFrom: '',
           priceTo: '',
           profitsFrom: '',
@@ -424,6 +439,7 @@
         // let isActUser = localStorage.getItem('isActUser')
         if (this.isActUser == 1) {
           this.gotoDw(spuId)
+          return
         }
         this.isBack = true
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
