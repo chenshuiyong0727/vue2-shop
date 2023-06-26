@@ -16,8 +16,8 @@
     border-bottom-width: 1px;"
     >
       <div @click="userInfo" class="header-icon" style="margin-left: 6vw;">
-          <img v-if="form.imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" :src="fileUrl + form.imgUrl">
-          <img v-else style="width: 50px;height: 50px;border-radius: 100%;" src="../../static/img/userimg5.jpg">
+          <img v-if="imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" :src="imgUrl">
+<!--          <img v-if="form && !form.imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" src="../../static/img/userimg5.jpg">-->
       </div>
       <span  @click="userInfo">{{
        form.userRealName ? form.userRealName : form.userAccount ? form.userAccount : '系统用户'
@@ -204,6 +204,7 @@
     },
     data() {
       return {
+        imgUrl: '',
         fileUrl: fileUrl,
         orderIofo: {},
         // userName: localStorage.getItem('user_name'),
@@ -246,6 +247,11 @@
         userContainerApi.getUcUser().then(res => {
           if (res.subCode === 1000) {
             this.form = res.data ? res.data : {}
+            if (this.form.imgUrl) {
+              this.imgUrl = this.fileUrl + this.form.imgUrl
+            }else{
+              this.imgUrl = '../../static/img/userimg5.jpg'
+            }
           } else {
             this.$toast(res.subMsg)
           }
