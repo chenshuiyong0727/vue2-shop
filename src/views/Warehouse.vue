@@ -81,14 +81,17 @@
               {{item.actNo}}
             </strong>
           </div>
-<!--          <div class="dingdans_top_right" v-if="item.difference && item.thisTimePrice">-->
-<!--             变更-->
-<!--            <strong v-if="item.difference > 0" class="color-danger"> +{{item.difference }}</strong>-->
-<!--            <strong v-else class="color-success">{{item.difference }}</strong>-->
-<!--          </div>-->
-          <div class="dingdans_top_right">
-            <strong class="color-danger">{{item.size }}</strong>
+          <div class="dingdans_top_right" v-if="item.difference && item.thisTimePrice">
+             变更
+            <strong v-if="item.difference > 0" class="color-danger"> +{{item.difference }}</strong>
+            <strong v-else class="color-success">{{item.difference }}</strong>
           </div>
+<!--          <div class="dingdans_top_right">-->
+<!--            尺码：<strong class="color-danger">{{item.size }}</strong>-->
+<!--            <span>变更</span>-->
+<!--            <strong v-if="item.difference > 0" class="color-danger"> +{{item.difference }}</strong>-->
+<!--            <strong v-if="item.difference < 0" class="color-success">{{item.difference }}</strong>-->
+<!--          </div>-->
         </div>
         <div class="dingdans_con" style="margin-top: -8px;">
           <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">
@@ -104,13 +107,15 @@
                   <strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl,item.img )" style="color: #409EFF"> {{item.actNo}} </strong>
                  <img @click="copyUrl(item.actNo)" style="width: 20px;" src="../../static/img/copy6.png">
              </span>
-              <!--              尺码：<strong class="color-danger">{{item.size }}</strong>-->
+                            尺码：<strong class="color-danger">{{item.size }}</strong>
               <span v-if="item.thisTimePrice" >利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong></span>
               <span v-else>利润：<strong class="color-danger">{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong></span>
-              <span > {{ item.warehouseId | dictToDescTypeValue(40) }} </span>
             </div>
             <div class="dingdans_con_right_top">
-              原库存：<strong>{{item.oldInventory}} </strong> 库存：<strong>{{item.inventory}}</strong> 成功：<strong>{{item.successCount}}</strong> 上架：<strong>{{item.galleryCount}}</strong>
+              原库存：<strong>{{item.oldInventory}} </strong>
+              库存：<strong>{{item.inventory}}</strong>
+              成功：<strong>{{item.successCount}}</strong>
+              上架：<strong>{{item.galleryCount}}</strong>
             </div>
             <div class="dingdans_con_right_down">
               <span v-if="item.thisTimePrice">到手：<strong>{{item.thisTimeThePrice}}</strong></span>
@@ -123,12 +128,13 @@
             <div style="    margin-bottom: -9vw;
     font-size: 3.5vw;
     margin-top: -16px;">
+              <span > {{ item.warehouseId | dictToDescTypeValue(40) }} </span>
               <strong> {{item.createTime |formateTime }}</strong>
               <el-button
                 type="text"
-                style="font-weight: 600;padding-left: 40px;"
+                style="font-weight: 600;padding-left: 5px;"
                 @click="gotoDw(item.spuId)">得物</el-button>
-              <el-dropdown trigger="click" style="margin-left: 5px;">
+              <el-dropdown trigger="click" style="margin-left: 2px;">
                 <span class="el-dropdown-link">
                   操作<i class="el-icon-arrow-down el-icon--right" style="font-weight: 600;    margin-left: 2px;"></i>
                 </span>
