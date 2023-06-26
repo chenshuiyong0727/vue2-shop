@@ -81,10 +81,13 @@
               {{item.actNo}}
             </strong>
           </div>
-          <div class="dingdans_top_right" v-if="item.difference && item.thisTimePrice">
-             变更
-            <strong v-if="item.difference > 0" class="color-danger"> +{{item.difference }}</strong>
-            <strong v-else class="color-success">{{item.difference }}</strong>
+<!--          <div class="dingdans_top_right" v-if="item.difference && item.thisTimePrice">-->
+<!--             变更-->
+<!--            <strong v-if="item.difference > 0" class="color-danger"> +{{item.difference }}</strong>-->
+<!--            <strong v-else class="color-success">{{item.difference }}</strong>-->
+<!--          </div>-->
+          <div class="dingdans_top_right">
+            <strong class="color-danger">{{item.size }}</strong>
           </div>
         </div>
         <div class="dingdans_con" style="margin-top: -8px;">
@@ -96,10 +99,15 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
-              <strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl,item.img )" style="color: #409EFF"> {{item.actNo}} </strong>
-              尺码：<strong class="color-danger">{{item.size }}</strong>
+             <span>
+<!--               <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>-->
+                  <strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl,item.img )" style="color: #409EFF"> {{item.actNo}} </strong>
+                 <img @click="copyUrl(item.actNo)" style="width: 20px;" src="../../static/img/copy6.png">
+             </span>
+              <!--              尺码：<strong class="color-danger">{{item.size }}</strong>-->
               <span v-if="item.thisTimePrice" >利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong></span>
               <span v-else>利润：<strong class="color-danger">{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong></span>
+              <span > {{ item.warehouseId | dictToDescTypeValue(40) }} </span>
             </div>
             <div class="dingdans_con_right_top">
               原库存：<strong>{{item.oldInventory}} </strong> 库存：<strong>{{item.inventory}}</strong> 成功：<strong>{{item.successCount}}</strong> 上架：<strong>{{item.galleryCount}}</strong>
@@ -112,15 +120,17 @@
               <strong v-if="item.thisTimePrice">{{item.thisTimePrice}}</strong>
               <strong v-else>{{item.dwPrice}}</strong>
             </div>
-            <div style="
-            margin-bottom: -7vw;
+            <div style="    margin-bottom: -9vw;
     font-size: 3.5vw;
-    margin-top: -1vw;">
-              <strong class="color-danger"> {{ item.warehouseId | dictToDescTypeValue(40) }} </strong>
+    margin-top: -16px;">
               <strong> {{item.createTime |formateTime }}</strong>
-              <el-dropdown trigger="click" style="margin-left: 10vw;">
+              <el-button
+                type="text"
+                style="font-weight: 600;padding-left: 40px;"
+                @click="gotoDw(item.spuId)">得物</el-button>
+              <el-dropdown trigger="click" style="margin-left: 5px;">
                 <span class="el-dropdown-link">
-                  操作<i class="el-icon-arrow-down el-icon--right"></i>
+                  操作<i class="el-icon-arrow-down el-icon--right" style="font-weight: 600;    margin-left: 2px;"></i>
                 </span>
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>
@@ -890,6 +900,26 @@
         this.isBack = true
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
         this.$router.push({ path: '/scanCode', query: { id, type } })
+      },
+      gotoDw(spuId) {
+        if (!spuId){
+          return
+        }
+        // let url = "https://www.dewu.com/router/product/ProductDetail?spuId=";
+        let url = "https://m.dewu.com/router/product/ProductDetail?spuId=";
+        window.location.href = url + spuId;
+      },
+      // 复制链接
+      copyUrl(url) {
+        const input = document.createElement('input')
+        document.body.appendChild(input)
+        input.setAttribute('value', url)
+        input.select()
+        if (document.execCommand('copy')) {
+          document.execCommand('copy')
+        }
+        document.body.removeChild(input)
+        this.$toast('已复制至剪切板')
       },
       WarehouseDetail(goodsId , actNo,imgUrl,img) {
         this.isBack = true

@@ -90,7 +90,7 @@
             </div>
           </div>
           <div class="diangdans_con_right22"  @click="gotoDw(item.spuId)"  style="margin-top: 10px;">
-            <img src="../../static/img/dw.png" height="30px;"width="30px;" >
+            <img src="../../static/img/dw_1.png" height="30px;"width="30px;" >
           </div>
         </div>
       </div>
@@ -290,7 +290,7 @@
           document.execCommand('copy')
         }
         document.body.removeChild(input)
-        this.$toast('已复制至系统剪切板')
+        this.$toast('已复制至剪切板')
       },
       gotoDw(spuId) {
         if (!spuId){

@@ -61,30 +61,33 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top" style="margin-top: -10px">
-              <span @click="scanCode(item.id,1)" v-if="item.name"><strong>{{item.name}} </strong></span>
+              <span @click="scanCode(item.id,1)" v-if="item.name"><strong> {{item.name | sizeFilterNum(50) }}</strong></span>
             </div>
-<!--            <div class="dingdans_con_right_top">-->
-<!--              货号：<strong>{{item.actNo}} </strong>-->
-<!--            </div>-->
             <div class="dingdans_con_right_down">
-              货号：
-              <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
+<!--              货号：-->
+<!--              <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>-->
+              <span>
+                <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
+<!--               <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>-->
+<!--                  <strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl,item.img )" style="color: #409EFF"> {{item.actNo}} </strong>-->
+                 <img @click="copyUrl(item.actNo)" style="width: 20px;" src="../../static/img/copy6.png">
+             </span>
               <strong> {{item.brand}}</strong>
               <strong> {{ item.type | dictToDescTypeValue(20221108) }}</strong>
             </div>
             <div style="
                margin-bottom: -12vw;
-    margin-left: 30vw;
+    margin-left: 20vw;
     margin-top: -3vw;">
               <el-button
                 style="margin-left: 10.1vw;font-weight: 600;"
                 type="text"
                 class="color-danger"
                 @click="storeAdd(item.id)">选择</el-button>
-<!--              <el-button-->
-<!--                style="margin-left: 1vw;font-weight: 600;"-->
-<!--                type="text"-->
-<!--                @click="jumpactNo(item.actNo)">库存</el-button>-->
+              <el-button
+                style="margin-left: 1vw;font-weight: 600;"
+                type="text"
+                @click="gotoDw(item.spuId)">得物</el-button>
               <el-button
                 style="margin-left: 1vw;font-weight: 600;"
                 type="text"
@@ -303,11 +306,30 @@
       goDetail(id, type) {
         this.$router.push({ path: '/goodsAdd', query: { id, type } })
       },
+      gotoDw(spuId) {
+        if (!spuId){
+          return
+        }
+        // let url = "https://www.dewu.com/router/product/ProductDetail?spuId=";
+        let url = "https://m.dewu.com/router/product/ProductDetail?spuId=";
+        window.location.href = url + spuId;
+      },
       storeAdd(goodsId) {
         this.$router.push({ path: '/storeAdd', query: { goodsId } })
       },
       jumpactNo(actNo) {
         this.$router.push({ path: '/store', query: { actNo } })
+      },
+      copyUrl(url) {
+        const input = document.createElement('input')
+        document.body.appendChild(input)
+        input.setAttribute('value', url)
+        input.select()
+        if (document.execCommand('copy')) {
+          document.execCommand('copy')
+        }
+        document.body.removeChild(input)
+        this.$toast('已复制至剪切板')
       },
       getPage() {
         goodsBaseApi.page(this.queryParam).then(res => {

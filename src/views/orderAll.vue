@@ -55,7 +55,10 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
-              <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
+             <span>
+               <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
+                 <img @click="copyUrl(item.actNo)" style="width: 20px;" src="../../static/img/copy6.png">
+             </span>
               尺码：<strong>{{item.size}}</strong>
               <span>
                  售价：<strong>{{item.shelvesPrice}}</strong>
@@ -74,21 +77,22 @@
                 入库价：<strong>{{item.price}}</strong>
               </div>
             </div>
-            <div  class="dingdans_con_right_down" style="margin-bottom: 1vw;margin-top: 1vw;" v-if="item.addressId">
+            <div  class="dingdans_con_right_down" style="margin-bottom: 0vw;" v-if="item.addressId">
               <strong  v-if="item.status == 3" style="font-size: 12px;" class="color-danger"> {{item.deliveryDeadlineTime |formateTime }}</strong>
               <strong style="font-size: 12px;" >{{ item.addressId | dictToDescTypeValue(38) }} </strong>
             </div>
             <div class="dingdans_con_right_down_2">
               <el-button
                 type="text"
-                style="font-weight: 600;padding-left: 115px;"
-                @click="handleClick(item)">修改</el-button>
-              <el-dropdown trigger="click" style="margin-left: 2vw;">
+                style="font-weight: 600;padding-left: 130px;"
+                @click="gotoDw(item.spuId)">得物</el-button>
+              <el-dropdown trigger="click"  style="margin-left: 5px;">
                 <span class="el-dropdown-link">
-                  更多<i class="el-icon-arrow-down el-icon--right"></i>
+                  更多<i class="el-icon-arrow-down el-icon--right" style="font-weight: 600;    margin-left: 2px;"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
+                  <el-dropdown-item type="text" class="color-danger" @click.native="handleClick(item.id)">修改</el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
@@ -918,6 +922,18 @@
 
         this.isShowDialog1 = true
       },
+      // 复制链接
+      copyUrl(url) {
+        const input = document.createElement('input')
+        document.body.appendChild(input)
+        input.setAttribute('value', url)
+        input.select()
+        if (document.execCommand('copy')) {
+          document.execCommand('copy')
+        }
+        document.body.removeChild(input)
+        this.$toast('已复制至剪切板')
+      },
       jumpactNo(actNo) {
         this.isBack = true
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
@@ -944,6 +960,14 @@
       //     })
       //   })
       // },
+      gotoDw(spuId) {
+        if (!spuId){
+          return
+        }
+        // let url = "https://www.dewu.com/router/product/ProductDetail?spuId=";
+        let url = "https://m.dewu.com/router/product/ProductDetail?spuId=";
+        window.location.href = url + spuId;
+      },
       goDel(id) {
         this.$confirm('是否删除',"提示",{
           confirmButtonText: '确定',
