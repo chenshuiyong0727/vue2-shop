@@ -9,6 +9,7 @@ const userInfo = resolve => require(['@/views/userInfo.vue'], resolve)
 const Order = resolve => require(['@/views/OrderAll.vue'], resolve)
 const orderDetail = resolve => require(['@/views/orderDetail.vue'], resolve)
 const putin = resolve => require(['@/views/report/putin.vue'], resolve)
+const channelStorage = resolve => require(['@/views/report/channelStorage.vue'], resolve)
 const sellListDetail = resolve => require(['@/views/report/sellListDetail.vue'], resolve)
 const putinDetail = resolve => require(['@/views/report/putinDetail.vue'], resolve)
 const putinDayDetail = resolve => require(['@/views/report/putinDayDetail.vue'], resolve)
@@ -165,6 +166,13 @@ export default new Router({
       path: '/areaSellList',
       name: '区域销售报表',
       component: areaSellList,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
+    }, {
+      path: '/channelStorage',
+      name: '入库渠道报表',
+      component: channelStorage,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },
