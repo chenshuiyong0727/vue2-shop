@@ -44,7 +44,7 @@
           </div>
           <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap" @click="avatarShow(item.img)">
             <img :src="item.img" style="margin-top: 25px;">
-            <p class="mark" v-if="item.saleType != 1">
+            <p class="mark">
               <span class="text" >
                 {{ item.saleType | dictToDescTypeValue(46) }}
               </span>
@@ -60,22 +60,23 @@
                  <img @click="copyUrl(item.actNo)" style="width: 20px;" src="../../static/img/copy6.png">
              </span>
               尺码：<strong>{{item.size}}</strong>
-              <span>
-                 售价：<strong>{{item.shelvesPrice}}</strong>
-              </span>
+              入库价：<strong>{{item.price}}</strong>
+<!--              <span>-->
+<!--                 -->
+<!--              </span>-->
             </div>
             <div class="dingdans_con_right_down" style="margin-bottom: 1vw;margin-top: 1vw;">
-              最低售价：<strong class="color-danger">{{item.thisTimePrice}}</strong>
+               <span  v-if="[2,11].includes(item.status)">最低售价：<strong class="color-danger">{{item.thisTimePrice}}</strong></span>
               <span  v-if="[2,11].includes(item.status)">
                 预估利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong>
               </span>
               <span v-else>
                 <span v-if="item.profits">利润：<strong class="color-danger">{{item.profits}}</strong></span>
               </span>
-              <div>
-                <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
-                入库价：<strong>{{item.price}}</strong>
-              </div>
+            </div>
+            <div class="dingdans_con_right_down" style="margin-bottom: 0vw;" >
+              售价：<strong>{{item.shelvesPrice}}</strong>
+              <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
             </div>
             <div  class="dingdans_con_right_down" style="margin-bottom: 0vw;" v-if="item.addressId">
               <strong  v-if="item.status == 3" style="font-size: 12px;" class="color-danger"> {{item.deliveryDeadlineTime |formateTime }}</strong>
@@ -84,15 +85,15 @@
             <div class="dingdans_con_right_down_2">
               <el-button
                 type="text"
-                style="font-weight: 600;padding-left: 130px;"
-                @click="gotoDw(item.spuId)">得物</el-button>
+                style="font-weight: 600;padding-left: 130px;   margin-top: -16px;"
+                @click="handleClick(item)">修改</el-button>
               <el-dropdown trigger="click"  style="margin-left: 5px;">
                 <span class="el-dropdown-link">
-                  更多<i class="el-icon-arrow-down el-icon--right" style="font-weight: 600;    margin-left: 2px;"></i>
+                  更多<i class="el-icon-arrow-down el-icon--right" style="font-weight: 600; margin-left: 2px;"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
-                  <el-dropdown-item type="text" class="color-danger" @click.native="handleClick(item.id)">修改</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
@@ -124,7 +125,7 @@
           <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 147vw;width: 100vw">
+      <section style="height: 148vw;width: 100vw">
         <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :disabled="true"></mt-field>
         <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam.waybillNo"></mt-field>
@@ -145,6 +146,17 @@
             <el-option label="状态" value=""></el-option>
             <el-option
               v-for="item in statusList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+            </el-option>
+          </el-select>
+        </mt-field>
+        <mt-field label="销售类型">
+          <el-select size="small" class="select100" v-model="requestParam.saleType">
+            <el-option label="销售类型" value=""></el-option>
+            <el-option
+              v-for="item in saleTypeList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
@@ -1011,6 +1023,7 @@
       handleClick(orderData) {
         this.orderData = orderData
         this.requestParam.id = this.orderData.id
+        this.requestParam.saleType = this.orderData.saleType
         this.requestParam.price = this.orderData.price
         this.requestParam.shelvesPrice = this.orderData.shelvesPrice
 
@@ -1023,6 +1036,9 @@
           this.requestParam.status = this.orderData.status + 1
         } else{
           this.requestParam.status = 6
+        }
+        if (this.orderData.status == 7) {
+          this.requestParam.status = 7
         }
         if (!this.orderData.poundage) {
           let poundage = this.requestParam.shelvesPrice * 0.075 + 38 + 8.5
@@ -1133,10 +1149,10 @@
   }
   .dingdans_con_right_down_2 {
     margin-left: 9vw;
-    /* margin-bottom: -2vw; */
+     margin-bottom: -2vw;
     font-size: 3.5vw;
     height: 16px;
-    margin-top: -13px;
+    margin-top: -17px;
   }
 /*
  -----分割线---

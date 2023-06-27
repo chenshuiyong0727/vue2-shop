@@ -53,8 +53,16 @@
 <!--          </div>-->
 <!--        </div>-->
         <div class="dingdans_con" style="padding : 0 ;">
-          <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">
-            <img :src="item.img">
+<!--          <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">-->
+<!--            <img :src="item.img">-->
+<!--          </div>-->
+          <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap" @click="avatarShow(item.img)">
+            <img :src="item.img" style="margin-top: 35px;">
+            <p style="top: 10px;" class="mark1">
+              <span class="text1" >
+                {{item.type | dictToDescTypeValue2(20221108)}}
+              </span>
+            </p>
           </div>
           <div v-if="!item.img && item.imgUrl" :src="item.img" class="dingdans_con_left" @click="avatarShow(fileUrl+ item.imgUrl)">
             <img :src="fileUrl + item.imgUrl">
@@ -73,7 +81,7 @@
                  <img @click="copyUrl(item.actNo)" style="width: 20px;" src="../../static/img/copy6.png">
              </span>
               <strong> {{item.brand}}</strong>
-              <strong> {{ item.type | dictToDescTypeValue(20221108) }}</strong>
+<!--              <strong> {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
             </div>
             <div style="
                margin-bottom: -12vw;
@@ -125,7 +133,7 @@
         </div>
       </mt-header>
       <section style="height: 80vw;width: 100vw">
-        <mt-field label="状态" style="margin-top: 11vw;">
+        <mt-field label="类型" style="margin-top: 11vw;">
 <!--            <select class="select100" v-model="queryParam.type" @change="changeSystem" >-->
 <!--               <option :disabled="true" value="" selected>请选择类型</option>-->
 <!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
@@ -813,5 +821,41 @@
     /*width: 5.7rem;*/
     padding: 0.2rem;
 
+  }
+  .wrap {
+    position: relative;
+  }
+  .mark1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+  }
+
+  .mark1:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-width: 10px;
+    border-bottom-width: 16px;
+    border-left-width: 20px;
+  }
+
+  .text1 {
+    color: white;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    font-size: 11px;
+    text-transform: uppercase;
+    width: 30px;
+    text-align: center;
+    margin-top: 2.1px;
   }
 </style>

@@ -242,10 +242,10 @@
           this.$toast('货号非空')
           return false
         }
-        if (!this.form.imgUrl) {
-          this.$toast('请上传图片')
-          return false
-        }
+        // if (!this.form.imgUrl) {
+        //   this.$toast('请上传图片')
+        //   return false
+        // }
         if (!this.form.sizeList.length) {
           this.$toast('请选择尺码')
           return false

@@ -77,6 +77,22 @@
               </div>
             </template>
           </el-table-column>
+          <el-table-column align="center" prop="channelId"  width="100"  label="渠道">
+            <template scope="scope">
+              <div class="input-box">
+                <select v-model="scope.row.channelId">
+                  <option label="渠道" value=""></option>
+                  <option
+                    v-for="item in channelIdList"
+                    :key="item.fieldValue"
+                    :label="item.fieldName"
+                    :value="item.fieldValue">
+                  </option>
+                </select>
+                <!--                <input class="elInput1" type="number"  v-model="scope.row.dwPrice"></input>-->
+              </div>
+            </template>
+          </el-table-column>
           <el-table-column fixed="right" align="center" label="操作" width="55">
             <template scope="scope">
               <el-button type="text" @click="changeStatusDialog1(scope.row.sizeIndex,scope.row)">详情
@@ -96,8 +112,19 @@
           <mt-button size="normal" @click="goDel" style="font-size: 16px">移除</mt-button>
         </div>
       </mt-header>
-      <section style="height: 80vw;width: 80vw">
+      <section style="height: 90vw;width: 80vw">
         <mt-field label="尺码" style="margin-top: 11vw;"  v-model="orderData1.size" :disabled="true"></mt-field>
+        <mt-field label="仓库">
+            <select size="small" class="select80" :disabled="true" v-model="orderData1.channelId"  >
+              <option :disabled="true" value="" selected>渠道</option>
+              <option
+                v-for="item in channelIdList"
+                :key="item.fieldValue"
+                :label="item.fieldName"
+                :value="+item.fieldValue">
+              </option>
+            </select>
+        </mt-field>
         <mt-field label="库存" v-model="orderData1.inventory" :disabled="true"></mt-field>
         <mt-field label="进价" v-model="orderData1.price" :disabled="true"></mt-field>
         <mt-field label="售价" v-model="orderData1.dwPrice" :disabled="true"></mt-field>
@@ -108,14 +135,17 @@
     </mt-popup>
     <div style="    margin-left: 20vw;
     margin-top: 20px;">
-      <mt-button style="bottom: 10px"
+      <el-button style="bottom: 10px"
         type="primary"
-        @click="goAdd">提交</mt-button>
-      <mt-button style="bottom: 10px"
-        @click="$router.go(-1)">取消</mt-button>
-      <mt-button style="bottom: 10px"
+                 size="small"
+        @click="goAdd">提交</el-button>
+      <el-button style="bottom: 10px"
+                 size="small"
+                 @click="$router.go(-1)">取消</el-button>
+      <el-button style="bottom: 10px"
         type="primary"
-        @click="gotoIndex">回到首页</mt-button>
+                 size="small"
+                 @click="gotoIndex">回到首页</el-button>
     </div>
   </div>
 </template>
@@ -137,6 +167,7 @@ export default {
         imgUrl: '',
         img: '',
       },
+      channelIdList: [],
       isShowDialog1: false,
       orderData1: '',
       inventoryIndex:'',
@@ -158,22 +189,16 @@ export default {
     }
   },
   mounted() {
+    this.listSysDict()
   },
   methods:{
+    listSysDict() {
+      let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
+        localStorage.getItem('sysDictList')) : []
+      this.channelIdList = sysDictList.filter(item => item.typeValue == 47)
+    },
     changeStatusDialog1(index,row) {
       this.inventoryIndex = index
-      // if (!row.inventory) {
-      //   this.$toast('请输入尺码 ' + row.size + ' 的库存')
-      //   return
-      // }
-      // if (!row.price) {
-      //   this.$toast('请输入尺码 ' + row.size  + ' 的入库价')
-      //   return
-      // }
-      // if (!row.dwPrice) {
-      //   this.$toast('请输入尺码 ' + row.size  + ' 的售价')
-      //   return
-      // }
       this.orderData1 = row
       if (this.orderData1.dwPrice)  {
         let poundage = this.orderData1.dwPrice * 0.075 + 38 + 8.5
@@ -210,12 +235,14 @@ export default {
           this.$toast('请输入尺码 ' + size + ' 的售价')
           return
         }
+        if (!data1.channelId) {
+          data1.channelId = 1
+        }
       }
       goodsInventoryApi.add({ sizeDtos: this.tableData }).then(res => {
         if (res.subCode === 1000) {
           this.$toast('操作成功')
           this.$router.go(-1)
-          // this.goBack()
         } else {
           this.$toast(res.subMsg)
         }
@@ -261,6 +288,7 @@ export default {
         item.sizeIndex = index
         item.sizeId = item.id
         item.goodsId = this.goodsId
+        item.channelId = 1
         if (this.tableData.length) {
           let data1 = this.tableData[0]
           item.inventory = data1.inventory
@@ -268,8 +296,10 @@ export default {
           if (!item.dwPrice) {
             item.dwPrice = data1.dwPrice
           }
+          item.channelId = data1.channelId
         }
         this.tableData.push(item)
+        this.$forceUpdate()
       } else {
         this.del(index)
         this.delItem(item)

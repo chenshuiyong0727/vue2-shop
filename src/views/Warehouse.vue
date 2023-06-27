@@ -93,9 +93,25 @@
 <!--            <strong v-if="item.difference < 0" class="color-success">{{item.difference }}</strong>-->
 <!--          </div>-->
         </div>
-        <div class="dingdans_con" style="margin-top: -8px;">
-          <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">
-            <img :src="item.img">
+        <div class="dingdans_con" style="margin-top: -5px;">
+<!--          <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">-->
+<!--            <img :src="item.img">-->
+<!--          </div>-->
+<!--          <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap" @click="avatarShow(item.img)">-->
+<!--            <img :src="item.img" style="margin-top: 25px;">-->
+<!--            <p class="mark" v-if="item.saleType != 1">-->
+<!--              <span class="text" >-->
+<!--                {{ item.channelId | dictToDescTypeValue(47) }}-->
+<!--              </span>-->
+<!--            </p>-->
+<!--          </div>-->
+          <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap" @click="avatarShow(item.img)">
+            <img :src="item.img" style="margin-top: 25px;">
+            <p class="mark2">
+              <span class="text1" >
+                {{ item.channelId | dictToDescTypeValue(47) }}
+              </span>
+            </p>
           </div>
           <div v-if="!item.img && item.imgUrl" :src="item.img" class="dingdans_con_left" @click="avatarShow(fileUrl+ item.imgUrl)">
             <img :src="fileUrl + item.imgUrl">
@@ -231,7 +247,7 @@
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 100vw;width: 100vw">
+      <section style="height: 110vw;width: 100vw">
         <mt-field label="排序" style="margin-top: 11vw;">
 <!--            <select class="select100" v-model="queryParam.sort" @change="changeSystem" >-->
 <!--          <option :disabled="true" value="" selected>请选择排序</option>-->
@@ -263,14 +279,21 @@
             </el-select>
         </mt-field>
         <mt-field label="仓库">
-<!--            <select class="select100" v-model="queryParam.warehouseId" @change="changeSystem" >-->
-<!--              <option :disabled="true" value="" selected>请选择仓库</option>-->
-<!--              <option v-for="x in warehouseList" :value="x.fieldValue">{{x.fieldName}}</option>-->
-<!--            </select>-->
             <el-select size="small" class="select100" v-model="queryParam.warehouseId"  >
               <el-option :disabled="true" value="" selected>请选择仓库</el-option>
               <el-option
                 v-for="item in warehouseList"
+                :key="item.fieldValue"
+                :label="item.fieldName"
+                :value="+item.fieldValue">
+              </el-option>
+            </el-select>
+        </mt-field>
+        <mt-field label="渠道">
+            <el-select size="small" class="select100" v-model="queryParam.channelId"  >
+              <el-option :disabled="true" value="" selected>请选择渠道</el-option>
+              <el-option
+                v-for="item in channelIdList"
                 :key="item.fieldValue"
                 :label="item.fieldName"
                 :value="+item.fieldValue">
@@ -409,6 +432,7 @@
           createTimeTo: '',
           id: '',
           warehouseId: '',
+          channelId: '',
           inventory: 1,
           sort:'',
           inventoryFrom: '',
@@ -423,6 +447,7 @@
         bottomStatus: "",
         allLoaded: false,
         warehouseList: [],
+        channelIdList: [],
         addressList: [],
         todayList: [],
         // todayList: [
@@ -545,14 +570,15 @@
         //   }
         //   // this.search1()
         // }
-        const { actNo,size,months ,warehouseId,today} = this.$route.query
+        const { actNo,size,months ,warehouseId,channelId,today} = this.$route.query
         this.queryParam.size = size
         this.queryParam.actNo = actNo
         this.queryParam.warehouseId = warehouseId
+        this.queryParam.channelId = channelId
         this.queryParam.today = today
         this.initToday = today
         this.months = months
-        if (this.queryParam.actNo || this.queryParam.size || this.queryParam.warehouseId || this.months||  this.queryParam.today) {
+        if (this.queryParam.actNo || this.queryParam.size || this.queryParam.warehouseId ||this.queryParam.channelId ||  this.months||  this.queryParam.today) {
           if (this.months) {
             this.queryParam.createTimeFrom = this.months
             this.queryParam.createTimeTo = this.months
@@ -564,6 +590,10 @@
           this.titleName = '前埔库存'
         }else if (this.queryParam.warehouseId == 2) {
           this.titleName = '云头库存'
+        }else if (this.queryParam.channelId == 1) {
+          this.titleName = '线下'
+        }else if (this.queryParam.channelId == 2) {
+          this.titleName = '线上'
         }
         if (this.queryParam.today == 1) {
           this.titleName = '今日更新'
@@ -673,6 +703,7 @@
         this.statusList = sysDictList.filter(item => item.typeValue == 37)
         this.dataStatusList = sysDictList.filter(item => item.typeValue == 36)
         this.warehouseList = sysDictList.filter(item => item.typeValue == 40)
+        this.channelIdList = sysDictList.filter(item => item.typeValue == 47)
         this.todayList = sysDictList.filter(item => item.typeValue == 44)
       },
       loadData(p_status) {
@@ -736,6 +767,7 @@
       resetData() {
         this.queryParam = {
           warehouseId: '',
+          channelId: '',
           createTimeFrom: '',
           createTimeTo: '',
           syncTimeFrom: '',
@@ -757,6 +789,7 @@
       resetHandle() {
         this.queryParam = {
           warehouseId: '',
+          channelId: '',
           syncTimeFrom: '',
           syncTimeTo: '',
           createTimeFrom: '',
@@ -1285,5 +1318,41 @@
   }
   .section1name{
     color: black;
+  }
+  .wrap {
+    position: relative;
+  }
+  .mark2 {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    margin: 0;
+  }
+
+  .mark2:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-width: 10px;
+    border-bottom-width: 16px;
+    border-left-width: 20px;
+  }
+
+  .text1 {
+    color: white;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    font-size: 11px;
+    text-transform: uppercase;
+    width: 30px;
+    text-align: center;
+    margin-top: 2.1px;
   }
 </style>
