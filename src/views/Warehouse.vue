@@ -155,8 +155,8 @@
                   操作<i class="el-icon-arrow-down el-icon--right" style="font-weight: 600;    margin-left: 2px;"></i>
                 </span>
                     <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>
                       <el-dropdown-item type="text"  class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
+                      <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="jumpactNo(item.actNo)">订单</el-dropdown-item>
                       <el-dropdown-item type="text" v-if="item.inventory > item.galleryCount" @click.native="changeStatusDialog1(item)">上架</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl )">库存</el-dropdown-item>

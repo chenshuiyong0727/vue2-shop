@@ -4,6 +4,9 @@
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
       </div>
+      <div slot="right">
+        <mt-button size="normal" style="font-size: 16px"  @click="submit">保存</mt-button>
+      </div>
     </mt-header>
     <section style="padding-top:46px">
       <mt-field
@@ -25,7 +28,7 @@
             v-if="form.imgUrl"
             :src="fileUrl + form.imgUrl"
           />
-          <el-button :disabled="type == 1 " type="primary" class="select100" v-show="!form.imgUrl" size="small"
+          <el-button :disabled="type == 1 " type="text" class="select100" v-show="!form.imgUrl"  style=" margin-left: -108vw;"
           >上传图片
           </el-button
           >
@@ -88,20 +91,20 @@
         >
       </mt-field>
     </section>
-    <div style="    margin-left: 20vw;
-    margin-top: 20px;">
-      <mt-button v-if="type != 1" style="bottom: 10px"
-        type="primary"
-        @click="submit">提交</mt-button>
-      <mt-button v-else style="bottom: 10px"
-        type="primary"
-        @click="goEdit">编辑</mt-button>
-      <mt-button style="bottom: 10px"
-        @click="$router.go(-1)">取消</mt-button>
-      <mt-button style="bottom: 10px"
-        type="primary"
-        @click="gotoIndex">回到首页</mt-button>
-    </div>
+<!--    <div style="    margin-left: 20vw;-->
+<!--    margin-top: 20px;">-->
+<!--      <mt-button v-if="type != 1" style="bottom: 10px"-->
+<!--        type="primary"-->
+<!--        @click="submit">提交</mt-button>-->
+<!--      <mt-button v-else style="bottom: 10px"-->
+<!--        type="primary"-->
+<!--        @click="goEdit">编辑</mt-button>-->
+<!--      <mt-button style="bottom: 10px"-->
+<!--        @click="$router.go(-1)">取消</mt-button>-->
+<!--      <mt-button style="bottom: 10px"-->
+<!--        type="primary"-->
+<!--        @click="gotoIndex">回到首页</mt-button>-->
+<!--    </div>-->
 
 
   </div>

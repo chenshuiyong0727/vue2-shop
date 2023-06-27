@@ -120,14 +120,14 @@
 <!--         <span style="margin-right: 80px;" >{{form.updateTime | formateTime }}</span>-->
 <!--      </mt-field>-->
     </section>
-    <div style="    margin-left: 28vw;
-    margin-top: 20px;">
-      <mt-button style="bottom: 10px"
-        @click="$router.go(-1)">返回</mt-button>
-      <mt-button style="bottom: 10px"
-        type="primary"
-        @click="gotoIndex">回到首页</mt-button>
-    </div>
+<!--    <div style="    margin-left: 28vw;-->
+<!--    margin-top: 20px;">-->
+<!--      <mt-button style="bottom: 10px"-->
+<!--        @click="$router.go(-1)">返回</mt-button>-->
+<!--      <mt-button style="bottom: 10px"-->
+<!--        type="primary"-->
+<!--        @click="gotoIndex">回到首页</mt-button>-->
+<!--    </div>-->
 
 
   </div>

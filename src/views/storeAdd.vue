@@ -7,6 +7,9 @@
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
       </div>
+      <div slot="right">
+        <mt-button size="normal" style="font-size: 16px"  @click="goAdd">保存</mt-button>
+      </div>
     </mt-header>
     <div class="dingdans_item" style=" margin-top: 12vw;" >
       <div class="dingdans_con">
@@ -77,7 +80,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column align="center" prop="channelId"  width="100"  label="渠道">
+          <el-table-column align="center" prop="channelId"  width="80"  label="渠道">
             <template scope="scope">
               <div class="input-box">
                 <select v-model="scope.row.channelId">
@@ -133,20 +136,20 @@
         <mt-field label="利润" :disabled="true" v-model="orderData1.profits"></mt-field>
       </section>
     </mt-popup>
-    <div style="    margin-left: 20vw;
-    margin-top: 20px;">
-      <el-button style="bottom: 10px"
-        type="primary"
-                 size="small"
-        @click="goAdd">提交</el-button>
-      <el-button style="bottom: 10px"
-                 size="small"
-                 @click="$router.go(-1)">取消</el-button>
-      <el-button style="bottom: 10px"
-        type="primary"
-                 size="small"
-                 @click="gotoIndex">回到首页</el-button>
-    </div>
+<!--    <div style="    margin-left: 20vw;-->
+<!--    margin-top: 20px;">-->
+<!--      <el-button style="bottom: 10px"-->
+<!--        type="primary"-->
+<!--                 size="small"-->
+<!--        @click="goAdd">提交</el-button>-->
+<!--      <el-button style="bottom: 10px"-->
+<!--                 size="small"-->
+<!--                 @click="$router.go(-1)">取消</el-button>-->
+<!--      <el-button style="bottom: 10px"-->
+<!--        type="primary"-->
+<!--                 size="small"-->
+<!--                 @click="gotoIndex">回到首页</el-button>-->
+<!--    </div>-->
   </div>
 </template>
 

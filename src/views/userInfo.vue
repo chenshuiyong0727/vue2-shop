@@ -26,13 +26,10 @@
             style="height: 30vw;width: 30vw; margin-left: -90vw;"
             class="select100"
             v-if="form.imgUrl"
-            :src="fileUrl + form.imgUrl"
-          />
-          <el-button :disabled="type == 1 " style=" margin-left: -97vw;" type="primary"
-                     v-else  size="small"
-          >上传头像
-          </el-button
-          >
+            :src="fileUrl + form.imgUrl"/>
+          <el-button :disabled="type == 1 " style=" margin-left: -103vw;" type="text"
+                     v-else >上传头像
+          </el-button>
         </el-upload>
       </mt-field>
       <mt-field
