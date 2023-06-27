@@ -7,6 +7,9 @@
       <div slot="left">
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
+      <div v-if="type == 1" slot="right">
+        <mt-button size="normal" style="font-size: 16px"  @click="getImgUrl">更新</mt-button>
+      </div>
     </mt-header>
     <div class="fenlei_top_2" v-if="type!=1">
       <input type="file" capture="user" accept="image/*" style="display:none" ref="file1"
@@ -19,10 +22,9 @@
       align-items:center;" >
         <el-col :span="6" style="text-align: right"><span>根据货号获取</span></el-col>
         <el-col :span="30" :offset="1">
-          <el-input v-model.trim="form.actNo" style="width: 153px;" size="small" placeholder="请输入货号">
-<!--            <el-button type="primary" slot="append" size="small" @click="getImgUrl">手动获取</el-button>-->
+          <el-input v-model.trim="form.actNo" style="width: 180px;" size="small" placeholder="请输入货号">
           </el-input>
-          <el-button type="primary" size="small" @click="getImgUrl()">获取资料</el-button>
+          <el-button type="text"  @click="getImgUrl()">获取信息</el-button>
         </el-col>
       </el-row>
 
@@ -41,16 +43,15 @@
           >
             <el-button
               :disabled="type == 1 "
-              size="small"
-              type="primary">上传图片
+              type="text"
+            >上传图片
             </el-button>
           </el-upload>
         </el-col>
         <el-col :span="6" >
           <el-button
             :disabled="type == 1 "
-            size="small"
-            type="primary"
+            type="text"
             @click="uploadMaterial"
           >拍摄照片
           </el-button>
@@ -531,7 +532,7 @@
               this.form = res.data ? res.data : {}
               this.queryParam.goodsId = this.form.id
               this.getPage()
-              this.getImgUrl()
+              // this.getImgUrl()
             } else {
               this.$toast(res.subMsg)
             }
