@@ -41,42 +41,13 @@
           </router-link>
         </li>
       </ul>
-<!--      <router-link class="my-indent-2" :to="{ name: '订单'}">-->
-<!--        <span class="my-indent-2-left">利润统计数据盘</span>-->
         <div style="
             margin-left: 30vw;
     height: 13vw;
     line-height: 6vw;">
-<!--          <span style="-->
-<!--    display: inline-block;-->
-<!--    font-size: 14px;-->
-<!--    color: rgba(0, 0, 0, 0.4);-->
-<!--    position: relative;">-->
-<!--          </span>-->
           <el-button :type="mouthLl" @click="profitData(1)" size="small" round>月利润</el-button>
           <el-button :type="dayLl" @click="profitData(0)" size="small" round>日利润</el-button>
         </div>
-<!--      </router-link>-->
-<!--      <div v-if="dateType == 'month'" style="-->
-<!--      margin-left: 2.5vw;-->
-<!--      display: flex;-->
-<!--    align-items: center;-->
-<!--    justify-content: space-between;-->
-<!--    width: 95vw;">-->
-<!--        <el-date-picker style="width: 35vw;"-->
-<!--                        v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"-->
-<!--                        type="month" placeholder="时间开始">-->
-<!--        </el-date-picker>-->
-<!--        <span style="    font-size: 15px;margin-left: 1vw;">至</span>-->
-<!--        <el-date-picker style="width: 35vw"-->
-<!--                        v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"-->
-<!--                        type="month" placeholder="时间结束">-->
-<!--        </el-date-picker>-->
-<!--        <mt-button-->
-<!--          type="primary"-->
-<!--          size="small"-->
-<!--          @click="getData1">搜索1</mt-button>-->
-<!--      </div>-->
       <div style="
       margin-left: 2.5vw;
       display: flex;
@@ -92,10 +63,6 @@
                         v-model="queryParam.createTimeTo" :value-format="valueFormat"
                         :type="dateType" placeholder="时间结束" @change="getData1">
         </el-date-picker>
-<!--        <mt-button-->
-<!--          type="primary"-->
-<!--          size="small"-->
-<!--          @click="getData1">搜索</mt-button>-->
       </div>
       <div style="margin-top: 20px;">
         <ve-line
