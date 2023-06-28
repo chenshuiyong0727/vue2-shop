@@ -2,24 +2,11 @@
 
   <div class="car1" style="  padding-top: 28px;">
     <div class="main">
-<!--      <h1 class="section1-title">-->
-<!--        待处理事务-->
-<!--      </h1>-->
-<!--      <section class="my-vip" style="margin-top: 0">-->
-<!--        <router-link class="my-vip-bottom ho" :to="{ path: '/store?today=1'}">-->
-<!--        <div>-->
-<!--          <img style="width: 7.9vw;margin-left: -0.5vw;    margin-bottom: 5px;" src="../../../static/img/today.png" ></img>-->
-<!--        </div>-->
-<!--        <p>-->
-<!--          <span>今日更新</span>-->
-<!--          <i><samp :class="storeData.successNum > 0 ? 'color-danger' : ''">{{storeData.successNum}}</samp>-->
-<!--            <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>-->
-<!--          </i>-->
-<!--          &lt;!&ndash;            <samp>{{orderIofo.count2}}</samp>&ndash;&gt;-->
-<!--        </p>-->
-<!--      </router-link>-->
-<!--      </section>-->
-      <section class="my-vip" style="margin-top: 16px">
+      <section class="my-vip" style="margin-top: 0px">
+        <h1 class="section1-title">
+          <span style="    margin-left: 20px;">待办事项
+          </span>
+        </h1>
         <router-link class="my-vip-bottom ho" :to="{ path: '/store?today=7'}">
           <div>
             <img style="width: 6.9vw;margin-bottom: 5px;" src="../../../static/img/shengjiang2.png" ></img>
@@ -233,12 +220,13 @@
   .section1-title {
     .bt();
     background-color: #ffffff;
-    text-align: center;
+    text-align: left;
     padding: 3vw 0;
     margin-top: 4vw;
-    .fz(font-size, 40);
+    font-size: 16px;
     color: #333;
     position: relative;
+    font-weight: 600;
 
     i {
       position: absolute;

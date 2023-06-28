@@ -1,7 +1,8 @@
 <template lang="html">
   <section class="section1">
     <h1 class="section1-title">
-        仓库值
+      <span style="    margin-left: 20px;">仓库值
+      </span>
     </h1>
     <div style="background-color: #fff">
       <ve-pie height="320px"
@@ -271,11 +272,14 @@ export default {
   .section1-title {
     .bt();
     background-color: #ffffff;
-    text-align: center;
-    padding: 2vw 0;
-    .fz(font-size, 40);
+    text-align: left;
+    padding: 3vw 0;
+    margin-top: 4vw;
+    font-size: 16px;
     color: #333;
     position: relative;
+    /*margin-left: 20px;*/
+    font-weight: 600;
 
     i {
       position: absolute;

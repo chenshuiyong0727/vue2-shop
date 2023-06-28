@@ -3,9 +3,13 @@
   <div class="index">
     <mt-header title="移动端仓库">
     </mt-header>
+<!--    待办事项-->
     <v-orderNum :orderIofo ="orderIofo" :storeData ="storeData"/>
+<!--    仓库值-->
     <v-section1 :form="form" :countDay="countDay" :count="count":chartData1="chartData1" :orderIofo ="orderIofo" :chartSettings1="chartSettings1" />
-    <div style="margin-top: 17px;border-left:1px solid #DCDFE6; background-color: #fff;    height: 500px;">
+
+    <!--    销售走势-->
+    <div style="margin-top: 28px;border-left:1px solid #DCDFE6; background-color: #fff;    height: 520px;">
       <h1 class="index-title">
         销售走势
       </h1>
@@ -41,13 +45,13 @@
           </router-link>
         </li>
       </ul>
-        <div style="
+      <div style="
             margin-left: 30vw;
     height: 13vw;
     line-height: 6vw;">
-          <el-button :type="mouthLl" @click="profitData(1)" size="small" round>月利润</el-button>
-          <el-button :type="dayLl" @click="profitData(0)" size="small" round>日利润</el-button>
-        </div>
+        <el-button :type="mouthLl" @click="profitData(1)" size="small" round>月利润</el-button>
+        <el-button :type="dayLl" @click="profitData(0)" size="small" round>日利润</el-button>
+      </div>
       <div style="
       margin-left: 2.5vw;
       display: flex;
@@ -347,12 +351,14 @@ export default {
   .index-title {
     .bt();
     background-color: #ffffff;
-    text-align: center;
+    text-align: left;
     padding: 3vw 0;
     margin-top: 4vw;
-    .fz(font-size, 40);
+    font-size: 16px;
     color: #333;
     position: relative;
+    margin-left: 20px;
+    font-weight: 600;
 
     i {
       position: absolute;
