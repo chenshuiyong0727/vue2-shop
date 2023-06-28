@@ -1,30 +1,13 @@
 <template>
   <div class="hello">
-    <mt-header :title="titleName">
-      <div slot="left">
-        <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
-      </div>
+    <mt-header title="Nike">
     </mt-header>
     <div class="fenlei_top">
       <div    class="fenlei_top_left">
         <input type="text" v-model.trim="queryParam.actNo" placeholder="搜索关键词（货号，商品名）" class="ins">
       </div>
-      <div class="fenlei_top_right" >
-        <mt-button
-          style="margin-left: -65px"
-          type="primary"
-          size="small"
-          @click="search">搜索</mt-button>
-        <mt-button
-          style="
-           padding-top: 1.3px;
-           margin-left: 12px;
-           width: 67px;"
-          type="primary"
-          size="small"
-          @click="isShowDialog2 = true">  <img style="margin-left: -10px;" src="../../static/img/choose.png" height="20" width="20" slot="icon">
-          <span style="margin-left: -5px;">筛选</span>
-          </mt-button>
+      <div class="fenlei_top_right" @click="isShowDialog2 = true">
+        <img src="../../static/img/search.png" height="30px;"width="30px;" >
       </div>
     </div>
     <mt-loadmore
@@ -43,23 +26,16 @@
             货号：<strong> {{item.actNo}} </strong>
           </div>
           <div class="dingdans_top_right">
-            尺码：<strong>{{item.size }}</strong>
+            尺码：<strong class="color-danger">{{item.size }}</strong>
           </div>
         </div>
         <div class="dingdans_con">
           <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">
             <img :src="item.img">
           </div>
-          <div v-if="!item.img && item.imgUrl" :src="item.img" class="dingdans_con_left" @click="avatarShow(fileUrl+ item.imgUrl)">
-            <img :src="fileUrl + item.imgUrl">
-          </div>
           <div class="diangdans_con_right">
-            <div class="dingdans_con_right_top" style="font-size: 18px;" >
-               库存：<strong class="color-danger">{{item.inventory}}</strong>
-            </div>
-            <div class="dingdans_con_right_down" style="font-size: 18px;" v-if="isShowPrice">
-              得物价：<strong v-if="item.thisTimePrice" class="color-danger">{{item.thisTimePrice}}</strong>
-              <strong v-else class="color-danger">{{item.dwPrice}}</strong>
+            <div class="dingdans_con_right_top" style="font-size: 14px;" >
+               <span>{{item.goodsName}}</span>
             </div>
           </div>
         </div>
@@ -76,50 +52,6 @@
         <span v-if="bottomStatus === 'loading'">加载中</span>
       </div>
     </mt-loadmore>
-    <p v-if="allLoaded" class="to-the-bottom">{{emtityMsg}}</p>
-    <mt-popup
-      v-model="isShowDialog">
-      <mt-header title="修改">
-        <div slot="right">
-          <mt-button size="normal"  @click="isShowDialog = false" style="font-size: 16px">关闭</mt-button>
-        </div>
-        <div slot="left">
-          <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>
-        </div>
-      </mt-header>
-      <section style="height: 130vw;width: 80vw">
-        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :disabled="true"></mt-field>
-        <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
-        <mt-field label="入库价" placeholder="请输入入库价" @keyup.native="keyup1($event)" type="number" v-model="requestParam.price"></mt-field>
-        <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup1($event)" type="number" v-model="requestParam.dwPrice"></mt-field>
-        <mt-field label="手续费" :disabled="true" v-model="requestParam.poundage"></mt-field>
-        <mt-field label="到手价" :disabled="true" v-model="requestParam.theirPrice"></mt-field>
-        <mt-field label="利润" :disabled="true" v-model="requestParam.profits"></mt-field>
-      </section>
-    </mt-popup>
-    <mt-popup
-      v-model="isShowDialog1">
-      <mt-header title="上架">
-        <div slot="right">
-          <mt-button size="normal"  @click="isShowDialog1 = false" style="font-size: 16px">关闭</mt-button>
-        </div>
-        <div slot="left">
-          <mt-button size="normal" @click="confirmHandle1" style="font-size: 16px">确定</mt-button>
-        </div>
-      </mt-header>
-      <section style="height: 130vw;width: 80vw">
-        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData1.actNo" :disabled="true"></mt-field>
-        <mt-field label="尺码" v-model="orderData1.size" :disabled="true"></mt-field>
-        <mt-field label="当前库存" v-model="orderData1.inventory" :disabled="true"></mt-field>
-        <mt-field label="已上架数量" v-model="orderData1.galleryCount" :disabled="true"></mt-field>
-        <mt-field label="入库价" v-model="orderData1.price" :disabled="true"></mt-field>
-        <mt-field label="上架数量" placeholder="请输入上架数量"  @keyup.native="keyup2($event)" type="number" v-model="requestParam1.num"></mt-field>
-        <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup2($event)" type="number" v-model="requestParam1.shelvesPrice"></mt-field>
-        <mt-field label="手续费" :disabled="true" v-model="requestParam1.poundage"></mt-field>
-        <mt-field label="到手价" :disabled="true" v-model="requestParam1.theirPrice"></mt-field>
-        <mt-field label="利润" :disabled="true" v-model="requestParam1.profits"></mt-field>
-      </section>
-    </mt-popup>
     <mt-popup
       position="bottom"
       v-model="isShowDialog2">
@@ -134,19 +66,19 @@
       <section style="height: 80vw;width: 100vw">
         <mt-field label="状态" style="margin-top: 11vw;">
             <select class="select100" v-model="queryParam.inventory" @change="changeSystem" :disabled="true">
-               <option :disabled="true" value="" selected>请选择状态</option>
+          <option :disabled="true" value="" selected>请选择状态</option>
               <option v-for="x in inventoryToList" :value="x.fieldValue">{{x.fieldName}}</option>
             </select>
         </mt-field>
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
       </section>
     </mt-popup>
+    <p v-if="allLoaded" class="to-the-bottom">{{emtityMsg}}</p>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
         <img :src="imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
-<!--    <v-footer></v-footer>-->
   </div>
 </template>
 <script>
@@ -192,7 +124,7 @@
           addressId: ''
         },
         // popupVisible: false,
-        titleName: '仓库',
+        titleName: '商品',
         emtityMsg: '人家是有底线的 -.-',
         orderData: '',
         isShowDialog: false,
@@ -272,13 +204,13 @@
     //   }, 200);
     // },
     created() {
-      const { actNo,size,isShowPrice } = this.$route.query
-      this.isShowPrice = isShowPrice
-      this.queryParam.size = size
+      const { actNo,size } = this.$route.query
       this.queryParam.actNo = actNo
+      this.queryParam.size = size
       if (this.queryParam.actNo || this.queryParam.size) {
         this.search1()
       }
+      this.keyupSubmit()
     },
     mounted() {
       this.getPage()
@@ -289,7 +221,7 @@
         document.onkeydown = (e) => {
           let _key = window.event.keyCode
           if (_key === 13) {
-            this.getPage()
+            this.search()
           }
         }
       },
@@ -303,17 +235,7 @@
         }
       },
       getPage() {
-        if (this.queryParam.inventory == 1) {
-          this.queryParam.inventoryFrom = 1
-          this.queryParam.inventoryTo = ''
-        } else if (this.queryParam.inventory == 0) {
-          this.queryParam.inventoryFrom = ''
-          this.queryParam.inventoryTo = 0
-        } else {
-          this.queryParam.inventoryFrom = ''
-          this.queryParam.inventoryTo = ''
-        }
-        goodsInventoryApi.pageGoods(this.queryParam).then(res => {
+        goodsInventoryApi.pageOpen(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
@@ -321,7 +243,7 @@
               this.allLoaded = true;
               this.emtityMsg = '暂无相关库存 -.-'
             } else if (this.totalCount <= this.queryParam.pageSize) {
-              this.allLoaded = true;
+              this.allLoaded = tr
               this.emtityMsg = '人家是有底线的 -.-'
             }
           } else {

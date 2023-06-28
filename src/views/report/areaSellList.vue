@@ -30,7 +30,7 @@
               :data="chartData1" :settings="chartSettings1"></ve-pie>
     </div>
      <div  :style="queryParam.addressId ? 'padding-top: 0.86rem' : ''">
-      <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index">
+      <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index" v-if="!(queryParam.addressId && item.months == '合计')">
         <div class="dingdans_top">
           <div class="dingdans_top_left">
 <!--           <strong>月份：</strong> <strong class="color-danger"> {{item.months}} </strong>-->

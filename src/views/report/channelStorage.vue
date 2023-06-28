@@ -54,6 +54,7 @@
               已售数量：<strong>{{item.saleNum}}</strong>
               出售金额：<strong>{{item.theirPrice}}</strong>
               已产生利润：<strong>{{item.profits}}</strong>
+              利润均价：<strong>{{item.profits / item.saleNum  | numFilter}}</strong>
               预估利润：<strong>{{item.thisTimeProfits}}</strong>
             </div>
 <!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
