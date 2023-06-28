@@ -42,19 +42,18 @@
 
       </ul>
     </div>
-    <div style="padding-top: 2.86rem">
+    <div style="padding-top: 3.86rem">
       <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top">
           <div class="dingdans_top_left">
+            <el-button
+              type="text"
+              style="margin-right: 10px"
+              @click="handleClick(item)">修改</el-button>
               <strong> {{item.name}} </strong>
               <strong style="margin-left: 10px"> {{item.price}} </strong>
               <strong style="margin-left: 10px"> {{item.type | dictToDescTypeValue(41)}} </strong>
               <strong style="margin-left: 10px"> {{item.label | dictToDescTypeValue(42)}} </strong>
-            <mt-button
-              style="margin-left: 20px;"
-              type="primary"
-              size="small"
-              @click="handleClick(item)">修改</mt-button>
           </div>
         </div>
       </div>
@@ -609,7 +608,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 2rem;
+    height: 3rem;
     padding: 0.1rem 0.2rem;
     width: 100vw;
     background: #fff;
@@ -641,7 +640,7 @@
   .overview1 {
     padding-top: 5px;
     padding-right: 3px;
-    padding-bottom: 0px;
+    padding-bottom: 1px;
     padding-left: 3px;
   }
   .overview2 {

@@ -58,7 +58,7 @@
         <div v-else>
           <div class="dingdans_top">
             <div class="dingdans_top_left">
-              货号：<strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl )" style="color: #409EFF"> {{item.actNo}} </strong>
+              货号：<strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl,item.img )" style="color: #409EFF"> {{item.actNo}} </strong>
             </div>
             <div class="dingdans_top_right">
               尺码：<strong class="color-danger">{{item.size }}</strong>
@@ -152,8 +152,8 @@
         this.imageZoom = e
         this.pictureZoomShow = true
       },
-      WarehouseDetail(goodsId , actNo,imgUrl) {
-        this.$router.push({ path: '/WarehouseDetail', query: {goodsId, actNo ,imgUrl} })
+      WarehouseDetail(goodsId , actNo,imgUrl,img) {
+        this.$router.push({ path: '/WarehouseDetail', query: {goodsId, actNo ,imgUrl,img} })
       },
       jumpDetail(months) {
         this.$router.push({ path: '/store', query: { months }})
