@@ -29,7 +29,7 @@
     font-size: 14px;
     color: rgba(0, 0, 0, 0.4);
     position: relative;">
-            <el-button @click="comfirm(2)" style="    border: 1px solid #409EFF; color: #409EFF"
+            <el-button @click="comfirm(2)" style="    border: 1px solid #333; color: #333"
                        size="small" round>账户管理</el-button>
           </span>
       </div>
@@ -49,10 +49,9 @@
           <!--                  <span class="icon2-money"></span>-->
           <img
             :class="orderIofo.count3 > 0 ? 'count3' : ''"
-            style="
-                 margin-top: 7px;
-    margin-bottom: -4px;
-    width: 8.2vw;" src="../../static/img/order-3.png"></img>
+            style="margin-top: 10px;
+    margin-bottom: -5px;
+    width: 28px;" src="../../static/img/order-3.png"></img>
           <i v-if="orderIofo.count3" class="danger-num">{{orderIofo.count3}}</i>
           <p style="color: #333">待发货</p>
         </router-link>
@@ -60,9 +59,9 @@
           <!--                  <span class="icon2-thecar"></span>-->
           <img
             :class="orderIofo.count4 > 0 ? 'count4' : ''"
-            style=" margin-top: 5px;
-    margin-bottom: -9px;
-    width: 10.2vw;" src="../../static/img/order-4.png"></img>
+            style="margin-top: 11px;
+    margin-bottom: -3.9px;
+    width: 27px;" src="../../static/img/order-4-1.png"></img>
           <i v-if="orderIofo.count4" style="margin-left: -14px" class="danger-num">{{orderIofo.count4}}</i>
           <p style="color: #333">已发货</p>
         </router-link>
@@ -70,9 +69,9 @@
           <!--                  <span class="icon2-thecar"></span>-->
           <img
             :class="orderIofo.count5 > 0 ? 'count5' : ''"
-            style="margin-top: 7px;
+            style="margin-top: 10px;
     margin-bottom: -4px;
-    width: 8.2vw;" src="../../static/img/order-5.png"></img>
+    width: 27px;" src="../../static/img/order-5.png"></img>
           <i v-if="orderIofo.count5" style="margin-left: -10px" class="danger-num">{{orderIofo.count5}}</i>
           <p style="color: #333">已揽件</p>
         </router-link>
@@ -120,7 +119,7 @@
         </router-link>
         <router-link :to="{ name: '区域销售报表'}" class="my-settle1-bottom">
           <div>
-            <img style="width: 25px;margin-left: 2px;margin-bottom: 10px;" src="../../static/img/area6.png"></img>
+            <img style="width: 25px;margin-left: 2px;margin-bottom: 10px;" src="../../static/img/area7.png"></img>
           </div>
           <p>
             <span style="color: #333">区域销售报表</span><i class="icon-go"></i>
@@ -201,7 +200,7 @@
             style="
                  margin-top: 7px;
     margin-bottom: -4px;
-    width: 29px;" src="../../static/img/gift_1.png"></img>
+    width: 29px;" src="../../static/img/act_1.png"></img>
           <p style="color: #333">活动</p>
         </router-link>
         <router-link :to="{ name: '其他收支'}">
@@ -215,9 +214,9 @@
         <router-link :to="{ name: '瑕疵商品'}">
           <!--                  <span class="icon2-thecar"></span>-->
           <img
-            style="margin-top: 7px;
-    margin-bottom: -4px;
-    width: 29px;" src="../../static/img/xiaci1.png"></img>
+            style="    margin-top: 4px;
+    margin-bottom: -7px;
+    width: 35px;" src="../../static/img/xiaci1.png"></img>
           <p style="color: #333">瑕疵商品</p>
         </router-link>
         <router-link :to="{ name: '红包'}">
@@ -229,31 +228,6 @@
         </router-link>
       </section>
       <section class="my-pay-1">
-<!--        <router-link :to="{ name: '活动'}">-->
-<!--          &lt;!&ndash;                  <span class="icon2-money"></span>&ndash;&gt;-->
-<!--          <img-->
-<!--            style="-->
-<!--                 margin-top: 7px;-->
-<!--    margin-bottom: -4px;-->
-<!--    width: 29px;" src="../../static/img/gift_1.png"></img>-->
-<!--          <p style="color: #333">活动</p>-->
-<!--        </router-link>-->
-<!--        <router-link :to="{ name: '其他收支'}">-->
-<!--          &lt;!&ndash;                  <span class="icon2-thecar"></span>&ndash;&gt;-->
-<!--          <img-->
-<!--            style=" margin-top: 7px;-->
-<!--    margin-bottom: -4px;-->
-<!--    width: 29px;" src="../../static/img/other1.png"></img>-->
-<!--          <p style="color: #333">其他收支</p>-->
-<!--        </router-link>-->
-<!--        <router-link :to="{ name: '瑕疵商品'}">-->
-<!--          &lt;!&ndash;                  <span class="icon2-thecar"></span>&ndash;&gt;-->
-<!--          <img-->
-<!--            style="margin-top: 7px;-->
-<!--    margin-bottom: -4px;-->
-<!--    width: 29px;" src="../../static/img/xiaci1.png"></img>-->
-<!--          <p style="color: #333">瑕疵商品</p>-->
-<!--        </router-link>-->
         <router-link :to="{ path: '/logout?type=1'}" style="width: 25%">
           <img
             style="margin-top: 7px;
@@ -362,6 +336,7 @@
     /*font-family: "微软雅黑";*/
     /*color: #333;*/
     /*background: #fff;*/
+    background-color: #F8FCFF;
   }
 
   .car {
@@ -412,8 +387,10 @@
     }
 
     .main {
-      width: 100%;
+      width: 92vw;
+      margin-left: 4vw;
       height: 100%;
+      margin-bottom: 50px;
       background-color: #F8FCFF;
       .my-indent {
         width: 100%;

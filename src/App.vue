@@ -117,7 +117,8 @@ i {
 body {
     font-family: PingFangSC-Light,helvetica,'Heiti SC';
     color: #666;
-    background: #fff;
+    background: #F8FCFF;
+    /*background: #fff;*/
 }
 
 a {
