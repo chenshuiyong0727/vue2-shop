@@ -381,6 +381,7 @@
           padding: 0 6vw;
           -webkit-box-sizing: border-box;
           box-sizing: border-box;
+          color: #333;
           &:active {
             background-color: rgb(224, 227, 230);
           }

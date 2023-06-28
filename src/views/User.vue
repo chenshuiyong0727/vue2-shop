@@ -54,7 +54,7 @@
     margin-bottom: -4px;
     width: 8.2vw;" src="../../static/img/order-3.png"></img>
           <i v-if="orderIofo.count3" class="danger-num">{{orderIofo.count3}}</i>
-          <p style="color: #5e5e5e">待发货</p>
+          <p style="color: #333">待发货</p>
         </router-link>
         <router-link :to="{ path: '/order?status=4'}">
           <!--                  <span class="icon2-thecar"></span>-->
@@ -64,7 +64,7 @@
     margin-bottom: -9px;
     width: 10.2vw;" src="../../static/img/order-4.png"></img>
           <i v-if="orderIofo.count4" style="margin-left: -14px" class="danger-num">{{orderIofo.count4}}</i>
-          <p style="color: #5e5e5e">已发货</p>
+          <p style="color: #333">已发货</p>
         </router-link>
         <router-link :to="{ path: '/order?status=5'}">
           <!--                  <span class="icon2-thecar"></span>-->
@@ -74,7 +74,7 @@
     margin-bottom: -4px;
     width: 8.2vw;" src="../../static/img/order-5.png"></img>
           <i v-if="orderIofo.count5" style="margin-left: -10px" class="danger-num">{{orderIofo.count5}}</i>
-          <p style="color: #5e5e5e">已揽件</p>
+          <p style="color: #333">已揽件</p>
         </router-link>
         <router-link :to="{ path: '/order?status=6'}">
           <img
@@ -83,17 +83,13 @@
     margin-bottom: -3px;
     width: 7.2vw;" src="../../static/img/order-6.png"></img>
           <i v-if="orderIofo.count6" style="margin-left: -10px" class="danger-num">{{orderIofo.count6}}</i>
-          <p style="color: #5e5e5e">已收货</p>
+          <p style="color: #333">已收货</p>
         </router-link>
 
       </section>
 
       <div class="my-indent" style="    margin-bottom: -10px;">
         <span class="my-indent-left">报表</span>
-<!--        <div class="my-indent-right">-->
-<!--          <span>全部订单</span>-->
-<!--          <i class="icon-go"></i>-->
-<!--        </div>-->
       </div>
       <section class="my-settle1" style="margin-top: 0;border-top-style:none">
         <router-link :to="{ name: '入库报表'}" class="my-settle1-top">
@@ -102,7 +98,7 @@
           </div>
 
           <p>
-            <span>入库报表</span><i class="icon-go"></i>
+            <span style="color: #333">入库报表</span><i class="icon-go"></i>
           </p>
         </router-link>
         <router-link :to="{ name: '入库渠道报表'}" class="my-settle1-top">
@@ -111,7 +107,7 @@
           </div>
 
           <p>
-            <span>入库渠道报表</span><i class="icon-go"></i>
+            <span style="color: #333">入库渠道报表</span><i class="icon-go"></i>
           </p>
         </router-link>
         <router-link :to="{ name: '销售报表'}" class="my-settle1-bottom">
@@ -119,7 +115,7 @@
             <img style="width: 25px;margin-left: 2px;margin-bottom: 10px;" src="../../static/img/sell2.png"></img>
           </div>
           <p>
-            <span>销售报表</span><i class="icon-go"></i>
+            <span style="color: #333">销售报表</span><i class="icon-go"></i>
           </p>
         </router-link>
         <router-link :to="{ name: '区域销售报表'}" class="my-settle1-bottom">
@@ -127,7 +123,7 @@
             <img style="width: 25px;margin-left: 2px;margin-bottom: 10px;" src="../../static/img/area6.png"></img>
           </div>
           <p>
-            <span>区域销售报表</span><i class="icon-go"></i>
+            <span style="color: #333">区域销售报表</span><i class="icon-go"></i>
           </p>
         </router-link>
       </section>
@@ -206,7 +202,7 @@
                  margin-top: 7px;
     margin-bottom: -4px;
     width: 29px;" src="../../static/img/gift_1.png"></img>
-          <p style="color: #5e5e5e">活动</p>
+          <p style="color: #333">活动</p>
         </router-link>
         <router-link :to="{ name: '其他收支'}">
           <!--                  <span class="icon2-thecar"></span>-->
@@ -214,7 +210,7 @@
             style=" margin-top: 7px;
     margin-bottom: -4px;
     width: 29px;" src="../../static/img/other1.png"></img>
-          <p style="color: #5e5e5e">其他收支</p>
+          <p style="color: #333">其他收支</p>
         </router-link>
         <router-link :to="{ name: '瑕疵商品'}">
           <!--                  <span class="icon2-thecar"></span>-->
@@ -222,14 +218,14 @@
             style="margin-top: 7px;
     margin-bottom: -4px;
     width: 29px;" src="../../static/img/xiaci1.png"></img>
-          <p style="color: #5e5e5e">瑕疵商品</p>
+          <p style="color: #333">瑕疵商品</p>
         </router-link>
         <router-link :to="{ name: '红包'}">
           <img
             style="margin-top: 7px;
     margin-bottom: -4px;
     width: 29px;" src="../../static/img/gift_1.png"></img>
-          <p style="color: #5e5e5e">红包</p>
+          <p style="color: #333">红包</p>
         </router-link>
       </section>
       <section class="my-pay-1">
@@ -240,7 +236,7 @@
 <!--                 margin-top: 7px;-->
 <!--    margin-bottom: -4px;-->
 <!--    width: 29px;" src="../../static/img/gift_1.png"></img>-->
-<!--          <p style="color: #5e5e5e">活动</p>-->
+<!--          <p style="color: #333">活动</p>-->
 <!--        </router-link>-->
 <!--        <router-link :to="{ name: '其他收支'}">-->
 <!--          &lt;!&ndash;                  <span class="icon2-thecar"></span>&ndash;&gt;-->
@@ -248,7 +244,7 @@
 <!--            style=" margin-top: 7px;-->
 <!--    margin-bottom: -4px;-->
 <!--    width: 29px;" src="../../static/img/other1.png"></img>-->
-<!--          <p style="color: #5e5e5e">其他收支</p>-->
+<!--          <p style="color: #333">其他收支</p>-->
 <!--        </router-link>-->
 <!--        <router-link :to="{ name: '瑕疵商品'}">-->
 <!--          &lt;!&ndash;                  <span class="icon2-thecar"></span>&ndash;&gt;-->
@@ -256,14 +252,14 @@
 <!--            style="margin-top: 7px;-->
 <!--    margin-bottom: -4px;-->
 <!--    width: 29px;" src="../../static/img/xiaci1.png"></img>-->
-<!--          <p style="color: #5e5e5e">瑕疵商品</p>-->
+<!--          <p style="color: #333">瑕疵商品</p>-->
 <!--        </router-link>-->
         <router-link :to="{ path: '/logout?type=1'}" style="width: 25%">
           <img
             style="margin-top: 7px;
     margin-bottom: -4px;
     width: 29px;" src="../../static/img/setting0.png"></img>
-          <p style="color: #5e5e5e">设置</p>
+          <p style="color: #333">设置</p>
         </router-link>
       </section>
     </div>
@@ -492,7 +488,7 @@
         .mt();
         .bd();
         .bt();
-
+        color: #333;
         > a {
           background-color: #fff;
           display: block;
