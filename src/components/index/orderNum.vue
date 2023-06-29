@@ -2,176 +2,74 @@
 
   <div class="car1" style="  padding-top: 28px;">
     <div class="main">
-      <section class="my-vip" style="margin-top: 0px">
-        <h1 class="section1-title">
-          <span style="    margin-left: 20px;">待办事项
+      <section class="my-pay-2" style="border-bottom-style:none">
+        <router-link :to="{ path: '/store'}">
+          <span style="    margin-top: 0vw;">
+             <img
+               style="margin-top: 11px;
+    margin-bottom: -3px;
+    width: 28px;" src="../../../static/img/goods-1.png"></img>
           </span>
-        </h1>
-        <router-link class="my-vip-bottom ho" :to="{ path: '/store?today=7'}">
-          <div>
-            <img style="width: 6.9vw;margin-bottom: 5px;" src="../../../static/img/shengjiang2.png" ></img>
-          </div>
-          <p>
-            <span>变价商品</span>
-            <i><samp :class="storeData.upCout > 0 ? 'color-danger' : ''">{{storeData.upCout}}</samp>
-              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
-            </i>
-          </p>
+          <p style="color: #333;font-size: 16px;    margin-top: 1px;">商品管理</p>
+        </router-link>
+        <img style="    margin-left: 10px;
+    height: 55px;
+    margin-top: 10px;" src="../../../static/img/more-1.png">
+        <router-link :to="{ path: '/store?today=7'}">
+          <span :class="storeData.upCout > 0 ? 'color-danger-strong' : 'color-font'">{{storeData.upCout}}</span>
+          <p style="color: #8c8a8a;font-size: 16px;">变价</p>
+        </router-link>
+        <router-link :to="{ path: '/store?today=2'}">
+          <span :class="storeData.successNumLast > 0 ? 'color-danger-strong' : 'color-font'">{{storeData.successNumLast}}</span>
+          <p style="color: #8c8a8a;font-size: 16px;">待上架</p>
+        </router-link>
+        <router-link :to="{ path: '/store?today=3'}">
+          <span :class="storeData.waitMoveCout > 0 ? 'color-danger-strong' : 'color-font'">{{storeData.waitMoveCout}}</span>
+          <p style="color: #8c8a8a;font-size: 16px;">待移库</p>
         </router-link>
       </section>
-      <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ path: '/store?today=2'}">
-        <div>
-          <img style="width: 7.9vw;margin-left: -0.5vw;    margin-bottom: 5px;" src="../../../static/img/wait.png" ></img>
-        </div>
-        <p>
-          <span>待上架商品</span>
-          <i><samp :class="storeData.successNumLast > 0 ? 'color-danger' : ''">{{storeData.successNumLast}}</samp>
-            <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
-          </i>
-        </p>
-      </router-link>
-      </section>
-      <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ path: '/store?today=3'}">
-        <div>
-          <img style="width: 7.9vw;margin-left: -0.5vw;    margin-bottom: 5px;" src="../../../static/img/move.png" ></img>
-        </div>
-        <p>
-          <span>待移库商品</span>
-          <i><samp :class="storeData.waitMoveCout > 0 ? 'color-danger' : ''">{{storeData.waitMoveCout}}</samp>
-            <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
-          </i>
-        </p>
-      </router-link>
-      </section>
-      <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=2'}">
-        <div>
-          <img style="width: 7.9vw;margin-left: -0.5vw;    margin-bottom: 5px;" src="../../../static/img/order_2.png" ></img>
-        </div>
-        <p>
-          <span>已上架订单</span>
-          <i><samp>{{orderIofo.count2}} </samp>
-            <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
-          </i>
-          <!--            <samp>{{orderIofo.count2}}</samp>-->
-        </p>
-      </router-link>
-      </section>
-      <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=11'}">
-        <div>
-          <img style="width: 7.1vw;margin-left: -0.5vw;    margin-bottom: 5px;" src="../../../static/img/order_11.png" ></img>
-        </div>
-        <p>
-          <span>闪电直发入仓</span>
-          <i><samp :class="orderIofo.count11 > 0 ? 'color-danger' : ''">{{orderIofo.count11}} </samp>
-            <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
-          </i>
-          <!--            <samp>{{orderIofo.count2}}</samp>-->
-        </p>
-      </router-link>
-      </section>
-
-
-      <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=3'}">
-          <div>
-            <img style="width: 7vw; margin-bottom: 5px;margin-left: -0.2vw;" src="../../../static/img/order-3.png" ></img>
-          </div>
-          <p>
-            <span>待发货订单</span>
-            <i><samp :class="orderIofo.count3 > 0 ? 'color-danger' : ''">{{orderIofo.count3}}</samp>
-              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
-            </i>
-          </p>
+      <h1 class="section1-title">
+      <span style="    margin-left: 20px;">
+        订单管理
+      </span>
+        <div class="link-top"></div>
+      </h1>
+      <section class="my-pay-2" style="border-bottom-style:none;">
+        <router-link :to="{ path: '/order?status=3'}">
+          <span :class="orderIofo.count3 > 0 ? 'color-danger-strong' : 'color-font'">{{orderIofo.count3}}</span>
+          <p style="color: #8c8a8a;font-size: 16px;">待发货</p>
+        </router-link>
+        <router-link :to="{ path: '/order?status=4'}">
+          <span :class="orderIofo.count4 > 0 ? 'color-danger-strong' : 'color-font'">{{orderIofo.count4}}</span>
+          <p style="color: #8c8a8a;font-size: 16px;">已发货</p>
+        </router-link>
+        <router-link :to="{ path: '/order?status=5'}">
+          <span :class="orderIofo.count5 > 0 ? 'color-danger-strong' : 'color-font'">{{orderIofo.count5}}</span>
+          <p style="color: #8c8a8a;font-size: 16px;">已揽件</p>
+        </router-link>
+        <router-link :to="{ path: '/order?status=6'}">
+          <span :class="orderIofo.count6 > 0 ? 'color-danger-strong' : 'color-font'">{{orderIofo.count6}}</span>
+          <p style="color: #8c8a8a;font-size: 16px;">已收货</p>
         </router-link>
       </section>
-      <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=4'}">
-          <div>
-            <img style="width: 8.4vw;margin-left: -0.9vw; margin-bottom: 5px;" src="../../../static/img/order-4.png" ></img>
-          </div>
-          <p>
-            <span>已发货订单</span>
-            <i><samp :class="orderIofo.count4 > 0 ? 'color-danger' : ''">{{orderIofo.count4}}</samp>
-              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
-            </i>
-          </p>
+      <section class="my-pay-2" style="border-bottom-style:none;">
+        <router-link :to="{ path: '/order?status=11'}">
+          <span class="color-font">{{orderIofo.count11}}</span>
+          <p style="color: #8c8a8a;font-size: 16px;">已入库</p>
+        </router-link>
+        <router-link :to="{ path: '/order?status=2'}">
+          <span class="color-font">{{orderIofo.count2}}</span>
+          <p style="color: #8c8a8a;font-size: 16px;">已上架</p>
+        </router-link>
+        <router-link :to="{ path: '/order?status=7'}">
+          <span class="color-font">{{orderIofo.count7}}</span>
+          <p style="color: #8c8a8a;font-size: 16px;">成功</p>
+        </router-link>
+        <router-link :to="{ path: '/order?status=8'}">
+          <span class="color-font">{{orderIofo.count8}}</span>
+          <p style="color: #8c8a8a;font-size: 16px;">瑕疵</p>
         </router-link>
       </section>
-      <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=5'}">
-          <div>
-            <img style=" margin-bottom: 5px;margin-left: -0.7vw;width: 7.3vw" src="../../../static/img/order-5.png" ></img>
-          </div>
-          <p>
-            <span>已揽件订单</span>
-            <i><samp  :class="orderIofo.count5 > 0 ? 'color-danger' : ''">{{orderIofo.count5}}</samp>
-              <img style=" width: 4.2vw;" src="../../../static/img/more.png" ></img>
-            </i>
-          </p>
-        </router-link>
-      </section>
-      <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=6'}">
-          <div>
-            <img style=" margin-bottom: 5px;width: 6.2vw" src="../../../static/img/order-6.png" ></img>
-          </div>
-          <p>
-            <span>已收货订单</span>
-            <i><samp :class="orderIofo.count6 > 0 ? 'color-danger' : ''">{{orderIofo.count6}}</samp>
-              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
-            </i>
-          </p>
-        </router-link>
-      </section>
-      <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=7'}">
-          <div>
-            <img style="width: 7vw;margin-left: -0.5vw;    margin-bottom: 5px;" src="../../../static/img/order_7.png" ></img>
-          </div>
-          <p>
-            <span>成功订单</span>
-            <i><samp>{{orderIofo.count7}} </samp>
-              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
-            </i>
-            <!--            <samp>{{orderIofo.count2}}</samp>-->
-          </p>
-        </router-link>
-      </section>
-      <section class="my-vip" style="margin-top: 0">
-        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=8'}">
-          <div>
-            <img style="    margin-bottom: 5px;
-    width: 7.5vw;
-    margin-left: -2px;" src="../../../static/img/xiaci2.png" ></img>
-          </div>
-          <p>
-            <span>瑕疵订单</span>
-            <i><samp :class="orderIofo.count8 > 0 ? 'color-danger' : ''">{{orderIofo.count8}}</samp>
-              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>
-            </i>
-          </p>
-        </router-link>
-      </section>
-<!--      -->
-<!--      <section class="my-vip" style="margin-top: 0">-->
-<!--        <router-link class="my-vip-bottom ho" :to="{ path: '/order?status=4'}">-->
-<!--          <div>-->
-<!--            <img style="width: 6.2vw" src="../../../static/img/order-8.png" ></img>-->
-<!--          </div>-->
-<!--          <p>-->
-<!--            <span>瑕疵商品</span>-->
-<!--            <i> <samp-->
-<!--          :class="orderIofo.count8 > 0 ? 'color-danger' : ''"-->
-<!--          style="margin-left: 49vw">{{orderIofo.count8}} </samp>-->
-<!--              <img style="width: 4.2vw" src="../../../static/img/more.png" ></img>-->
-<!--            </i>-->
-<!--          </p>-->
-<!--        </router-link>-->
-<!--      </section>-->
     </div>
   </div>
 </template>
@@ -227,7 +125,8 @@
     color: #333;
     position: relative;
     font-weight: 600;
-
+    width: 92%;
+    margin-left: 4%;
     i {
       position: absolute;
       right: 6vw;
@@ -242,6 +141,7 @@
   }
   .car1 {
     width: 100%;
+    /*background-color: #6ae9ff;*/
     background-color: #F8FCFF;
     .header {
       width: 100%;
@@ -423,9 +323,45 @@
   [class*=" icon2-"] {
     .fz(font-size, 50);
   }
+  .link-top {
+    width: 92%;
+    margin-left: 4%;
+    height: 1px;
+    border-top: solid #d9d4d4 1.5px;
+    margin-bottom: -15px;
+    margin-top: 13px;
+  }
 
   .icon2-service {
     .fz(font-size, 34);
   }
+  .my-pay-2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 92%;
+    margin-left: 4%;
+    padding: 2vw 0;
+    background-color: #fff;
+    .bd();
 
+    > a {
+      display: block;
+      width: 33.33%;
+      color: #999;
+      text-align: center;
+
+      > span {
+        .fz(font-size, 50);
+        margin-top: 2.3vw;
+        display: block;
+        text-align: center;
+      }
+
+      p {
+        padding: 2.3vw 0;
+        text-align: center;
+      }
+    }
+  }
 </style>

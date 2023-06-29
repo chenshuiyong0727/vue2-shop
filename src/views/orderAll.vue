@@ -79,15 +79,33 @@
               <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
             </div>
             <div  class="dingdans_con_right_down" style="margin-bottom: 0vw;" v-if="item.addressId">
-              <strong  v-if="item.status == 3" style="font-size: 12px;" class="color-danger"> {{item.deliveryDeadlineTime |formateTime }}</strong>
-              <strong style="font-size: 12px;" >{{ item.addressId | dictToDescTypeValue(38) }} </strong>
+              <span >{{ item.addressId | dictToDescTypeValue(38) }} </span>
             </div>
-            <div class="dingdans_con_right_down_2">
+            <div   v-if="item.status == 3" class="dingdans_con_right_down_2_1">
+              <span  >  截止时间
+                 <strong style="font-size: 12px;" class="color-danger"> {{item.deliveryDeadlineTime |formateTime }}</strong>
+              </span>
+              <el-button
+                type="text"
+                style="font-weight: 600;padding-left: 0px;"
+                @click="handleClick(item)">修改</el-button>
+              <el-dropdown trigger="click"  style="margin-left: 1px;">
+                <span class="el-dropdown-link">
+                  更多<i class="el-icon-arrow-down el-icon--right" style="font-weight: 600; margin-left: 2px;"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
+            <div v-else class="dingdans_con_right_down_2">
               <el-button
                 type="text"
                 style="font-weight: 600;padding-left: 130px;   margin-top: -16px;"
                 @click="handleClick(item)">修改</el-button>
-              <el-dropdown trigger="click"  style="margin-left: 5px;">
+              <el-dropdown trigger="click"  style="margin-left: 1px;">
                 <span class="el-dropdown-link">
                   更多<i class="el-icon-arrow-down el-icon--right" style="font-weight: 600; margin-left: 2px;"></i>
                 </span>
@@ -1148,11 +1166,17 @@
     margin-bottom: 2vw;
   }
   .dingdans_con_right_down_2 {
-    margin-left: 9vw;
-     margin-bottom: -2vw;
+    margin-left: 13.4vw;
+    margin-bottom: -2vw;
     font-size: 3.5vw;
     height: 16px;
     margin-top: -17px;
+  }
+  .dingdans_con_right_down_2_1 {
+    margin-bottom: 1vw;
+    font-size: 3.5vw;
+    height: 16px;
+    margin-top: -9px;
   }
 /*
  -----分割线---

@@ -96,6 +96,14 @@
 .color-danger {
   color: #F56C6C;
 }
+.color-danger-strong {
+  color: #F56C6C;
+  font-weight: 600;
+}
+.color-font {
+  color: #333333;
+  font-weight: 600;
+}
 .color-url {
   color: #409eff;
 }

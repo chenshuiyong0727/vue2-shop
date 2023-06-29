@@ -41,6 +41,11 @@ Vue.filter('numFilter', (value) => {
   let realVal = parseFloat(value).toFixed(2)
   return realVal
 })
+Vue.filter('numFilterTo0', (value) => {
+  // 截取当前数据到小数点后两位
+  let realVal = parseFloat(value).toFixed(0)
+  return realVal
+})
 Vue.filter('numFilter0', (value) => {
   // 截取当前数据到小数点后两位
   let realVal = parseFloat(value).toFixed(0)

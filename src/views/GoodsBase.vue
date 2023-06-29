@@ -294,6 +294,7 @@
       if (this.queryParam.actNo) {
         this.search1()
       }
+      this.keyupSubmit()
     },
     mounted() {
       this.getPage()

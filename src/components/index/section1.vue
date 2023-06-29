@@ -1,5 +1,7 @@
 <template lang="html">
-  <section class="section1">
+  <section class="section1" style="padding-top: 0vw;
+    width: 92vw;
+    margin-left: 4vw;">
     <h1 class="section1-title">
       <span style="    margin-left: 20px;">仓库值
       </span>
@@ -11,13 +13,12 @@
     <ul class="section1-list" style="
     display: -webkit-box;
     flex-wrap: wrap;
-    margin-left: 0.5vw;
     padding-top: 0vw;
     padding-right: 1vw;
     padding-bottom: 0vw;
     padding-left: 1vw;
 ">
-      <li style="width: 48%"  @click="chunjie">
+      <li style="width: 47.6%"  @click="chunjie">
         <router-link :to="{name:''}">
           <p><strong class="color-danger"> {{countDay}}</strong>{{count}}</p>
           <p class="section1name">春节倒计时</p>
@@ -31,13 +32,12 @@
       </li>
       <li>
         <router-link :to="{name:'销售报表'}">
-          <p class="color-danger">{{form.profitsAmount}}</p>
+          <p class="color-danger">{{form.profitsAmount | numFilterTo0}}</p>
           <p class="section1name">利润总额</p>
         </router-link>
       </li>
     </ul>
     <ul class="section1-list" style="
-        margin-left: 0.5vw;
     padding-top: 0vw;
     padding-right: 1vw;
     padding-bottom: 0vw;
@@ -71,11 +71,10 @@
     <ul class="section1-list" style="
     display: -webkit-box;
     flex-wrap: wrap;
-    margin-left: 0.5vw;
     padding: 0vw 1vw;">
       <li>
         <router-link :to="{ path: '/store?warehouseId=2'}">
-          <p class="color-danger">{{form.ytInventory}}</p>
+          <p class="color-danger">{{form.ytInventory | numFilterTo0}}</p>
           <p class="section1name">云头库存</p>
         </router-link>
       </li>
@@ -87,13 +86,13 @@
       </li>
       <li>
         <router-link :to="{ path: '/store?warehouseId=1'}">
-          <p class="color-danger">{{form.qpInventory}}</p>
+          <p class="color-danger">{{form.qpInventory }}</p>
           <p class="section1name">前埔库存</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{ path: '/store?warehouseId=1'}">
-          <p class="color-danger">{{form.qpAmount}}</p>
+          <p class="color-danger">{{form.qpAmount | numFilterTo0}}</p>
           <p class="section1name">前埔货值</p>
         </router-link>
       </li>
@@ -101,7 +100,6 @@
     <ul class="section1-list" style="
     display: -webkit-box;
     flex-wrap: wrap;
-    margin-left: 0.5vw;
     padding: 0vw 1vw;">
       <li>
         <router-link :to="{name:'入库报表'}">
@@ -111,7 +109,7 @@
       </li>
       <li>
         <router-link :to="{name:'入库报表'}">
-          <p>{{form.inventoryAmount}}</p>
+          <p>{{form.inventoryAmount | numFilterTo0}}</p>
           <p class="section1name">入库总额</p>
         </router-link>
       </li>
@@ -123,7 +121,7 @@
       </li>
       <li>
         <router-link :to="{name:'销售报表'}">
-          <p>{{form.orderAmount}}</p>
+          <p>{{form.orderAmount | numFilterTo0}}</p>
           <p class="section1name">成功总额</p>
         </router-link>
       </li>
@@ -131,17 +129,16 @@
     <ul class="section1-list" style="
     display: -webkit-box;
     flex-wrap: wrap;
-    margin-left: 0.5vw;
     padding: 0vw 1vw;">
       <li>
         <router-link :to="{ path: '/order?status=7'}">
-          <p>{{form.freight}}</p>
+          <p>{{form.freight |numFilterTo0}}</p>
           <p class="section1name">总运费</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{ path: '/order?status=7'}">
-          <p>{{form.poundage}}</p>
+          <p>{{form.poundage | numFilterTo0}}</p>
           <p class="section1name">手续费</p>
         </router-link>
       </li>
@@ -161,7 +158,6 @@
     <ul class="section1-list" style="
     display: -webkit-box;
     flex-wrap: wrap;
-    margin-left: 0.5vw;
     padding: 0vw 1vw;">
       <li>
         <router-link :to="{name:'销售报表'}">
@@ -191,8 +187,9 @@
     <ul class="section1-list" style="
     display: -webkit-box;
     flex-wrap: wrap;
-    margin-left: 0.5vw;
-    padding: 0vw 1vw;">
+    padding: 0vw 1vw;
+    padding-bottom: 5vw;
+    ">
       <li>
         <router-link :to="{name:'瑕疵商品'}">
           <p>{{form.defectsNum}}</p>
@@ -305,11 +302,11 @@ export default {
     li {
       border-radius: 10px;
       background-color: #EEF2F7;
-      width: 22.9%;
+      width: 22.7%;
       padding: 1.6vw;
       color: #333;
       margin: 1vw;
-      font-size: 4.5vw;
+      font-size: 15px;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       a,

@@ -5,11 +5,10 @@
     </mt-header>
 <!--    待办事项-->
     <v-orderNum :orderIofo ="orderIofo" :storeData ="storeData"/>
-<!--    仓库值-->
-    <v-section1 :form="form" :countDay="countDay" :count="count":chartData1="chartData1" :orderIofo ="orderIofo" :chartSettings1="chartSettings1" />
-
     <!--    销售走势-->
-    <div style="margin-top: 28px;border-left:1px solid #DCDFE6; background-color: #fff;    height: 520px;">
+    <div style="margin-top: 18px;border-left:1px solid #DCDFE6; background-color: #fff;height: 520px;
+    width: 92vw;
+    margin-left: 4vw;">
       <h1 class="index-title">
         销售走势
       </h1>
@@ -17,9 +16,9 @@
         <li>
           <router-link :to="{name:'销售报表'}">
             <p class="color-danger"><strong>{{orderData.successNum}}</strong> </p>
-            <p class="section1name" >本月订单总数</p>
+            <p class="section1name" >月订单数</p>
             <p class="color-url"><strong>{{orderData.expectSuccessNum}}</strong> </p>
-            <p class="section1name" >预计本月总数</p>
+            <p class="section1name" >预计总数</p>
             <p :class="orderData.successNumRate<0 ? 'color-success' : 'color-danger'" >{{orderData.successNumRate}} %</p>
             <p class="section1name" >同比上月</p>
           </router-link>
@@ -27,9 +26,9 @@
         <li>
           <router-link :to="{name:'销售报表'}">
             <p class="color-danger"><strong>{{orderData.profitsAmount}}</strong> </p>
-            <p class="section1name" >本月订单利润</p>
+            <p class="section1name" >本月利润</p>
             <p class="color-url"><strong>{{orderData.expectProfitsAmount}}</strong> </p>
-            <p class="section1name" >预计本月利润</p>
+            <p class="section1name" >预计利润</p>
             <p :class="orderData.profitsAmountRate<0 ? 'color-success' : 'color-danger'" >{{orderData.profitsAmountRate}} %</p>
             <p class="section1name" >同比上月</p>
           </router-link>
@@ -37,9 +36,9 @@
         <li>
           <router-link :to="{name:'销售报表'}">
             <p class="color-danger"><strong>{{orderData.orderAmount}}</strong> </p>
-            <p class="section1name" >本月销售总额</p>
+            <p class="section1name" >本月总额</p>
             <p class="color-url"><strong>{{orderData.expectOrderAmount}}</strong> </p>
-            <p class="section1name" >预计本月总额</p>
+            <p class="section1name" >预计总额</p>
             <p :class="orderData.orderAmountRate<0 ? 'color-success' : 'color-danger'" >{{orderData.orderAmountRate}} %</p>
             <p class="section1name" >同比上月</p>
           </router-link>
@@ -53,17 +52,17 @@
         <el-button :type="dayLl" @click="profitData(0)" size="small" round>日利润</el-button>
       </div>
       <div style="
-      margin-left: 2.5vw;
+      margin-left: 4vw;
       display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 95vw;">
-        <el-date-picker style="width: 42vw;"
+    width: 92vw;">
+        <el-date-picker style="width: 37vw;"
                         v-model="queryParam.createTimeFrom" :value-format="valueFormat"
                         :type="dateType"  placeholder="时间开始" @change="getData1">
         </el-date-picker>
         <span style="    font-size: 15px;margin-left: 1vw;">至</span>
-        <el-date-picker style="width: 42vw"
+        <el-date-picker style="width: 37vw;    margin-right: 8vw;"
                         v-model="queryParam.createTimeTo" :value-format="valueFormat"
                         :type="dateType" placeholder="时间结束" @change="getData1">
         </el-date-picker>
@@ -80,6 +79,9 @@
         <ve-histogram height="250px" v-else :data="chartData2" :extend="extend" :settings="chartSettings" :legend-visible="true"></ve-histogram>
       </div>
     </div>
+    <!--    仓库值-->
+    <v-section1 :form="form" :countDay="countDay" :count="count":chartData1="chartData1" :orderIofo ="orderIofo" :chartSettings1="chartSettings1" />
+
     <v-baseline/>
     <v-footer/>
   </div>
@@ -168,7 +170,7 @@ export default {
       },
       createTime: '',
       chartSettings: {
-        xAxisType: 'time',
+        // xAxisType: 'time',
         area: false,
         axisSite: { right: ['profitsAmount'] },
         labelAlias: {
@@ -346,6 +348,7 @@ export default {
 .index {
     width: 100%;
     padding-bottom: 14vw;
+    /*background-color: #6ae9ff;*/
     background-color: #F8FCFF;
 }
   .index-title {
@@ -410,7 +413,7 @@ export default {
       text-align: center;
       border-radius: 10px;
       background-color: #EEF2F7;
-      width: 31%;
+      width: 30%;
       padding: 1vw;
       color: #333;
       margin: 1.1vw;
