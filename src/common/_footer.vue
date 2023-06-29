@@ -4,7 +4,6 @@
     <mt-tabbar v-model="selected" fixed>
       <mt-tab-item id="首页">
         <img style="width: 6.9vw" :src="index_img" ></img>
-        <!--        <img style="width: 6.9vw" src="../../static/img/index_1.png" ></img>-->
         <p :style="blue1">首页</p>
       </mt-tab-item>
       <mt-tab-item id="订单">
@@ -16,7 +15,7 @@
         <p :style="blue5">商品</p>
       </mt-tab-item>
 <!--      <mt-tab-item id="扫码">-->
-<!--        <img style="width: 11vw"  src="../../static/img/score3.png" ></img>-->
+<!--        <img style="width: 11vw"  src="../../static/img/new/score3.png" ></img>-->
 <!--      </mt-tab-item>-->
       <mt-tab-item id="仓库">
         <img style="width: 6.9vw" :src="store_img"></img>
@@ -56,11 +55,11 @@
         blue4: 'margin-top: 1vw;',
         blue5: 'margin-top: 1vw;',
         selected: '',
-        index_img: '../../static/img/index_1.png',
-        order_img: '../../static/img/order_0.png',
-        store_img: '../../static/img/store_0.png',
-        person_img: '../../static/img/person_0.png',
-        goods_img: '../../static/img/good_0.png',
+        index_img: '../../static/img/new/index_1.png',
+        order_img: '../../static/img/new/order_0.png',
+        store_img: '../../static/img/new/store_0.png',
+        person_img: '../../static/img/new/person_0.png',
+        goods_img: '../../static/img/new/good_0.png',
       }
     },
     mounted() {
@@ -70,11 +69,11 @@
       switch (Rname) {
         case '首页':
           this.selected = '首页';
-          this.index_img= '../../static/img/index_1.png'
-          this.order_img= '../../static/img/order_0.png'
-          this.store_img= '../../static/img/store_0.png'
-          this.person_img= '../../static/img/person_0.png'
-          this.goods_img= '../../static/img/good_0.png'
+          this.index_img= '../../static/img/new/index_1.png'
+          this.order_img= '../../static/img/new/order_0.png'
+          this.store_img= '../../static/img/new/store_0.png'
+          this.person_img= '../../static/img/new/person_0.png'
+          this.goods_img= '../../static/img/new/good_0.png'
           this.blue1= 'color:#409EFF;margin-top: 1vw;'
           this.blue2= 'margin-top: 1vw;'
           this.blue3= 'margin-top: 1vw;'
@@ -83,11 +82,11 @@
           break;
         case '订单':
           this.selected = '订单';
-          this.order_img= '../../static/img/order_1.png'
-          this.index_img= '../../static/img/index_0.png'
-          this.store_img= '../../static/img/store_0.png'
-          this.person_img= '../../static/img/person_0.png'
-          this.goods_img= '../../static/img/good_0.png'
+          this.order_img= '../../static/img/new/order_1.png'
+          this.index_img= '../../static/img/new/index_0.png'
+          this.store_img= '../../static/img/new/store_0.png'
+          this.person_img= '../../static/img/new/person_0.png'
+          this.goods_img= '../../static/img/new/good_0.png'
           this.blue2= 'color:#409EFF;margin-top: 1vw;'
           this.blue1= 'margin-top: 1vw;'
           this.blue3= 'margin-top: 1vw;'
@@ -96,11 +95,11 @@
           break;
         case '仓库':
           this.selected = '仓库';
-          this.store_img= '../../static/img/store_1.png'
-          this.order_img= '../../static/img/order_0.png'
-          this.index_img= '../../static/img/index_0.png'
-          this.person_img= '../../static/img/person_0.png'
-          this.goods_img= '../../static/img/good_0.png'
+          this.store_img= '../../static/img/new/store_1.png'
+          this.order_img= '../../static/img/new/order_0.png'
+          this.index_img= '../../static/img/new/index_0.png'
+          this.person_img= '../../static/img/new/person_0.png'
+          this.goods_img= '../../static/img/new/good_0.png'
           this.blue3= 'color:#409EFF;margin-top: 1vw;'
           this.blue1= 'margin-top: 1vw;'
           this.blue2= 'margin-top: 1vw;'
@@ -108,11 +107,11 @@
           this.blue5= 'margin-top: 1vw;'
           break;
         case '用户页':
-          this.person_img= '../../static/img/person_1.png'
-          this.store_img= '../../static/img/store_0.png'
-          this.order_img= '../../static/img/order_0.png'
-          this.index_img= '../../static/img/index_0.png'
-          this.goods_img= '../../static/img/good_0.png'
+          this.person_img= '../../static/img/new/person_1.png'
+          this.store_img= '../../static/img/new/store_0.png'
+          this.order_img= '../../static/img/new/order_0.png'
+          this.index_img= '../../static/img/new/index_0.png'
+          this.goods_img= '../../static/img/new/good_0.png'
           this.selected = '用户页';
           this.blue4= 'color:#409EFF;margin-top: 1vw;'
           this.blue1= 'margin-top: 1vw;'
@@ -121,11 +120,11 @@
           this.blue5= 'margin-top: 1vw;'
           break;
         case '商品':
-          this.goods_img= '../../static/img/good_1.png'
-          this.person_img= '../../static/img/person_0.png'
-          this.store_img= '../../static/img/store_0.png'
-          this.order_img= '../../static/img/order_0.png'
-          this.index_img= '../../static/img/index_0.png'
+          this.goods_img= '../../static/img/new/good_1.png'
+          this.person_img= '../../static/img/new/person_0.png'
+          this.store_img= '../../static/img/new/store_0.png'
+          this.order_img= '../../static/img/new/order_0.png'
+          this.index_img= '../../static/img/new/index_0.png'
           this.selected = '商品';
           this.blue5= 'color:#409EFF;margin-top: 1vw;'
           this.blue1= 'margin-top: 1vw;'

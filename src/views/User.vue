@@ -51,36 +51,39 @@
             :class="orderIofo.count3 > 0 ? 'count3' : ''"
             style="margin-top: 10px;
     margin-bottom: -5px;
-    width: 28px;" src="../../static/img/order-3.png"></img>
+    width: 28px;" src="../../static/img/new/daifahuo.png"></img>
           <i v-if="orderIofo.count3" class="danger-num">{{orderIofo.count3}}</i>
           <p style="color: #333">待发货</p>
         </router-link>
         <router-link :to="{ path: '/order?status=4'}">
           <!--                  <span class="icon2-thecar"></span>-->
           <img
-            :class="orderIofo.count4 > 0 ? 'count4' : ''"
-            style="margin-top: 11px;
-    margin-bottom: -3.9px;
-    width: 27px;" src="../../static/img/order-4-1.png"></img>
+            :class="orderIofo.count4 > 0 ? 'count3' : ''"
+            style="margin-top: 10px;
+    margin-bottom: -5px;
+    width: 28px;"
+            src="../../static/img/new/fahuo.png"></img>
           <i v-if="orderIofo.count4" style="margin-left: -14px" class="danger-num">{{orderIofo.count4}}</i>
           <p style="color: #333">已发货</p>
         </router-link>
         <router-link :to="{ path: '/order?status=5'}">
           <!--                  <span class="icon2-thecar"></span>-->
           <img
-            :class="orderIofo.count5 > 0 ? 'count5' : ''"
             style="margin-top: 10px;
-    margin-bottom: -4px;
-    width: 27px;" src="../../static/img/order-5.png"></img>
+    margin-bottom: -5px;
+    width: 28px;"
+            :class="orderIofo.count5 > 0 ? 'count3' : ''"
+            src="../../static/img/new/yilanjian.png"></img>
           <i v-if="orderIofo.count5" style="margin-left: -10px" class="danger-num">{{orderIofo.count5}}</i>
-          <p style="color: #333">已揽件</p>
+          <p style="color: #333">运输中</p>
         </router-link>
         <router-link :to="{ path: '/order?status=6'}">
           <img
-            :class="orderIofo.count6 > 0 ? 'count6' : ''"
             style="margin-top: 10px;
-    margin-bottom: -3px;
-    width: 7.2vw;" src="../../static/img/order-6.png"></img>
+    margin-bottom: -5px;
+    width: 28px;"
+            :class="orderIofo.count6 > 0 ? 'count3' : ''"
+            src="../../static/img/new/yishouhuo.png"></img>
           <i v-if="orderIofo.count6" style="margin-left: -10px" class="danger-num">{{orderIofo.count6}}</i>
           <p style="color: #333">已收货</p>
         </router-link>
@@ -93,7 +96,7 @@
       <section class="my-settle1" style="margin-top: 0;border-top-style:none">
         <router-link :to="{ name: '入库报表'}" class="my-settle1-top">
           <div>
-            <img style="width: 27px;margin-bottom: 10px;" src="../../static/img/putin1.png"></img>
+            <img style="width: 27px;margin-bottom: 10px;" src="../../static/img/new/ruku.png"></img>
           </div>
 
           <p>
@@ -102,7 +105,7 @@
         </router-link>
         <router-link :to="{ name: '入库渠道报表'}" class="my-settle1-top">
           <div>
-            <img style="width: 27px;margin-bottom: 10px;" src="../../static/img/channel5.png"></img>
+            <img style="width: 27px;margin-bottom: 10px;" src="../../static/img/new/qudao.png"></img>
           </div>
 
           <p>
@@ -111,7 +114,7 @@
         </router-link>
         <router-link :to="{ name: '销售报表'}" class="my-settle1-bottom">
           <div>
-            <img style="width: 25px;margin-left: 2px;margin-bottom: 10px;" src="../../static/img/sell2.png"></img>
+            <img style="width: 27px;margin-bottom: 10px;" src="../../static/img/new/xiaoshou.png"></img>
           </div>
           <p>
             <span style="color: #333">销售报表</span><i class="icon-go"></i>
@@ -119,73 +122,13 @@
         </router-link>
         <router-link :to="{ name: '区域销售报表'}" class="my-settle1-bottom">
           <div>
-            <img style="width: 25px;margin-left: 2px;margin-bottom: 10px;" src="../../static/img/area7.png"></img>
+            <img style="width: 27px;margin-bottom: 10px;" src="../../static/img/new/quyu.png"></img>
           </div>
           <p>
             <span style="color: #333">区域销售报表</span><i class="icon-go"></i>
           </p>
         </router-link>
       </section>
-
-<!--      <section class="my-settle1">-->
-<!--        <router-link :to="{ name: '活动'}" class="my-settle1-top">-->
-<!--          <div>-->
-<!--            <img style="width: 29px;margin-bottom: 7px;" src="../../static/img/gift_1.png"></img>-->
-<!--          </div>-->
-
-<!--          <p>-->
-<!--            <span>活动</span><i class="icon-go"></i>-->
-<!--          </p>-->
-<!--        </router-link>-->
-<!--&lt;!&ndash;        <router-link :to="{ name: '红包'}" class="my-settle1-top">&ndash;&gt;-->
-<!--&lt;!&ndash;          <div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <img style="width: 29px;margin-bottom: 7px;" src="../../static/img/gift_1.png"></img>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;          <p>&ndash;&gt;-->
-<!--&lt;!&ndash;            <span>红包</span><i class="icon-go"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;          </p>&ndash;&gt;-->
-<!--&lt;!&ndash;        </router-link>&ndash;&gt;-->
-<!--        <router-link :to="{ name: '其他收支'}" class="my-settle1-top">-->
-<!--          <div>-->
-<!--            <img style="width: 29px;margin-bottom: 7px;" src="../../static/img/other1.png"></img>-->
-<!--          </div>-->
-
-<!--          <p>-->
-<!--            <span>其他收支</span><i class="icon-go"></i>-->
-<!--          </p>-->
-<!--        </router-link>-->
-<!--        <router-link :to="{ name: '瑕疵商品'}" class="my-settle1-top">-->
-<!--          <div>-->
-<!--            <img style="    width: 33px;-->
-<!--    margin-bottom: 7px;-->
-<!--    margin-left: -2px;" src="../../static/img/xiaci1.png"></img>-->
-<!--          </div>-->
-
-<!--          <p>-->
-<!--            <span>瑕疵商品</span><i class="icon-go"></i>-->
-<!--          </p>-->
-<!--        </router-link>-->
-<!--&lt;!&ndash;        <a @click="syncOldPriceToNew1()"  class="my-settle1-bottom">&ndash;&gt;-->
-<!--&lt;!&ndash;          <div >&ndash;&gt;-->
-<!--&lt;!&ndash;            <img style="width: 29px;&ndash;&gt;-->
-<!--&lt;!&ndash;                  margin-bottom: 7px;" src="../../static/img/qrzj.png"></img>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--&lt;!&ndash;          <p>&ndash;&gt;-->
-<!--&lt;!&ndash;            <span>确认涨价</span><i class="icon-go"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;          </p>&ndash;&gt;-->
-<!--&lt;!&ndash;        </a>&ndash;&gt;-->
-<!--        <router-link :to="{ path: '/logout?type=1'}" class="my-settle1-bottom">-->
-<!--          <div>-->
-<!--            <img style="width: 29px;-->
-<!--                  margin-bottom: 7px;" src="../../static/img/setting0.png"></img>-->
-<!--          </div>-->
-<!--          <p>-->
-<!--            <span>设置</span><i class="icon-go"></i>-->
-<!--          </p>-->
-<!--        </router-link>-->
-
-<!--      </section>-->
       <div class="my-indent" style="    margin-bottom: -10px;">
         <span class="my-indent-left">服务</span>
         <!--        <div class="my-indent-right">-->
@@ -197,18 +140,15 @@
         <router-link :to="{ name: '活动'}">
           <!--                  <span class="icon2-money"></span>-->
           <img
-            style="
-                 margin-top: 7px;
-    margin-bottom: -4px;
-    width: 29px;" src="../../static/img/act_1.png"></img>
+            style="margin-top: 7px;margin-bottom: -4px;width: 27px;"
+            src="../../static/img/new/huodong.png"></img>
           <p style="color: #333">活动</p>
         </router-link>
         <router-link :to="{ name: '其他收支'}">
           <!--                  <span class="icon2-thecar"></span>-->
           <img
-            style=" margin-top: 7px;
-    margin-bottom: -4px;
-    width: 29px;" src="../../static/img/other1.png"></img>
+            style="margin-top: 7px;margin-bottom: -4px;width: 27px;"
+            src="../../static/img/new/qita.png"></img>
           <p style="color: #333">其他收支</p>
         </router-link>
         <router-link :to="{ name: '瑕疵商品'}">
@@ -216,23 +156,21 @@
           <img
             style="    margin-top: 4px;
     margin-bottom: -7px;
-    width: 35px;" src="../../static/img/xiaci1.png"></img>
+    width: 35px;" src="../../static/img/new/xiaci.png"></img>
           <p style="color: #333">瑕疵商品</p>
         </router-link>
         <router-link :to="{ name: '红包'}">
           <img
-            style="margin-top: 7px;
-    margin-bottom: -4px;
-    width: 29px;" src="../../static/img/gift_1.png"></img>
+            style="margin-top: 7px;margin-bottom: -4px;width: 27px;"
+            src="../../static/img/new/hongbao.png"></img>
           <p style="color: #333">红包</p>
         </router-link>
       </section>
       <section class="my-pay-1">
         <router-link :to="{ path: '/logout?type=1'}" style="width: 25%">
           <img
-            style="margin-top: 7px;
-    margin-bottom: -4px;
-    width: 29px;" src="../../static/img/setting0.png"></img>
+            style="margin-top: 7px;margin-bottom: -4px;width: 27px;"
+            src="../../static/img/setting0.png"></img>
           <p style="color: #333">设置</p>
         </router-link>
       </section>
@@ -557,20 +495,20 @@
   }
 
   .count3 {
-    margin-left: 16px;
-  }
-
-  .count4 {
     margin-left: 12px;
   }
 
-  .count5 {
-    margin-left: 10px;
-  }
+  /*.count4 {*/
+  /*  margin-left: 12px;*/
+  /*}*/
 
-  .count6 {
-    margin-left: 10px;
-  }
+  /*.count5 {*/
+  /*  margin-left: 10px;*/
+  /*}*/
+
+  /*.count6 {*/
+  /*  margin-left: 10px;*/
+  /*}*/
   .my-pay-1 {
     display: -webkit-box;
     display: -ms-flexbox;

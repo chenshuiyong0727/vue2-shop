@@ -45,7 +45,7 @@
         </router-link>
         <router-link :to="{ path: '/order?status=5'}">
           <span :class="orderIofo.count5 > 0 ? 'color-danger-strong' : 'color-font'">{{orderIofo.count5}}</span>
-          <p style="color: #8c8a8a;font-size: 14px;">已揽件</p>
+          <p style="color: #8c8a8a;font-size: 14px;">运输中</p>
         </router-link>
         <router-link :to="{ path: '/order?status=6'}">
           <span :class="orderIofo.count6 > 0 ? 'color-danger-strong' : 'color-font'">{{orderIofo.count6}}</span>
