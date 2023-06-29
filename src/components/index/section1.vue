@@ -2,7 +2,7 @@
   <section class="section1" style="padding-top: 0vw;
     width: 92vw;
     margin-left: 4vw;">
-    <h1 class="section1-title">
+    <h1 class="section1-title"  style="border-top-style:none">
       <span style="    margin-left: 20px;">仓库值
       </span>
     </h1>

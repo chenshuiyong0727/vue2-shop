@@ -6,10 +6,10 @@
 <!--    待办事项-->
     <v-orderNum :orderIofo ="orderIofo" :storeData ="storeData"/>
     <!--    销售走势-->
-    <div style="margin-top: 18px;border-left:1px solid #DCDFE6; background-color: #fff;height: 520px;
+    <div style="margin-top: 18px; background-color: #fff;height: 520px;
     width: 92vw;
     margin-left: 4vw;">
-      <h1 class="index-title">
+      <h1 class="index-title"  style="border-top-style:none">
         销售走势
       </h1>
       <ul class="index-list" >

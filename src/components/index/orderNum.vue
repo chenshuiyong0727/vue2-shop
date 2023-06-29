@@ -2,33 +2,33 @@
 
   <div class="car1" style="  padding-top: 28px;">
     <div class="main">
-      <section class="my-pay-2" style="border-bottom-style:none">
+      <section class="my-pay-2" style="border-bottom-style:none;    margin-top:30px;">
         <router-link :to="{ path: '/store'}">
-          <span style="    margin-top: 0vw;">
+          <span style="    margin-top: -3px;">
              <img
                style="margin-top: 11px;
     margin-bottom: -3px;
     width: 28px;" src="../../../static/img/goods-1.png"></img>
           </span>
-          <p style="color: #333;font-size: 16px;    margin-top: 1px;">商品管理</p>
+          <p style="color: #333;font-size: 14px;    margin-top: 1px;">商品管理</p>
         </router-link>
         <img style="    margin-left: 10px;
     height: 55px;
     margin-top: 10px;" src="../../../static/img/more-1.png">
         <router-link :to="{ path: '/store?today=7'}">
           <span :class="storeData.upCout > 0 ? 'color-danger-strong' : 'color-font'">{{storeData.upCout}}</span>
-          <p style="color: #8c8a8a;font-size: 16px;">变价</p>
+          <p style="color: #8c8a8a;font-size: 14px;">变价</p>
         </router-link>
         <router-link :to="{ path: '/store?today=2'}">
           <span :class="storeData.successNumLast > 0 ? 'color-danger-strong' : 'color-font'">{{storeData.successNumLast}}</span>
-          <p style="color: #8c8a8a;font-size: 16px;">待上架</p>
+          <p style="color: #8c8a8a;font-size: 14px;">待上架</p>
         </router-link>
         <router-link :to="{ path: '/store?today=3'}">
           <span :class="storeData.waitMoveCout > 0 ? 'color-danger-strong' : 'color-font'">{{storeData.waitMoveCout}}</span>
-          <p style="color: #8c8a8a;font-size: 16px;">待移库</p>
+          <p style="color: #8c8a8a;font-size: 14px;">待移库</p>
         </router-link>
       </section>
-      <h1 class="section1-title">
+      <h1 class="section1-title" style="border-top-style:none">
       <span style="    margin-left: 20px;">
         订单管理
       </span>
@@ -37,37 +37,37 @@
       <section class="my-pay-2" style="border-bottom-style:none;">
         <router-link :to="{ path: '/order?status=3'}">
           <span :class="orderIofo.count3 > 0 ? 'color-danger-strong' : 'color-font'">{{orderIofo.count3}}</span>
-          <p style="color: #8c8a8a;font-size: 16px;">待发货</p>
+          <p style="color: #8c8a8a;font-size: 14px;">待发货</p>
         </router-link>
         <router-link :to="{ path: '/order?status=4'}">
           <span :class="orderIofo.count4 > 0 ? 'color-danger-strong' : 'color-font'">{{orderIofo.count4}}</span>
-          <p style="color: #8c8a8a;font-size: 16px;">已发货</p>
+          <p style="color: #8c8a8a;font-size: 14px;">已发货</p>
         </router-link>
         <router-link :to="{ path: '/order?status=5'}">
           <span :class="orderIofo.count5 > 0 ? 'color-danger-strong' : 'color-font'">{{orderIofo.count5}}</span>
-          <p style="color: #8c8a8a;font-size: 16px;">已揽件</p>
+          <p style="color: #8c8a8a;font-size: 14px;">已揽件</p>
         </router-link>
         <router-link :to="{ path: '/order?status=6'}">
           <span :class="orderIofo.count6 > 0 ? 'color-danger-strong' : 'color-font'">{{orderIofo.count6}}</span>
-          <p style="color: #8c8a8a;font-size: 16px;">已收货</p>
+          <p style="color: #8c8a8a;font-size: 14px;">已收货</p>
         </router-link>
       </section>
       <section class="my-pay-2" style="border-bottom-style:none;">
         <router-link :to="{ path: '/order?status=11'}">
           <span class="color-font">{{orderIofo.count11}}</span>
-          <p style="color: #8c8a8a;font-size: 16px;">已入库</p>
+          <p style="color: #8c8a8a;font-size: 14px;">已入库</p>
         </router-link>
         <router-link :to="{ path: '/order?status=2'}">
           <span class="color-font">{{orderIofo.count2}}</span>
-          <p style="color: #8c8a8a;font-size: 16px;">已上架</p>
+          <p style="color: #8c8a8a;font-size: 14px;">已上架</p>
         </router-link>
         <router-link :to="{ path: '/order?status=7'}">
           <span class="color-font">{{orderIofo.count7}}</span>
-          <p style="color: #8c8a8a;font-size: 16px;">成功</p>
+          <p style="color: #8c8a8a;font-size: 14px;">成功</p>
         </router-link>
         <router-link :to="{ path: '/order?status=8'}">
           <span class="color-font">{{orderIofo.count8}}</span>
-          <p style="color: #8c8a8a;font-size: 16px;">瑕疵</p>
+          <p style="color: #8c8a8a;font-size: 14px;">瑕疵</p>
         </router-link>
       </section>
     </div>
@@ -327,7 +327,7 @@
     width: 92%;
     margin-left: 4%;
     height: 1px;
-    border-top: solid #d9d4d4 1.5px;
+    border-top: solid #E2DDDD 1.5px;
     margin-bottom: -15px;
     margin-top: 13px;
   }
@@ -352,7 +352,7 @@
       text-align: center;
 
       > span {
-        .fz(font-size, 50);
+        font-size: 22px;
         margin-top: 2.3vw;
         display: block;
         text-align: center;
