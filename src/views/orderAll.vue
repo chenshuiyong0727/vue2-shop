@@ -83,11 +83,11 @@
             </div>
             <div   v-if="item.status == 3" class="dingdans_con_right_down_2_1">
               <span  >  截止时间
-                 <strong style="font-size: 12px;" class="color-danger"> {{item.deliveryDeadlineTime |formateTime }}</strong>
+                 <strong style="font-size: 12px;" class="color-danger"> {{item.deliveryDeadlineTime | formateTime('{y}-{m}-{d} {h}:{i}')  }}</strong>
               </span>
               <el-button
                 type="text"
-                style="font-weight: 600;padding-left: 0px;"
+                style="font-weight: 600;padding-left: 5px;"
                 @click="handleClick(item)">修改</el-button>
               <el-dropdown trigger="click"  style="margin-left: 1px;">
                 <span class="el-dropdown-link">
@@ -103,7 +103,7 @@
             <div v-else class="dingdans_con_right_down_2">
               <el-button
                 type="text"
-                style="font-weight: 600;padding-left: 130px;   margin-top: -16px;"
+                style="font-weight: 600;padding-left: 118px;   margin-top: -16px;"
                 @click="handleClick(item)">修改</el-button>
               <el-dropdown trigger="click"  style="margin-left: 1px;">
                 <span class="el-dropdown-link">
@@ -520,6 +520,8 @@
       }
     },
     activated() {
+      this.showSd = false
+      this.checkAll = false
       this.keyupSubmit()
       // 新开的页面
       this.isBack = false
