@@ -95,7 +95,7 @@
               <el-button
                 type="text"
                 style="font-weight: 600;padding-left: 5px;"
-                @click="gotoWl(item)">物流
+                @click="handleClick(item)">修改
               </el-button>
               <el-dropdown trigger="click" style="margin-left: 1px;">
                 <span class="el-dropdown-link">
@@ -108,7 +108,7 @@
                   </el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物
                   </el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="handleClick(item)">修改
+                  <el-dropdown-item type="text" @click.native="gotoWl(item)">物流
                   </el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情
                   </el-dropdown-item>
@@ -119,7 +119,7 @@
               <el-button
                 type="text"
                 style="font-weight: 600;padding-left: 118px;   margin-top: -16px;"
-                @click="gotoWl(item )">物流
+                @click="handleClick(item )">修改
               </el-button>
               <el-dropdown trigger="click" style="margin-left: 1px;">
                 <span class="el-dropdown-link">
@@ -132,7 +132,7 @@
                   </el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物
                   </el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="handleClick(item)">修改
+                  <el-dropdown-item type="text" @click.native="gotoWl(item)">物流
                   </el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情
                   </el-dropdown-item>
