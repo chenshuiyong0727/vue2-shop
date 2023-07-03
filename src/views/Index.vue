@@ -9,10 +9,16 @@
     <div style="margin-top: 18px; background-color: #fff;height: 520px;
     width: 92vw;
     margin-left: 4vw;">
-      <h1 class="index-title"  style="border-top-style:none">
+<!--      <h1 class="index-title"  style="border-top-style:none">-->
+<!--        销售走势-->
+<!--      </h1>-->
+      <h1 class="index-title" style="border-top-style:none">
+      <span >
         销售走势
+      </span>
+        <div class="link-top-1"></div>
       </h1>
-      <ul class="index-list" >
+      <ul class="index-list" style=" padding-top: 4vw" >
         <li>
           <router-link :to="{name:'销售报表'}">
             <p class="color-danger"><strong>{{orderData.successNum}}</strong> </p>
@@ -447,5 +453,13 @@ export default {
     &:active {
       background-color: rgb(224, 227, 230)
     }
+  }
+  .link-top-1 {
+    width: 98%;
+    margin-left: -2vw;
+    height: 1px;
+    border-top: solid #E2DDDD 1.5px;
+    margin-bottom: -15px;
+    margin-top: 13px;
   }
 </style>

@@ -2,11 +2,17 @@
   <section class="section1" style="padding-top: 0vw;
     width: 92vw;
     margin-left: 4vw;">
-    <h1 class="section1-title"  style="border-top-style:none">
-      <span style="    margin-left: 20px;">仓库值
+<!--    <h1 class="section1-title"  style="border-top-style:none">-->
+<!--      <span style="    margin-left: 20px;">仓库值-->
+<!--      </span>-->
+<!--    </h1>-->
+    <h1 class="section1-title" style="border-top-style:none">
+      <span style="    margin-left: 20px;">
+        仓库值
       </span>
+      <div class="link-top"></div>
     </h1>
-    <div style="background-color: #fff">
+    <div style="background-color: #fff ; padding-top: 4vw">
       <ve-pie height="320px"
         :data="chartData1" :settings="chartSettings1" ></ve-pie>
     </div>
@@ -334,4 +340,13 @@ export default {
     color: black;
     /*font-weight: 600;*/
   }
+.link-top {
+  width: 92%;
+  margin-left: 4%;
+  height: 1px;
+  border-top: solid #E2DDDD 1.5px;
+  margin-bottom: -15px;
+  margin-top: 13px;
+}
+
 </style>
