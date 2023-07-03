@@ -14,6 +14,11 @@ export const goodsOrderApi = {
     method: 'get',
     params: body
   }),
+  waybillNoList: (body) => request({
+    url: '/gw/op/v1/goodsOrder/waybillNoList',
+    method: 'get',
+    params: body
+  }),
   // 批量删除
   batchdelete: (body) => request({
     url: '/gw/op/v1/goodsOrder/batch/remove',

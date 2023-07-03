@@ -2,18 +2,19 @@
   <div class="hello" ref="hello">
     <mt-header :title="titleName">
       <div slot="left">
-        <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
+        <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
     </mt-header>
-<!--    <div style=" width: 35px;height: 35px;position: fixed;left: 10px;top: 18px;z-index: 999;" @click="$router.go(-1)">-->
-<!--      <img width="100%" src="../../static/img/topBack.png" alt="" />-->
-<!--    </div>-->
+    <!--    <div style=" width: 35px;height: 35px;position: fixed;left: 10px;top: 18px;z-index: 999;" @click="$router.go(-1)">-->
+    <!--      <img width="100%" src="../../static/img/topBack.png" alt="" />-->
+    <!--    </div>-->
     <div class="fenlei_top">
-      <div    class="fenlei_top_left">
-        <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）" class="ins">
+      <div class="fenlei_top_left">
+        <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）"
+               class="ins">
       </div>
       <div class="fenlei_top_right" @click="isShowDialog2 = true">
-        <img src="../../static/img/search.png" height="30px;"width="30px;" >
+        <img src="../../static/img/search.png" height="30px;" width="30px;">
       </div>
     </div>
     <mt-loadmore
@@ -32,71 +33,85 @@
             <strong>{{item.orderNo }}</strong>
           </div>
           <div class="dingdans_top_right">
-            <strong v-if="item.status == 7" class="color-success" >{{ item.status | dictToDescTypeValue(37) }} </strong>
-            <strong v-else-if="[3,4,5,6,8].includes(item.status)" class="color-danger" >{{ item.status | dictToDescTypeValue(37) }} </strong>
+            <strong v-if="item.status == 7" class="color-success">{{ item.status |
+              dictToDescTypeValue(37) }} </strong>
+            <strong v-else-if="[3,4,5,6,8].includes(item.status)" class="color-danger">{{
+              item.status | dictToDescTypeValue(37) }} </strong>
             <strong v-else>{{ item.status | dictToDescTypeValue(37) }} </strong>
           </div>
         </div>
         <div class="dingdans_con">
           <div style="width: 30px;   display: flex;align-items: center;" v-if="showSd">
             <el-checkbox :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
-<!--            <strong style="margin-left: 6px;">{{index + 1}}</strong>-->
+            <!--            <strong style="margin-left: 6px;">{{index + 1}}</strong>-->
           </div>
-          <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap" @click="avatarShow(item.img)">
+          <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap"
+               @click="avatarShow(item.img)">
             <img :src="item.img" style="margin-top: 25px;">
             <p class="mark">
-              <span class="text" >
+              <span class="text">
                 {{ item.saleType | dictToDescTypeValue(46) }}
               </span>
             </p>
           </div>
-          <div v-if="!item.img && item.imgUrl" :src="item.img" class="dingdans_con_left" @click="avatarShow(fileUrl+ item.imgUrl)">
+          <div v-if="!item.img && item.imgUrl" :src="item.img" class="dingdans_con_left"
+               @click="avatarShow(fileUrl+ item.imgUrl)">
             <img :src="fileUrl + item.imgUrl">
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top">
              <span>
-               <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
-                 <img @click="copyUrl(item.actNo)" style="width: 20px;" src="../../static/img/copy6.png">
+               <strong style="color: #409EFF"
+                       @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
+                 <img @click="copyUrl(item.actNo)" style="width: 20px;"
+                      src="../../static/img/copy6.png">
              </span>
               尺码：<strong>{{item.size}}</strong>
               入库价：<strong>{{item.price}}</strong>
-<!--              <span>-->
-<!--                 -->
-<!--              </span>-->
+              <!--              <span>-->
+              <!--                 -->
+              <!--              </span>-->
             </div>
             <div class="dingdans_con_right_down" style="margin-bottom: 1vw;margin-top: 1vw;">
-               <span  v-if="[2,11].includes(item.status)">最低售价：<strong class="color-danger">{{item.thisTimePrice}}</strong></span>
-              <span  v-if="[2,11].includes(item.status)">
+              <span v-if="[2,11].includes(item.status)">最低售价：<strong class="color-danger">{{item.thisTimePrice}}</strong></span>
+              <span v-if="[2,11].includes(item.status)">
                 预估利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong>
               </span>
               <span v-else>
                 <span v-if="item.profits">利润：<strong class="color-danger">{{item.profits}}</strong></span>
               </span>
             </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: 0vw;" >
+            <div class="dingdans_con_right_down" style="margin-bottom: 0vw;">
               售价：<strong>{{item.shelvesPrice}}</strong>
               <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
             </div>
-            <div  class="dingdans_con_right_down" style="margin-bottom: 0vw;" v-if="item.addressId">
-              <span >{{ item.addressId | dictToDescTypeValue(38) }} </span>
+            <div class="dingdans_con_right_down" style="margin-bottom: 0vw;" v-if="item.addressId">
+              <span>{{ item.addressId | dictToDescTypeValue(38) }} </span>
             </div>
-            <div   v-if="item.status == 3" class="dingdans_con_right_down_2_1">
-              <span  >  截止时间
+            <div v-if="item.status == 3" class="dingdans_con_right_down_2_1">
+              <span>  截止时间
                  <strong style="font-size: 12px;" class="color-danger"> {{item.deliveryDeadlineTime | formateTime('{y}-{m}-{d} {h}:{i}')  }}</strong>
               </span>
               <el-button
                 type="text"
                 style="font-weight: 600;padding-left: 5px;"
-                @click="handleClick(item)">修改</el-button>
-              <el-dropdown trigger="click"  style="margin-left: 1px;">
+                @click="gotoWl(item)">物流
+              </el-button>
+              <el-dropdown trigger="click" style="margin-left: 1px;">
                 <span class="el-dropdown-link">
-                  更多<i class="el-icon-arrow-down el-icon--right" style="font-weight: 600; margin-left: 2px;"></i>
+                  更多<i class="el-icon-arrow-down el-icon--right"
+                       style="font-weight: 600; margin-left: 2px;"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
+                  <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">
+                    删除
+                  </el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物
+                  </el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="handleClick(item)">修改
+                  </el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情
+                  </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
@@ -104,15 +119,23 @@
               <el-button
                 type="text"
                 style="font-weight: 600;padding-left: 118px;   margin-top: -16px;"
-                @click="handleClick(item)">修改</el-button>
-              <el-dropdown trigger="click"  style="margin-left: 1px;">
+                @click="gotoWl(item )">物流
+              </el-button>
+              <el-dropdown trigger="click" style="margin-left: 1px;">
                 <span class="el-dropdown-link">
-                  更多<i class="el-icon-arrow-down el-icon--right" style="font-weight: 600; margin-left: 2px;"></i>
+                  更多<i class="el-icon-arrow-down el-icon--right"
+                       style="font-weight: 600; margin-left: 2px;"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
+                  <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">
+                    删除
+                  </el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物
+                  </el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="handleClick(item)">修改
+                  </el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情
+                  </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
@@ -120,7 +143,8 @@
         </div>
       </div>
       <div slot="top" class="mint-loadmore-top">
-        <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }">松手释放↓</span>
+        <span v-show="topStatus !== 'loading'"
+              :class="{ 'rotate': topStatus === 'drop' }">松手释放↓</span>
         <span v-show="topStatus === 'loading'">加载中</span>
       </div>
       <div slot="bottom" class="mint-loadmore-bottom">
@@ -137,18 +161,21 @@
       v-model="isShowDialog">
       <mt-header title="修改">
         <div slot="right">
-          <mt-button size="normal"  @click="isShowDialog = false" style="font-size: 16px">关闭</mt-button>
+          <mt-button size="normal" @click="isShowDialog = false" style="font-size: 16px">关闭
+          </mt-button>
         </div>
         <div slot="left">
           <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
       <section style="height: 148vw;width: 100vw">
-        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :disabled="true"></mt-field>
+        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo"
+                  :disabled="true"></mt-field>
         <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
-        <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam.waybillNo"></mt-field>
+        <mt-field label="运单号" placeholder="请输入运单号" v-model="requestParam.waybillNo"></mt-field>
         <mt-field label="地址">
-            <el-select size="small" class="select100" v-model="requestParam.addressId">
+            
+          <el-select size="small" class="select100" v-model="requestParam.addressId">
             <el-option :disabled="true" value="" selected>请选择</el-option>
             <el-option
               v-for="item in addressList"
@@ -156,8 +183,9 @@
               :label="item.fieldName"
               :value="+item.fieldValue">
             </el-option>
-<!--              <el-option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</el-option>-->
-            </el-select>
+            <!--              <el-option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</el-option>-->
+              
+          </el-select>
         </mt-field>
         <mt-field label="状态">
           <el-select size="small" class="select100" v-model="requestParam.status">
@@ -181,57 +209,123 @@
             </el-option>
           </el-select>
         </mt-field>
-        <mt-field label="瑕疵原因" v-if="requestParam.status == 8" placeholder="请输入瑕疵原因"  v-model="requestParam.reason"></mt-field>
+        <mt-field label="瑕疵原因" v-if="requestParam.status == 8" placeholder="请输入瑕疵原因"
+                  v-model="requestParam.reason"></mt-field>
         <mt-field label="发货截止时间">
           <el-date-picker size="small" class="select100" style="width: 62vw"
                           type="datetime" placeholder="发货截止时间"
                           v-model="requestParam.deliveryDeadlineTime"
-                          value-format="yyyy-MM-dd HH:mm:ss">></el-date-picker>
+                          value-format="yyyy-MM-dd HH:mm:ss">>
+          </el-date-picker>
         </mt-field>
-        <mt-field label="入库价" placeholder="请输入入库价" @keyup.native="keyup1($event)" type="number" v-model="requestParam.price"></mt-field>
-        <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup1($event)" type="number" v-model="requestParam.shelvesPrice"></mt-field>
-        <mt-field label="补贴价格" placeholder="请输入补贴价格" @keyup.native="keyup1($event)" type="number" v-model="requestParam.subsidiesPrice"></mt-field>
-        <mt-field label="手续费" placeholder="请输入手续费" @keyup.native="keyup1($event)" type="number" v-model="requestParam.poundage"></mt-field>
-        <mt-field label="运费" placeholder="请输入运费" @keyup.native="keyup1($event)" type="number" v-model="requestParam.freight"></mt-field>
-        <mt-field label="到手价" placeholder="请输入到手价" @keyup.native="keyup2($event)" type="number" v-model="requestParam.theirPrice"></mt-field>
-        <mt-field label="利润" placeholder="请输入利润" @keyup.native="keyup1($event)" type="number" v-model="requestParam.profits"></mt-field>
+        <mt-field label="入库价" placeholder="请输入入库价" @keyup.native="keyup1($event)" type="number"
+                  v-model="requestParam.price"></mt-field>
+        <mt-field label="出售价格" placeholder="请输入出售价格" @keyup.native="keyup1($event)" type="number"
+                  v-model="requestParam.shelvesPrice"></mt-field>
+        <mt-field label="补贴价格" placeholder="请输入补贴价格" @keyup.native="keyup1($event)" type="number"
+                  v-model="requestParam.subsidiesPrice"></mt-field>
+        <mt-field label="手续费" placeholder="请输入手续费" @keyup.native="keyup1($event)" type="number"
+                  v-model="requestParam.poundage"></mt-field>
+        <mt-field label="运费" placeholder="请输入运费" @keyup.native="keyup1($event)" type="number"
+                  v-model="requestParam.freight"></mt-field>
+        <mt-field label="到手价" placeholder="请输入到手价" @keyup.native="keyup2($event)" type="number"
+                  v-model="requestParam.theirPrice"></mt-field>
+        <mt-field label="利润" placeholder="请输入利润" @keyup.native="keyup1($event)" type="number"
+                  v-model="requestParam.profits"></mt-field>
       </section>
     </mt-popup>
     <mt-popup
+      position="bottom"
+      v-model="isShowDialogWl">
+      <mt-header title="物流详情">
+        <div slot="left">
+          <mt-button size="normal" @click="isShowDialogWl = false" style="font-size: 16px">关闭
+          </mt-button>
+        </div>
+      </mt-header>
+      <div class="wlInfo">
+        <p>顺丰速运 : <span>{{requestParamWl.waybillNo}}</span>
+          <el-button
+          type="text"
+          style="font-weight: 600;padding-left: 5px;padding-top: 0px;padding-bottom: 0px;"
+          @click="copyUrl(requestParamWl.waybillNo )">复制
+        </el-button>
+        </p>
+        <p style="margin-top: 2px;">实际金额 : <span>{{requestParamWl.freight}}</span></p>
+        <p style="margin-top: 2px;">
+          <span>收货地址 :</span>
+          <div style="width: 56vw;
+    margin-top: -17px;
+    margin-left: 72px;">{{requestParamWl.receiverAddress }}</div>
+        </p>
+      </div>
+      <div style="height: 120vw;width: 100vw;" class="rigth-content-bottom">
+        <div class="package-status" style="overflow-y:scroll;">
+          <div class="status-box" >
+            <ul class="status-list">
+              <li :class="index==0 || wlDataSize==(index+1) ? 'latest' : ''"
+                  v-for="(item,index) in wlData" :key="index">
+                <div
+                  :class="index==0 || wlDataSize==(index+1) ? 'status-time-latest' : 'status-time-before'">
+                  <strong>
+                     {{item.status}}
+                  </strong>
+                  <span>
+                     {{item.date | formateTime('{m}-{d} {h}:{i}') }}
+                  </span>
+                </div>
+                <div
+                  :class="index==0 || wlDataSize==(index+1) ? 'status-content-latest' : 'status-content-before'">
+                  {{item.message}}
+                </div>
+                <div class="status-line"></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </mt-popup>
+    <mt-popup
       v-model="isShowDialog1">
-      <mt-header title="修改地址" >
+      <mt-header title="修改地址">
         <div slot="right">
-          <mt-button size="normal"  @click="isShowDialog1 = false" style="font-size: 16px">关闭</mt-button>
+          <mt-button size="normal" @click="isShowDialog1 = false" style="font-size: 16px">关闭
+          </mt-button>
         </div>
         <div slot="left">
           <mt-button size="normal" @click="updateAddress" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
       <section style="height: 85vw;width: 80vw">
-        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData1.actNo" :readonly="1==1"></mt-field>
+        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData1.actNo"
+                  :readonly="1==1"></mt-field>
         <mt-field label="尺码" v-model="orderData1.size" :readonly="1==1"></mt-field>
-        <mt-field label="运费" placeholder="请输入运费"  type="number" v-model="requestParam1.freight"></mt-field>
-        <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam1.waybillNo"></mt-field>
+        <mt-field label="运费" placeholder="请输入运费" type="number"
+                  v-model="requestParam1.freight"></mt-field>
+        <mt-field label="运单号" placeholder="请输入运单号" v-model="requestParam1.waybillNo"></mt-field>
         <mt-field label="地址">
-            <el-select size="small"class="select80" v-model="requestParam1.addressId">
-              <el-option :disabled="true" value="" selected>请选择</el-option>
-<!--              <el-option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</el-option>-->
-              <el-option
-                v-for="item in addressList"
-                :key="item.fieldValue"
-                :label="item.fieldName"
-                :value="+item.fieldValue">
-              </el-option>
-            </el-select>
+            
+          <el-select size="small" class="select80" v-model="requestParam1.addressId">
+            <el-option :disabled="true" value="" selected>请选择</el-option>
+            <!--              <el-option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</el-option>-->
+            <el-option
+              v-for="item in addressList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+            </el-option>
+              
+          </el-select>
         </mt-field>
       </section>
     </mt-popup>
     <mt-popup
       position="bottom"
       v-model="isShowDialog2">
-      <mt-header title="筛选" >
+      <mt-header title="筛选">
         <div slot="right">
-          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px"> 重置（关闭）</mt-button>
+          <mt-button size="normal" @click="resetHandle" style="font-size: 16px"> 重置（关闭）</mt-button>
         </div>
         <div slot="left">
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
@@ -239,8 +333,9 @@
       </mt-header>
       <section style="height: 90vw;width: 100vw">
         <mt-field label="状态" style="margin-top: 12vw;">
-          <el-select size="small" class="select100" v-model="queryParam.status" @change="changeSystem">
-            <el-option  label="状态" value=""></el-option>
+          <el-select size="small" class="select100" v-model="queryParam.status"
+                     @change="changeSystem">
+            <el-option label="状态" value=""></el-option>
             <el-option
               v-for="item in statusList"
               :key="item.fieldValue"
@@ -250,20 +345,23 @@
           </el-select>
         </mt-field>
         <mt-field label="地址">
-            <el-select size="small" class="select100" v-model="queryParam.addressId">
-               <el-option :disabled="true" value="" selected>请选择地址</el-option>
-<!--              <el-option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</el-option>-->
-              <el-option
-                v-for="item in addressList"
-                :key="item.fieldValue"
-                :label="item.fieldName"
-                :value="+item.fieldValue">
-              </el-option>
-            </el-select>
+            
+          <el-select size="small" class="select100" v-model="queryParam.addressId">
+            <el-option :disabled="true" value="" selected>请选择地址</el-option>
+            <!--              <el-option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</el-option>-->
+            <el-option
+              v-for="item in addressList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+            </el-option>
+              
+          </el-select>
         </mt-field>
         <mt-field label="销售类型">
-          <el-select size="small" class="select100" v-model="queryParam.saleType" @change="changeSystem1">
-            <el-option  label="销售类型" value=""></el-option>
+          <el-select size="small" class="select100" v-model="queryParam.saleType"
+                     @change="changeSystem1">
+            <el-option label="销售类型" value=""></el-option>
             <el-option
               v-for="item in saleTypeList"
               :key="item.fieldValue"
@@ -272,8 +370,8 @@
             </el-option>
           </el-select>
         </mt-field>
-<!--        <mt-field label="成功开始时间" type="date" placeholder="成功开始时间"  v-model="queryParam.successTimeFrom" ></mt-field>-->
-<!--        <mt-field label="成功结束时间" type="date" placeholder="成功结束时间"  v-model="queryParam.successTimeTo" ></mt-field>-->
+        <!--        <mt-field label="成功开始时间" type="date" placeholder="成功开始时间"  v-model="queryParam.successTimeFrom" ></mt-field>-->
+        <!--        <mt-field label="成功结束时间" type="date" placeholder="成功结束时间"  v-model="queryParam.successTimeTo" ></mt-field>-->
         <mt-field label="成功开始时间">
           <el-date-picker class="select100"
                           size="small"
@@ -288,71 +386,83 @@
                           type="date" placeholder="成功结束时间">
           </el-date-picker>
         </mt-field>
-        <mt-field label="运单号" placeholder="请输入运单号"  v-model="queryParam.waybillNo"></mt-field>
-        <mt-field label="订单号" placeholder="请输入订单号"  v-model="queryParam.orderNo"></mt-field>
-        <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
+        <mt-field label="运单号" placeholder="请输入运单号" v-model="queryParam.waybillNo"></mt-field>
+        <mt-field label="订单号" placeholder="请输入订单号" v-model="queryParam.orderNo"></mt-field>
+        <mt-field label="尺码" placeholder="请输入尺码" v-model="queryParam.size"></mt-field>
       </section>
     </mt-popup>
     <mt-popup
       v-model="isShowDialog3">
       <mt-header title="闪电直发">
         <div slot="right">
-          <mt-button size="normal"  @click="isShowDialog3 = false" style="font-size: 16px">关闭</mt-button>
+          <mt-button size="normal" @click="isShowDialog3 = false" style="font-size: 16px">关闭
+          </mt-button>
         </div>
         <div slot="left">
           <mt-button size="normal" @click="confirmHandle3" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
       <section style="height: 100vw;width: 100vw">
-        <mt-field label="选中数" style="margin-top: 11vw;" v-model="ids.length" :disabled="true"></mt-field>
+        <mt-field label="选中数" style="margin-top: 11vw;" v-model="ids.length"
+                  :disabled="true"></mt-field>
         <mt-field label="发货截止时间">
           <el-date-picker size="small" class="select100" style="width: 62vw"
                           type="datetime" placeholder="发货截止时间"
                           v-model="requestParam3.deliveryDeadlineTime"
-                          value-format="yyyy-MM-dd HH:mm:ss">></el-date-picker>
+                          value-format="yyyy-MM-dd HH:mm:ss">>
+          </el-date-picker>
         </mt-field>
         <mt-field label="地址">
-          <el-select size="small" class="select100" v-model="requestParam3.addressId"  >
+            
+          <el-select size="small" class="select100" v-model="requestParam3.addressId">
             <el-option :disabled="true" value="" selected>请选择仓库</el-option>
             <el-option
               v-for="item in addressList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
-             </el-option>
-              </el-select>
-          </mt-field>
+            </el-option>
+              
+          </el-select>
+        </mt-field>
         <mt-field label="销售类型">
-          <el-select size="small" class="select100" v-model="requestParam3.saleType"  >
+            
+          <el-select size="small" class="select100" v-model="requestParam3.saleType">
             <el-option :disabled="true" value="" selected>请选择销售类型</el-option>
             <el-option
               v-for="item in saleTypeList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
-             </el-option>
-              </el-select>
-          </mt-field>
+            </el-option>
+              
+          </el-select>
+        </mt-field>
         <mt-field label="状态">
-          <el-select size="small" class="select100" v-model="requestParam3.status"  >
+            
+          <el-select size="small" class="select100" v-model="requestParam3.status">
             <el-option :disabled="true" value="" selected>请选择状态</el-option>
             <el-option
               v-for="item in statusList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
-             </el-option>
-              </el-select>
-          </mt-field>
-        <mt-field label="免仓储费天数" placeholder="请输入免仓储费天数" type="number"  v-model="requestParam3.inStoreFreeDay"></mt-field>
+            </el-option>
+              
+          </el-select>
+        </mt-field>
+        <mt-field label="免仓储费天数" placeholder="请输入免仓储费天数" type="number"
+                  v-model="requestParam3.inStoreFreeDay"></mt-field>
         <mt-field label="寄售入仓时间">
           <el-date-picker size="small" class="select100" style="width: 62vw"
                           type="datetime" placeholder="闪电直发入仓时间"
                           v-model="requestParam3.inStoreTime"
-                          value-format="yyyy-MM-dd HH:mm:ss">></el-date-picker>
+                          value-format="yyyy-MM-dd HH:mm:ss">>
+          </el-date-picker>
         </mt-field>
-        <mt-field label="运费" placeholder="请输入运费"  type="number" v-model="requestParam3.freight"></mt-field>
-        <mt-field label="运单号" placeholder="请输入运单号"  v-model="requestParam3.waybillNo"></mt-field>
+        <mt-field label="运费" placeholder="请输入运费" type="number"
+                  v-model="requestParam3.freight"></mt-field>
+        <mt-field label="运单号" placeholder="请输入运单号" v-model="requestParam3.waybillNo"></mt-field>
 
       </section>
     </mt-popup>
@@ -361,33 +471,36 @@
         <img :src="imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
-<!--    <div style="-->
-<!--    bottom: 120;-->
-<!--    position: absolute;-->
-<!--    text-align: center;-->
-<!--    ">-->
-<!--      &lt;!&ndash;      <mt-button  @click="goGoodsBase"  style="margin-left: 5px;&ndash;&gt;-->
-<!--      &lt;!&ndash;    border-radius: 100%;&ndash;&gt;-->
-<!--      &lt;!&ndash;    margin-top: 0px;&ndash;&gt;-->
-<!--      &lt;!&ndash;    height: 55px;&ndash;&gt;-->
-<!--      &lt;!&ndash;    width: 55px;" type="primary">&ndash;&gt;-->
-<!--      &lt;!&ndash;        <img src="../../static/img/add.png" height="30" width="30" slot="icon">&ndash;&gt;-->
-<!--      &lt;!&ndash;      </mt-button>&ndash;&gt;-->
-<!--      <el-button v-if="checkAll" v-model="checkAll" @click="checkedAll" style="    margin-left: 115px;margin-bottom: 10px;" type="primary">反选</el-button>-->
-<!--      <el-button v-else v-model="checkAll" @click="checkedAll" style="    margin-left: 115px;margin-bottom: 10px;" type="primary">全选</el-button>-->
-<!--      <el-button  type="primary" @click="sdzf" >闪电直发</el-button>-->
-<!--      &lt;!&ndash;      <el-button  @click="$router.go(-1)" >取消</el-button>&ndash;&gt;-->
-<!--    </div>-->
+    <!--    <div style="-->
+    <!--    bottom: 120;-->
+    <!--    position: absolute;-->
+    <!--    text-align: center;-->
+    <!--    ">-->
+    <!--      &lt;!&ndash;      <mt-button  @click="goGoodsBase"  style="margin-left: 5px;&ndash;&gt;-->
+    <!--      &lt;!&ndash;    border-radius: 100%;&ndash;&gt;-->
+    <!--      &lt;!&ndash;    margin-top: 0px;&ndash;&gt;-->
+    <!--      &lt;!&ndash;    height: 55px;&ndash;&gt;-->
+    <!--      &lt;!&ndash;    width: 55px;" type="primary">&ndash;&gt;-->
+    <!--      &lt;!&ndash;        <img src="../../static/img/add.png" height="30" width="30" slot="icon">&ndash;&gt;-->
+    <!--      &lt;!&ndash;      </mt-button>&ndash;&gt;-->
+    <!--      <el-button v-if="checkAll" v-model="checkAll" @click="checkedAll" style="    margin-left: 115px;margin-bottom: 10px;" type="primary">反选</el-button>-->
+    <!--      <el-button v-else v-model="checkAll" @click="checkedAll" style="    margin-left: 115px;margin-bottom: 10px;" type="primary">全选</el-button>-->
+    <!--      <el-button  type="primary" @click="sdzf" >闪电直发</el-button>-->
+    <!--      &lt;!&ndash;      <el-button  @click="$router.go(-1)" >取消</el-button>&ndash;&gt;-->
+    <!--    </div>-->
     <div style="
     right: 15px;
     bottom: 20vw;
     position: fixed;
     text-align: center;
     ">
-        <el-button v-if="showSd && checkAll" v-model="checkAll" @click="checkedAll">反选</el-button>
-        <el-button v-if="showSd && !checkAll" v-model="checkAll" @click="checkedAll" style="margin-bottom: 10px;" type="primary">全选</el-button>
-        <el-button v-if="showSd" type="primary" style="margin-right: 17px" @click="sdzf" >闪电直发</el-button>
-      <mt-button  @click="showSdClick()" :class="showSd ? 'zhihui' : ''"  style="margin-left: 5px;
+      <el-button v-if="showSd && checkAll" v-model="checkAll" @click="checkedAll">反选</el-button>
+      <el-button v-if="showSd && !checkAll" v-model="checkAll" @click="checkedAll"
+                 style="margin-bottom: 10px;" type="primary">全选
+      </el-button>
+      <el-button v-if="showSd" type="primary" style="margin-right: 17px" @click="sdzf">闪电直发
+      </el-button>
+      <mt-button @click="showSdClick()" :class="showSd ? 'zhihui' : ''" style="margin-left: 5px;
     border-radius: 100%;
     margin-top: 0px;
     height: 55px;
@@ -401,8 +514,8 @@
 <script>
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
-  import { goodsOrderApi } from '@/api/goodsOrder'
-  import { parseTime } from '@/utils/index'
+  import {goodsOrderApi} from '@/api/goodsOrder'
+  import {parseTime} from '@/utils/index'
 
   export default {
     components: {
@@ -439,6 +552,12 @@
           waybillNo: '',
           freight: ''
         },
+        requestParamWl: {
+          receiverAddress: '',
+          addressId: '',
+          waybillNo: '',
+          freight: '',
+        },
         requestParam: {
           id: '',
           status: '',
@@ -465,6 +584,8 @@
         orderData2: '',
         isShowDialog2: false,
         isShowDialog3: false,
+        orderDataWl: '',
+        isShowDialogWl: false,
         pictureZoomShow: false,
         imageZoom: '',
         fileUrl: fileUrl,
@@ -516,6 +637,8 @@
         selectedId: [],
         ids: [],
         tableData: [],
+        wlData: [],
+        wlDataSize: '',
         totalCount: 1
       }
     },
@@ -529,21 +652,22 @@
         this.listSysDict()
         this.resetData()
         //isBack 时添加中router中的元信息，判读是否要缓存
-        const { actNo,status,months,orderNo ,saleType} = this.$route.query
-        if (saleType ) {
+        const {actNo, status, months, orderNo, saleType} = this.$route.query
+        if (saleType) {
           this.saleType = saleType
           this.queryParam.saleType = saleType
           this.changeOrder()
         }
         this.queryParam.orderNo = orderNo
         this.queryParam.keyword = actNo
-        if (status){
-          this.status = + status
-          this.queryParam.status = + status
+        if (status) {
+          this.status = +status
+          this.queryParam.status = +status
         }
         this.months = months
-        if (this.queryParam.keyword || this.queryParam.status || this.months || this.queryParam.orderNo|| this.queryParam.saleType) {
-          if(this.queryParam.status){
+        if (this.queryParam.keyword || this.queryParam.status || this.months
+          || this.queryParam.orderNo || this.queryParam.saleType) {
+          if (this.queryParam.status) {
             this.changeSystem()
           }
           if (this.months) {
@@ -553,7 +677,7 @@
           }
         }
         this.getPage()
-      }else {
+      } else {
         this.$refs.hello.scrollTop = this.curScrollTop
       }
     },
@@ -601,12 +725,12 @@
       // console.log(scrollTop,"scrollTop");
       // console.log(clientHeight,"clientHeight");
       // console.log(scrollview,"scrollview");
-      if (to.path == "/store" || to.path  =="/orderDetail") {
+      if (to.path == "/store" || to.path == "/orderDetail" || to.path == "/WlDetail") {
         // console.info(this.isBack)
         //当离开的时候是去库存页的时候开启缓存
         from.meta.isBack = this.isBack;
         // this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
-      }else {
+      } else {
         this.curScrollTop = 0
         from.meta.isBack = false;
       }
@@ -634,7 +758,8 @@
         if (id) {
           goodsOrderApi.getDetailById(id).then(res => {
             if (res.subCode === 1000) {
-              this.requestParam3.deliveryDeadlineTime = res.data ? parseTime(res.data.deliveryDeadlineTime) : ''
+              this.requestParam3.deliveryDeadlineTime = res.data ? parseTime(
+                res.data.deliveryDeadlineTime) : ''
               this.requestParam3.inStoreTime = res.data ? parseTime(res.data.inStoreTime) : ''
               this.requestParam3.addressId = res.data ? res.data.addressId : ''
               this.requestParam3.inStoreFreeDay = res.data ? res.data.inStoreFreeDay : ''
@@ -657,7 +782,7 @@
       },
       changeChecked(id) {
         this.tableData.map(item => {
-          if(item.id === id) {
+          if (item.id === id) {
             if (item.checked) {
               this.delItem(id)
             } else {
@@ -677,7 +802,7 @@
             if (type) {
               this.tableData.map(item => {
                 this.$set(item, 'checked', this.checkAll)
-                if ( this.checkAll) {
+                if (this.checkAll) {
                   this.ids.push(item.id)
                 } else {
                   this.delItem(item.id)
@@ -737,7 +862,7 @@
         }
         goodsOrderApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
-            let list =  res.data ? res.data.list : []
+            let list = res.data ? res.data.list : []
             if (list && list.length) {
               for (let i = 0; i < list.length; i++) {
                 this.tableData.push(list[i])
@@ -754,7 +879,7 @@
         })
       },
       search() {
-        if (!this.queryParam.keyword ) {
+        if (!this.queryParam.keyword) {
           this.$toast('请输入关键字')
           return
         }
@@ -792,7 +917,7 @@
         this.getPage()
       },
       resetData() {
-        this.queryParam ={
+        this.queryParam = {
           id: '',
           size: '',
           keyword: '',
@@ -819,7 +944,7 @@
           successTimeTo: '',
           pageSize: 20,
           pageNum: 1
-         }
+        }
         this.allLoaded = false;
         this.isShowDialog2 = false
       },
@@ -857,7 +982,7 @@
         this.updateTime = ''
         this.sellTime = ''
         this.successTime = ''
-        if(this.saleType) {
+        if (this.saleType) {
           this.queryParam.saleType = this.saleType
         }
         this.changeSystem()
@@ -907,19 +1032,19 @@
         this.requestParam.profits = parseFloat(profits).toFixed(2)
       },
       confirmHandle() {
-        if(this.requestParam.status == 7 && !this.requestParam.freight) {
+        if (this.requestParam.status == 7 && !this.requestParam.freight) {
           this.$toast('请输入运费')
           return
         }
-        if(this.requestParam.status == 3 && !this.requestParam.addressId) {
+        if (this.requestParam.status == 3 && !this.requestParam.addressId) {
           this.$toast('请选择地址')
           return
         }
-        if(this.requestParam.status == 8 && !this.requestParam.reason) {
+        if (this.requestParam.status == 8 && !this.requestParam.reason) {
           this.$toast('请输入瑕疵原因')
           return
         }
-        if(this.requestParam.status == 3 && !this.requestParam.deliveryDeadlineTime) {
+        if (this.requestParam.status == 3 && !this.requestParam.deliveryDeadlineTime) {
           this.$toast('发货截止时间为空')
           return
         }
@@ -969,12 +1094,12 @@
       jumpactNo(actNo) {
         this.isBack = true
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
-        this.$router.push({ path: '/store', query: { actNo } })
+        this.$router.push({path: '/store', query: {actNo}})
       },
       goDetail(id) {
         this.isBack = true
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
-        this.$router.push({ path: '/orderDetail', query: { id } })
+        this.$router.push({path: '/orderDetail', query: {id}})
       },
       // goDel(id) {
       //   this.$confirm('是否删除', '提示', {
@@ -993,7 +1118,7 @@
       //   })
       // },
       gotoDw(spuId) {
-        if (!spuId){
+        if (!spuId) {
           return
         }
         // let url = "https://www.dewu.com/router/product/ProductDetail?spuId=";
@@ -1001,10 +1126,10 @@
         window.location.href = url + spuId;
       },
       goDel(id) {
-        this.$confirm('是否删除',"提示",{
+        this.$confirm('是否删除', "提示", {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          type:"warning",
+          type: "warning",
         }).then(() => {
           goodsOrderApi.delById(id).then(res => {
             this.$toast(res.subMsg)
@@ -1024,7 +1149,7 @@
       },
       checkedAll() {
         this.checkAll = !this.checkAll
-        this.tableData= []
+        this.tableData = []
         this.getPage(1)
       },
       showSdClick() {
@@ -1033,12 +1158,46 @@
       sdzf() {
         this.requestParam3.ids = this.ids
         this.requestParam3.status = 3
-        if (!this.ids.length ) {
+        if (!this.ids.length) {
           this.$toast('请选择订单')
           return
         }
         this.getDetailById()
         this.isShowDialog3 = true
+      },
+      gotoWl(orderData) {
+        this.requestParamWl.addressId = orderData.addressId
+        this.requestParamWl.waybillNo = orderData.waybillNo
+        if (!this.requestParamWl.waybillNo) {
+          this.$toast('没有物流单号')
+          return
+        }
+        goodsOrderApi.waybillNoList(this.requestParamWl).then(res => {
+          if (res.subCode === 1000) {
+            if (res.data.list.length) {
+              this.wlDataSize = res.data.list.length
+              this.requestParamWl.receiverAddress = res.data.receiverAddress
+              this.requestParamWl.freight = res.data.realAmount
+              this.wlData = []
+              for (let i = 0; i < res.data.list.length; i++) {
+                let dataInfo = res.data.list[i]
+                let status = '运输中'
+                if (dataInfo.message.indexOf("已收取快件") >= 0) {
+                  status = '已揽件'
+                } else if (dataInfo.message.indexOf("可查看签收人信息") >= 0) {
+                  status = '已签收'
+                }
+                dataInfo.status = status
+                this.wlData.push(dataInfo)
+              }
+              this.isShowDialogWl = true
+            } else {
+              this.$toast("暂无物流信息，请核对物流单号")
+            }
+          } else {
+            this.$toast(res.subMsg)
+          }
+        })
       },
       handleClick(orderData) {
         this.orderData = orderData
@@ -1054,7 +1213,7 @@
         this.requestParam.addressId = this.orderData.addressId
         if (this.orderData.status != 11) {
           this.requestParam.status = this.orderData.status + 1
-        } else{
+        } else {
           this.requestParam.status = 6
         }
         if (this.orderData.status == 7) {
@@ -1113,14 +1272,16 @@
   /*  padding-left: 2%;*/
   /*  width: 96%;*/
   /*}*/
-  strong{
+  strong {
     font-weight: 600;
   }
+
   .mint-button--small {
     display: inline-block;
     font-size: 4vw;
     height: 6vw;
   }
+
   .dingdans_item {
     padding: 2.4vw 1.2vw;
     background: #ffffff;
@@ -1167,6 +1328,7 @@
     font-size: 13px;
     margin-bottom: 2vw;
   }
+
   .dingdans_con_right_down_2 {
     margin-left: 13.4vw;
     margin-bottom: -2vw;
@@ -1174,24 +1336,28 @@
     height: 16px;
     margin-top: -17px;
   }
+
   .dingdans_con_right_down_2_1 {
     margin-bottom: 1vw;
     font-size: 3.5vw;
     height: 16px;
     margin-top: -9px;
   }
-/*
- -----分割线---
-*/
+
+  /*
+   -----分割线---
+  */
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
+
   /* 这里直接设置 1rem = 50px begin */
   html {
     font-size: 50px;
   }
+
   /* 这里直接设置 1rem = 50px end */
   html,
   body {
@@ -1199,6 +1365,7 @@
     /*color: #333;*/
     /*background: #fff;*/
   }
+
   /*ul,*/
   /*li {*/
   /*  list-style: none;*/
@@ -1211,8 +1378,9 @@
     height: 100vh;
     /*overflow:hidden;*/
 
-  overflow-y: auto;
+    overflow-y: auto;
   }
+
   /* 给要上拉的容器设置 end */
   /*.fl {*/
   /*  float: left;*/
@@ -1277,7 +1445,7 @@
     top: 0;
     left: 0;
     z-index: 99;
-    margin-top:11.6vw;
+    margin-top: 11.6vw;
     /*margin-top:0.85rem;*/
   }
 
@@ -1287,10 +1455,12 @@
     width: 2rem;
     text-align: center;
   }
+
   .el-date-picker.has-time .el-picker-panel__body-wrapper {
     position: relative;
     margin-right: 52px;
   }
+
   .ins {
     writing-mode: horizontal-tb !important;
     font-style: ;
@@ -1329,9 +1499,11 @@
     padding: 0.2rem;
 
   }
+
   .wrap {
     position: relative;
   }
+
   .mark {
     position: absolute;
     top: 0;
@@ -1364,5 +1536,135 @@
     width: 51px;
     text-align: center;
     margin-top: 2.1px;
+  }
+
+  .package-status {
+    color: #b8b8b8;
+    padding: 18px 0 0 0
+  }
+
+  .package-status .status-list {
+    margin: 0;
+    padding: 0;
+    margin-top: -5px;
+    padding-left: 7px;
+    list-style: none;
+  }
+
+  .package-status .status-list li {
+    border-left: 2px solid #d9d9d9;
+    width: 80vw;
+    text-align: left;
+  }
+
+  .package-status .status-list li:before { /* 流程点的样式 */
+    content: '';
+    border: 3px solid #f3f3f3;
+    background-color: #d9d9d9;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    margin-left: -9px;
+    margin-right: 10px
+  }
+
+  .package-status .status-list .latest:before {
+    background-color: #333;
+    border-color: #333;
+  }
+
+  .package-status .status-box {
+    overflow: hidden
+  }
+
+  .package-status .status-list li {
+    height: auto;
+  }
+
+  .package-status .status-list {
+    margin-top: -8px
+  }
+
+  .package-status .status-box {
+    position: relative
+  }
+
+  .package-status .status-box:before {
+    content: " ";
+    background-color: #f3f3f3;
+    display: block;
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    width: 10px;
+    height: 4px
+  }
+
+  .package-status .status-list {
+    margin-top: 0px;
+  }
+
+  /* .package-status .status-list .latest{border:none} */
+  /* .package-status .status-list li{margin-bottom:-2px} */
+
+
+  .status-list li:not(:first-child) {
+    padding-top: 10px;
+  }
+
+  .status-content-before {
+    text-align: left;
+    margin-right: 20px;
+    margin-left: 25px;
+    /*margin-top: -20px;*/
+  }
+
+  .status-content-latest {
+    text-align: left;
+    margin-right: 20px;
+    margin-left: 25px;
+    color: #333;
+    /*margin-top: -20px;*/
+  }
+
+  .status-time-before {
+    text-align: left;
+    margin-left: 25px;
+    font-size: 15px;
+    margin-top: -17px;
+
+  }
+
+  .status-time-latest {
+    text-align: left;
+    margin-left: 25px;
+    color: #333;
+    font-size: 15px;
+    margin-top: -17px;
+  }
+
+  .status-line {
+    padding-top: 15px;
+  }
+
+  .rigth-content-bottom {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 2px;
+    /*margin-top: 16px;*/
+    overflow: scroll;
+  }
+  .wlInfo {
+    width: 80vw;
+    border-bottom: 1px solid #ccc;
+    margin-top: 10vw;
+    text-align: left;
+    margin-left: 40px;
+    padding: 3vw;
+    color: rgb(51, 51, 51);
+    font-size: 4.2vw;
   }
 </style>

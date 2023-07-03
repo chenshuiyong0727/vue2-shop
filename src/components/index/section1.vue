@@ -50,7 +50,7 @@
       </li>
       <li>
         <router-link :to="{name:'仓库'}">
-          <p class="color-danger">{{form.inventoryCost}}</p>
+          <p class="color-danger">{{form.inventoryCost | numFilterTo0}}</p>
           <p  class="section1name">库存成本</p>
         </router-link>
       </li>
