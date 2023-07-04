@@ -149,7 +149,7 @@
               <el-button
                 type="text"
                 style="font-weight: 600;padding-left: 5px;"
-                @click="gotoDw(item.spuId)">得物</el-button>
+                @click="goDetail(item.id)">详情</el-button>
               <el-dropdown trigger="click" style="margin-left: 2px;">
                 <span class="el-dropdown-link">
                   操作<i class="el-icon-arrow-down el-icon--right" style="font-weight: 600;    margin-left: 2px;"></i>
@@ -157,7 +157,7 @@
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item type="text"  class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>
-                      <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
+                      <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="jumpactNo(item.actNo)">订单</el-dropdown-item>
                       <el-dropdown-item type="text" v-if="item.inventory > item.galleryCount" @click.native="changeStatusDialog1(item)">上架</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl )">库存</el-dropdown-item>
@@ -248,7 +248,7 @@
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 110vw;width: 100vw">
+      <section style="height: 120vw;width: 100vw">
         <mt-field label="排序" style="margin-top: 11vw;">
 <!--            <select class="select100" v-model="queryParam.sort" @change="changeSystem" >-->
 <!--          <option :disabled="true" value="" selected>请选择排序</option>-->
@@ -288,6 +288,17 @@
                 :label="item.fieldName"
                 :value="+item.fieldValue">
               </el-option>
+            </el-select>
+        </mt-field>
+        <mt-field label="类型">
+            <el-select size="small" class="select100" v-model="queryParam.goodType" >
+          <el-option :disabled="true" value="" selected>请选择类型</el-option>
+          <el-option
+            v-for="item in typeList"
+            :key="item.fieldValue"
+            :label="item.fieldName"
+            :value="item.fieldValue">
+          </el-option>
             </el-select>
         </mt-field>
         <mt-field label="渠道">
@@ -423,6 +434,7 @@
         isShowDialog2: false,
         pictureZoomShow: false,
         imageZoom: '',
+        typeList: [],
         fileUrl: fileUrl,
         today: '',
         queryParam: {
@@ -433,6 +445,7 @@
           createTimeTo: '',
           id: '',
           warehouseId: '',
+          goodType: '',
           channelId: '',
           inventory: 1,
           sort:'',
@@ -710,6 +723,8 @@
         this.warehouseList = sysDictList.filter(item => item.typeValue == 40)
         this.channelIdList = sysDictList.filter(item => item.typeValue == 47)
         this.todayList = sysDictList.filter(item => item.typeValue == 44)
+        this.typeList = sysDictList.filter(item => item.typeValue == 20221108)
+
       },
       loadData(p_status) {
         // 第一次加载或者下拉刷新最新数据
@@ -777,6 +792,7 @@
           createTimeTo: '',
           syncTimeFrom: '',
           syncTimeTo: '',
+          goodType: '',
           id: '',
           sort:'',
           inventory: 1,
@@ -796,6 +812,7 @@
           warehouseId: '',
           channelId: '',
           syncTimeFrom: '',
+          goodType: '',
           syncTimeTo: '',
           createTimeFrom: '',
           createTimeTo: '',

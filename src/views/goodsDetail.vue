@@ -9,13 +9,13 @@
       <mt-field
         label="图片"
       >
-          <img
-            @click="avatarShow(form.img)"
-            :disabled="true "
-            class="select100"
-            v-if="form.img"
-            :src="form.img"
-          />
+        <img
+          @click="avatarShow(form.img)"
+          :disabled="true "
+          class="select100"
+          v-if="form.img"
+          :src="form.img"
+        />
       </mt-field>
       <mt-field label="状态">
           <el-select size="small" class="select100" v-model="form.status" :disabled="true " >
@@ -53,13 +53,13 @@
       <mt-field :disabled="true " label="预估利润" type = "text" v-model = "form.forecastProfits"></mt-field>
       <mt-field label="地址">
           <el-select size="small" class="select100" v-model="form.addressId" :disabled="true " >
-            <el-option :disabled="true" value="" selected>请选择类型</el-option>
-            <el-option
-              v-for="item in addressList"
-              :key="item.fieldValue"
-              :label="item.fieldName"
-              :value="+item.fieldValue">
-            </el-option>
+        <el-option :disabled="true" value="" selected>请选择类型</el-option>
+        <el-option
+          v-for="item in addressList"
+          :key="item.fieldValue"
+          :label="item.fieldName"
+          :value="+item.fieldValue">
+        </el-option>
           </el-select>
       </mt-field>
       <mt-field :disabled="true " label="运单编号" type = "text" v-model = "form.waybillNo"></mt-field>
@@ -85,66 +85,66 @@
 </template>
 
 <script>
-import Header from '@/common/_header.vue'
-import {goodsInventoryApi} from '@/api/goodsInventory'
-import { parseTime } from '@/utils'
+  import Header from '@/common/_header.vue'
+  import {goodsInventoryApi} from '@/api/goodsInventory'
+  import { parseTime } from '@/utils'
 
-export default {
-  components:{
-    'v-header':Header
-  },
-  data(){
-    return {
-      form: {
-      },
-      imageZoom: '',
-      pictureZoomShow: false,
-      fileUrl: fileUrl,
-      dataStatusList: [],
-      statusList: [],
-      addressList: [],
-      saleTypeList: [],
-      type: '',
-      id: '',
-    }
-  },
-  created() {
-    const { id } = this.$route.query
-    if (id) {
-      this.getDetailById(id)
-    }
-  },
-  mounted() {
-    this.listSysDict()
-  },
-  methods:{
-    avatarShow(e) {
-      this.imageZoom = e
-      this.pictureZoomShow = true
+  export default {
+    components:{
+      'v-header':Header
     },
-    getDetailById(id) {
-      if (id) {
-        goodsInventoryApi.getDetailById(id).then(res => {
-          if (res.subCode === 1000) {
-            this.form = res.data ? res.data : {}
-          } else {
-            this.$toast(res.subMsg)
-          }
-        })
+    data(){
+      return {
+        form: {
+        },
+        imageZoom: '',
+        pictureZoomShow: false,
+        fileUrl: fileUrl,
+        dataStatusList: [],
+        statusList: [],
+        addressList: [],
+        saleTypeList: [],
+        type: '',
+        id: '',
       }
     },
-    listSysDict() {
-      let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
-        localStorage.getItem('sysDictList')) : []
-      this.addressList = sysDictList.filter(item => item.typeValue == 38)
-      this.statusList = sysDictList.filter(item => item.typeValue == 37)
-      this.dataStatusList = sysDictList.filter(item => item.typeValue == 36)
-      this.warehouseList = sysDictList.filter(item => item.typeValue == 40)
-      this.channelIdList = sysDictList.filter(item => item.typeValue == 47)
-      this.todayList = sysDictList.filter(item => item.typeValue == 44)
+    created() {
+      const { id } = this.$route.query
+      if (id) {
+        this.getDetailById(id)
+      }
     },
+    mounted() {
+      this.listSysDict()
+    },
+    methods:{
+      avatarShow(e) {
+        this.imageZoom = e
+        this.pictureZoomShow = true
+      },
+      getDetailById(id) {
+        if (id) {
+          goodsInventoryApi.getDetailById(id).then(res => {
+            if (res.subCode === 1000) {
+              this.form = res.data ? res.data : {}
+            } else {
+              this.$toast(res.subMsg)
+            }
+          })
+        }
+      },
+      listSysDict() {
+        let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
+          localStorage.getItem('sysDictList')) : []
+        this.addressList = sysDictList.filter(item => item.typeValue == 38)
+        this.statusList = sysDictList.filter(item => item.typeValue == 37)
+        this.dataStatusList = sysDictList.filter(item => item.typeValue == 36)
+        this.warehouseList = sysDictList.filter(item => item.typeValue == 40)
+        this.channelIdList = sysDictList.filter(item => item.typeValue == 47)
+        this.todayList = sysDictList.filter(item => item.typeValue == 44)
+      },
+    }
   }
-}
 
 </script>
 
@@ -152,13 +152,13 @@ export default {
   @import '../assets/index/style.css';
 
   .login {
-  >section {
-    .tip {
-      padding: 6vw 3vw;
-      color:rgb(224, 145, 71);
-      letter-spacing: 2px;
-      font-size: 16px;
+    >section {
+      .tip {
+        padding: 6vw 3vw;
+        color:rgb(224, 145, 71);
+        letter-spacing: 2px;
+        font-size: 16px;
+      }
     }
   }
-}
 </style>

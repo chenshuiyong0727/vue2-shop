@@ -331,7 +331,7 @@
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 90vw;width: 100vw">
+      <section style="height: 100vw;width: 100vw">
         <mt-field label="状态" style="margin-top: 12vw;">
           <el-select size="small" class="select100" v-model="queryParam.status"
                      @change="changeSystem">
@@ -343,6 +343,17 @@
               :value="+item.fieldValue">
             </el-option>
           </el-select>
+        </mt-field>
+        <mt-field label="类型">
+            <el-select size="small" class="select100" v-model="queryParam.goodType" >
+          <el-option :disabled="true" value="" selected>请选择类型</el-option>
+          <el-option
+            v-for="item in typeList"
+            :key="item.fieldValue"
+            :label="item.fieldName"
+            :value="item.fieldValue">
+          </el-option>
+            </el-select>
         </mt-field>
         <mt-field label="地址">
             
@@ -590,6 +601,7 @@
         imageZoom: '',
         fileUrl: fileUrl,
         saleType: '',
+        typeList: [],
         queryParam: {
           id: '',
           size: '',
@@ -607,6 +619,7 @@
           theirPriceFrom: '',
           theirPriceTo: '',
           addressId: '',
+          goodType: '',
           waybillNo: '',
           createTimeFrom: '',
           createTimeTo: '',
@@ -854,6 +867,7 @@
         this.statusList = sysDictList.filter(item => item.typeValue == 37)
         this.dataStatusList = sysDictList.filter(item => item.typeValue == 36)
         this.saleTypeList = sysDictList.filter(item => item.typeValue == 46)
+        this.typeList = sysDictList.filter(item => item.typeValue == 20221108)
       },
       loadData(p_status) {
         // 第一次加载或者下拉刷新最新数据
@@ -931,6 +945,7 @@
           poundageFrom: '',
           poundageTo: '',
           theirPriceFrom: '',
+          goodType: '',
           theirPriceTo: '',
           addressId: '',
           waybillNo: '',
@@ -963,6 +978,7 @@
           poundageFrom: '',
           poundageTo: '',
           theirPriceFrom: '',
+          goodType: '',
           theirPriceTo: '',
           addressId: '',
           waybillNo: '',
