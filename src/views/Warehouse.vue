@@ -157,6 +157,7 @@
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item type="text"  class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>
+                      <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="jumpactNo(item.actNo)">订单</el-dropdown-item>
                       <el-dropdown-item type="text" v-if="item.inventory > item.galleryCount" @click.native="changeStatusDialog1(item)">上架</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl )">库存</el-dropdown-item>
@@ -622,7 +623,11 @@
       }
     },
     beforeRouteLeave(to, from, next) {
-      if (to.path == "/goodsBase" || to.path  =="/order" ||  to.path  =="/WarehouseDetail" || to.path  =="/scanCode") {
+      if (to.path == "/goodsBase"
+        || to.path  =="/order"
+        || to.path  =="/storeDetail"
+        || to.path  =="/WarehouseDetail"
+        || to.path  =="/scanCode") {
         from.meta.isBack = this.isBack;
         // this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
       }else {
@@ -934,6 +939,11 @@
         this.isBack = true
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
         this.$router.push({ path: '/order', query: { actNo } })
+      },
+      goDetail(id) {
+        this.isBack = true
+        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.$router.push({path: '/storeDetail', query: {id}})
       },
       scanCode(id, type) {
         this.isBack = true
