@@ -1,6 +1,6 @@
 <template>
   <div class="hello" ref="hello">
-    <mt-header :title="titleName">
+    <mt-header title="订单">
       <div slot="left">
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
@@ -17,8 +17,19 @@
         <img src="../../static/img/search.png" height="30px;" width="30px;">
       </div>
     </div>
+    <div class="searchList">
+      <span style="margin-right: 6vw;" :class="!queryParam.status ? 'activity' : ''" @click="searchStatus">全部</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==3 ? 'activity' : ''" @click="searchStatus(3)">待发货</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==4 ? 'activity' : ''" @click="searchStatus(4)">已发货</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==5 ? 'activity' : ''" @click="searchStatus(5)">运输中</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==6 ? 'activity' : ''" @click="searchStatus(6)">已收货</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==11 ? 'activity' : ''" @click="searchStatus(11)">已入库</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==2 ? 'activity' : ''" @click="searchStatus(2)">已上架</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==7 ? 'activity' : ''" @click="searchStatus(7)">成功</span>
+      <span style="margin-right: 0px;" :class="queryParam.status==8 ? 'activity' : ''" @click="searchStatus(8)">瑕疵</span>
+    </div>
     <mt-loadmore
-      style="padding-top: 0.86rem"
+      style="margin-top: 87px;"
       :top-method="loadTop"
       :bottom-method="loadBottom"
       :bottom-all-loaded="allLoaded"
@@ -930,6 +941,10 @@
         this.isShowDialog2 = false
         this.getPage()
       },
+      searchStatus(status) {
+        this.queryParam.status = status
+        this.search1()
+      },
       resetData() {
         this.queryParam = {
           id: '',
@@ -1682,5 +1697,46 @@
     padding: 3vw;
     color: rgb(51, 51, 51);
     font-size: 4.2vw;
+  }
+  .searchList {
+    border-bottom: 1vw solid #eee;
+    height: 5vw;
+    width: 100vw;
+    margin-top: 40px;
+    background: #fff;
+    padding: 6vw;
+    position: fixed;
+    z-index: 99;
+    font-size: 16px;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #A4A4A4;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    text-align: center;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    > span {
+      white-space: nowrap;
+      display: inline-block;
+      margin-right: 6vw;
+    }
+  }
+  .searchList::-webkit-scrollbar {
+    display: none;
+  }
+  .activity {
+    font-weight: 600;
+    color: #333;
+    font-size: 17px;
+    text-decoration:none;
+    border-bottom:1.5px solid #333333; /* #555换成链接的颜色 */
+    display: inline-block;
+    padding-bottom:3px;  /*这里设置你要空的距离*/
   }
 </style>
