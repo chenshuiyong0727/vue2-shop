@@ -21,7 +21,7 @@ export default {
   .content {
     width: 100%;
     margin-top: 10px;
-    border-top: 20px solid #F8FCFF;
+    border-top: 20px solid #EFF3F6;
     .img-wrap {
     height: 120vw;
 
