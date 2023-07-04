@@ -16,8 +16,8 @@
     border-bottom-width: 1px;"
     >
       <div @click="userInfo" class="header-icon" style="margin-left: 6vw;">
-          <img v-if="imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" :src="imgUrl">
-<!--          <img v-if="form && !form.imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" src="../../static/img/userimg5.jpg">-->
+        <img v-if="imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" :src="imgUrl">
+        <!--          <img v-if="form && !form.imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" src="../../static/img/userimg5.jpg">-->
       </div>
       <span  @click="userInfo">{{
        form.userRealName ? form.userRealName : form.userAccount ? form.userAccount : '系统用户'
@@ -36,14 +36,14 @@
 
     </header>
     <div class="main">
-      <router-link class="my-indent" style="margin-bottom: -10px" :to="{ name: '订单'}">
+      <router-link class="my-indent" style="    margin-bottom: -10px;" :to="{ name: '订单'}">
         <span class="my-indent-left">订单</span>
         <div class="my-indent-right">
           <span style="font-weight: 500">全部</span>
           <i class="icon-go"></i>
         </div>
       </router-link>
-      <div class="link-top-2"></div>
+
       <section class="my-pay">
         <router-link :to="{ path: '/order?status=3'}">
           <!--                  <span class="icon2-money"></span>-->
@@ -93,7 +93,6 @@
       <div class="my-indent" style="    margin-bottom: -10px;">
         <span class="my-indent-left">报表</span>
       </div>
-      <div class="link-top-2"></div>
       <section class="my-settle1" style="margin-top: 0;border-top-style:none">
         <router-link :to="{ name: '入库报表'}" class="my-settle1-top">
           <div>
@@ -137,7 +136,6 @@
         <!--          <i class="icon-go"></i>-->
         <!--        </div>-->
       </div>
-      <div class="link-top-2"></div>
       <section class="my-pay-1" style="border-bottom-style:none">
         <router-link :to="{ name: '活动'}">
           <!--                  <span class="icon2-money"></span>-->
@@ -539,11 +537,4 @@
       }
     }
   }
-  .link-top-2 {
-    width: 92%;
-    margin-left: 4%;
-    height: 1px;
-    border-top: solid #E2DDDD 1.5px;
-  }
-
 </style>

@@ -244,16 +244,16 @@
         </div>
       </mt-header>
       <div class="wlInfo">
-        <p>顺丰速运 : <span>{{requestParamWl.waybillNo}}</span>
+        <p><span style="color: #979a9e">顺丰速运 :</span>  <span>{{requestParamWl.waybillNo}}</span>
           <el-button
           type="text"
           style="font-weight: 600;padding-left: 5px;padding-top: 0px;padding-bottom: 0px;"
           @click="copyUrl(requestParamWl.waybillNo )">复制
         </el-button>
         </p>
-        <p style="margin-top: 2px;">实际金额 : <span>{{requestParamWl.freight}}</span></p>
+        <p style="margin-top: 2px;"><span style="color: #979a9e">实际金额 :</span> <span>{{requestParamWl.freight}}</span></p>
         <p style="margin-top: 2px;">
-          <span>收货地址 :</span>
+          <span style="color: #979a9e">收货地址 :</span>
           <div style="width: 56vw;
     margin-top: -17px;
     margin-left: 72px;">{{requestParamWl.receiverAddress }}</div>

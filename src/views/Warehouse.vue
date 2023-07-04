@@ -134,8 +134,8 @@
               上架：<strong>{{item.galleryCount}}</strong>
             </div>
             <div class="dingdans_con_right_down">
-              <span v-if="item.thisTimePrice">到手：<strong>{{item.thisTimeThePrice}}</strong></span>
-              <span v-if="!item.thisTimePrice && item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
+              <span v-if="item.thisTimeThePrice">到手：<strong>{{item.thisTimeThePrice}}</strong></span>
+              <span v-if="!item.thisTimeThePrice && item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
               入库价：<strong>{{item.price}}</strong>
               得物价：
               <strong v-if="item.thisTimePrice">{{item.thisTimePrice}}</strong>
@@ -149,14 +149,14 @@
               <el-button
                 type="text"
                 style="font-weight: 600;padding-left: 5px;"
-                @click="goDetail(item.id)">详情</el-button>
+                @click="handleClick(item)">修改 </el-button>
               <el-dropdown trigger="click" style="margin-left: 2px;">
                 <span class="el-dropdown-link">
                   操作<i class="el-icon-arrow-down el-icon--right" style="font-weight: 600;    margin-left: 2px;"></i>
                 </span>
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item type="text"  class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
-                      <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>
+                      <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="jumpactNo(item.actNo)">订单</el-dropdown-item>
                       <el-dropdown-item type="text" v-if="item.inventory > item.galleryCount" @click.native="changeStatusDialog1(item)">上架</el-dropdown-item>

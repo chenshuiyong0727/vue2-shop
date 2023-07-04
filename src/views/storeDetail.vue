@@ -1,12 +1,12 @@
 <template lang="html">
-  <div class="detail">
+  <div class="hello">
     <mt-header title="库存详情">
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
       </div>
     </mt-header>
     <div class="ui-flex justify-center center"
-         style="margin-top: 12vw; width: 100vw; height: 220px;background-color: white">
+         style="width: 100vw; height: 220px;background-color: white;margin-top: -3.1px;">
       <div class="cell">
         <img
           @click="avatarShow(form.img)"
@@ -17,49 +17,199 @@
         />
       </div>
     </div>
-    <section class="my-pay-3" style="border-bottom-style:none;">
+    <section class="my-pay-3">
+      <div style="padding-top: 15px;
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #333;
+     display: flex;
+    justify-content: space-between;
+    align-items: center;
+  ">
+        <div>
+          <strong  style="color: #333;font-size: 18px;">¥</strong>
+          <strong v-if="form.thisTimeThePrice" style="color: #333;font-size: 25px;margin-left: -2px;" >{{form.thisTimeThePrice}}</strong>
+          <strong v-else  style="color: #333;font-size: 25px;" v-if="!form.thisTimeThePrice && form.theirPrice">{{form.theirPrice}}</strong>
+          <span style="color: #333; margin-left: -2px;">得物到手价</span>
+          <span style="font-size: 15px;margin-left: 10px;text-decoration:line-through;color: #7a7a7a;" v-if="form.thisTimePrice">
+          {{form.thisTimePrice}}
+         </span>
+          <span style="font-size: 15px;margin-left: 10px;text-decoration:line-through;color: #7a7a7a;" v-else >
+          {{form.dwPrice}}
+        </span>
+        </div>
       <div>
-        <span>1</span>
-        <p style="color: #8c8a8a;font-size: 14px;">待发货</p>
+          <span v-if="form.thisTimePrice"  >
+          <strong class="color-danger" style="font-size: 15px;margin-right: 1px;">{{form.thisTimeProfits}}</strong>
+          利润</span>
+         <span   v-else>
+          <strong class="color-danger" style="font-size: 15px;margin-right: 1px;">{{(form.dwPrice - (form.dwPrice * 0.075 + 38 + 8.5) - form.price - 10) | numFilter}}</strong>利润
+        </span>
       </div>
-      <div>
-        <span>12</span>
-        <p style="color: #8c8a8a;font-size: 14px;">待发货</p>
+
       </div>
-      <div>
-        <span>13</span>
-        <p style="color: #8c8a8a;font-size: 14px;">待发货</p>
+      <div style="padding-top: 0px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+">
+        <div>
+            <span style="font-size: 15px;color: #7a7a7a;">
+            {{form.price}}
+           </span>
+            <span style="color: #7a7a7a; margin-left: -2px;">入库价</span>
+        </div>
+        <div  v-if="form.difference && form.thisTimePrice" style="">
+          变更
+          <strong v-if="form.difference > 0" class="color-danger"> +{{form.difference }}</strong>
+          <strong v-else class="color-success">{{form.difference }}</strong>
+        </div>
       </div>
-      <div>
-        <span>14</span>
-        <p style="color: #8c8a8a;font-size: 14px;">待发货</p>
+      <div style="padding-top: 0px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;">
+        <strong style="color: #333;font-size: 15px;line-height: 22px;" @click="scanCode(form.goodsId, 1) ">
+          {{form.goodsName}}
+        </strong>
+      </div>
+      <div style="padding-top: 0px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+  ">
+        <span  style="font-size: 14px;
+    background-color: #EFF3F6;
+    padding: 5px;
+    border-radius: 5px;">
+          {{form.type | dictToDescTypeValue(20221108)}}
+        </span>
+      </div>
+      <div style="padding-top: 0px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  ">
+        <strong style="color: #333;font-size: 15px;">
+          {{form.actNo}}
+          <img @click="copyUrl(form.actNo)" style="width: 20px;margin-top: -5px;" src="../../static/img/copy6.png">
+        </strong>
+        <strong class="color-danger" style="font-size: 15px;">
+          {{form.size}}
+        </strong>
       </div>
     </section>
+    <section class="my-pay-4">
+      <div style="border-right-color: rgba(185, 185, 185, .14);
+  border-right-style: solid;">
+        <span style="color: #7a7a7a;font-size: 15px;">
+          库存
+        </span>
+      </div>
+      <div style="border-right-color: rgba(185, 185, 185, .14);
+  border-right-style: solid;">
+        <p>剩余</p>
+        <strong>
+          {{form.inventory}}
+        </strong>
+      </div>
+      <div style="border-right-color: rgba(185, 185, 185, .14);
+  border-right-style: solid;">
+        <p>原库存</p>
+        <strong>
+          {{form.oldInventory}}
+        </strong>
+      </div>
+      <div style="border-right-color: rgba(185, 185, 185, .14);
+  border-right-style: solid;">
+        <p>已上架</p>
+        <strong>
+          {{form.galleryCount}}
+        </strong>
+      </div>
+      <div style="border-right-color: rgba(185, 185, 185, .14);
+  border-right-style: solid;">
+        <p>成功</p>
+        <strong>
+          {{form.successCount}}
+        </strong>
+      </div>
+    </section>
+    <section class="my-pay-4">
+      <div style="    border-right-color: rgba(185, 185, 185, .14);
+    border-right-style: solid;
+    height: 12vw;
+    margin-top: 26px;">
+        <span style="color: #7a7a7a;font-size: 15px;">
+          信息
+        </span>
+      </div>
+      <div style="width: 75vw;">
+        <span style="color: #7a7a7a;font-size: 15px;text-align: left;margin-left: 15px;">入库时间
+          <span  style="color: #333;font-size: 15px;text-align: left;margin-left: 5px;">
+                {{form.createTime |formateTime }}
+          </span>
+        </span>
+        <span style="color: #7a7a7a;font-size: 15px;text-align: left;margin-left: 15px;">入库渠道
+          <span  style="color: #333;font-size: 15px;text-align: left;margin-left: 5px;">
+                {{form.channelId | dictToDescTypeValue(47) }}
+          </span>
+        </span>
+        <span style="color: #7a7a7a;font-size: 15px;text-align: left;margin-left: 15px;margin-bottom: 5px;">所在库存
+          <span  style="color: #333;font-size: 15px;text-align: left;margin-left: 5px;">
+                {{form.warehouseId | dictToDescTypeValue(40) }}
+          </span>
+        </span>
+      </div>
+<!--      <div style="border-right-color: rgba(185, 185, 185, .14);-->
+<!--  border-right-style: solid;">-->
+<!--        <p>原库存</p>-->
+<!--        <strong>-->
+<!--          {{form.oldInventory}}-->
+<!--        </strong>-->
+<!--      </div>-->
+<!--      <div style="border-right-color: rgba(185, 185, 185, .14);-->
+<!--  border-right-style: solid;">-->
+<!--        <p>已上架</p>-->
+<!--        <strong>-->
+<!--          {{form.galleryCount}}-->
+<!--        </strong>-->
+<!--      </div>-->
+<!--      <div style="border-right-color: rgba(185, 185, 185, .14);-->
+<!--  border-right-style: solid;">-->
+<!--        <p>成功</p>-->
+<!--        <strong>-->
+<!--          {{form.successCount}}-->
+<!--        </strong>-->
+<!--      </div>-->
+    </section>
 
-    <v-chose/>
-    <v-content/>
-    <v-baseline/>
-    <v-footer/>>
+<!--    <v-chose/>-->
+<!--    <v-content/>-->
+<!--    <v-baseline/>-->
+<!--    <v-footer/>>-->
   </div>
 </template>
 
 <script>
-  import Chose from '@/components/detail/chose.vue'
-  import Content from '@/components/detail/content.vue'
-  import Footer from '@/components/detail/footer.vue'
-  import Baseline from '@/common/_baseline.vue'
+  // import Chose from '@/components/detail/chose.vue'
+  // import Content from '@/components/detail/content.vue'
+  // import Footer from '@/components/detail/footer.vue'
+  // import Baseline from '@/common/_baseline.vue'
   import {goodsInventoryApi} from '@/api/goodsInventory'
-  import detail from '@/http/mock.js' //模拟数据
+  // import detail from '@/http/mock.js' //模拟数据
   export default {
     components:{
-      'v-chose':Chose,
-      'v-content':Content,
-      'v-footer':Footer,
-      'v-baseline':Baseline
-    },
-
-    beforeCreate(){
-      this.$store.dispatch('setDatas');
+      // 'v-chose':Chose,
+      // 'v-content':Content,
+      // 'v-footer':Footer,
+      // 'v-baseline':Baseline
     },
     data(){
       return {
@@ -84,6 +234,20 @@
       this.listSysDict()
     },
     methods:{
+      scanCode(id, type) {
+        this.$router.push({ path: '/scanCode', query: { id, type } })
+      },
+      copyUrl(url) {
+        const input = document.createElement('input')
+        document.body.appendChild(input)
+        input.setAttribute('value', url)
+        input.select()
+        if (document.execCommand('copy')) {
+          document.execCommand('copy')
+        }
+        document.body.removeChild(input)
+        this.$toast('已复制至剪切板')
+      },
       avatarShow(e) {
         this.imageZoom = e
         this.pictureZoomShow = true
@@ -115,10 +279,57 @@
 <style lang="less" scoped>
   @import '../assets/index/style.css';
   @import '../assets/fz.less';
-  .detail {
-    width: 100%;
-    padding-bottom: 14vw;
+  /** {*/
+  /*  !*margin: 0;*!*/
+  /*  !*padding: 0;*!*/
+  /*  box-sizing: border-box;*/
+  /*}*/
+  /*!* 这里直接设置 1rem = 50px begin *!*/
+  /*html {*/
+  /*  font-size: 10px;*/
+  /*}*/
+  /*!* 这里直接设置 1rem = 50px end *!*/
+  /*html,*/
+  /*body {*/
+  /*  !*font-family: "微软雅黑";*!*/
+  /*  !*color: #333;*!*/
+  /*  !*background: #fff;*!*/
+  /*}*/
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
+  /* 这里直接设置 1rem = 50px begin */
+  html {
+    font-size: 50px;
+  }
+  /* 这里直接设置 1rem = 50px end */
+  html,
+  body {
+    /*font-family: "微软雅黑";*/
+    /*color: #333;*/
+    /*background: #fff;*/
+  }
+  /*ul,*/
+  /*li {*/
+  /*  list-style: none;*/
+  /*}*/
+  /* 给要上拉的容器设置 begin */
+  .hello {
+    background-color: #EFF3F6;
+    padding-top: 12vw;
+    font-size: 13px;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  strong{
+    font-weight: 600;
+  }
+  /*.detail {*/
+  /*  width: 100%;*/
+  /*  padding-bottom: 14vw;*/
+  /*}*/
 
 .ui-flex {
   display: -webkit-box !important;
@@ -151,8 +362,16 @@
     align-items: center
   }
   .my-pay-3 {
-    border-radius: 5px;
+    border-radius: 10px;
     margin-top: 15px;
+    width: 92%;
+    margin-left: 4%;
+    background-color: #fff;
+  }
+
+  .my-pay-4 {
+    margin-top: 15px;
+    border-radius: 10px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -162,9 +381,9 @@
     background-color: #fff;
     .bd();
 
-    > a {
+    > div {
       display: block;
-      width: 33.33%;
+      width: 20%;
       color: #999;
       text-align: center;
 
@@ -176,8 +395,10 @@
       }
 
       p {
-        padding: 2.3vw 0;
-        text-align: center;
+        color: #8c8a8a;font-size: 14px; margin-top: 3px;margin-bottom: 4px;
+      }
+      strong {
+        color: #333;font-size: 15px;
       }
     }
   }
