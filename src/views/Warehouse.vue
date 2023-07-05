@@ -292,7 +292,7 @@
         </mt-field>
         <mt-field label="类型">
             <el-select size="small" class="select100" v-model="queryParam.goodType" >
-          <el-option :disabled="true" value="" selected>请选择类型</el-option>
+          <el-option :disabled="true" value="" selected>请选择商品类型</el-option>
           <el-option
             v-for="item in typeList"
             :key="item.fieldValue"

@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="searchList">
-      <span style="margin-right: 6vw;" :class="!queryParam.status ? 'activity' : ''" @click="searchStatus">全部</span>
+      <span style="margin-right: 6vw;" :class="!queryParam.status ? 'activity' : ''" @click="searchStatus('')">全部</span>
       <span style="margin-right: 6vw;" :class="queryParam.status==3 ? 'activity' : ''" @click="searchStatus(3)">待发货</span>
       <span style="margin-right: 6vw;" :class="queryParam.status==4 ? 'activity' : ''" @click="searchStatus(4)">已发货</span>
       <span style="margin-right: 6vw;" :class="queryParam.status==5 ? 'activity' : ''" @click="searchStatus(5)">运输中</span>
@@ -357,7 +357,7 @@
         </mt-field>
         <mt-field label="类型">
             <el-select size="small" class="select100" v-model="queryParam.goodType" >
-          <el-option :disabled="true" value="" selected>请选择类型</el-option>
+          <el-option :disabled="true" value="" selected>请选择商品类型</el-option>
           <el-option
             v-for="item in typeList"
             :key="item.fieldValue"
