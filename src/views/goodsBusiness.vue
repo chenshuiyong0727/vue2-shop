@@ -5,30 +5,26 @@
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
       </div>
     </mt-header>
+<!--    <div class="fenlei_top">-->
+<!--      <div    class="fenlei_top_left">-->
+<!--        <input type="text" v-model.trim="queryParam.keyword" placeholder="请输入货号/商品名" class="ins">-->
+<!--      </div>-->
+<!--      <div class="fenlei_top_right" @click="isShowDialog2 = true">-->
+<!--        <img src="../../static/img/search.png" height="30px;"width="30px;" >-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="fenlei_top">
-      <div    class="fenlei_top_left">
-        <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）" class="ins">
+      <div class="fenlei_top_left">
+        <el-input
+          clearable
+          placeholder="请输入货号/商品名"
+          prefix-icon="el-icon-search"
+          v-model.trim="queryParam.keyword">
+        </el-input>
       </div>
       <div class="fenlei_top_right" @click="isShowDialog2 = true">
-        <img src="../../static/img/search.png" height="30px;"width="30px;" >
+        <img src="../../static/img/search.png" height="30px;" width="30px;">
       </div>
-<!--      <div class="fenlei_top_right" >-->
-<!--&lt;!&ndash;        <mt-button&ndash;&gt;-->
-<!--&lt;!&ndash;          style="margin-left: -65px"&ndash;&gt;-->
-<!--&lt;!&ndash;          type="primary"&ndash;&gt;-->
-<!--&lt;!&ndash;          size="small"&ndash;&gt;-->
-<!--&lt;!&ndash;          @click="search">搜索</mt-button>&ndash;&gt;-->
-<!--        <mt-button-->
-<!--          style="-->
-<!--           padding-top: 1.3px;-->
-<!--           margin-left: 6px;-->
-<!--           width: 67px;"-->
-<!--          type="primary"-->
-<!--          size="small"-->
-<!--          @click="isShowDialog2 = true">  <img style="margin-left: -10px;" src="../../static/img/choose.png" height="20" width="20" slot="icon">-->
-<!--          <span style="margin-left: -5px;">筛选</span>-->
-<!--          </mt-button>-->
-<!--      </div>-->
     </div>
     <mt-loadmore
       style="padding-top: 0.86rem"
@@ -336,6 +332,7 @@
 <style>
 
   @import '../assets/index/style.css';
+
   strong{
     font-weight: 600;
   }
@@ -479,64 +476,8 @@
     font-size: 0.28rem;
   }
 
-  .fenlei_top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 0.88rem;
-    padding: 0.1rem 0.2rem;
-    width: 100vw;
-    background: #eeeeee;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99;
-    margin-top:11.6vw;
-    /*margin-top:0.85rem;*/
-  }
 
-  .fenlei_top_right {
-    font-size: 0.32rem;
-    color: #353535;
-    width: 2rem;
-    text-align: center;
-  }
-  .ins {
-    writing-mode: horizontal-tb !important;
-    font-style: ;
-    font-variant-ligatures: ;
-    font-variant-caps: ;
-    font-variant-numeric: ;
-    font-variant-east-asian: ;
-    font-weight: ;
-    font-stretch: ;
-    font-size: ;
-    font-family: ;
-    text-rendering: auto;
-    color: fieldtext;
-    letter-spacing: normal;
-    word-spacing: normal;
-    line-height: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    appearance: auto;
-    -webkit-rtl-ordering: logical;
-    cursor: text;
-    background-color: field;
-    margin: 0em;
-    padding: 1px 2px;
-    border-width: 2px;
-    border-style: inset;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
-    border: 0;
-    outline: none;
-    width: 84vw;
-    /*width: 5.7rem;*/
-    padding: 0.2rem;
 
-  }
+
+
 </style>

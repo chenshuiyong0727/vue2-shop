@@ -135,7 +135,7 @@
       </div>
       <div style="border-right-color: rgba(185, 185, 185, .14);
   border-right-style: solid;">
-        <p>成功</p>
+        <p>交易成功</p>
         <strong>
           {{form.successCount}}
         </strong>
@@ -183,7 +183,7 @@
 <!--      </div>-->
 <!--      <div style="border-right-color: rgba(185, 185, 185, .14);-->
 <!--  border-right-style: solid;">-->
-<!--        <p>成功</p>-->
+<!--        <p>交易成功</p>-->
 <!--        <strong>-->
 <!--          {{form.successCount}}-->
 <!--        </strong>-->

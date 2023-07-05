@@ -7,7 +7,7 @@
     </mt-header>
     <div class="fenlei_top_1">
       <ul class="store-list-1" >
-        <li  style="display:flex ;align-items:center;" class="store-list-1-li">
+        <li  style="display:flex ;align-items:center; background-color: white;border: 2px solid #f1f1f1 ;" class="store-list-1-li">
           <div>
             <img
               v-if="img"
@@ -378,6 +378,7 @@
 <style>
 
   @import '../assets/index/style.css';
+
   strong{
     font-weight: 600;
   }
@@ -475,50 +476,8 @@
     /*margin-top:0.85rem;*/
   }
 
-  .fenlei_top_right {
-    font-size: 0.32rem;
-    color: #353535;
-    width: 2rem;
-    text-align: center;
-  }
-  .ins {
-    writing-mode: horizontal-tb !important;
-    font-style: ;
-    font-variant-ligatures: ;
-    font-variant-caps: ;
-    font-variant-numeric: ;
-    font-variant-east-asian: ;
-    font-weight: ;
-    font-stretch: ;
-    font-size: ;
-    font-family: ;
-    text-rendering: auto;
-    color: fieldtext;
-    letter-spacing: normal;
-    word-spacing: normal;
-    line-height: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    appearance: auto;
-    -webkit-rtl-ordering: logical;
-    cursor: text;
-    background-color: field;
-    margin: 0em;
-    padding: 1px 2px;
-    border-width: 2px;
-    border-style: inset;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
-    border: 0;
-    outline: none;
-    width: 84vw;
-    /*width: 5.7rem;*/
-    padding: 0.2rem;
 
-  }
+
   .clearfix11 {
   &:after {
      visibility: hidden;

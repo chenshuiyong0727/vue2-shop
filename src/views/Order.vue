@@ -8,10 +8,23 @@
     <!--    <div style=" width: 35px;height: 35px;position: fixed;left: 10px;top: 18px;z-index: 999;" @click="$router.go(-1)">-->
     <!--      <img width="100%" src="../../static/img/topBack.png" alt="" />-->
     <!--    </div>-->
+<!--    <div class="fenlei_top">-->
+<!--      <div class="fenlei_top_left">-->
+<!--        <input type="text" v-model.trim="queryParam.keyword" placeholder="请输入货号/商品名"-->
+<!--               class="ins">-->
+<!--      </div>-->
+<!--      <div class="fenlei_top_right" @click="isShowDialog2 = true">-->
+<!--        <img src="../../static/img/search.png" height="30px;" width="30px;">-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="fenlei_top">
       <div class="fenlei_top_left">
-        <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）"
-               class="ins">
+        <el-input
+          clearable
+          placeholder="请输入货号/商品名"
+          prefix-icon="el-icon-search"
+          v-model.trim="queryParam.actNo">
+        </el-input>
       </div>
       <div class="fenlei_top_right" @click="isShowDialog2 = true">
         <img src="../../static/img/search.png" height="30px;" width="30px;">
@@ -25,7 +38,7 @@
       <span style="margin-right: 6vw;" :class="queryParam.status==6 ? 'activity' : ''" @click="searchStatus(6)">已收货</span>
       <span style="margin-right: 6vw;" :class="queryParam.status==11 ? 'activity' : ''" @click="searchStatus(11)">已入库</span>
       <span style="margin-right: 6vw;" :class="queryParam.status==2 ? 'activity' : ''" @click="searchStatus(2)">已上架</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==7 ? 'activity' : ''" @click="searchStatus(7)">成功</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==7 ? 'activity' : ''" @click="searchStatus(7)">交易成功</span>
       <span style="margin-right: 0px;" :class="queryParam.status==8 ? 'activity' : ''" @click="searchStatus(8)">瑕疵</span>
     </div>
     <mt-loadmore
@@ -1279,6 +1292,7 @@
 <style>
 
   @import '../assets/index/style.css';
+
   /*.mint-button--default.is-plain {*/
   /*  border: 1px solid #409EFF;*/
   /*  background-color: transparent;*/
@@ -1464,72 +1478,15 @@
     font-size: 0.28rem;
   }
 
-  .fenlei_top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 0.88rem;
-    padding: 0.1rem 0.2rem;
-    width: 100vw;
-    background: #eeeeee;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99;
-    margin-top: 11.6vw;
-    /*margin-top:0.85rem;*/
-  }
 
-  .fenlei_top_right {
-    font-size: 0.32rem;
-    color: #353535;
-    width: 2rem;
-    text-align: center;
-  }
+
 
   .el-date-picker.has-time .el-picker-panel__body-wrapper {
     position: relative;
     margin-right: 52px;
   }
 
-  .ins {
-    writing-mode: horizontal-tb !important;
-    font-style: ;
-    font-variant-ligatures: ;
-    font-variant-caps: ;
-    font-variant-numeric: ;
-    font-variant-east-asian: ;
-    font-weight: ;
-    font-stretch: ;
-    font-size: ;
-    font-family: ;
-    text-rendering: auto;
-    color: fieldtext;
-    letter-spacing: normal;
-    word-spacing: normal;
-    line-height: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    appearance: auto;
-    -webkit-rtl-ordering: logical;
-    cursor: text;
-    background-color: field;
-    margin: 0em;
-    padding: 1px 2px;
-    border-width: 2px;
-    border-style: inset;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
-    border: 0;
-    outline: none;
-    width: 84vw;
-    /*width: 5.7rem;*/
-    padding: 0.2rem;
 
-  }
 
   .wrap {
     position: relative;

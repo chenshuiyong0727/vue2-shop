@@ -63,7 +63,7 @@
         </router-link>
         <router-link :to="{ path: '/order?status=7'}">
           <span class="color-font">{{orderIofo.count7}}</span>
-          <p style="color: #8c8a8a;font-size: 14px;">成功</p>
+          <p style="color: #8c8a8a;font-size: 14px;">交易成功</p>
         </router-link>
         <router-link :to="{ path: '/order?status=8'}">
           <span class="color-font">{{orderIofo.count8}}</span>

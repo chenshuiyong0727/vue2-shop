@@ -34,6 +34,7 @@
           prefix-icon="el-icon-s-custom"
           v-model = "loginForm.loginAccount"
           :readonly = '!toggle'
+          clearable
           :disableClear = '!toggle'>
         </el-input>
         <el-input
@@ -42,6 +43,7 @@
           placeholder="请输入密码"
           prefix-icon="el-icon-warning"
           type="password"
+          clearable
           v-model="loginForm.loginPassword"
           :readonly='!toggle'
           :disableClear = '!toggle'>

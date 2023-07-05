@@ -7,8 +7,12 @@
     </mt-header>
     <div class="fenlei_top">
       <div class="fenlei_top_left">
-        <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）"
-               class="ins">
+        <el-input
+          clearable
+          placeholder="请输入货号/商品名"
+          prefix-icon="el-icon-search"
+          v-model.trim="queryParam.keyword">
+        </el-input>
       </div>
       <div class="fenlei_top_right" @click="isShowDialog2 = true">
         <img src="../../static/img/search.png" height="30px;" width="30px;">
@@ -22,7 +26,7 @@
       <span style="margin-right: 6vw;" :class="queryParam.status==6 ? 'activity' : ''" @click="searchStatus(6)">已收货</span>
       <span style="margin-right: 6vw;" :class="queryParam.status==11 ? 'activity' : ''" @click="searchStatus(11)">已入库</span>
       <span style="margin-right: 6vw;" :class="queryParam.status==2 ? 'activity' : ''" @click="searchStatus(2)">已上架</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==7 ? 'activity' : ''" @click="searchStatus(7)">成功</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==7 ? 'activity' : ''" @click="searchStatus(7)">交易成功</span>
       <span style="margin-right: 0px;" :class="queryParam.status==8 ? 'activity' : ''" @click="searchStatus(8)">瑕疵</span>
     </div>
     <mt-loadmore
@@ -36,114 +40,115 @@
       ref="loadmore"
     >
       <div class="dingdans_item_dw" v-for="(item,index) in tableData" :key="index">
+<!--        头部-->
         <div class="dingdans_top_dw">
           <div class="dingdans_top_left_dw">
-            <strong>{{item.orderNo }}</strong>
+            <span>订单号:</span>
+            <span>{{item.orderNo }}</span>
           </div>
           <div class="dingdans_top_right_dw">
-            <strong v-if="item.status == 7" class="color-success">{{ item.status |
-              dictToDescTypeValue(37) }} </strong>
-            <strong v-else-if="[3,4,5,6,8].includes(item.status)" class="color-danger">{{
-              item.status | dictToDescTypeValue(37) }} </strong>
-            <strong v-else>{{ item.status | dictToDescTypeValue(37) }} </strong>
+            <span>{{ item.status | dictToDescTypeValue(37) }} </span>
           </div>
         </div>
+<!--        中间-->
         <div class="dingdans_con_dw">
-          <div style="width: 30px;   display: flex;align-items: center;" v-if="showSd">
+          <div style=" width: 30px;   display: flex;align-items: center;" v-if="showSd">
             <el-checkbox :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
             <!--            <strong style="margin-left: 6px;">{{index + 1}}</strong>-->
           </div>
-          <div v-if="item.img" :src="item.img" class="dingdans_con_left_dw wrap"
+          <div :src="item.img" class="dingdans_con_left_dw"
                @click="avatarShow(item.img)">
-            <img :src="item.img" style="margin-top: 25px;">
-            <p class="mark">
-              <span class="text">
+            <img :src="item.img">
+            <p class="mark_dw">
+              <span class="text_dw">
                 {{ item.saleType | dictToDescTypeValue(46) }}
               </span>
             </p>
           </div>
-          <div v-if="!item.img && item.imgUrl" :src="item.img" class="dingdans_con_left_dw"
-               @click="avatarShow(fileUrl+ item.imgUrl)">
-            <img :src="fileUrl + item.imgUrl">
-          </div>
           <div class="diangdans_con_right_dw">
-            <div class="dingdans_con_right_top_dw">
-             <span>
-               <strong style="color: #409EFF"
-                       @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
-                 <img @click="copyUrl(item.actNo)" style="width: 20px;"
-                      src="../../static/img/copy6.png">
-             </span>
-              尺码：<strong>{{item.size}}</strong>
-              入库价：<strong>{{item.price}}</strong>
-              <!--              <span>-->
-              <!--                 -->
-              <!--              </span>-->
-            </div>
-            <div class="dingdans_con_right_down_dw" style="margin-bottom: 1vw;margin-top: 1vw;">
-              <span v-if="[2,11].includes(item.status)">最低售价：<strong class="color-danger">{{item.thisTimePrice}}</strong></span>
-              <span v-if="[2,11].includes(item.status)">
-                预估利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong>
-              </span>
-              <span v-else>
-                <span v-if="item.profits">利润：<strong class="color-danger">{{item.profits}}</strong></span>
+            <div class="dingdans_con_right_top_dw" @click="scanCode(item.goodsId, 1) ">
+              <span>
+                {{item.goodsName}}
               </span>
             </div>
-            <div class="dingdans_con_right_down_dw" style="margin-bottom: 0vw;">
-              售价：<strong>{{item.shelvesPrice}}</strong>
-              <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
-            </div>
-            <div class="dingdans_con_right_down_dw" style="margin-bottom: 0vw;" v-if="item.addressId">
-              <span>{{ item.addressId | dictToDescTypeValue(38) }} </span>
-            </div>
-            <div v-if="item.status == 3" class="dingdans_con_right_down_2_1">
-              <span>  截止时间
-                 <strong style="font-size: 12px;" class="color-danger"> {{item.deliveryDeadlineTime | formateTime('{y}-{m}-{d} {h}:{i}')  }}</strong>
+            <div class="dingdans_con_right_top_dw_1">
+              <span @click="jumpactNo(item.actNo)">
+                {{item.actNo}}
               </span>
-              <el-button
-                type="text"
-                style="font-weight: 600;padding-left: 5px;"
-                @click="handleClick(item)">修改
-              </el-button>
-              <el-dropdown trigger="click" style="margin-left: 1px;">
-                <span class="el-dropdown-link">
-                  更多<i class="el-icon-arrow-down el-icon--right"
-                       style="font-weight: 600; margin-left: 2px;"></i>
+              <img @click="copyUrl(item.actNo)" style="width: 20px;"
+                   src="../../static/img/copy6.png">
+            </div>
+<!--            <div v-if="item.status == 3" style="margin-top: 15px">-->
+<!--              <span v-if="item.status == 3" class="dingdans_con_dw_time">-->
+<!--                {{item.deliveryDeadlineTime | formateTime('{y}-{m}-{d} {h}:{i}') }}-->
+<!--              </span>-->
+<!--            </div>-->
+            <div class="dingdans_con_right_top_dw_2">
+              <div>
+                 <span>
+                {{item.size}}
+              </span>
+              </div>
+              <div>
+                <strong v-if="item.theirPrice && ![2,11].includes(item.status)"   style="color: #333333">
+                  ¥
+                </strong>
+                <strong  v-if="item.theirPrice && ![2,11].includes(item.status)" style="font-size: 17px ;margin-left: -2px;color: #333333">
+                  {{item.theirPrice}}
+                </strong>
+                <span v-if="![2,11].includes(item.status)"  style="margin-left: 3px;text-decoration:line-through;">
+                  {{item.shelvesPrice}}
                 </span>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">
-                    删除
-                  </el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物
-                  </el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="gotoWl(item)">物流
-                  </el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情
-                  </el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
-            </div>
-            <div v-else class="dingdans_con_right_down_2">
-              <el-button
-                type="text"
-                style="font-weight: 600;padding-left: 118px;   margin-top: -16px;"
-                @click="handleClick(item )">修改
-              </el-button>
-              <el-dropdown trigger="click" style="margin-left: 1px;">
-                <span class="el-dropdown-link">
-                  更多<i class="el-icon-arrow-down el-icon--right"
-                       style="font-weight: 600; margin-left: 2px;"></i>
+                <span v-else style="margin-left: 3px;color: #333333;font-size: 15px">
+                   <span style="font-size: 13px">¥</span>
+                  {{item.shelvesPrice}}
                 </span>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">
-                    删除
-                  </el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物
-                  </el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="gotoWl(item)">物流
-                  </el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情
-                  </el-dropdown-item>
+              </div>
+            </div>
+            <div v-if="item.addressId" style="margin-top: 10px">
+              <span  class="dingdans_con_dw_address">
+                {{item.addressId | dictToDescTypeValue(38)}}
+              </span>
+            </div>
+<!--            <div v-if="item.status == 3" style="margin-top: 15px">-->
+<!--              <span v-if="item.status == 3" class="dingdans_con_dw_time">-->
+<!--                {{item.deliveryDeadlineTime | formateTime('{y}-{m}-{d} {h}:{i}') }}-->
+<!--              </span>-->
+<!--            </div>-->
+          </div>
+        </div>
+<!--底部-->
+        <div class="dingdans_bottom_dw">
+          <div v-if="[2,11].includes(item.status)" class="dingdans_top_left_dw">
+            <span v-if="item.thisTimePrice">最低售价</span>
+            <span v-if="item.thisTimePrice">{{item.thisTimePrice }} ,</span>
+            <span v-if="item.thisTimeProfits" style="margin-left: 3px">预估利润</span>
+            <span v-if="item.thisTimeProfits">{{item.thisTimeProfits }}</span>
+          </div>
+          <div v-else class="dingdans_top_left_dw">
+            <span>利润</span>
+            <span>{{item.profits }}</span>
+            <span v-if="item.status == 3 && item.deliveryDeadlineTime" style="margin-left: 3px">
+              <span>,</span>
+              发货截止时间
+            </span>
+            <span v-if="item.status == 3 && item.deliveryDeadlineTime" class="dingdans_con_dw_time">
+                 {{item.deliveryDeadlineTime | formateTime('{y}-{m}-{d} {h}:{i}') }}
+              </span>
+          </div>
+<!--          操作栏-->
+          <div class="dingdans_top_right_dw">
+            <div class="dingdans_con_right_down_2_1">
+              <el-dropdown trigger="click" style="margin-left: 1px;">
+                <button
+                  class="dw-button-common">操作
+                </button>
+                <el-dropdown-menu slot="dropdown" >
+                  <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="gotoWl(item)">物流</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
+                  <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
@@ -517,14 +522,14 @@
       <el-button v-if="showSd && !checkAll" v-model="checkAll" @click="checkedAll"
                  style="margin-bottom: 10px;" type="primary">全选
       </el-button>
-      <el-button v-if="showSd" type="primary" style="margin-right: 17px" @click="sdzf">闪电直发
+      <el-button v-if="showSd"  type="primary" style="margin-right: 17px" @click="sdzf">闪电直发
       </el-button>
-      <mt-button @click="showSdClick()" :class="showSd ? 'zhihui' : ''" style="margin-left: 5px;
+      <mt-button @click="showSdClick()"  :class="showSd ? 'zhihui' : 'zhihui_act'" style="margin-left: 5px;
     border-radius: 100%;
     margin-top: 0px;
-    height: 55px;
-    width: 55px;" type="primary">
-        <img src="../../static/img/sd1.png" height="30" width="30" slot="icon">
+    height: 40px;
+    width: 40px;" type="primary">
+        <img  style="margin-left: -1px;" src="../../static/img/sd1.png" height="20" width="20" slot="icon">
       </mt-button>
     </div>
     <v-footer></v-footer>
@@ -746,7 +751,7 @@
       // console.log(scrollTop,"scrollTop");
       // console.log(clientHeight,"clientHeight");
       // console.log(scrollview,"scrollview");
-      if (to.path == "/store" || to.path == "/orderDetail" || to.path == "/WlDetail") {
+      if (to.path == "/store" || to.path == "/orderDetail" || to.path == "/WlDetail" || to.path == "/scanCode") {
         // console.info(this.isBack)
         //当离开的时候是去库存页的时候开启缓存
         from.meta.isBack = this.isBack;
@@ -1119,6 +1124,11 @@
         document.body.removeChild(input)
         this.$toast('已复制至剪切板')
       },
+      scanCode(id, type) {
+        this.isBack = true
+        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.$router.push({ path: '/scanCode', query: { id, type } })
+      },
       jumpactNo(actNo) {
         this.isBack = true
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
@@ -1276,6 +1286,7 @@
 <style>
 
   @import '../assets/index/style.css';
+
   /*.mint-button--default.is-plain {*/
   /*  border: 1px solid #409EFF;*/
   /*  background-color: transparent;*/
@@ -1311,46 +1322,103 @@
   }
 
   .dingdans_item_dw {
+    color: #333333;
     padding: 2.4vw 1.2vw;
     background: #ffffff;
-    border-bottom: 1vw solid #eee;
+    border-bottom: 7px solid #f4f3f8;
     padding-right: 3%;
     padding-left: 3%;
+    font-size: 12.5px;
   }
 
   .dingdans_top_dw {
-    font-size: 3.68vw;
-    height: 3.88vw;
-    line-height: 3.88vw;
+    height: 26px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    border-bottom: 1.5px solid #f1f1f1;
+    padding-bottom: 6px;
+  }
+
+  .dingdans_bottom_dw {
+    height: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    border-top: 1.5px solid #f1f1f1;
+    padding-top: 10px;
+    color: #807f85;
   }
 
   .dingdans_con_dw {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 1.3vw 0;
+    padding: 15px 0;
+  }
+  .dingdans_con_dw_address {
+    font-size: 12px;
+    background-color: #f3f2f8;
+    padding: 5px;
+    border-radius: 5px;
+    padding-right: 3px;
+    margin-left: -2px;
+  }
+  .dingdans_con_dw_time {
+    /*font-size: 12px;*/
+    padding: 5px;
+    color: #F56C6C;
+    /*border: 1px solid #F56C6C;*/
+    /*border-radius: 5px;*/
+    /*padding-right: 3px;*/
+    /*margin-left: -2px;*/
   }
 
   .dingdans_con_left_dw {
-    width: 35vw;
-    height: 20vw;
-    display: flex;
+    width: 180px;
+    height: 92px;
+    border: 1px solid #f1f1f1 ;
+    position: relative;
   }
 
   .dingdans_con_left_dw img {
-    width: 100%;
-    margin: auto;
-    border-radius: 10px;
+    width: 80%;
+    margin-top: 30px;
+    margin-left: 10%;
   }
 
   .diangdans_con_right_dw {
     width: 130vw;
     padding-left: 10px;
   }
-
+  .dingdans_con_right_top_dw {
+    font-size: 14.7px;
+  }
+  .dingdans_con_right_top_dw_1 {
+    font-size: 13px;
+    font-weight: bold;
+    margin: 5px 0;
+  }
+  .dingdans_con_right_top_dw_2 {
+    font-size: 13.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #807f85;
+    margin: 5px 0;
+  }
   .dingdans_con_right_down_dw {
     margin-top: 1.4vw;
     font-size: 13px;
@@ -1461,85 +1529,25 @@
     font-size: 0.28rem;
   }
 
-  .fenlei_top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 0.88rem;
-    padding: 0.1rem 0.2rem;
-    width: 100vw;
-    background: #eeeeee;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99;
-    margin-top: 11.6vw;
-    /*margin-top:0.85rem;*/
-  }
-
-  .fenlei_top_right {
-    font-size: 0.32rem;
-    color: #353535;
-    width: 2rem;
-    text-align: center;
-  }
-
   .el-date-picker.has-time .el-picker-panel__body-wrapper {
     position: relative;
     margin-right: 52px;
   }
 
-  .ins {
-    writing-mode: horizontal-tb !important;
-    font-style: ;
-    font-variant-ligatures: ;
-    font-variant-caps: ;
-    font-variant-numeric: ;
-    font-variant-east-asian: ;
-    font-weight: ;
-    font-stretch: ;
-    font-size: ;
-    font-family: ;
-    text-rendering: auto;
-    color: fieldtext;
-    letter-spacing: normal;
-    word-spacing: normal;
-    line-height: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    appearance: auto;
-    -webkit-rtl-ordering: logical;
-    cursor: text;
-    background-color: field;
-    margin: 0em;
-    padding: 1px 2px;
-    border-width: 2px;
-    border-style: inset;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
-    border: 0;
-    outline: none;
-    width: 84vw;
-    /*width: 5.7rem;*/
-    padding: 0.2rem;
 
-  }
 
   .wrap {
     position: relative;
   }
 
-  .mark {
+  .mark_dw {
     position: absolute;
     top: 0;
     left: 0;
     margin: 0;
   }
 
-  .mark:before {
+  .mark_dw:before {
     content: "";
     position: absolute;
     top: 0;
@@ -1551,9 +1559,10 @@
     border-right-width: 30px;
     border-bottom-width: 16px;
     border-left-width: 20px;
+    border-radius: 2px;
   }
 
-  .text {
+  .text_dw {
     color: white;
     display: inline-block;
     position: absolute;

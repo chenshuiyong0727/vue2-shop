@@ -31,12 +31,14 @@
       <section style="margin-top: 30px">
         <el-input
           placeholder="请输入账号"
+          clearable
           prefix-icon="el-icon-s-custom"
           v-model = "loginForm.loginAccount"
           >
         </el-input>
         <el-input
           style="margin-top: 10px"
+          clearable
           placeholder="请输入验证码"
           prefix-icon="el-icon-warning"
           v-model="loginForm.verifyCode">

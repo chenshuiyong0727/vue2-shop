@@ -170,7 +170,7 @@
         <router-link :to="{ path: '/logout?type=1'}" style="width: 25%">
           <img
             style="margin-top: 7px;margin-bottom: -4px;width: 27px;"
-            src="../../static/img/setting0.png"></img>
+            src="../../static/img/setting7.png"></img>
           <p style="color: #333">设置</p>
         </router-link>
       </section>

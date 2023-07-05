@@ -69,7 +69,10 @@ Vue.filter('sizeFilterNum', (value , num) => {
   if (!value || value.length < num) {
     return value
   }
-  let realVal = value.substring(0,num) + '...'
+  let realVal = value.substring(0,num)
+  if (value.length > num ){
+    realVal = realVal  + '...'
+  }
   return realVal
 })
 

@@ -16,7 +16,7 @@
             :value="item.fieldValue">
           </el-option>
         </el-select>
-<!--        <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）" class="ins">-->
+<!--        <input type="text" v-model.trim="queryParam.keyword" placeholder="请输入货号/商品名" class="ins">-->
 <!--      </div>-->
 <!--      <div class="fenlei_top_right" >-->
 <!--        <mt-button-->
@@ -241,64 +241,8 @@
     overflow-y: auto;
   }
 
-  .fenlei_top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 0.88rem;
-    padding: 0.1rem 0.2rem;
-    width: 100vw;
-    background: #eeeeee;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99;
-    margin-top:11.6vw;
-    /*margin-top:0.85rem;*/
-  }
 
-  .fenlei_top_right {
-    font-size: 0.32rem;
-    color: #353535;
-    width: 2rem;
-    text-align: center;
-  }
-  .ins {
-    writing-mode: horizontal-tb !important;
-    font-style: ;
-    font-variant-ligatures: ;
-    font-variant-caps: ;
-    font-variant-numeric: ;
-    font-variant-east-asian: ;
-    font-weight: ;
-    font-stretch: ;
-    font-size: ;
-    font-family: ;
-    text-rendering: auto;
-    color: fieldtext;
-    letter-spacing: normal;
-    word-spacing: normal;
-    line-height: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    appearance: auto;
-    -webkit-rtl-ordering: logical;
-    cursor: text;
-    background-color: field;
-    margin: 0em;
-    padding: 1px 2px;
-    border-width: 2px;
-    border-style: inset;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
-    border: 0;
-    outline: none;
-    width: 84vw;
-    /*width: 5.7rem;*/
-    padding: 0.2rem;
 
-  }
+
+
 </style>

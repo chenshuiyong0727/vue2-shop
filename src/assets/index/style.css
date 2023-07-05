@@ -239,3 +239,102 @@ select{
 .zhihui{
   background-color: #b8bbbf;
 }
+.zhihui_act{
+  background-color: #333333;
+}
+.dw-button-common {
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background: #FFF;
+  border: 1px solid #ababab;
+  color: #333333;
+  -webkit-appearance: none;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: 0;
+  margin: 0;
+  -webkit-transition: .1s;
+  transition: .1s;
+  padding: 6px 16px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+.el-dropdown-menu__item {
+  font-weight: 400;
+  list-style: none;
+  line-height: 36px;
+  margin: 0;
+  color: #333333;
+  outline: 0;
+}
+.fenlei_top {
+  display: flex;
+  align-items: center;
+  height: 0.88rem;
+  padding: 0.1rem 0.2rem;
+  width: 100vw;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  margin-top: 11.6vw;
+}
+.fenlei_top_left{
+  width: 100vw
+}
+
+.el-input__inner {
+  -webkit-appearance: none;
+  background-color: #f4f3f8;
+  background-image: none;
+  border-radius: 4px;
+  border: 1px solid #DCDFE6;
+  box-sizing: border-box;
+  color: #606266;
+  display: inline-block;
+  height: 35px;
+  line-height: 35px;
+  outline: 0;
+  padding: 0 15px;
+  -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+  transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+  width: 100%;
+&::placeholder{
+   color:#b0aebb;
+ }
+}
+.el-input__icon {
+  height: 100%;
+  width: 25px;
+  text-align: center;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  line-height: 35px;
+}
+.fenlei_top_right {
+  width: 50px;
+  text-align: center;
+}
+
+.fenlei_top_report {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 0.88rem;
+  padding: 0.1rem 0.2rem;
+  width: 100vw;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  margin-top: 11.6vw;
+}
+.el-select .el-input__inner {
+  cursor: pointer;
+  background-color: #fff;
+}
