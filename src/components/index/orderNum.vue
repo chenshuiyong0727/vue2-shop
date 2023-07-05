@@ -142,7 +142,7 @@
   .car1 {
     width: 100%;
     /*background-color: #6ae9ff;*/
-    background-color: #EFF3F6;
+    background-color: #f3f2f8;
     .header {
       width: 100%;
       height: 16vw;

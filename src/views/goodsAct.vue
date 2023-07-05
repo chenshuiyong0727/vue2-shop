@@ -539,7 +539,7 @@
   /*}*/
   /* 给要上拉的容器设置 begin */
   .hello {
-    background-color: #EFF3F6;
+    background-color: #f3f2f8;
     padding-top: 12vw;
     font-size: 13px;
     height: 100vh;

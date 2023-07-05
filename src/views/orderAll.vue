@@ -1,13 +1,10 @@
 <template>
   <div class="hello" ref="hello">
-    <mt-header title="订单">
+    <mt-header title="订单管理">
       <div slot="left">
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
     </mt-header>
-    <!--    <div style=" width: 35px;height: 35px;position: fixed;left: 10px;top: 18px;z-index: 999;" @click="$router.go(-1)">-->
-    <!--      <img width="100%" src="../../static/img/topBack.png" alt="" />-->
-    <!--    </div>-->
     <div class="fenlei_top">
       <div class="fenlei_top_left">
         <input type="text" v-model.trim="queryParam.keyword" placeholder="搜索关键词（货号，商品名）"
@@ -38,12 +35,12 @@
       :autoFill="false"
       ref="loadmore"
     >
-      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
-        <div class="dingdans_top">
-          <div class="dingdans_top_left">
+      <div class="dingdans_item_dw" v-for="(item,index) in tableData" :key="index">
+        <div class="dingdans_top_dw">
+          <div class="dingdans_top_left_dw">
             <strong>{{item.orderNo }}</strong>
           </div>
-          <div class="dingdans_top_right">
+          <div class="dingdans_top_right_dw">
             <strong v-if="item.status == 7" class="color-success">{{ item.status |
               dictToDescTypeValue(37) }} </strong>
             <strong v-else-if="[3,4,5,6,8].includes(item.status)" class="color-danger">{{
@@ -51,12 +48,12 @@
             <strong v-else>{{ item.status | dictToDescTypeValue(37) }} </strong>
           </div>
         </div>
-        <div class="dingdans_con">
+        <div class="dingdans_con_dw">
           <div style="width: 30px;   display: flex;align-items: center;" v-if="showSd">
             <el-checkbox :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
             <!--            <strong style="margin-left: 6px;">{{index + 1}}</strong>-->
           </div>
-          <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap"
+          <div v-if="item.img" :src="item.img" class="dingdans_con_left_dw wrap"
                @click="avatarShow(item.img)">
             <img :src="item.img" style="margin-top: 25px;">
             <p class="mark">
@@ -65,12 +62,12 @@
               </span>
             </p>
           </div>
-          <div v-if="!item.img && item.imgUrl" :src="item.img" class="dingdans_con_left"
+          <div v-if="!item.img && item.imgUrl" :src="item.img" class="dingdans_con_left_dw"
                @click="avatarShow(fileUrl+ item.imgUrl)">
             <img :src="fileUrl + item.imgUrl">
           </div>
-          <div class="diangdans_con_right">
-            <div class="dingdans_con_right_top">
+          <div class="diangdans_con_right_dw">
+            <div class="dingdans_con_right_top_dw">
              <span>
                <strong style="color: #409EFF"
                        @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
@@ -83,7 +80,7 @@
               <!--                 -->
               <!--              </span>-->
             </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: 1vw;margin-top: 1vw;">
+            <div class="dingdans_con_right_down_dw" style="margin-bottom: 1vw;margin-top: 1vw;">
               <span v-if="[2,11].includes(item.status)">最低售价：<strong class="color-danger">{{item.thisTimePrice}}</strong></span>
               <span v-if="[2,11].includes(item.status)">
                 预估利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong>
@@ -92,11 +89,11 @@
                 <span v-if="item.profits">利润：<strong class="color-danger">{{item.profits}}</strong></span>
               </span>
             </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: 0vw;">
+            <div class="dingdans_con_right_down_dw" style="margin-bottom: 0vw;">
               售价：<strong>{{item.shelvesPrice}}</strong>
               <span v-if="item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
             </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: 0vw;" v-if="item.addressId">
+            <div class="dingdans_con_right_down_dw" style="margin-bottom: 0vw;" v-if="item.addressId">
               <span>{{ item.addressId | dictToDescTypeValue(38) }} </span>
             </div>
             <div v-if="item.status == 3" class="dingdans_con_right_down_2_1">
@@ -718,7 +715,7 @@
     //   //   // 回到原来的位置
     //   //   // const position = JSON.parse(localStorage.getItem('position'))
     //   //   // console.info(position)
-    //   //   // // document.querySelector('.dingdans_item').scrollTop = position
+    //   //   // // document.querySelector('.dingdans_item_dw').scrollTop = position
     //   //   // // let recruitScrollY = this.$store.state.recruitScrollY
     //   //   // window.scroll(0, position)
     //   // })
@@ -726,7 +723,7 @@
     // beforeRouteLeave(to, from, next) {
     //   console.info('beforeRouteLeave')
     //   // 保存离开页面时的位置
-    //   const position = document.querySelector('.dingdans_item').scrollTop
+    //   const position = document.querySelector('.dingdans_item_dw').scrollTop
     //   window.sessionStorage.setItem('position', JSON.stringify(position))
     //   next()
     // },
@@ -734,7 +731,7 @@
       // let position = window.scrollY //记录离开页面的位置
       // console.info("position1" , position)
       // if (position == null)
-      // position = document.querySelector('.dingdans_item').scrollTop
+      // position = document.querySelector('.dingdans_item_dw').scrollTop
       // console.info("position2" , position)
       // localStorage.setItem('position', JSON.stringify(position)
       // this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop
@@ -1313,7 +1310,7 @@
     height: 6vw;
   }
 
-  .dingdans_item {
+  .dingdans_item_dw {
     padding: 2.4vw 1.2vw;
     background: #ffffff;
     border-bottom: 1vw solid #eee;
@@ -1321,7 +1318,7 @@
     padding-left: 3%;
   }
 
-  .dingdans_top {
+  .dingdans_top_dw {
     font-size: 3.68vw;
     height: 3.88vw;
     line-height: 3.88vw;
@@ -1330,31 +1327,31 @@
     justify-content: space-between;
   }
 
-  .dingdans_con {
+  .dingdans_con_dw {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     padding: 1.3vw 0;
   }
 
-  .dingdans_con_left {
+  .dingdans_con_left_dw {
     width: 35vw;
     height: 20vw;
     display: flex;
   }
 
-  .dingdans_con_left img {
+  .dingdans_con_left_dw img {
     width: 100%;
     margin: auto;
     border-radius: 10px;
   }
 
-  .diangdans_con_right {
+  .diangdans_con_right_dw {
     width: 130vw;
     padding-left: 10px;
   }
 
-  .dingdans_con_right_down {
+  .dingdans_con_right_down_dw {
     margin-top: 1.4vw;
     font-size: 13px;
     margin-bottom: 2vw;
@@ -1403,7 +1400,7 @@
   /*}*/
   /* 给要上拉的容器设置 begin */
   .hello {
-    background-color: #EFF3F6;
+    background-color: #f3f2f8;
     padding-top: 12vw;
     font-size: 13px;
     height: 100vh;
@@ -1733,7 +1730,7 @@
   .activity {
     font-weight: 600;
     color: #333;
-    font-size: 17px;
+    font-size: 16px;
     text-decoration:none;
     border-bottom:1.5px solid #333333; /* #555换成链接的颜色 */
     display: inline-block;

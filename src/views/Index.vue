@@ -355,7 +355,7 @@ export default {
     width: 100%;
     padding-bottom: 14vw;
     /*background-color: #6ae9ff;*/
-    background-color: #EFF3F6;
+    background-color: #f3f2f8;
 }
   .index-title {
     .bt();

@@ -15,7 +15,7 @@
 @import '../assets/fz.less';
 @import '../assets/index/style.css';
 header {
-  background-color: #EFF3F6;
+  background-color: #f3f2f8;
   text-align: center;
   position: relative;
   height: 12vw;

@@ -82,7 +82,7 @@
     padding-left: 10px;
   ">
         <span  style="font-size: 14px;
-    background-color: #EFF3F6;
+    background-color: #f3f2f8;
     padding: 5px;
     border-radius: 5px;">
           {{form.type | dictToDescTypeValue(20221108)}}
@@ -317,7 +317,7 @@
   /*}*/
   /* 给要上拉的容器设置 begin */
   .hello {
-    background-color: #EFF3F6;
+    background-color: #f3f2f8;
     padding-top: 12vw;
     font-size: 13px;
     height: 100vh;

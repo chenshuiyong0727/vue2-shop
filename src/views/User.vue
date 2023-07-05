@@ -274,13 +274,13 @@
     /*font-family: "微软雅黑";*/
     /*color: #333;*/
     /*background: #fff;*/
-    background-color: #EFF3F6;
+    background-color: #f3f2f8;
   }
 
   .car {
     width: 100%;
     padding-bottom: 14vw;
-    background-color: #EFF3F6;
+    background-color: #f3f2f8;
     border-top: 1vw solid #eee;
     .header {
       width: 100%;
@@ -329,7 +329,7 @@
       margin-left: 4vw;
       height: 100%;
       margin-bottom: 50px;
-      background-color: #EFF3F6;
+      background-color: #f3f2f8;
       .my-indent {
         width: 100%;
         display: block;
