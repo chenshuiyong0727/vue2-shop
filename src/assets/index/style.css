@@ -143,8 +143,12 @@
 }
 .imageShow {
   margin: auto;
-  width: 90vw;
-  /*height: 70vw;*/
+  width: 85vw;
+  height: 85vw;
+  background: #fff;
+  > img {
+    margin-top: 70px;
+  }
 }
 /* 我是有底线的 begin */
 .to-the-bottom {

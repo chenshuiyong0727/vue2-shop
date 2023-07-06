@@ -126,7 +126,7 @@
     </div>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
-        <img :src="imageZoom" alt="" width="100%" height="100%">
+        <img :src="imageZoom" alt="" width="100%" >
       </div>
     </div>
     <p style="padding: 1.5rem 0;" class="to-the-bottom"></p>
