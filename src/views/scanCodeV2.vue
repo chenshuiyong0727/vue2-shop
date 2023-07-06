@@ -242,7 +242,7 @@
     </el-dialog>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
-        <img :src="form.img" alt="" width="100%" height="100%">
+        <img :src="form.img" alt="" width="100%" >
       </div>
     </div>
     <div v-if="type==3 && !form.id" style="
