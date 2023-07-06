@@ -72,7 +72,7 @@
           </div>
           <div :src="item.img" class="dingdans_con_left_dw"
                @click="avatarShow(item.img)">
-            <img :src="item.img">
+            <img :src="item.img" >
             <p class="mark_dw">
               <span class="text_dw">
                 {{ item.saleType | dictToDescTypeValue(46) }}
@@ -131,8 +131,8 @@
             <span v-if="item.thisTimeProfits">{{item.thisTimeProfits }}</span>
           </div>
           <div v-else class="dingdans_top_left_dw">
-            <span>利润</span>
-            <span>{{item.profits }}</span>
+            <span >利润</span>
+            <span class="color-danger">{{item.profits }}</span>
             <span v-if="item.status == 3 && item.deliveryDeadlineTime" style="margin-left: 3px">
               <span>,</span>
               发货截止时间
@@ -341,7 +341,7 @@
       v-model="isShowDialog2">
       <mt-header title="筛选">
         <div slot="right">
-          <mt-button size="normal" @click="resetHandle" style="font-size: 16px"> 重置（关闭）</mt-button>
+          <mt-button size="normal" @click="resetHandle" style="font-size: 16px">关闭</mt-button>
         </div>
         <div slot="left">
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
@@ -1316,12 +1316,14 @@
     height: 92px;
     border: 1px solid #f1f1f1 ;
     position: relative;
+    border-radius: 5px;
   }
 
   .dingdans_con_left_dw img {
     width: 80%;
     margin-top: 30px;
     margin-left: 10%;
+    /*transform: rotate(331deg);*/
   }
 
   .diangdans_con_right_dw {
@@ -1483,7 +1485,7 @@
     border-left-style: solid;
     border-right-width: 30px;
     border-bottom-width: 16px;
-    border-left-width: 20px;
+    border-left-width: 21px;
     border-radius: 2px;
   }
 
