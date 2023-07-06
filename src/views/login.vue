@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="login">
+  <div class="login_new">
     <mt-header title="移动仓库">
     </mt-header>
     <div style="
@@ -28,7 +28,7 @@
         <h5 style="font-size: 25px; font-weight: 600; margin-top: 17px;">欢迎来到移动仓库</h5>
       </div>
 
-      <section style="margin-top: 30px">
+      <section class="login_form"  style="margin-top: 30px">
         <el-input
           placeholder="请输入账号"
           prefix-icon="el-icon-s-custom"
@@ -238,13 +238,4 @@ export default {
       height: 0;
     }
   }
-.login {
-  >section {
-    .tip {
-      color:rgb(224, 145, 71);
-      letter-spacing: 2px;
-      font-size: 16px;
-    }
-  }
-}
 </style>

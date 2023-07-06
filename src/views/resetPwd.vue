@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="login">
+  <div class="login_new">
     <mt-header title="修改密码">
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
@@ -23,7 +23,7 @@
         userName ? userName : '系统用户'
         }}</h5>
 
-      <section style="margin-top: 30px">
+      <section class="login_form" style="margin-top: 30px">
         <el-input
           show-password
           style="margin-top: 10px"

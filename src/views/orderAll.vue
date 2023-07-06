@@ -63,9 +63,6 @@
     margin-left: -2px;
     margin-right: 2px;" >
             <el-checkbox v-model="item.checked" :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
-<!--            <input type = "radio" v-model="item.checked"  @change="changeChecked(item.id)" ></input>-->
-            <!--            <strong style="margin-left: 6px;">{{index + 1}}</strong>-->
-<!--            <input type="checkbox" v-model="item.checked" />-->
           </div>
           <div :src="item.img" class="dingdans_con_left_dw"
                @click="avatarShow(item.img)">
@@ -90,11 +87,6 @@
               <img @click="copyUrl(item.actNo)" style="width: 20px;"
                    src="../../static/img/copy6.png">
             </div>
-<!--            <div v-if="item.status == 3" style="margin-top: 15px">-->
-<!--              <span v-if="item.status == 3" class="dingdans_con_dw_time">-->
-<!--                {{item.deliveryDeadlineTime | formateTime('{y}-{m}-{d} {h}:{i}') }}-->
-<!--              </span>-->
-<!--            </div>-->
             <div class="dingdans_con_right_top_dw_2">
               <div>
                  <span>
@@ -122,11 +114,6 @@
                 {{item.addressId | dictToDescTypeValue(38)}}
               </span>
             </div>
-<!--            <div v-if="item.status == 3" style="margin-top: 15px">-->
-<!--              <span v-if="item.status == 3" class="dingdans_con_dw_time">-->
-<!--                {{item.deliveryDeadlineTime | formateTime('{y}-{m}-{d} {h}:{i}') }}-->
-<!--              </span>-->
-<!--            </div>-->
           </div>
         </div>
 <!--底部-->
@@ -208,7 +195,6 @@
               :label="item.fieldName"
               :value="+item.fieldValue">
             </el-option>
-            <!--              <el-option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</el-option>-->
               
           </el-select>
         </mt-field>
@@ -333,7 +319,6 @@
             
           <el-select size="small" class="select80" v-model="requestParam1.addressId">
             <el-option :disabled="true" value="" selected>请选择</el-option>
-            <!--              <el-option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</el-option>-->
             <el-option
               v-for="item in addressList"
               :key="item.fieldValue"
@@ -384,7 +369,6 @@
             
           <el-select size="small" class="select100" v-model="queryParam.addressId">
             <el-option :disabled="true" value="" selected>请选择地址</el-option>
-            <!--              <el-option v-for="x in addressList" :value="x.fieldValue">{{x.fieldName}}</el-option>-->
             <el-option
               v-for="item in addressList"
               :key="item.fieldValue"
@@ -406,8 +390,9 @@
             </el-option>
           </el-select>
         </mt-field>
-        <!--        <mt-field label="成功开始时间" type="date" placeholder="成功开始时间"  v-model="queryParam.successTimeFrom" ></mt-field>-->
-        <!--        <mt-field label="成功结束时间" type="date" placeholder="成功结束时间"  v-model="queryParam.successTimeTo" ></mt-field>-->
+        <mt-field label="运单号" placeholder="请输入运单号" v-model="queryParam.waybillNo"></mt-field>
+        <mt-field label="订单号" placeholder="请输入订单号" v-model="queryParam.orderNo"></mt-field>
+        <mt-field label="尺码" placeholder="请输入尺码" v-model="queryParam.size"></mt-field>
         <mt-field label="成功开始时间">
           <el-date-picker class="select100"
                           size="small"
@@ -422,9 +407,6 @@
                           type="date" placeholder="成功结束时间">
           </el-date-picker>
         </mt-field>
-        <mt-field label="运单号" placeholder="请输入运单号" v-model="queryParam.waybillNo"></mt-field>
-        <mt-field label="订单号" placeholder="请输入订单号" v-model="queryParam.orderNo"></mt-field>
-        <mt-field label="尺码" placeholder="请输入尺码" v-model="queryParam.size"></mt-field>
       </section>
     </mt-popup>
     <mt-popup
@@ -507,23 +489,6 @@
         <img :src="imageZoom" alt="" width="100%" >
       </div>
     </div>
-    <!--    <div style="-->
-    <!--    bottom: 120;-->
-    <!--    position: absolute;-->
-    <!--    text-align: center;-->
-    <!--    ">-->
-    <!--      &lt;!&ndash;      <mt-button  @click="goGoodsBase"  style="margin-left: 5px;&ndash;&gt;-->
-    <!--      &lt;!&ndash;    border-radius: 100%;&ndash;&gt;-->
-    <!--      &lt;!&ndash;    margin-top: 0px;&ndash;&gt;-->
-    <!--      &lt;!&ndash;    height: 55px;&ndash;&gt;-->
-    <!--      &lt;!&ndash;    width: 55px;" type="primary">&ndash;&gt;-->
-    <!--      &lt;!&ndash;        <img src="../../static/img/add.png" height="30" width="30" slot="icon">&ndash;&gt;-->
-    <!--      &lt;!&ndash;      </mt-button>&ndash;&gt;-->
-    <!--      <el-button v-if="checkAll" v-model="checkAll" @click="checkedAll" style="    margin-left: 115px;margin-bottom: 10px;" type="primary">反选</el-button>-->
-    <!--      <el-button v-else v-model="checkAll" @click="checkedAll" style="    margin-left: 115px;margin-bottom: 10px;" type="primary">全选</el-button>-->
-    <!--      <el-button  type="primary" @click="sdzf" >闪电直发</el-button>-->
-    <!--      &lt;!&ndash;      <el-button  @click="$router.go(-1)" >取消</el-button>&ndash;&gt;-->
-    <!--    </div>-->
     <div v-if="showSd" style="
     bottom: 54px;
     position: fixed;
@@ -540,10 +505,6 @@
           全选
         </el-checkbox>
       </div>
-<!--      <el-button v-if="showSd && checkAll" v-model="checkAll" @click="checkedAll">反选</el-button>-->
-<!--      <el-button v-if="showSd && !checkAll" v-model="checkAll" @click="checkedAll"-->
-<!--                 style="margin-bottom: 10px;" type="primary">全选-->
-<!--      </el-button>-->
       <div>
         <span>已选</span>
         <span class="color-url" style=" font-size: 17px;font-weight: bolder">{{ids.length}}</span>
@@ -554,27 +515,17 @@
         margin-right: 20px" @click="sdzf">批量操作
         </el-button>
       </div>
-<!--      <mt-button @click="showSdClick()"  :class="showSd ? 'zhihui' : 'zhihui_act'" style="margin-left: 5px;-->
-<!--    border-radius: 100%;-->
-<!--    margin-top: 0px;-->
-<!--    height: 40px;-->
-<!--    width: 40px;" type="primary">-->
-<!--        <img  style="margin-left: -1px;" src="../../static/img/sd1.png" height="20" width="20" slot="icon">-->
-<!--      </mt-button>-->
     </div>
-<!--    <v-baseline/>-->
     <v-footer></v-footer>
   </div>
 </template>
 <script>
-  // import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import {goodsOrderApi} from '@/api/goodsOrder'
   import {parseTime} from '@/utils/index'
 
   export default {
     components: {
-      // 'v-baseline': Baseline,
       'v-footer': Footer
     },
     name: "HelloWorld",
@@ -629,7 +580,6 @@
           reason: '色差',
           addressId: ''
         },
-        // popupVisible: false,
         titleName: '订单',
         emtityMsg: '人家是有底线的 -.-',
         orderData: '',
@@ -676,6 +626,7 @@
           pageSize: 5,
           pageNum: 1
         },
+        successTimeFrom:'',
         topStatus: "",
         bottomStatus: "",
         allLoaded: false,
@@ -737,69 +688,15 @@
         this.$refs.hello.scrollTop = this.curScrollTop
       }
     },
-    // beforeRouteEnter(to, from, next) {
-    //   // console.info('beforeRouteEnter')
-    //   this.$refs.loadmore.scrollTo(0, 1000);
-    //
-    //   // next(vm => {
-    //   //   console.info('beforeRouteEnter')
-    //   //   // window.scroll(0, 1000 )
-    //   //   this.$refs.loadmore.scrollTo(0, 1000);
-    //   //
-    //   //   // document.documentElement.scrollTop = 10000
-    //   //   // 回到原来的位置
-    //   //   // const position = JSON.parse(localStorage.getItem('position'))
-    //   //   // console.info(position)
-    //   //   // // document.querySelector('.dingdans_item_dw').scrollTop = position
-    //   //   // // let recruitScrollY = this.$store.state.recruitScrollY
-    //   //   // window.scroll(0, position)
-    //   // })
-    // },
-    // beforeRouteLeave(to, from, next) {
-    //   console.info('beforeRouteLeave')
-    //   // 保存离开页面时的位置
-    //   const position = document.querySelector('.dingdans_item_dw').scrollTop
-    //   window.sessionStorage.setItem('position', JSON.stringify(position))
-    //   next()
-    // },
     beforeRouteLeave(to, from, next) {
-      // let position = window.scrollY //记录离开页面的位置
-      // console.info("position1" , position)
-      // if (position == null)
-      // position = document.querySelector('.dingdans_item_dw').scrollTop
-      // console.info("position2" , position)
-      // localStorage.setItem('position', JSON.stringify(position)
-      // this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-      // this.curScrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop || 0
-
-      // console.info('beforeRouteLeave' , document.documentElement.scrollTop )
-      // console.info('beforeRouteLeave' , window.pageYOffset )
-      // console.info('beforeRouteLeave' , document.body.scrollTop )
-      // var scrollTop = document.querySelector(".mint-loadmore").scrollTop;
-      // let clientHeight = document.querySelector(".mint-loadmore").clientHeight;
-      // var scrollview = document.querySelector('.mint-loadmore').scrollHeight;
-      // console.log(scrollTop,"scrollTop");
-      // console.log(clientHeight,"clientHeight");
-      // console.log(scrollview,"scrollview");
       if (to.path == "/store" || to.path == "/orderDetail" || to.path == "/WlDetail" || to.path == "/scanCode") {
-        // console.info(this.isBack)
-        //当离开的时候是去库存页的时候开启缓存
         from.meta.isBack = this.isBack;
-        // this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
       } else {
         this.curScrollTop = 0
         from.meta.isBack = false;
       }
-      // this.$store.commit('changeRecruitScrollY', position) //离开路由时把位置存起来
       next()
     },
-    // beforeRouteEnter(to, from, next) {
-    //   console.info('beforeRouteEnter' +to.name )
-    //   // if (to.name === 'NewRecruit') {//跳转的的页面的名称是"NewRecruit",这里就相当于我们listview页面，或者原始页面
-    //     let recruitScrollY = this.$store.state.recruitScrollY
-    //     window.scroll(0, recruitScrollY)
-    //   // }
-    // },
     methods: {
       initBatch() {
         this.showSd = false
@@ -833,14 +730,15 @@
           })
         }
       },
-      successTimeChange() {
-        if (this.successTime) {
-          this.queryParam.successTimeFrom = this.successTime[0]
-          this.queryParam.successTimeTo = this.successTime[1]
-        } else {
-          this.queryParam.successTimeFrom = null
-          this.queryParam.successTimeTo = null
-        }
+      selectYear () {
+        this.$refs.datePicker.open();
+      },
+      handleConfirm (value) {
+        console.log(value);
+        let year = value.getFullYear();
+        let month = value.getMonth() + 1;
+        let date = value.getDate();
+        this.queryParam.successTimeFrom = year+'-'+month+'-'+date
       },
       getPage() {
         this.initBatch()
@@ -849,16 +747,6 @@
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             this.initBatch()
-            // if (type) {
-            //   this.tableData.map(item => {
-            //     this.$set(item, 'checked', this.checkAll)
-            //     if (this.checkAll) {
-            //       this.ids.push(item.id)
-            //     } else {
-            //       this.delItem(item.id)
-            //     }
-            //   })
-            // }
             if (this.totalCount == 0) {
               this.allLoaded = true;
               this.emtityMsg = '暂无相关订单 -.-'
@@ -1163,27 +1051,10 @@
         this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
         this.$router.push({path: '/orderDetail', query: {id}})
       },
-      // goDel(id) {
-      //   this.$confirm('是否删除', '提示', {
-      //     confirmButtonText: '确定',
-      //     cancelButtonText: '取消',
-      //     type: 'warning'
-      //   }).then(() => {
-      //     goodsOrderApi.delById(id).then(res => {
-      //       if (res.subCode === 1000) {
-      //         this.$message.success(res.subMsg)
-      //         this.getPage()
-      //       } else {
-      //         this.$message.error(res.subMsg)
-      //       }
-      //     })
-      //   })
-      // },
       gotoDw(spuId) {
         if (!spuId) {
           return
         }
-        // let url = "https://www.dewu.com/router/product/ProductDetail?spuId=";
         let url = "https://m.dewu.com/router/product/ProductDetail?spuId=";
         window.location.href = url + spuId;
       },
@@ -1210,8 +1081,6 @@
         }
       },
       checkedAll() {
-        // debugger
-        // this.checkAll = !this.checkAll
         this.ids= []
         this.tableData.map(item => {
           if (this.checkAll) {

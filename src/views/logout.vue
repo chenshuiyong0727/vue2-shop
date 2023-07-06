@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="login" >
+  <div class="login_new" >
     <mt-header :title="title">
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
