@@ -45,7 +45,7 @@
       <div class="dingdans_item_dw"
            v-for="(item,index) in tableData"
            :key="index"
-           :style="tableData.length==(index+1) ? 'margin-bottom: 50px;' : ''"
+           :style="tableData.length==(index+1) ? 'margin-bottom: 56px;' : ''"
       >
 <!--        头部-->
         <div class="dingdans_top_dw">
@@ -673,7 +673,7 @@
           sellTimeTo: '',
           successTimeFrom: '',
           successTimeTo: '',
-          pageSize: 20,
+          pageSize: 5,
           pageNum: 1
         },
         topStatus: "",
@@ -998,7 +998,7 @@
           sellTimeTo: '',
           successTimeFrom: '',
           successTimeTo: '',
-          pageSize: 20,
+          pageSize: 5,
           pageNum: 1
         }
         this.allLoaded = false;
@@ -1031,7 +1031,7 @@
           sellTimeTo: '',
           successTimeFrom: '',
           successTimeTo: '',
-          pageSize: 20,
+          pageSize: 5,
           pageNum: 1
         }
         this.titleName = '订单'
