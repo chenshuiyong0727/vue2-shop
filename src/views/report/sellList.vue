@@ -78,7 +78,7 @@
     data() {
       return {
         titleName: '销售报表',
-        emtityMsg: '人家是有底线的 -.-',
+        emtityMsg: '没有更多了',
         queryParam: {
           createTimeFrom: '',
           createTimeTo: ''
@@ -106,9 +106,9 @@
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data : []
             if (this.tableData.length == 0) {
-              this.emtityMsg = '暂无相关数据 -.-'
+              this.emtityMsg = '暂无相关数据'
             } else {
-              this.emtityMsg = '人家是有底线的 -.-'
+              this.emtityMsg = '没有更多了'
             }
           } else {
             this.$toast(res.subMsg)

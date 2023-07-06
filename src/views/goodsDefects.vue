@@ -95,7 +95,14 @@
         <span v-if="bottomStatus === 'loading'">加载中</span>
       </div>
     </mt-loadmore>
-    <p v-if="allLoaded" class="to-the-bottom">{{emtityMsg}}</p>
+        <div v-if="allLoaded" class="to-the-bottom">
+      <p v-if="emtityMsg != '没有更多了'">
+        <img src="../../static/img/new/empity_7.png" style="width: 60vw;">
+      </p>
+      <p>
+        <span>{{emtityMsg}}</span>
+      </p>
+    </div>
     <mt-popup
       position="bottom"
       v-model="isShowDialog2">
@@ -194,7 +201,7 @@
         orderData2: '',
         isShowDialog2: false,
         titleName: '瑕疵商品',
-        emtityMsg: '人家是有底线的 -.-',
+        emtityMsg: '没有更多了',
         pictureZoomShow: false,
         imageZoom: '',
         fileUrl: fileUrl,
@@ -266,10 +273,10 @@
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             if (this.totalCount == 0) {
               this.allLoaded = true;
-              this.emtityMsg = '暂无相关数据 -.-'
+              this.emtityMsg = '暂无相关数据'
             } else if (this.totalCount <= this.queryParam.pageSize) {
               this.allLoaded = true;
-              this.emtityMsg = '人家是有底线的 -.-'
+              this.emtityMsg = '没有更多了'
             }
           } else {
             this.$toast(res.subMsg)
@@ -296,7 +303,7 @@
               }
             } else {
               this.allLoaded = true;
-              this.emtityMsg = '人家是有底线的 -.-'
+              this.emtityMsg = '没有更多了'
               this.$toast('没有更多了')
             }
           } else {

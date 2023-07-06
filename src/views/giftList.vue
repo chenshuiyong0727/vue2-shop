@@ -146,7 +146,7 @@
         orderData2: '',
         isShowDialog2: false,
         titleName: '红包',
-        emtityMsg: '人家是有底线的 -.-',
+        emtityMsg: '没有更多了',
         // pictureZoomShow: false,
         // imageZoom: '',
         // fileUrl: fileUrl,
@@ -273,10 +273,10 @@
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             if (this.totalCount == 0) {
               this.allLoaded = true;
-              this.emtityMsg = '暂无相关数据 -.-'
+              this.emtityMsg = '暂无相关数据'
             } else if (this.totalCount <= this.queryParam.pageSize) {
               this.allLoaded = true;
-              this.emtityMsg = '人家是有底线的 -.-'
+              this.emtityMsg = '没有更多了'
             }
           } else {
             this.$toast(res.subMsg)
@@ -310,7 +310,7 @@
               }
             } else {
               this.allLoaded = true;
-              this.emtityMsg = '人家是有底线的 -.-'
+              this.emtityMsg = '没有更多了'
               this.$toast('没有更多了')
             }
           } else {
