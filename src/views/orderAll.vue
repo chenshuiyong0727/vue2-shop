@@ -42,7 +42,11 @@
       :autoFill="false"
       ref="loadmore"
     >
-      <div class="dingdans_item_dw" v-for="(item,index) in tableData" :key="index">
+      <div class="dingdans_item_dw"
+           v-for="(item,index) in tableData"
+           :key="index"
+           :style="tableData.length==(index+1) ? 'margin-bottom: 50px;' : ''"
+      >
 <!--        头部-->
         <div class="dingdans_top_dw">
           <div class="dingdans_top_left_dw">
@@ -558,18 +562,19 @@
 <!--        <img  style="margin-left: -1px;" src="../../static/img/sd1.png" height="20" width="20" slot="icon">-->
 <!--      </mt-button>-->
     </div>
+<!--    <v-baseline/>-->
     <v-footer></v-footer>
   </div>
 </template>
 <script>
-  import Baseline from '@/common/_baseline.vue'
+  // import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import {goodsOrderApi} from '@/api/goodsOrder'
   import {parseTime} from '@/utils/index'
 
   export default {
     components: {
-      'v-baseline': Baseline,
+      // 'v-baseline': Baseline,
       'v-footer': Footer
     },
     name: "HelloWorld",
