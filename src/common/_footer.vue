@@ -1,7 +1,7 @@
 <template lang="html">
   <!-- gotoRouter:点击后路由跳转到与id名相同的route.name所对应的路径 -->
   <footer class="footer" @click.stop='gotoRouter'>
-    <mt-tabbar v-model="selected" fixed>
+    <mt-tabbar v-model="selected" style="border-top: 1px solid #f3f2f8;" fixed>
       <mt-tab-item id="首页">
         <img style="width: 6.9vw" :src="index_img" ></img>
         <p :style="blue1">首页</p>

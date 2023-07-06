@@ -12,7 +12,8 @@ export const goodsOrderApi = {
   page: (body) => request({
     url: '/gw/op/v1/goodsOrder',
     method: 'get',
-    params: body
+    params: body,
+    loading: false
   }),
   waybillNoList: (body) => request({
     url: '/gw/op/v1/goodsOrder/waybillNoList',

@@ -1,8 +1,11 @@
 <template>
   <div class="hello" ref="hello">
-    <mt-header title="订单管理">
+    <mt-header title="订单">
       <div slot="left">
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
+      </div>
+      <div slot="right">
+        <mt-button size="normal" style="font-size: 16px; color: #656b79"  @click="showSdClick">{{!showSd ? '管理' : '退出管理' }}</mt-button>
       </div>
     </mt-header>
     <div class="fenlei_top">
@@ -52,9 +55,13 @@
         </div>
 <!--        中间-->
         <div class="dingdans_con_dw">
-          <div style=" width: 30px;   display: flex;align-items: center;" v-if="showSd">
-            <el-checkbox :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
+          <div v-if="showSd" style="width: 50px;
+    margin-left: -2px;
+    margin-right: 2px;" >
+            <el-checkbox v-model="item.checked" :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
+<!--            <input type = "radio" v-model="item.checked"  @change="changeChecked(item.id)" ></input>-->
             <!--            <strong style="margin-left: 6px;">{{index + 1}}</strong>-->
+<!--            <input type="checkbox" v-model="item.checked" />-->
           </div>
           <div :src="item.img" class="dingdans_con_left_dw"
                @click="avatarShow(item.img)">
@@ -68,12 +75,13 @@
           <div class="diangdans_con_right_dw">
             <div class="dingdans_con_right_top_dw" @click="scanCode(item.goodsId, 1) ">
               <span>
+<!--                {{ids}}-->
                 {{item.goodsName}}
               </span>
             </div>
             <div class="dingdans_con_right_top_dw_1">
               <span @click="jumpactNo(item.actNo)">
-                {{item.actNo}}
+              {{item.actNo}}
               </span>
               <img @click="copyUrl(item.actNo)" style="width: 20px;"
                    src="../../static/img/copy6.png">
@@ -417,7 +425,7 @@
     </mt-popup>
     <mt-popup
       v-model="isShowDialog3">
-      <mt-header title="闪电直发">
+      <mt-header title="批量操作">
         <div slot="right">
           <mt-button size="normal" @click="isShowDialog3 = false" style="font-size: 16px">关闭
           </mt-button>
@@ -512,25 +520,43 @@
     <!--      <el-button  type="primary" @click="sdzf" >闪电直发</el-button>-->
     <!--      &lt;!&ndash;      <el-button  @click="$router.go(-1)" >取消</el-button>&ndash;&gt;-->
     <!--    </div>-->
-    <div style="
-    right: 15px;
-    bottom: 20vw;
+    <div v-if="showSd" style="
+    bottom: 54px;
     position: fixed;
     text-align: center;
+    width: 100vw;
+    background-color: white;
+    border-top: 1px solid rgb(243, 242, 248);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     ">
-      <el-button v-if="showSd && checkAll" v-model="checkAll" @click="checkedAll">反选</el-button>
-      <el-button v-if="showSd && !checkAll" v-model="checkAll" @click="checkedAll"
-                 style="margin-bottom: 10px;" type="primary">全选
-      </el-button>
-      <el-button v-if="showSd"  type="primary" style="margin-right: 17px" @click="sdzf">闪电直发
-      </el-button>
-      <mt-button @click="showSdClick()"  :class="showSd ? 'zhihui' : 'zhihui_act'" style="margin-left: 5px;
-    border-radius: 100%;
-    margin-top: 0px;
-    height: 40px;
-    width: 40px;" type="primary">
-        <img  style="margin-left: -1px;" src="../../static/img/sd1.png" height="20" width="20" slot="icon">
-      </mt-button>
+      <div style="margin-left: 20px;">
+        <el-checkbox :checked="checkAll" v-model="checkAll"  @change="checkedAll" style="color: #666">
+          全选
+        </el-checkbox>
+      </div>
+<!--      <el-button v-if="showSd && checkAll" v-model="checkAll" @click="checkedAll">反选</el-button>-->
+<!--      <el-button v-if="showSd && !checkAll" v-model="checkAll" @click="checkedAll"-->
+<!--                 style="margin-bottom: 10px;" type="primary">全选-->
+<!--      </el-button>-->
+      <div>
+        <span>已选</span>
+        <span class="color-url" style=" font-size: 17px;font-weight: bolder">{{ids.length}}</span>
+        <el-button   type="primary" round size="small" style="
+        margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 8px;
+        margin-right: 20px" @click="sdzf">批量操作
+        </el-button>
+      </div>
+<!--      <mt-button @click="showSdClick()"  :class="showSd ? 'zhihui' : 'zhihui_act'" style="margin-left: 5px;-->
+<!--    border-radius: 100%;-->
+<!--    margin-top: 0px;-->
+<!--    height: 40px;-->
+<!--    width: 40px;" type="primary">-->
+<!--        <img  style="margin-left: -1px;" src="../../static/img/sd1.png" height="20" width="20" slot="icon">-->
+<!--      </mt-button>-->
     </div>
     <v-footer></v-footer>
   </div>
@@ -669,12 +695,11 @@
       }
     },
     activated() {
-      this.showSd = false
-      this.checkAll = false
       this.keyupSubmit()
       // 新开的页面
       this.isBack = false
       if (!this.$route.meta.isBack) {
+        this.initBatch()
         this.listSysDict()
         this.resetData()
         //isBack 时添加中router中的元信息，判读是否要缓存
@@ -771,6 +796,12 @@
     //   // }
     // },
     methods: {
+      initBatch() {
+        this.showSd = false
+        this.checkAll = false
+        this.ids= []
+        this.tableData.forEach((obj) => (obj.checked = false));
+      },
       keyupSubmit() {
         document.onkeydown = (e) => {
           let _key = window.event.keyCode
@@ -806,35 +837,23 @@
           this.queryParam.successTimeTo = null
         }
       },
-      changeChecked(id) {
-        this.tableData.map(item => {
-          if (item.id === id) {
-            if (item.checked) {
-              this.delItem(id)
-            } else {
-              if (!this.ids.includes(id)) {
-                this.ids.push(id)
-              }
-            }
-            item.checked = !item.checked
-          }
-        })
-      },
-      getPage(type) {
+      getPage() {
+        this.initBatch()
         goodsOrderApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
-            if (type) {
-              this.tableData.map(item => {
-                this.$set(item, 'checked', this.checkAll)
-                if (this.checkAll) {
-                  this.ids.push(item.id)
-                } else {
-                  this.delItem(item.id)
-                }
-              })
-            }
+            this.initBatch()
+            // if (type) {
+            //   this.tableData.map(item => {
+            //     this.$set(item, 'checked', this.checkAll)
+            //     if (this.checkAll) {
+            //       this.ids.push(item.id)
+            //     } else {
+            //       this.delItem(item.id)
+            //     }
+            //   })
+            // }
             if (this.totalCount == 0) {
               this.allLoaded = true;
               this.emtityMsg = '暂无相关订单 -.-'
@@ -1186,9 +1205,35 @@
         }
       },
       checkedAll() {
-        this.checkAll = !this.checkAll
-        this.tableData = []
-        this.getPage(1)
+        // debugger
+        // this.checkAll = !this.checkAll
+        this.ids= []
+        this.tableData.map(item => {
+          if (this.checkAll) {
+            this.ids.push(item.id)
+          } else {
+            this.delItem(item.id)
+          }
+        })
+        this.tableData.forEach((obj) => (obj.checked = this.checkAll));
+      },
+      changeChecked(id) {
+        this.tableData.map(item => {
+          if (item.id === id) {
+            if (item.checked) {
+              this.ids.push(item.id)
+            } else {
+              this.delItem(item.id)
+            }
+          }
+        })
+        let idLength = this.ids.length
+        let totalLength = this.queryParam.pageNum * this.queryParam.pageSize
+        if (idLength == totalLength){
+          this.checkAll = true
+        }else{
+          this.checkAll = false
+        }
       },
       showSdClick() {
         this.showSd = !this.showSd
@@ -1738,10 +1783,10 @@
   }
   .activity {
     font-weight: 600;
-    color: #333;
+    color: #409eff;
     font-size: 16px;
     text-decoration:none;
-    border-bottom:1.5px solid #333333; /* #555换成链接的颜色 */
+    border-bottom:1.5px solid #409eff; /* #555换成链接的颜色 */
     display: inline-block;
     padding-bottom:3px;  /*这里设置你要空的距离*/
   }

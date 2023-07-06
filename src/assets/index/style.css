@@ -248,8 +248,8 @@ select{
   white-space: nowrap;
   cursor: pointer;
   background: #FFF;
-  border: 1px solid #ababab;
-  color: #333333;
+  border: 1px solid #409eff;
+  color: #409eff;
   -webkit-appearance: none;
   text-align: center;
   -webkit-box-sizing: border-box;
@@ -337,4 +337,39 @@ select{
 .el-select .el-input__inner {
   cursor: pointer;
   background-color: #fff;
+}
+.el-checkbox__inner {
+  /* border-radius: 2px; */
+  display: inline-block;
+  position: relative;
+  border: 1px solid #409eff;
+  border-radius: 12px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 17px;
+  height: 17px;
+  background-color: #FFF;
+  z-index: 1;
+  -webkit-transition: border-color .25s cubic-bezier(.71,-.46,.29,1.46),background-color .25s cubic-bezier(.71,-.46,.29,1.46);
+  transition: border-color .25s cubic-bezier(.71,-.46,.29,1.46),background-color .25s cubic-bezier(.71,-.46,.29,1.46);
+}
+.el-checkbox__inner::after {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  content: "";
+  border: 2.5px solid #FFF;
+  border-left: 0;
+  border-top: 0;
+  height: 9px;
+  left: 5px;
+  position: absolute;
+  top: 1.5px;
+  transform: rotate(45deg) scaleY(0);
+  width: 3px;
+  -webkit-transition: -webkit-transform .15s ease-in .05s;
+  transition: -webkit-transform .15s ease-in .05s;
+  transition: transform .15s ease-in .05s;
+  transition: transform .15s ease-in .05s,-webkit-transform .15s ease-in .05s;
+  -webkit-transform-origin: center;
+  transform-origin: center;
 }
