@@ -7,7 +7,7 @@
     </mt-header>
     <div style="
     font-size: 10px;
-    padding-top: 13.4vw;
+    padding-top: 20vw;
     padding-left: 4vw;
     max-width: 264px!important;
     max-height: 494px!important;

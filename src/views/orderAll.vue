@@ -172,11 +172,11 @@
         <span v-if="bottomStatus === 'loading'">加载中</span>
       </div>
     </mt-loadmore>
-    <div v-if="allLoaded" class="to-the-bottom">
+    <div v-if="allLoaded" class="to-the-bottom-1">
       <p v-if="emtityMsg != '没有更多了'">
         <img src="../../static/img/new/empity_7.png" style="width: 60vw;">
       </p>
-      <p>
+      <p :style="emtityMsg == '没有更多了' ? 'margin-top: -70px;' : ''">
         <span>{{emtityMsg}}</span>
       </p>
     </div>
