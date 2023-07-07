@@ -619,3 +619,46 @@ select{
   align-items: center;
   color: #807f85;
 }
+.dingdans_con_right_down_dw_1 {
+  margin-bottom: 1vw;
+  font-size: 3.5vw;
+  height: 16px;
+  margin-top: -9px;
+}
+
+
+.mark_dw {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+.mark_dw:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-width: 30px;
+  border-bottom-width: 16px;
+  border-left-width: 21.5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.text_dw {
+  color: white;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  font-size: 11px;
+  text-transform: uppercase;
+  width: 51px;
+  text-align: center;
+  margin-top: 2.1px;
+}

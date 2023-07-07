@@ -1220,31 +1220,6 @@
 <style>
 
   @import '../assets/index/style.css';
-
-  /*.mint-button--default.is-plain {*/
-  /*  border: 1px solid #409EFF;*/
-  /*  background-color: transparent;*/
-  /*  box-shadow: none;*/
-  /*  color: #409EFF;*/
-  /*}*/
-  /*.popupdiv {*/
-  /*  border-top: 1vw solid #eee;*/
-  /*  display: flex;*/
-  /*  padding-left: 22vw ;*/
-  /*}*/
-  /*.mt-button-div{*/
-  /*  margin-bottom: 3vw;margin-top: 2vw;margin-left: 1vw;margin-right: 2vw;*/
-  /*}*/
-  /*弹窗 end*/
-
-  /*.all_orders {*/
-  /*  background: #ffffff !important;*/
-  /*  font-size: 3.5vw;*/
-  /*}*/
-  /*.dingdans {*/
-  /*  padding-left: 2%;*/
-  /*  width: 96%;*/
-  /*}*/
   strong {
     font-weight: 600;
   }
@@ -1253,22 +1228,6 @@
     display: inline-block;
     font-size: 4vw;
     height: 6vw;
-  }
-
-
-  .dingdans_con_right_down_2 {
-    margin-left: 13.4vw;
-    margin-bottom: -2vw;
-    font-size: 3.5vw;
-    height: 16px;
-    margin-top: -17px;
-  }
-
-  .dingdans_con_right_down_2_1 {
-    margin-bottom: 1vw;
-    font-size: 3.5vw;
-    height: 16px;
-    margin-top: -9px;
   }
 
   /*
@@ -1288,15 +1247,8 @@
   /* 这里直接设置 1rem = 50px end */
   html,
   body {
-    /*font-family: "微软雅黑";*/
-    /*color: #333;*/
-    /*background: #fff;*/
   }
 
-  /*ul,*/
-  /*li {*/
-  /*  list-style: none;*/
-  /*}*/
   /* 给要上拉的容器设置 begin */
   .hello {
     background-color: #f3f2f8;
@@ -1308,53 +1260,6 @@
     overflow-y: auto;
   }
 
-  /* 给要上拉的容器设置 end */
-  /*.fl {*/
-  /*  float: left;*/
-  /*}*/
-  /*.fr {*/
-  /*  float: right;*/
-  /*}*/
-  /*.clearfix::before,*/
-  /*.clearfix::after {*/
-  /*  content: "";*/
-  /*  display: block;*/
-  /*  overflow: hidden;*/
-  /*  clear: both;*/
-  /*  visibility: hidden;*/
-  /*}*/
-  /*li {*/
-  /*  background: #fff;*/
-  /*}*/
-  /*.order-intr {*/
-  /*  position: relative;*/
-  /*  padding: 0.3rem 0.4rem;*/
-  /*  width: calc(100% - 0.6rem);*/
-  /*  margin: 0.4rem auto;*/
-  /*  border: 0.02rem solid #666;*/
-  /*  border-radius: 0.16rem;*/
-  /*}*/
-  /*.order-intr img {*/
-  /*  width: 3rem;*/
-  /*  height: 2.4rem;*/
-  /*}*/
-  /*.title {*/
-  /*  margin-left: 0.24rem;*/
-  /*  text-align: left;*/
-  /*}*/
-  /*.title h3 {*/
-  /*  font-size: 0.4rem;*/
-  /*}*/
-  /*.title p {*/
-  /*  font-size: 0.3rem;*/
-  /*}*/
-  /*.price {*/
-  /*  position: absolute;*/
-  /*  right: 0.3rem;*/
-  /*  bottom: 0.3rem;*/
-  /*  font-size: 0.5rem;*/
-  /*  color: #fe696b;*/
-  /*}*/
   .mint-loadmore-top,
   .mint-loadmore-bottom {
     font-size: 0.28rem;
@@ -1365,48 +1270,9 @@
     margin-right: 52px;
   }
 
-
-
   .wrap {
     position: relative;
   }
-
-  .mark_dw {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-  }
-
-  .mark_dw:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-    border-right-width: 30px;
-    border-bottom-width: 16px;
-    border-left-width: 21.5px;
-    border-top-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-  }
-
-  .text_dw {
-    color: white;
-    display: inline-block;
-    position: absolute;
-    left: 0;
-    z-index: 1;
-    font-size: 11px;
-    text-transform: uppercase;
-    width: 51px;
-    text-align: center;
-    margin-top: 2.1px;
-  }
-
   .package-status {
     color: #b8b8b8;
     padding: 18px 0 0 0
