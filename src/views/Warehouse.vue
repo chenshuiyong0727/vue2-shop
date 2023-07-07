@@ -607,7 +607,7 @@
         || to.path  =="/WarehouseDetail"
         || to.path  =="/scanCode") {
         from.meta.isBack = this.isBack;
-        // this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        // this.curScrollTop = this.$refs.hello.scrollTop
       }else {
         this.curScrollTop = 0
         from.meta.isBack = false;
@@ -920,17 +920,17 @@
       },
       jumpactNo(actNo) {
         this.isBack = true
-        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({ path: '/order', query: { actNo } })
       },
       goDetail(id) {
         this.isBack = true
-        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({path: '/storeDetail', query: {id}})
       },
       scanCode(id, type) {
         this.isBack = true
-        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({ path: '/scanCode', query: { id, type } })
       },
       gotoDw(spuId) {
@@ -955,7 +955,7 @@
       },
       WarehouseDetail(goodsId , actNo,imgUrl,img) {
         this.isBack = true
-        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({ path: '/WarehouseDetail', query: {goodsId, actNo ,imgUrl,img} })
       },
       changeStatusDialog1(row) {

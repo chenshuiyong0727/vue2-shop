@@ -773,7 +773,7 @@
         // console.info(this.isBack)
         //当离开的时候是去库存页的时候开启缓存
         from.meta.isBack = this.isBack;
-        // this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        // this.curScrollTop = this.$refs.hello.scrollTop
       } else {
         this.curScrollTop = 0
         from.meta.isBack = false;
@@ -1144,12 +1144,12 @@
       },
       jumpactNo(actNo) {
         this.isBack = true
-        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({path: '/store', query: {actNo}})
       },
       goDetail(id) {
         this.isBack = true
-        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({path: '/orderDetail', query: {id}})
       },
       // goDel(id) {

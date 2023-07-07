@@ -173,10 +173,10 @@
       </div>
     </mt-loadmore>
     <div v-if="allLoaded" class="to-the-bottom-1">
-      <p v-if="emtityMsg != '没有更多了'">
+      <p v-if="emtityMsg">
         <img src="../../static/img/new/empity_7.png" style="width: 60vw;">
       </p>
-      <p :style="emtityMsg == '没有更多了' ? 'margin-top: -70px;' : ''">
+      <p>
         <span>{{emtityMsg}}</span>
       </p>
     </div>
@@ -593,7 +593,7 @@
           addressId: ''
         },
         titleName: '订单',
-        emtityMsg: '没有更多了',
+        emtityMsg: '',
         orderData: '',
         isShowDialog: false,
         orderData1: '',
@@ -754,6 +754,7 @@
       },
       getPage() {
         this.initBatch()
+        this.emtityMsg = ''
         goodsOrderApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
@@ -761,10 +762,11 @@
             this.initBatch()
             if (this.totalCount == 0) {
               this.allLoaded = true;
-              this.emtityMsg = '暂无相关订单'
+              if (this.queryParam.pageNum == 1){
+                this.emtityMsg = '暂无相关订单'
+              }
             } else if (this.totalCount <= this.queryParam.pageSize) {
               this.allLoaded = true;
-              this.emtityMsg = '没有更多了'
             }
           } else {
             this.$toast(res.subMsg)
@@ -820,7 +822,6 @@
               }
             } else {
               this.allLoaded = true;
-              this.emtityMsg = '没有更多了'
               this.$toast('没有更多了')
             }
           } else {
@@ -1051,17 +1052,18 @@
       },
       scanCode(id, type) {
         this.isBack = true
-        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.curScrollTop = this.$refs.hello.scrollTop
+        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({ path: '/scanCode', query: { id, type } })
       },
       jumpactNo(actNo) {
         this.isBack = true
-        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({path: '/store', query: {actNo}})
       },
       goDetail(id) {
         this.isBack = true
-        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({path: '/orderDetail', query: {id}})
       },
       gotoDw(spuId) {
@@ -1495,8 +1497,9 @@
     border-left-style: solid;
     border-right-width: 30px;
     border-bottom-width: 16px;
-    border-left-width: 21px;
-    border-radius: 2px;
+    border-left-width: 21.5px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
 
   .text_dw {

@@ -457,7 +457,7 @@
           return
         }
         this.isBack = true
-        this.curScrollTop = document.querySelector('.mint-loadmore').scrollHeight;
+        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({ path: '/scanCode', query: { id, flag } })
       },
       // jumpactNo(actNo) {
