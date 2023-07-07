@@ -146,9 +146,13 @@
   width: 85vw;
   height: 85vw;
   background: #fff;
-  > img {
-    margin-top: 70px;
-  }
+}
+
+.imageShow .showImg{
+  margin-top: 80px;
+  width: 90%;
+  margin-left: 5%;
+  text-align: center;
 }
 /* 我是有底线的 begin */
 .to-the-bottom {

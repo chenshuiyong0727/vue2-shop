@@ -510,7 +510,7 @@
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
-        <img :src="imageZoom" alt="" width="100%" >
+        <img :src="imageZoom" alt="" class="showImg">
       </div>
     </div>
     <!--    <div style="-->

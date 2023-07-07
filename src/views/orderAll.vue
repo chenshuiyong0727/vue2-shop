@@ -82,7 +82,6 @@
           <div class="diangdans_con_right_dw">
             <div class="dingdans_con_right_top_dw" @click="scanCode(item.goodsId, 1) ">
               <span>
-<!--                {{ids}}-->
                 {{item.goodsName}}
               </span>
             </div>
@@ -90,8 +89,13 @@
               <span @click="jumpactNo(item.actNo)">
               {{item.actNo}}
               </span>
-              <img @click="copyUrl(item.actNo)" style="width: 20px;"
+              <img @click="copyUrl(item.actNo)" style="width: 20px;margin-bottom: 8px;"
                    src="../../static/img/copy6.png">
+            </div>
+            <div v-if="item.addressId" style="    margin-bottom: 10px;">
+              <span  class="dingdans_con_dw_address">
+                {{item.addressId | dictToDescTypeValue(38)}}
+              </span>
             </div>
             <div class="dingdans_con_right_top_dw_2">
               <div>
@@ -114,11 +118,6 @@
                   {{item.shelvesPrice}}
                 </span>
               </div>
-            </div>
-            <div v-if="item.addressId" style="margin-top: 10px">
-              <span  class="dingdans_con_dw_address">
-                {{item.addressId | dictToDescTypeValue(38)}}
-              </span>
             </div>
           </div>
         </div>
@@ -173,14 +172,6 @@
         <span v-if="bottomStatus === 'loading'">加载中</span>
       </div>
     </mt-loadmore>
-     <div v-if="allLoaded" class="to-the-bottom">
-      <p v-if="emtityMsg != '没有更多了'">
-        <img src="../../static/img/new/empity_7.png" style="width: 60vw;">
-      </p>
-      <p>
-        <span>{{emtityMsg}}</span>
-      </p>
-    </div>
     <div v-if="allLoaded" class="to-the-bottom">
       <p v-if="emtityMsg != '没有更多了'">
         <img src="../../static/img/new/empity_7.png" style="width: 60vw;">
@@ -507,7 +498,7 @@
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
-        <img :src="imageZoom" alt="" width="100%" >
+        <img :src="imageZoom" alt="" class="showImg">
       </div>
     </div>
     <div v-if="showSd" style="
@@ -1306,7 +1297,10 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 15px 0;
+    padding-top: 12px;
+    padding-right: 0px;
+    padding-bottom: 12px;
+    padding-left: 0px;
   }
   .dingdans_con_dw_address {
     font-size: 12px;
@@ -1351,7 +1345,8 @@
   .dingdans_con_right_top_dw_1 {
     font-size: 13px;
     font-weight: bold;
-    margin: 5px 0;
+    margin-top: 5px;
+    margin-bottom: 4px;
   }
   .dingdans_con_right_top_dw_2 {
     font-size: 13.5px;
@@ -1359,7 +1354,6 @@
     justify-content: space-between;
     align-items: center;
     color: #807f85;
-    margin: 5px 0;
   }
   .dingdans_con_right_down_dw {
     margin-top: 1.4vw;
