@@ -635,7 +635,7 @@
           sellTimeTo: '',
           successTimeFrom: '',
           successTimeTo: '',
-          pageSize: 5,
+          pageSize: 20,
           pageNum: 1
         },
         successTimeFrom:'',
@@ -900,7 +900,7 @@
           sellTimeTo: '',
           successTimeFrom: '',
           successTimeTo: '',
-          pageSize: 5,
+          pageSize: 20,
           pageNum: 1
         }
         this.allLoaded = false;
@@ -933,7 +933,7 @@
           sellTimeTo: '',
           successTimeFrom: '',
           successTimeTo: '',
-          pageSize: 5,
+          pageSize: 20,
           pageNum: 1
         }
         this.titleName = '订单'
