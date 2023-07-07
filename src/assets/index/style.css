@@ -97,12 +97,16 @@
   color: #F56C6C;
 }
 .color-danger-strong {
-  color: #F56C6C;
+  color: #409eff;
   font-weight: 600;
 }
 .color-font {
   color: #333333;
   font-weight: 600;
+}
+.color-font-big {
+  color: #333333;
+  font-size: 17px;
 }
 .color-url {
   color: #409eff;
@@ -112,7 +116,7 @@
   color: #0fbe8f;
 }
 .mint-header {
-  padding: 5.8vw 4.8vw;
+  padding: 5.81vw 4.8vw !important;
   background-color: #ffffff;
   color: black;
   font-size: 20px;
@@ -289,18 +293,18 @@ select{
 .fenlei_top {
   display: flex;
   align-items: center;
-  height: 0.88rem;
-  padding: 0.1rem 0.2rem;
+  height: 44px;
+  padding: 5px 10px !important;
   width: 100vw;
   background: #fff;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 99;
-  margin-top: 11.6vw;
+  margin-top: 11.6vw !important;
 }
 .fenlei_top_left{
-  width: 100vw
+  width: 100vw !important;
 }
 
 .el-input__inner {
@@ -340,8 +344,8 @@ select{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 0.88rem;
-  padding: 0.1rem 0.2rem;
+  height: 44px;
+  padding: 5px 10px !important;
   width: 100vw;
   background: #fff;
   position: fixed;

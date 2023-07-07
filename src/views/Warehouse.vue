@@ -478,7 +478,7 @@
         //   { fieldValue: 4, fieldName: '涨价商品' },
         //   { fieldValue: 5, fieldName: '降价商品' },
         //   { fieldValue: 6, fieldName: '售空商品' },
-        //   { fieldValue: 7, fieldName: '变价商品' },
+        //   { fieldValue: 7, fieldName: '变更商品' },
         // ],
         inventoryToList: [
           { fieldValue: 1, fieldName: '现货' }, { fieldValue: 0, fieldName: '售空' },
@@ -555,7 +555,7 @@
           this.titleName = '售空商品'
         }
         if (this.queryParam.today == 7) {
-          this.titleName = '变价商品'
+          this.titleName = '变更商品'
         }
         this.search1()
       }
@@ -635,7 +635,7 @@
           this.titleName = '售空商品'
         }
         if (this.queryParam.today == 7) {
-          this.titleName = '变价商品'
+          this.titleName = '变更商品'
         }
         this.getPage()
       }else {

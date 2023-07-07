@@ -26,19 +26,19 @@
 ">
       <li style="width: 47.6%"  @click="chunjie">
         <router-link :to="{name:''}">
-          <p><strong class="color-danger"> {{countDay}}</strong>{{count}}</p>
+          <p><strong class="color-url"> {{countDay}}</strong>{{count}}</p>
           <p class="section1name">春节倒计时</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{name:'仓库'}">
-          <p class="color-danger">{{form.inventoryNum}}</p>
+          <p class="color-url">{{form.inventoryNum}}</p>
           <p class="section1name" >库存总数</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{name:'销售报表'}">
-          <p class="color-danger">{{form.profitsAmount | numFilterTo0}}</p>
+          <p class="color-url">{{form.profitsAmount | numFilterTo0}}</p>
           <p class="section1name">利润总额</p>
         </router-link>
       </li>
@@ -50,26 +50,26 @@
     padding-left: 1vw;">
     <li>
         <router-link :to="{name:'销售报表'}">
-          <p class="color-danger">{{form.profitsAverage}}</p>
+          <p class="color-url">{{form.profitsAverage}}</p>
           <p class="section1name">平均利润</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{name:'仓库'}">
-          <p class="color-danger">{{form.inventoryCost | numFilterTo0}}</p>
+          <p class="color-url">{{form.inventoryCost | numFilterTo0}}</p>
           <p  class="section1name">库存成本</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{name:'仓库'}">
-          <p class="color-danger" v-if="form.inventoryNum  && form.goodsPutInNum">{{form.inventoryRatio}}%</p>
+          <p class="color-url" v-if="form.inventoryNum  && form.goodsPutInNum">{{form.inventoryRatio}}%</p>
           <p v-else> 0%</p>
           <p  class="section1name">库存比例</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{name:'商品'}">
-          <p class="color-danger">{{form.goodsNum}}</p>
+          <p class="color-url">{{form.goodsNum}}</p>
           <p class="section1name">商品款式</p>
         </router-link>
       </li>
@@ -80,25 +80,25 @@
     padding: 0vw 1vw;">
       <li>
         <router-link :to="{ path: '/store?warehouseId=2'}">
-          <p class="color-danger">{{form.ytInventory | numFilterTo0}}</p>
+          <p class="color-url">{{form.ytInventory | numFilterTo0}}</p>
           <p class="section1name">云头库存</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{ path: '/store?warehouseId=2'}">
-          <p class="color-danger">{{form.ytAmount}}</p>
+          <p class="color-url">{{form.ytAmount}}</p>
           <p class="section1name">云头货值</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{ path: '/store?warehouseId=1'}">
-          <p class="color-danger">{{form.qpInventory }}</p>
+          <p class="color-url">{{form.qpInventory }}</p>
           <p class="section1name">前埔库存</p>
         </router-link>
       </li>
       <li>
         <router-link :to="{ path: '/store?warehouseId=1'}">
-          <p class="color-danger">{{form.qpAmount | numFilterTo0}}</p>
+          <p class="color-url">{{form.qpAmount | numFilterTo0}}</p>
           <p class="section1name">前埔货值</p>
         </router-link>
       </li>

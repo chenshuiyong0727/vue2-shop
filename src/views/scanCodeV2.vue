@@ -336,6 +336,7 @@
         fileSize: 2,
         type: '',
         id: '',
+        photo: '',
         options: [],
         uploadData: {},
         fileUrl: fileUrl,
@@ -350,17 +351,27 @@
       }
     },
     created() {
-      const {id, type,flag} = this.$route.query
+      const {id, type,flag,photo} = this.$route.query
       this.flag = flag
       this.id = id
+      this.photo = photo
       this.type = type
       this.form.id = id
       if (this.id) {
         this.getDetailById(this.id)
       }
+      if(this.photo){
+        setTimeout(()=>{
+          this.uploadMaterial()
+        },200)
+      }
     },
     mounted() {
-      // this.handleChange()
+      // if(this.photo){
+      //   this.uploadMaterial()
+      //   setTimeout(()=>{
+      //   },1000)
+      // }
     },
     methods: {
       gotoAdd(id, type) {

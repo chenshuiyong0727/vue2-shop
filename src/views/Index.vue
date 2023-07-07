@@ -1,8 +1,23 @@
 <template lang="html">
   <!-- 在首页父组件发送http请求,后将数据通过props传递给子组件,可减少请求次数,减少服务器压力 -->
-  <div class="index">
+  <div class="hello" ref="hello">
     <mt-header title="移动仓库">
     </mt-header>
+<!--    搜索开始-->
+    <div class="fenlei_top">
+      <div class="fenlei_top_left">
+        <el-input
+          clearable
+          placeholder="请输入货号/商品名"
+          prefix-icon="el-icon-search"
+          v-model.trim="queryParamTop.actNo">
+        </el-input>
+      </div>
+      <div class="fenlei_top_right" @click="scanCode(1)">
+        <img src="../../static/img/photo_7.png" height="30px;" width="30px;">
+      </div>
+    </div>
+<!--    搜索结束-->
 <!--    待办事项-->
     <v-orderNum :orderIofo ="orderIofo" :storeData ="storeData"/>
     <!--    销售走势-->
@@ -21,9 +36,9 @@
       <ul class="index-list" style=" padding-top: 4vw" >
         <li>
           <router-link :to="{name:'销售报表'}">
-            <p class="color-danger"><strong>{{orderData.successNum}}</strong> </p>
+            <p class="color-font"><strong>{{orderData.successNum}}</strong> </p>
             <p class="section1name" >月订单数</p>
-            <p class="color-url"><strong>{{orderData.expectSuccessNum}}</strong> </p>
+            <p class="color-font"><strong>{{orderData.expectSuccessNum}}</strong> </p>
             <p class="section1name" >预计总数</p>
             <p :class="orderData.successNumRate<0 ? 'color-success' : 'color-danger'" >{{orderData.successNumRate}} %</p>
             <p class="section1name" >同比上月</p>
@@ -31,9 +46,9 @@
         </li>
         <li>
           <router-link :to="{name:'销售报表'}">
-            <p class="color-danger"><strong>{{orderData.profitsAmount}}</strong> </p>
+            <p class="color-font"><strong>{{orderData.profitsAmount}}</strong> </p>
             <p class="section1name" >本月利润</p>
-            <p class="color-url"><strong>{{orderData.expectProfitsAmount}}</strong> </p>
+            <p class="color-font"><strong>{{orderData.expectProfitsAmount}}</strong> </p>
             <p class="section1name" >预计利润</p>
             <p :class="orderData.profitsAmountRate<0 ? 'color-success' : 'color-danger'" >{{orderData.profitsAmountRate}} %</p>
             <p class="section1name" >同比上月</p>
@@ -41,9 +56,9 @@
         </li>
         <li>
           <router-link :to="{name:'销售报表'}">
-            <p class="color-danger"><strong>{{orderData.orderAmount}}</strong> </p>
+            <p class="color-font"><strong>{{orderData.orderAmount}}</strong> </p>
             <p class="section1name" >本月总额</p>
-            <p class="color-url"><strong>{{orderData.expectOrderAmount}}</strong> </p>
+            <p class="color-font"><strong>{{orderData.expectOrderAmount}}</strong> </p>
             <p class="section1name" >预计总额</p>
             <p :class="orderData.orderAmountRate<0 ? 'color-success' : 'color-danger'" >{{orderData.orderAmountRate}} %</p>
             <p class="section1name" >同比上月</p>
@@ -129,6 +144,9 @@ export default {
         dataType: 1,
         createTimeFrom: '',
         createTimeTo: ''
+      },
+      queryParamTop: {
+        actNo: ''
       },
       dataType: 1,
       extend: {
@@ -217,10 +235,22 @@ export default {
     this.getData()
     this.getData1()
     this.getData2()
+    this.keyupSubmit()
     // this.getData()
     // this.getData1()
   },
   methods: {
+    keyupSubmit() {
+      document.onkeydown = (e) => {
+        let _key = window.event.keyCode
+        if (_key === 13) {
+          this.jumpGoods(this.queryParamTop.actNo)
+        }
+      }
+    },
+    jumpGoods(actNo) {
+      this.$router.push({ path: '/GoodsBase', query: { actNo } })
+    },
     initTime() {
       let myDate = new Date().getTime()
       let endTime = '2024/02/10 00:00:00'
@@ -281,6 +311,9 @@ export default {
           this.$toast(res.subMsg)
         }
       })
+    },
+    scanCode(photo) {
+      this.$router.push({ path: '/scanCode', query: { photo } })
     },
     profitData(dataType) {
       this.dataType = dataType
@@ -351,12 +384,42 @@ export default {
 <style lang="less" scoped>
   @import '../assets/fz.less';
   @import '../assets/index/style.css';
-.index {
-    width: 100%;
-    padding-bottom: 14vw;
-    /*background-color: #6ae9ff;*/
+  .mint-button--small {
+    display: inline-block;
+    font-size: 4vw;
+    height: 6vw;
+  }
+
+  /*
+   -----分割线---
+  */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* 这里直接设置 1rem = 50px begin */
+  html {
+    font-size: 50px;
+  }
+
+  /* 这里直接设置 1rem = 50px end */
+  html,
+  body {
+  }
+
+  /* 给要上拉的容器设置 begin */
+  .hello {
     background-color: #f3f2f8;
-}
+    padding-top: 12vw;
+    font-size: 13px;
+    height: 100vh;
+    /*overflow:hidden;*/
+
+    overflow-y: auto;
+  }
+
   .index-title {
     .bt();
     background-color: #ffffff;
@@ -404,7 +467,7 @@ export default {
     }
   }
   .section1name{
-    color: black;
+    color: #8c8a8a;
   }
   .index-list {
     display: -ms-flex;

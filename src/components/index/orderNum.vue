@@ -2,7 +2,9 @@
 
   <div class="car1" style="  padding-top: 28px;">
     <div class="main">
-      <section class="my-pay-2" style="border-bottom-style:none;    margin-top:30px;">
+      <section class="my-pay-2" style="border-bottom-style:none;
+         padding-top: 6vw;
+         border-bottom-style: none; margin-left: 0;width: 100vw;">
         <router-link :to="{ path: '/store'}">
           <span style="    margin-top: -3px;">
              <img
@@ -10,14 +12,14 @@
     margin-bottom: -3px;
     width: 28px;" src="../../../static/img/goods-1.png"></img>
           </span>
-          <p style="color: #333;font-size: 14px;    margin-top: 1px;">商品管理</p>
+          <p style="color: #333;font-size: 14px;    margin-top: 1px;">库存管理</p>
         </router-link>
         <img style="    margin-left: 10px;
     height: 55px;
     margin-top: 10px;" src="../../../static/img/more-1.png">
         <router-link :to="{ path: '/store?today=7'}">
           <span :class="storeData.upCout > 0 ? 'color-danger-strong' : 'color-font'">{{storeData.upCout}}</span>
-          <p style="color: #8c8a8a;font-size: 14px;">变价</p>
+          <p style="color: #8c8a8a;font-size: 14px;">变更</p>
         </router-link>
         <router-link :to="{ path: '/store?today=2'}">
           <span :class="storeData.successNumLast > 0 ? 'color-danger-strong' : 'color-font'">{{storeData.successNumLast}}</span>
