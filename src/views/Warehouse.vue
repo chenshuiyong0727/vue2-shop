@@ -712,7 +712,9 @@
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             if (this.totalCount == 0) {
               this.allLoaded = true;
-              this.emtityMsg = '暂无相关库存'
+              if (this.queryParam.pageNum == 1){
+                this.emtityMsg = '暂无相关库存'
+              }
             } else if (this.totalCount <= this.queryParam.pageSize) {
               this.allLoaded = true;
             }

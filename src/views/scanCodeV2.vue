@@ -7,9 +7,20 @@
       <div slot="left">
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
-      <div v-if="type == 1" slot="right">
-        <mt-button size="normal" style="font-size: 16px"  @click="getImgUrl">更新</mt-button>
+<!--      <div v-if="type == 1" slot="right">-->
+<!--        <mt-button size="normal" style="font-size: 16px"  @click="getImgUrl">更新</mt-button>-->
+<!--      </div>-->
+      <div slot="right">
+        <el-dropdown trigger="click" style="margin-left: 1px;">
+          <mt-button size="normal" style="font-size: 16px; color: #656b79" >管理</mt-button>
+          <el-dropdown-menu slot="dropdown" >
+            <el-dropdown-item type="text" v-if="form.id" @click.native="gotoAdd(form.id,2)">手动编辑</el-dropdown-item>
+            <el-dropdown-item type="text" v-if="type != 3" @click.native="getImgUrl">智能更新</el-dropdown-item>
+            <el-dropdown-item type="text" v-else @click.native="gotoAdd(null,3)">手动添加</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
+
     </mt-header>
     <div class="fenlei_top_2" v-if="type!=1">
       <input type="file" capture="user" accept="image/*" style="display:none" ref="file1"
@@ -245,21 +256,21 @@
         <img :src="form.img" alt="" width="100%" >
       </div>
     </div>
-    <div v-if="type==3 && !form.id" style="
-      right: 15px;
-      bottom: 20vw;
-      position: absolute;
-      text-align: center;
-    ">
-      <mt-button  @click="gotoAdd(null,3)"  style="margin-left: 5px;
-      border-radius: 100%;
-      margin-top: 0px;
-      height: 55px;
-      width: 55px;"
-                  type="primary">
-        <img src="../../static/img/handleAdd.png" height="30" width="30" slot="icon">
-      </mt-button>
-    </div>
+<!--    <div v-if="type==3 && !form.id" style="-->
+<!--      right: 15px;-->
+<!--      bottom: 20vw;-->
+<!--      position: absolute;-->
+<!--      text-align: center;-->
+<!--    ">-->
+<!--      <mt-button  @click="gotoAdd(null,3)"  style="margin-left: 5px;-->
+<!--      border-radius: 100%;-->
+<!--      margin-top: 0px;-->
+<!--      height: 55px;-->
+<!--      width: 55px;"-->
+<!--                  type="primary">-->
+<!--        <img src="../../static/img/handleAdd.png" height="30" width="30" slot="icon">-->
+<!--      </mt-button>-->
+<!--    </div>-->
     <v-footer v-if="!flag"></v-footer>
   </div>
 </template>

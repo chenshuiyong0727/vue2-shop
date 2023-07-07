@@ -1,17 +1,11 @@
 <template>
   <div class="hello" ref="hello">
     <mt-header :title="titleName">
+<!--      <div slot="right">-->
+<!--        <mt-button size="normal"  @click="isShowDialog = false" style="font-size: 16px">首页</mt-button>-->
+<!--      </div>-->
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
-      </div>
-      <div slot="right">
-        <el-dropdown trigger="click" style="margin-left: 1px;">
-          <mt-button size="normal" style="font-size: 16px; color: #656b79" >管理</mt-button>
-          <el-dropdown-menu slot="dropdown" >
-            <el-dropdown-item type="text" @click.native="scanCode(null,3)">智能添加</el-dropdown-item>
-            <el-dropdown-item type="text" @click.native="resetHandle">重置</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
       </div>
     </mt-header>
     <div class="fenlei_top">
@@ -27,22 +21,8 @@
         <img src="../../static/img/search.png" height="30px;" width="30px;">
       </div>
     </div>
-
-    <div class="searchList">
-      <span style="margin-right: 6vw;" :class="!queryParam.type ? 'activity' : ''" @click="searchStatus('')">全部</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='01' ? 'activity' : ''" @click="searchStatus('01')">男鞋</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='02' ? 'activity' : ''" @click="searchStatus('02')">女鞋</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='03' ? 'activity' : ''" @click="searchStatus('03')">男女</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='11' ? 'activity' : ''" @click="searchStatus('11')">服装</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='05' ? 'activity' : ''" @click="searchStatus('05')">大童</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='07' ? 'activity' : ''" @click="searchStatus('07')">中童</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='04' ? 'activity' : ''" @click="searchStatus('04')">幼童</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='06' ? 'activity' : ''" @click="searchStatus('06')">婴童</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='20' ? 'activity' : ''" @click="searchStatus('20')">包包</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='21' ? 'activity' : ''" @click="searchStatus('21')">帽子</span>
-    </div>
     <mt-loadmore
-      style="padding-top: 87px"
+      style="padding-top: 0.86rem"
       :top-method="loadTop"
       :bottom-method="loadBottom"
       :bottom-all-loaded="allLoaded"
@@ -51,65 +31,71 @@
       :autoFill="false"
       ref="loadmore"
     >
-      <div class="dingdans_item_dw"
-              v-for="(item,index) in tableData"
-              :key="index"
-              :style="tableData.length==(index+1) ? 'margin-bottom: 56px;' : ''"
-      >
-        <div class="dingdans_con_dw">
-          <div v-if="showSd" style="width: 50px;
-    margin-left: -2px;
-    margin-right: 2px;" >
-            <el-checkbox v-model="item.checked" :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
-          </div>
-          <div :src="item.img" class="dingdans_con_left_dw"
-               @click="avatarShow(item.img)">
-            <img :src="item.img" >
-            <p class="mark_dw">
-              <span class="text_dw">
-                {{ item.type | dictToDescTypeValue(20221108) }}
+      <div class="dingdans_item" style="padding-top: 0vw;padding-bottom: 4vw;" v-for="(item,index) in tableData" :key="index">
+<!--        <div class="dingdans_top">-->
+<!--          <div class="dingdans_top_left">-->
+<!--            货号：<strong> {{item.actNo}} </strong>-->
+<!--          </div>-->
+<!--          <div class="dingdans_top_right">-->
+<!--            尺码：<strong>{{item.size }}</strong>-->
+<!--          </div>-->
+<!--        </div>-->
+        <div class="dingdans_con" style="padding : 0 ;">
+<!--          <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">-->
+<!--            <img :src="item.img">-->
+<!--          </div>-->
+          <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap" @click="avatarShow(item.img)">
+            <img :src="item.img" style="margin-top: 35px;">
+            <p style="top: 10px;" class="mark1">
+              <span class="text1" >
+                {{item.type | dictToDescTypeValue2(20221108)}}
               </span>
             </p>
           </div>
-          <div class="diangdans_con_right_dw">
-            <div class="dingdans_con_right_top_dw" @click="scanCode(item.id, 1) ">
+          <div v-if="!item.img && item.imgUrl" :src="item.img" class="dingdans_con_left" @click="avatarShow(fileUrl+ item.imgUrl)">
+            <img :src="fileUrl + item.imgUrl">
+          </div>
+          <div class="diangdans_con_right">
+            <div class="dingdans_con_right_top" style="margin-top: -10px">
+              <span @click="scanCode(item.id,1)" v-if="item.name"><strong> {{item.name | sizeFilterNum(50) }}</strong></span>
+            </div>
+            <div class="dingdans_con_right_down">
+<!--              货号：-->
+<!--              <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>-->
               <span>
-                {{item.name}}
-              </span>
+                <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
+<!--               <strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>-->
+<!--                  <strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl,item.img )" style="color: #409EFF"> {{item.actNo}} </strong>-->
+                 <img @click="copyUrl(item.actNo)" style="width: 20px;" src="../../static/img/copy6.png">
+             </span>
+              <strong> {{item.brand}}</strong>
+<!--              <strong> {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
             </div>
-            <div class="dingdans_con_right_top_dw_1">
-              <span @click="jumpactNo(item.actNo)">
-              {{item.actNo}}
-              </span>
-              <img @click="copyUrl(item.actNo)" style="width: 20px;margin-bottom: 8px;"
-                   src="../../static/img/copy6.png">
-            </div>
-            <div class="dingdans_con_right_top_dw_2" style="margin-bottom: -10px;">
-              <div  v-if="item.brand">
-                   <span  class="dingdans_con_dw_address">
-                    {{item.brand}}
-                  </span>
-              </div>
-              <div class="dingdans_top_right_dw">
-                <div class="dingdans_con_right_down_2_1">
-                  <el-dropdown trigger="click" style="margin-left: 1px;">
-                    <button
-                      class="dw-button-common">操作
-                    </button>
-                    <el-dropdown-menu slot="dropdown" >
-                      <el-dropdown-item type="text" @click.native="storeAdd(item.id)">选择</el-dropdown-item>
-                      <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
-                      <el-dropdown-item type="text" @click.native="scanCode(item.id,1)">详情</el-dropdown-item>
-                    </el-dropdown-menu>
-                  </el-dropdown>
-                </div>
-              </div>
+            <div style="
+               margin-bottom: -12vw;
+    margin-left: 20vw;
+    margin-top: -3vw;">
+              <el-button
+                style="margin-left: 10.1vw;font-weight: 600;"
+                type="text"
+                class="color-danger"
+                @click="storeAdd(item.id)">选择</el-button>
+              <el-button
+                style="margin-left: 1vw;font-weight: 600;"
+                type="text"
+                @click="gotoDw(item.spuId)">得物</el-button>
+              <el-button
+                style="margin-left: 1vw;font-weight: 600;"
+                type="text"
+                @click="scanCode(item.id,1)">查看</el-button>
+              <el-button
+                style="margin-left: 1vw;font-weight: 600;"
+                type="text"
+                @click="goDetail(item.id,2)">编辑</el-button>
             </div>
           </div>
         </div>
-        <!--底部-->
       </div>
-
       <div slot="top" class="mint-loadmore-top">
         <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }">松手释放↓</span>
         <span v-show="topStatus === 'loading'">加载中</span>
@@ -122,8 +108,8 @@
         <span v-if="bottomStatus === 'loading'">加载中</span>
       </div>
     </mt-loadmore>
-    <div v-if="allLoaded" class="to-the-bottom-1">
-      <p v-if="emtityMsg">
+        <div v-if="allLoaded" class="to-the-bottom">
+      <p v-if="emtityMsg != '没有更多了'">
         <img src="../../static/img/new/empity_7.png" style="width: 60vw;">
       </p>
       <p>
@@ -135,7 +121,7 @@
       v-model="isShowDialog2">
       <mt-header title="筛选" >
         <div slot="right">
-          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px">关闭</mt-button>
+          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px"> 重置（关闭）</mt-button>
         </div>
         <div slot="left">
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
@@ -143,8 +129,12 @@
       </mt-header>
       <section style="height: 80vw;width: 100vw">
         <mt-field label="类型" style="margin-top: 11vw;">
+<!--            <select class="select100" v-model="queryParam.type" @change="changeSystem" >-->
+<!--               <option :disabled="true" value="" selected>请选择类型</option>-->
+<!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
+<!--            </select>-->
           <el-select size="small" class="select100" v-model="queryParam.type" @change="changeSystem" >
-            <el-option :disabled="true">请选择类型</el-option>
+            <el-option :disabled="true" value="" selected>请选择类型</el-option>
             <el-option
               v-for="item in typeList"
               :key="item.fieldValue"
@@ -162,13 +152,32 @@
         <img :src="imageZoom" alt="" class="showImg">
       </div>
     </div>
+    <div style="
+    right: 15px;
+    bottom: 20vw;
+    position: absolute;
+    text-align: center;
+    ">
+      <mt-button  @click="scanCode(null,3)"  style="margin-left: 5px;
+    border-radius: 100%;
+    margin-top: 0px;
+    height: 55px;
+    width: 55px;" type="primary">
+        <img src="../../static/img/add.png" height="30" width="30" slot="icon">
+      </mt-button>
+    </div>
     <v-footer></v-footer>
   </div>
 </template>
 <script>
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
+  // import Footer from '@/components/goodsBase/_footer.vue'
+  // import { goodsOrderApi } from '@/api/goodsOrder'
   import { goodsBaseApi } from '@/api/goodsBase'
+  import {
+    MessageBox
+  } from "mint-ui";
   export default {
     components: {
       'v-baseline': Baseline,
@@ -177,15 +186,34 @@
     name: "HelloWorld",
     data() {
       return {
-        isBack: false, //记录滚动条位置对象
-        curScrollTop: 0, //记录滚动条位置对象
         topStatus: "",
         bottomStatus: "",
         allLoaded: false,
+        // mockArr: [],
         imageZoom: '',
         pictureZoomShow: true,
+        // requestParam1: {
+        //   poundage: '',
+        //   theirPrice: '',
+        //   profits: '',
+        //   inventoryId: '',
+        //   type: 1,
+        //   num: '',
+        //   shelvesPrice: ''
+        // },
+        // requestParam: {
+        //   id: '',
+        //   price: '',
+        //   dwPrice: '',
+        //   poundage: '',
+        //   theirPrice: '',
+        //   profits: '',
+        //   waybillNo: '',
+        //   addressId: ''
+        // },
+        // popupVisible: false,
         titleName: '商品',
-        emtityMsg: '',
+        emtityMsg: '没有更多了',
         orderData: '',
         isShowDialog: false,
         orderData1: '',
@@ -202,12 +230,43 @@
           name: '',
           brand: '',
           remark: '',
-          pageSize: 10,
+          pageSize: 20,
           pageNum: 1
         },
+        // queryParam: {
+        //   id: '',
+        //   size: '',
+        //   keyword: '',
+        //   orderNo: '',
+        //   inventoryId: '',
+        //   status: '',
+        //   dwPriceFrom: '',
+        //   dwPriceTo: '',
+        //   poundageFrom: '',
+        //   poundageTo: '',
+        //   theirPriceFrom: '',
+        //   theirPriceTo: '',
+        //   addressId: '',
+        //   waybillNo: '',
+        //   createTimeFrom: '',
+        //   createTimeTo: '',
+        //   updateTimeFrom: '',
+        //   updateTimeTo: '',
+        //   sellTimeFrom: '',
+        //   sellTimeTo: '',
+        //   successTimeFrom: '',
+        //   successTimeTo: '',
+        //   pageSize: 20,
+        //   pageNum: 1
+        // },
         topStatus: "",
         bottomStatus: "",
         allLoaded: false,
+        // mockArr: [],
+        // inventoryToList: [
+        //   { fieldValue: 1, fieldName: '现货' }, { fieldValue: 0, fieldName: '售空' },
+        //   { fieldValue: 2, fieldName: '未上架' }
+        // ],
         typeList: [],
         dataStatusList: [],
         status: '',
@@ -217,27 +276,24 @@
         totalCount: 1
       }
     },
-    activated() {
-      this.keyupSubmit()
-      // 新开的页面
-      this.isBack = false
-      if (this.$route.meta.isBack) {
-        this.$refs.hello.scrollTop = this.curScrollTop
-      }else{
-        const { actNo } = this.$route.query
-        this.queryParam.actNo = actNo
-        this.listSysDict()
+    // created() {
+    //   // ajax 模拟初始加载, 使用定时器默认ajax加载
+    //   let timer = setTimeout(_ => {
+    //     clearTimeout(timer);
+    //     this.loadData('refresh');
+    //   }, 200);
+    // },
+    created() {
+      const { actNo } = this.$route.query
+      this.queryParam.actNo = actNo
+      if (this.queryParam.actNo) {
         this.search1()
       }
+      this.keyupSubmit()
     },
-    beforeRouteLeave(to, from, next) {
-      if (to.path == "/store" || to.path == "/storeAdd" || to.path == "/scanCode") {
-        from.meta.isBack = this.isBack;
-      } else {
-        this.curScrollTop = 0
-        from.meta.isBack = false;
-      }
-      next()
+    mounted() {
+      this.getPage()
+      this.listSysDict()
     },
     methods: {
       keyupSubmit() {
@@ -249,25 +305,23 @@
         }
       },
       scanCode(id, type) {
-        this.isBack = true
-        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({ path: '/scanCode', query: { id, type } })
+      },
+      goDetail(id, type) {
+        this.$router.push({ path: '/goodsAdd', query: { id, type } })
       },
       gotoDw(spuId) {
         if (!spuId){
           return
         }
+        // let url = "https://www.dewu.com/router/product/ProductDetail?spuId=";
         let url = "https://m.dewu.com/router/product/ProductDetail?spuId=";
         window.location.href = url + spuId;
       },
       storeAdd(goodsId) {
-        this.isBack = true
-        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({ path: '/storeAdd', query: { goodsId } })
       },
       jumpactNo(actNo) {
-        this.isBack = true
-        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({ path: '/store', query: { actNo } })
       },
       copyUrl(url) {
@@ -282,18 +336,16 @@
         this.$toast('已复制至剪切板')
       },
       getPage() {
-        this.emtityMsg = ''
         goodsBaseApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             if (this.totalCount == 0) {
               this.allLoaded = true;
-              if (this.queryParam.pageNum == 1){
-                this.emtityMsg = '暂无相关商品'
-              }
+              this.emtityMsg = '暂无相关商品'
             } else if (this.totalCount <= this.queryParam.pageSize) {
               this.allLoaded = true;
+              this.emtityMsg = '没有更多了'
             }
           } else {
             this.$toast(res.subMsg)
@@ -320,6 +372,7 @@
               }
             } else {
               this.allLoaded = true;
+              this.emtityMsg = '没有更多了'
               this.$toast('没有更多了')
             }
           } else {
@@ -341,7 +394,7 @@
         let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
           localStorage.getItem('sysDictList')) : []
         let res = sysDictList.filter(
-          item => item.typeValue == 20221108 && item.fieldValue == this.queryParam.type)
+          item => item.typeValue == 20221108 && item.fieldValue == this.queryParam.status)
         this.titleName = res.length ? res[0].fieldName : ''
         this.titleName = this.titleName + '商品'
       },
@@ -366,7 +419,7 @@
           name: '',
           brand: '',
           remark: '',
-          pageSize: 10,
+          pageSize: 20,
           pageNum: 1
         }
         this.titleName = '商品'
@@ -384,10 +437,6 @@
         this.loadData()
         this.queryParam.pageNum++;
         this.$refs.loadmore.onBottomLoaded();
-      },
-      searchStatus(type) {
-        this.queryParam.type = type
-        this.search1()
       },
       loadTop() {
         // 默认下拉刷新最新数据

@@ -119,6 +119,8 @@
                       <el-dropdown-item type="text" @click.native="jumpactNo(item.actNo)">订单</el-dropdown-item>
                       <el-dropdown-item type="text" v-if="item.inventory > item.galleryCount" @click.native="changeStatusDialog1(item)">上架</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl )">库存</el-dropdown-item>
+
+
                     </el-dropdown-menu>
               </el-dropdown>
             </div>

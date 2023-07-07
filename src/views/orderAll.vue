@@ -1053,7 +1053,6 @@
       scanCode(id, type) {
         this.isBack = true
         this.curScrollTop = this.$refs.hello.scrollTop
-        this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({ path: '/scanCode', query: { id, type } })
       },
       jumpactNo(actNo) {
