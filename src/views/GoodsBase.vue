@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello" ref="hello">
     <mt-header :title="titleName">
 <!--      <div slot="right">-->
 <!--        <mt-button size="normal"  @click="isShowDialog = false" style="font-size: 16px">首页</mt-button>-->
@@ -300,7 +300,7 @@
         document.onkeydown = (e) => {
           let _key = window.event.keyCode
           if (_key === 13) {
-            this.getPage()
+            this.search1()
           }
         }
       },
@@ -408,6 +408,7 @@
         this.queryParam.pageNum = 1
         this.allLoaded = false;
         this.isShowDialog2 = false
+        this.$refs.hello.scrollTop = 0
         this.getPage()
       },
       resetHandle() {

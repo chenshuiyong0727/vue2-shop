@@ -1,5 +1,5 @@
 <template>
-  <div class="hello" ref="goodsAct">
+  <div class="hello" ref="hello">
     <mt-header title="首创奥莱活动">
       <div slot="left" v-if="isActUser !=1">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
@@ -278,7 +278,7 @@
         this.getPage()
         this.listSysDict()
       } else {
-        this.$refs.goodsAct.scrollTop = this.curScrollTop
+        this.$refs.hello.scrollTop = this.curScrollTop
       }
     },
     beforeRouteLeave(to, from, next) {
@@ -296,7 +296,7 @@
         document.onkeydown = (e) => {
           let _key = window.event.keyCode
           if (_key === 13) {
-            this.getPage()
+            this.search1()
           }
         }
       },
@@ -393,6 +393,7 @@
         this.queryParam.pageNum = 1
         this.allLoaded = false;
         this.isShowDialog2 = false
+        this.$refs.hello.scrollTop = 0
         this.getPage()
       },
       resetHandle() {
