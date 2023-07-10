@@ -55,6 +55,31 @@
       </div>
       <div style="padding-top: 0px;
     padding-right: 10px;
+    padding-bottom: 10px;    margin-left: -2px;
+    padding-left: 10px;
+  ">
+        <span  style="font-size: 14px;
+    background-color: #f3f2f8;
+    padding: 5px;
+    border-radius: 5px;">
+          {{form.type | dictToDescTypeValue(20221108)}}
+        </span>
+        <span  v-if="form.brand" style="font-size: 14px;
+    background-color: #f3f2f8;
+    padding: 5px;     margin-left: 7px;
+    border-radius: 5px;">
+          {{form.brand}}
+        </span>
+        <span v-if="form.sellDate" style="font-size: 14px;
+    background-color: #f3f2f8;
+    margin-left: 7px;
+    padding: 5px;
+    border-radius: 5px;">
+          {{form.sellDate}}
+        </span>
+      </div>
+      <div style="padding-top: 0px;
+    padding-right: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
     display: flex;
@@ -70,33 +95,64 @@
         </strong>
       </div>
     </section>
-    <section class="my-pay-4">
-      <div style="    border-right-color: rgba(185, 185, 185, .14);
-    border-right-style: solid;
-    height: 12vw;
-    margin-top: 26px;">
-        <span style="color: #7a7a7a;font-size: 15px;">
-          信息
-        </span>
-      </div>
-      <div style="width: 75vw;">
-        <span style="color: #7a7a7a;font-size: 15px;text-align: left;margin-left: 15px;">品牌
-          <span  style="color: #333;font-size: 15px;text-align: left;margin-left: 5px;">
-                {{form.brand }}
-          </span>
-        </span>
-        <span style="color: #7a7a7a;font-size: 15px;text-align: left;margin-left: 15px;">类型
-          <span  style="color: #333;font-size: 15px;text-align: left;margin-left: 5px;">
-          {{form.type | dictToDescTypeValue(20221108)}}
-          </span>
-        </span>
-        <span style="color: #7a7a7a;font-size: 15px;text-align: left;margin-left: 15px;margin-bottom: 5px;">发售时间
-          <span  style="color: #333;font-size: 15px;text-align: left;margin-left: 5px;">
-                {{form.sellDate }}
-          </span>
-        </span>
-      </div>
-    </section>
+<!--    <section class="my-pay-4-1">-->
+<!--      <div style="    border-right-color: rgba(185, 185, 185, .14);-->
+<!--    border-right-style: solid;-->
+<!--    height: 12vw;-->
+<!--    margin-top: 26px;">-->
+<!--        <span style="color: #7a7a7a;font-size: 15px;">-->
+<!--          信息-->
+<!--        </span>-->
+<!--      </div>-->
+<!--      <div style="width: 75vw;">-->
+<!--        <span style="color: #7a7a7a;font-size: 15px;text-align: left;margin-left: 15px;">品牌-->
+<!--          <span  style="color: #333;font-size: 15px;text-align: left;margin-left: 5px;">-->
+<!--                {{form.brand }}-->
+<!--          </span>-->
+<!--        </span>-->
+<!--        <span style="color: #7a7a7a;font-size: 15px;text-align: left;margin-left: 15px;">类型-->
+<!--          <span  style="color: #333;font-size: 15px;text-align: left;margin-left: 5px;">-->
+<!--          {{form.type | dictToDescTypeValue(20221108)}}-->
+<!--          </span>-->
+<!--        </span>-->
+<!--        <span style="color: #7a7a7a;font-size: 15px;text-align: left;margin-left: 15px;margin-bottom: 5px;">发售时间-->
+<!--          <span  style="color: #333;font-size: 15px;text-align: left;margin-left: 5px;">-->
+<!--                {{form.sellDate }}-->
+<!--          </span>-->
+<!--        </span>-->
+<!--      </div>-->
+<!--    </section>-->
+
+<!--    <section class="my-pay-4-1">-->
+<!--      <div style="border-right-color: rgba(185, 185, 185, .14);-->
+<!--  border-right-style: solid;">-->
+<!--        <span style="color: #7a7a7a;font-size: 15px;">-->
+<!--          信息-->
+<!--        </span>-->
+<!--      </div>-->
+<!--      <div style="border-right-color: rgba(185, 185, 185, .14);-->
+<!--  border-right-style: solid;">-->
+<!--        <p>品牌</p>-->
+<!--        <strong>-->
+<!--          {{form.brand}}-->
+<!--        </strong>-->
+<!--      </div>-->
+<!--      <div style="border-right-color: rgba(185, 185, 185, .14);-->
+<!--  border-right-style: solid;">-->
+<!--        <p>类型</p>-->
+<!--        <strong>-->
+<!--          {{form.type | dictToDescTypeValue(20221108)}}-->
+<!--        </strong>-->
+<!--      </div>-->
+<!--      <div style="border-right-color: rgba(185, 185, 185, .14);-->
+<!--  border-right-style: solid;">-->
+<!--        <p>发售时间</p>-->
+<!--        <strong>-->
+<!--          {{form.sellDate }}-->
+<!--        </strong>-->
+<!--      </div>-->
+<!--    </section>-->
+
     <div class="my-pay-5" v-if="tableData.length">
       <div>
         <h5 style="font-size: 17px;margin-left: 15px;font-weight: 600;color: #333333">尺码列表</h5>
@@ -632,7 +688,7 @@
     background-color: #fff;
   }
 
-  .my-pay-4 {
+  .my-pay-4-1 {
     margin-top: 15px;
     border-radius: 10px;
     display: -webkit-box;
