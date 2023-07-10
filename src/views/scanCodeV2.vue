@@ -70,7 +70,8 @@
       </el-row>
     </div>
 
-    <section  :style="type!=1 ? 'padding-top:138px;' : 'padding-top:42px;'">
+    <section  :style="type!=1 ? 'padding-top:148px;      border-radius: 10px;  margin-left: 4vw;' :
+     'padding-top:50px;   border-radius: 10px;  margin-left: 4vw;'">
 
       <div v-if="form.id">
         <mt-field
@@ -78,7 +79,7 @@
         >
           <img
             :disabled="type == 1 "
-            style="margin-bottom: 20px;"
+            style="margin-bottom: 20px;width: 54vw;"
             class="select100"
             v-if="form.img"
             :src="form.img"
@@ -126,25 +127,14 @@
           rows="3"
         >
         </mt-field>
-        <mt-field
-          :disabled="type == 1 "
-          label="备注"
-          placeholder="请输入备注"
-          type="textarea"
-          v-model="form.remark"
-          rows="4"
-        >
-        </mt-field>
-
-        <div style="
-        border-bottom: 1vw solid #eee;
-    font-size: 10px;
-    padding-top: 2.4vw;
-    padding-left: 4vw;
-    padding-right: 3vw;
-    background: #ffffff;" >
-          <h5 style="font-size: 20px;margin-bottom: 8px;">尺码列表</h5>
-          <el-table  style="margin-top: 20px;z-index: 1" border :data="tableData" @row-click="rowClick" >
+      </div>
+    </section>
+      <section  style="margin-top:10px;    margin-left: 4vw;width: 93vw;">
+        <div>
+          <div style="background-color: white">
+            <h5 style="font-size: 20px;padding: 2vw;">尺码列表</h5>
+          </div>
+          <el-table  style="z-index: 1" border :data="tableData" @row-click="rowClick" >
             <el-table-column align="center" width="51" prop="size" label="尺码">
               <template scope="scope">
                 <a style="color: #20a0ff" @click="rowClick(scope.row)"> {{ scope.row.size }}</a>
@@ -171,21 +161,6 @@
             </el-table-column>
           </el-table>
         </div>
-        <div  v-if="!flag" style="    margin-left: 35vw;
-      margin-top: 20px;">
-          <mt-button v-if="type != 1" style="bottom: 10px"
-                     type="primary"
-                     @click="submit">提交
-          </mt-button>
-          <mt-button v-else style="bottom: 10px"
-                     type="primary"
-                     @click="goEdit">编辑
-          </mt-button>
-          <mt-button style="bottom: 10px"
-                     @click="$router.go(-1)">取消
-          </mt-button>
-        </div>
-      </div>
     </section>
     <el-dialog
       center
@@ -198,41 +173,41 @@
         <li  class="store-list-1-li-1">
           <div class="overview1">
             <p><strong>当前价格</strong></p>
-            <p class="color-danger">{{priceData.price}}</p>
+            <p class="color-url">{{priceData.price}}</p>
           </div>
           <div class="overview2">
             <p><strong>到手价</strong></p>
-            <p class="color-danger">{{priceData.theirPrice}} </p>
+            <p class="color-url">{{priceData.theirPrice}} </p>
           </div>
         </li>
         <li  class="store-list-1-li-1">
           <div class="overview1">
             <p><strong>年度最高</strong></p>
-            <p class="color-danger">{{priceData.price365}}</p>
+            <p class="color-url">{{priceData.price365}}</p>
           </div>
           <div class="overview2">
             <p><strong>到手价</strong></p>
-            <p class="color-danger">{{priceData.theirPrice365}}</p>
+            <p class="color-url">{{priceData.theirPrice365}}</p>
           </div>
         </li>
         <li  class="store-list-1-li-1">
           <div class="overview1">
             <p><strong>半年最高</strong></p>
-            <p class="color-danger">{{priceData.price180}}</p>
+            <p class="color-url">{{priceData.price180}}</p>
           </div>
           <div class="overview2">
             <p><strong>到手价</strong></p>
-            <p class="color-danger">{{priceData.theirPrice180}}</p>
+            <p class="color-url">{{priceData.theirPrice180}}</p>
           </div>
         </li>
         <li  class="store-list-1-li-1">
           <div class="overview1">
             <p><strong>30天最高</strong></p>
-            <p class="color-danger">{{priceData.price30}}</p>
+            <p class="color-url">{{priceData.price30}}</p>
           </div>
           <div class="overview2">
             <p><strong>到手价</strong></p>
-            <p class="color-danger">{{priceData.theirPrice30}}</p>
+            <p class="color-url">{{priceData.theirPrice30}}</p>
           </div>
         </li>
       </ul>
@@ -271,7 +246,7 @@
 <!--        <img src="../../static/img/handleAdd.png" height="30" width="30" slot="icon">-->
 <!--      </mt-button>-->
 <!--    </div>-->
-    <v-footer v-if="!flag"></v-footer>
+<!--    <v-footer v-if="!flag"></v-footer>-->
   </div>
 </template>
 
@@ -282,13 +257,13 @@
   import { goodsBaseSizePriceApi } from '@/api/goodsBaseSizePrice'
   import axios from 'axios'
   import * as imageConversion from 'image-conversion'
-  import Footer from '@/common/_footer.vue'
+  // import Footer from '@/common/_footer.vue'
   import { hideLoading, showLoading } from '@/components/Loading/loading'
 
   export default {
     components: {
       'v-header': Header,
-      'v-footer': Footer
+      // 'v-footer': Footer
     },
     data() {
       return {
@@ -675,9 +650,9 @@
     display: -ms-flexbox;
     -ms-flex-align: center;
     -ms-flex-pack: justify;
-    background: #eeeeee;
+    background: #fff;
     position: fixed;
-    height: 94px;
+    height: 97px;
     font-size: 14px;
     z-index: 99;
     margin-top: 11.6vw;
