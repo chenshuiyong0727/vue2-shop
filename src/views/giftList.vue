@@ -4,6 +4,9 @@
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
       </div>
+      <div slot="right">
+        <mt-button size="normal" style="font-size: 16px"  @click="handleClick1">新增</mt-button>
+      </div>
     </mt-header>
 <!--    <div class="fenlei_top">-->
 <!--      <div    class="fenlei_top_left">-->
@@ -41,20 +44,32 @@
     <div style="padding-top: 3.86rem">
       <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top">
-          <div class="dingdans_top_left">
+          <div class="dingdans_top_left" style="     display: flex;
+    justify-content: space-between;
+    align-items: center;">
+            <div style="width: 15vw">
+              <strong> {{item.name}} </strong>
+            </div>
+            <div  style="width: 15vw">
+              <strong style="margin-left: 10px"> {{item.price}} </strong>
+            </div>
+            <div  style="width: 15vw">
+              <strong style="margin-left: 10px"> {{item.type | dictToDescTypeValue(41)}} </strong>
+            </div>
+            <div  style="width: 30vw">
+              <strong style="margin-left: 10px"> {{item.label | dictToDescTypeValue(42)}} </strong>
+            </div>
+            <div  style="width: 30vw;   display: flex;
+    flex-direction: column;align-self: flex-end;">
             <el-button
               type="text"
-              style="margin-right: 10px"
+              style=""
               @click="handleClick(item)">修改</el-button>
-              <strong> {{item.name}} </strong>
-              <strong style="margin-left: 10px"> {{item.price}} </strong>
-              <strong style="margin-left: 10px"> {{item.type | dictToDescTypeValue(41)}} </strong>
-              <strong style="margin-left: 10px"> {{item.label | dictToDescTypeValue(42)}} </strong>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <p style="padding: 1.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
     <mt-popup
       position="bottom"
       v-model="isShowDialog2">
@@ -113,20 +128,20 @@
 <!--        <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">-->
 <!--      </div>-->
 <!--    </div>-->
-    <div style="
-    right: 15px;
-    bottom: 10vw;
-    position: absolute;
-    text-align: center;
-    ">
-      <mt-button  @click="handleClick1"  style="margin-left: 5px;
-    border-radius: 100%;
-    margin-top: 0px;
-    height: 55px;
-    width: 55px;" type="primary">
-        <img src="../../static/img/add.png" height="30" width="30" slot="icon">
-      </mt-button>
-    </div>
+<!--    <div style="-->
+<!--    right: 15px;-->
+<!--    bottom: 10vw;-->
+<!--    position: absolute;-->
+<!--    text-align: center;-->
+<!--    ">-->
+<!--      <mt-button  @click="handleClick1"  style="margin-left: 5px;-->
+<!--    border-radius: 100%;-->
+<!--    margin-top: 0px;-->
+<!--    height: 55px;-->
+<!--    width: 55px;" type="primary">-->
+<!--        <img src="../../static/img/add.png" height="30" width="30" slot="icon">-->
+<!--      </mt-button>-->
+<!--    </div>-->
 <!--    <v-footer></v-footer>-->
   </div>
 </template>

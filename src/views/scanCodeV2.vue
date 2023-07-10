@@ -130,7 +130,7 @@
       </div>
     </section>
       <section  style="margin-top:10px;    margin-left: 4vw;width: 93vw;">
-        <div>
+        <div v-if="form.id">
           <div style="background-color: white">
             <h5 style="font-size: 20px;padding: 2vw;">尺码列表</h5>
           </div>
