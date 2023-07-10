@@ -22,103 +22,57 @@
                         type="month" placeholder="时间结束" @change="getPage">
         </el-date-picker>
       </div>
-<!--      <div class="fenlei_top_right">-->
-<!--        <mt-button-->
-<!--          type="primary"-->
-<!--          size="small"-->
-<!--          @click="getPage">搜索-->
-<!--        </mt-button>-->
-<!--      </div>-->
     </div>
     <div style="padding-top: 0.86rem">
-      <div class="dingdans_item_rt" v-for="(item,index) in tableData" :key="index">
-        <div class="dingdans_top_rt">
-            <strong style="margin-left: 12px;">月份：</strong>
+      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
+        <div class="dingdans_top">
+          <div class="dingdans_top_left">
+            <strong>月份：</strong>
+            <a>
               <strong
-                @click="jumpDetail(item.months )"> {{item.months}} </strong>
-        </div>
-        <div class="dingdans_con_rt">
-          <div  style="width: 33vw">
-            <strong>
-              {{item.successNum}}
-            </strong>
-            <p>入库数</p>
-          </div>
-          <div  style="width: 33vw">
-            <strong>
-              {{item.orderAmount}}
-            </strong>
-            <p>入库总额</p>
-          </div>
-          <div style="width: 33vw;    border-right-width: 0vw;">
-            <strong>
-              {{item.profitsAmount}}
-            </strong>
-            <p>市价总额</p>
+                @click="jumpDetail(item.months )"
+                :style="item.months == '合计' ? '' : 'color: #409EFF;'"> {{item.months}} </strong>
+            </a>
+            <!--            <strong>月份：</strong> <strong class="color-danger"> {{item.months}} </strong>-->
           </div>
         </div>
-        <div class="dingdans_con_rt">
-          <div  >
-            <strong v-if="item.successNum">
-              {{item.orderAmount / item.successNum  | numFilter}}
-            </strong>
-            <strong v-else>
-              0
-            </strong>
-            <p>入库均价</p>
-          </div>
-          <div  >
-            <strong v-if="item.successNum">
-              {{item.profitsAmount / item.successNum  | numFilter}}
-            </strong>
-            <strong v-else>
-              0
-            </strong>
-            <p>市价均价</p>
-          </div>
-          <div  >
-            <strong>
-              {{item.inventory}}
-            </strong>
-            <p>剩余库存</p>
-          </div>
-          <div style="border-right-width: 0vw;">
-            <strong>
-              {{item.inventoryPrice}}
-            </strong>
-            <p>剩余总额</p>
-          </div>
-        </div>
-        <div class="dingdans_con_rt">
-          <div  >
-            <strong>
-              {{item.saleNum}}
-            </strong>
-            <p>已售数量</p>
-          </div>
-          <div  >
-            <strong>
-              {{item.theirPrice}}
-            </strong>
-            <p>出售金额</p>
-          </div>
-          <div  >
-            <strong>
-              {{item.profits}}
-            </strong>
-            <p>已产生利润</p>
-          </div>
-          <div style=" border-right-width: 0vw;">
-            <strong>
-              {{item.thisTimeProfits}}
-            </strong>
-            <p>预估利润</p>
+        <div class="dingdans_con">
+          <div class="diangdans_con_right">
+            <div class="dingdans_con_right_top">
+              入库数：<strong>{{item.successNum}}</strong>
+              入库总额：<strong>{{item.orderAmount}}</strong>
+              市价总额：<strong>{{item.profitsAmount}}</strong>
+              <span v-if="item.successNum">入库均价：<strong>{{item.orderAmount / item.saleNum  | numFilter}}</strong></span>
+              <span v-else>入库均价：<strong>0</strong></span>
+              <span v-if="item.successNum">市价均价：<strong>{{item.profitsAmount / item.saleNum  | numFilter}}</strong></span>
+              <span v-else>市价均价：<strong>0</strong></span>
+              剩余库存：<strong>{{item.inventory}}</strong>
+              剩余库存总额：<strong>{{item.inventoryPrice}}</strong>
+              已售数量：<strong>{{item.saleNum}}</strong>
+              出售金额：<strong>{{item.theirPrice}}</strong>
+              已产生利润：<strong>{{item.profits}}</strong>
+              预估利润：<strong>{{item.thisTimeProfits}}</strong>
+            </div>
+<!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
+<!--              <span v-if="item.successNum">入库均价：<strong>{{item.orderAmount / item.successNum  | numFilter}}</strong></span>-->
+<!--              <span v-else>入库均价：<strong>0</strong></span>-->
+<!--              <span v-if="item.successNum">市价均价：<strong>{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>-->
+<!--              <span v-else>市价均价：<strong>0</strong></span>-->
+<!--              剩余库存：<strong>{{item.inventory}}</strong>-->
+<!--            </div>-->
+<!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
+<!--              剩余库存总额：<strong>{{item.inventoryPrice}}</strong>-->
+<!--              已售数量：<strong>{{item.saleNum}}</strong>-->
+<!--            </div>-->
+<!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
+<!--              出售金额：<strong>{{item.theirPrice}}</strong>-->
+<!--              产生利润：<strong>{{item.profits}}</strong>-->
+<!--            </div>-->
           </div>
         </div>
-
       </div>
     </div>
-<!--    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>-->
+    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
   </div>
 </template>
 <script>
@@ -156,9 +110,6 @@
         }
       },
       jumpDetail(months) {
-        if (months == '合计'){
-          return
-        }
         this.$router.push({ path: '/putinDetail', query: { months }})
       },
       getPage() {
@@ -187,7 +138,7 @@
     font-weight: 600;
   }
 
-  .dingdans_item_rt {
+  .dingdans_item {
     padding: 2.4vw 1.2vw;
     background: #ffffff;
     border-bottom: 1vw solid #eee;
@@ -195,68 +146,46 @@
     padding-left: 3%;
   }
 
-  .dingdans_top_rt {
-    font-size: 17px;
-    height: 25px;
-    line-height: 25px;
-    border-left: 6px solid #409eff;
-    color: #333333;
-  }
-
-  .dingdans_con_rt {
+  .dingdans_top {
+    font-size: 3.68vw;
+    height: 3.88vw;
+    line-height: 3.88vw;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 1.3vw 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    > div {
-      text-align: center;
-      width: 25vw;
-      border-right-color: #B9B9B9;
-      border-right-style: solid;
-      border-right-width: 1px;
-      font-size: 15px;
-      > strong {
-        color:#409eff;
-        font-size: 16px;
-        line-height: 20px;
-        }
-      > p {
-       margin-top: 2px;
-        }
-      }
-
+    justify-content: space-between;
   }
 
+  .dingdans_con {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.3vw 0;
+  }
 
-  .dingdans_con_rt_left {
+  .dingdans_con_left {
     width: 35vw;
     height: 20vw;
     display: flex;
   }
 
-  .dingdans_con_rt_left img {
+  .dingdans_con_left img {
     width: 100%;
     margin: auto;
     border-radius: 10px;
   }
 
-  .diangdans_con_right_rt {
+  .diangdans_con_right {
     width: 130vw;
     padding-left: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
 
-  .dingdans_con_rt_right_down {
+  .dingdans_con_right_down {
     margin-top: 1.4vw;
     font-size: 13px;
     margin-bottom: 2vw;
   }
 
-  /*.dingdans_con_rt_right_down_1 {*/
+  /*.dingdans_con_right_down_1 {*/
   /*  !*margin-left: 55vw;*!*/
   /*  margin-bottom: -7vw;*/
   /*  font-size: 3.5vw;*/
