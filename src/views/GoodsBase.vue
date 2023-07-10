@@ -57,11 +57,6 @@
               :style="tableData.length==(index+1) ? 'margin-bottom: 56px;' : ''"
       >
         <div class="dingdans_con_dw">
-          <div v-if="showSd" style="width: 50px;
-    margin-left: -2px;
-    margin-right: 2px;" >
-            <el-checkbox v-model="item.checked" :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
-          </div>
           <div :src="item.img" class="dingdans_con_left_dw"
                @click="avatarShow(item.img)">
             <img :src="item.img" >
@@ -72,7 +67,7 @@
             </p>
           </div>
           <div class="diangdans_con_right_dw">
-            <div class="dingdans_con_right_top_dw" @click="scanCode(item.id, 1) ">
+            <div class="dingdans_con_right_top_dw" @click="goodsDetail(item.id, 1) ">
               <span>
                 {{item.name}}
               </span>
@@ -99,7 +94,7 @@
                     <el-dropdown-menu slot="dropdown" >
                       <el-dropdown-item type="text" @click.native="storeAdd(item.id)">选择</el-dropdown-item>
                       <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
-                      <el-dropdown-item type="text" @click.native="scanCode(item.id,1)">详情</el-dropdown-item>
+                      <el-dropdown-item type="text" @click.native="goodsDetail(item.id,1)">详情</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
                 </div>
@@ -231,7 +226,7 @@
       }
     },
     beforeRouteLeave(to, from, next) {
-      if (to.path == "/store" || to.path == "/storeAdd" || to.path == "/scanCode") {
+      if (to.path == "/store" || to.path == "/storeAdd" || to.path == "/scanCode" || to.path == "/goodsDetail") {
         from.meta.isBack = this.isBack;
       } else {
         this.curScrollTop = 0
@@ -252,6 +247,11 @@
         this.isBack = true
         this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({ path: '/scanCode', query: { id, type } })
+      },
+      goodsDetail(id, type) {
+        this.isBack = true
+        this.curScrollTop = this.$refs.hello.scrollTop
+        this.$router.push({ path: '/goodsDetail', query: { id, type } })
       },
       gotoDw(spuId) {
         if (!spuId){

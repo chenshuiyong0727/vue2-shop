@@ -57,7 +57,7 @@
           </div>
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top" style="margin-top: -10px">
-              <span @click="scanCode(item.id,1)" v-if="item.name"><strong> {{item.name | sizeFilterNum(50) }}</strong></span>
+              <span @click="goodsDetail(item.id,1)" v-if="item.name"><strong> {{item.name | sizeFilterNum(50) }}</strong></span>
             </div>
             <div class="dingdans_con_right_down">
 <!--              货号：-->
@@ -87,7 +87,7 @@
               <el-button
                 style="margin-left: 1vw;font-weight: 600;"
                 type="text"
-                @click="scanCode(item.id,1)">查看</el-button>
+                @click="goodsDetail(item.id,1)">查看</el-button>
               <el-button
                 style="margin-left: 1vw;font-weight: 600;"
                 type="text"
@@ -158,7 +158,7 @@
     position: absolute;
     text-align: center;
     ">
-      <mt-button  @click="scanCode(null,3)"  style="margin-left: 5px;
+      <mt-button  @click="goodsDetail(null,3)"  style="margin-left: 5px;
     border-radius: 100%;
     margin-top: 0px;
     height: 55px;
@@ -304,8 +304,8 @@
           }
         }
       },
-      scanCode(id, type) {
-        this.$router.push({ path: '/scanCode', query: { id, type } })
+      goodsDetail(id, type) {
+        this.$router.push({ path: '/goodsDetail', query: { id, type } })
       },
       goDetail(id, type) {
         this.$router.push({ path: '/goodsAdd', query: { id, type } })

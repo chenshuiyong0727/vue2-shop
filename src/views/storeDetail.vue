@@ -72,7 +72,7 @@
     padding-right: 10px;
     padding-bottom: 5px;
     padding-left: 10px;">
-        <strong style="color: #333;font-size: 15px;line-height: 22px;" @click="scanCode(form.goodsId, 1) ">
+        <strong style="color: #333;font-size: 15px;line-height: 22px;" @click="goodsDetail(form.goodsId, 1) ">
           {{form.goodsName}}
         </strong>
       </div>
@@ -234,8 +234,8 @@
       this.listSysDict()
     },
     methods:{
-      scanCode(id, type) {
-        this.$router.push({ path: '/scanCode', query: { id, type } })
+      goodsDetail(id, type) {
+        this.$router.push({ path: '/goodsDetail', query: { id, type } })
       },
       copyUrl(url) {
         const input = document.createElement('input')

@@ -54,7 +54,7 @@
           <div class="diangdans_con_right">
             <div class="dingdans_con_right_top" >
               <strong v-if="item.goodsName"
-                      @click="scanCode(item.goodsId, 1) "
+                      @click="goodsDetail(item.goodsId, 1) "
                       >
                 {{item.goodsName}}
               </strong>
@@ -383,8 +383,8 @@
         this.imageZoom = e
         this.pictureZoomShow = true
       },
-      scanCode(id, type) {
-        this.$router.push({ path: '/scanCode', query: { id, type } })
+      goodsDetail(id, type) {
+        this.$router.push({ path: '/goodsDetail', query: { id, type } })
       },
       jumpactNo(actNo) {
         this.$router.push({ path: '/store', query: { actNo } })

@@ -22,7 +22,7 @@
 
             <p>
               <strong v-if="form.id"
-                      @click="scanCode(form.id, 1) "
+                      @click="goodsDetail(form.id, 1) "
                       :style="form.id ? 'font-size: 14px;color: #409EFF;' : 'font-size: 14px;'">
                 {{form.name }}
               </strong>
@@ -282,8 +282,8 @@ export default {
       }
       this.tableData = table1
     },
-    scanCode(id, flag) {
-      this.$router.push({ path: '/scanCode', query: { id, flag } })
+    goodsDetail(id, flag) {
+      this.$router.push({ path: '/goodsDetail', query: { id, flag } })
     },
     addSizeHandle(item, index = 0) {
       if (!this.activeIndex.includes(index)) {

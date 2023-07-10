@@ -40,11 +40,11 @@
         <div class="dingdans_top">
           <div class="dingdans_top_left">
             <strong v-if="item.goodsName"
-                    @click="scanCode(item.goodsId, 1) "
+                    @click="goodsDetail(item.goodsId, 1) "
                     style="color: #409EFF">
               {{item.goodsName | sizeFilter }}
             </strong>
-            <strong v-else  @click="scanCode(item.goodsId, 1) " style="color: #409EFF">
+            <strong v-else  @click="goodsDetail(item.goodsId, 1) " style="color: #409EFF">
               {{item.actNo}}
             </strong>
           </div>
@@ -322,8 +322,8 @@
         this.allLoaded = false;
         this.$refs.loadmore.onTopLoaded();
       },
-      scanCode(id, type) {
-        this.$router.push({ path: '/scanCode', query: { id, type } })
+      goodsDetail(id, type) {
+        this.$router.push({ path: '/goodsDetail', query: { id, type } })
       },
       jumpactNo(actNo) {
         this.$router.push({ path: '/store', query: { actNo } })

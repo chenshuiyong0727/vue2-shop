@@ -71,24 +71,37 @@
     </div>
 
     <section  :style="type!=1 ? 'padding-top:138px;' : 'padding-top:42px;'">
-
-      <div v-if="form.id">
-        <mt-field
-          label="商品图片"
-        >
+      <div class="ui-flex justify-center center"
+           style="width: 100vw; height: 220px;background-color: white;margin-top: -3.1px;">
+        <div class="cell">
           <img
-            :disabled="type == 1 "
+            @click="avatarShow(form.img)"
+            :disabled="true "
             style="margin-bottom: 20px;"
-            class="select100"
             v-if="form.img"
             :src="form.img"
             @click="pictureZoomShow = true"
           />
-        </mt-field>
+        </div>
+      </div>
+
+      <div v-if="form.id">
+<!--        <mt-field-->
+<!--          label="商品图片"-->
+<!--        >-->
+<!--          <img-->
+<!--            :disabled="type == 1 "-->
+<!--            style="margin-bottom: 20px;"-->
+<!--            class="select100"-->
+<!--            v-if="form.img"-->
+<!--            :src="form.img"-->
+<!--            @click="pictureZoomShow = true"-->
+<!--          />-->
+<!--        </mt-field>-->
         <mt-field
           :disabled="type == 1 "
           label="货号"
-          placeholder="请输入货号"
+          placeholder="请输入品牌"
           type="text"
           v-model="form.actNo"
         >
@@ -171,20 +184,6 @@
             </el-table-column>
           </el-table>
         </div>
-        <div  v-if="!flag" style="    margin-left: 35vw;
-      margin-top: 20px;">
-          <mt-button v-if="type != 1" style="bottom: 10px"
-                     type="primary"
-                     @click="submit">提交
-          </mt-button>
-          <mt-button v-else style="bottom: 10px"
-                     type="primary"
-                     @click="goEdit">编辑
-          </mt-button>
-          <mt-button style="bottom: 10px"
-                     @click="$router.go(-1)">取消
-          </mt-button>
-        </div>
       </div>
     </section>
     <el-dialog
@@ -253,7 +252,7 @@
     </el-dialog>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
-        <img :src="form.img" alt="" width="100%" >
+        <img :src="form.img" alt="" width="100%" class="showImg">
       </div>
     </div>
 <!--    <div v-if="type==3 && !form.id" style="-->
@@ -271,7 +270,7 @@
 <!--        <img src="../../static/img/handleAdd.png" height="30" width="30" slot="icon">-->
 <!--      </mt-button>-->
 <!--    </div>-->
-    <v-footer v-if="!flag"></v-footer>
+<!--    <v-footer v-if="!flag"></v-footer>-->
   </div>
 </template>
 
@@ -655,7 +654,7 @@
 
 </script>
 
-<style>
+<style lang="less" scoped>
   @import '../assets/index/style.css';
   html {
     font-size: 50px;

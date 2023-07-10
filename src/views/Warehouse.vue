@@ -80,7 +80,7 @@
             </p>
           </div>
           <div class="diangdans_con_right_dw">
-            <div class="dingdans_con_right_top_dw" @click="scanCode(item.goodsId, 1) ">
+            <div class="dingdans_con_right_top_dw" @click="goodsDetail(item.goodsId, 1) ">
               <span>
                 {{item.goodsName}}
               </span>
@@ -158,7 +158,7 @@
                   <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="jumpactNo(item.actNo)">订单</el-dropdown-item>
                   <el-dropdown-item type="text" v-if="item.inventory > item.galleryCount" @click.native="changeStatusDialog1(item)">上架</el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl )">库存</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="WarehouseDetail(item.goodsId ,item.actNo ,item.img )">库存</el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="goDel(item.id)">删除</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
@@ -647,7 +647,7 @@
         || to.path  =="/order"
         || to.path  =="/storeDetail"
         || to.path  =="/WarehouseDetail"
-        || to.path  =="/scanCode") {
+        || to.path  =="/goodsDetail") {
         from.meta.isBack = this.isBack;
         // this.curScrollTop = this.$refs.hello.scrollTop
       }else {
@@ -976,10 +976,10 @@
         this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({path: '/storeDetail', query: {id}})
       },
-      scanCode(id, type) {
+      goodsDetail(id, type) {
         this.isBack = true
         this.curScrollTop = this.$refs.hello.scrollTop
-        this.$router.push({ path: '/scanCode', query: { id, type } })
+        this.$router.push({ path: '/goodsDetail', query: { id, type } })
       },
       gotoDw(spuId) {
         if (!spuId){
@@ -1001,10 +1001,10 @@
         document.body.removeChild(input)
         this.$toast('已复制至剪切板')
       },
-      WarehouseDetail(goodsId , actNo,imgUrl,img) {
+      WarehouseDetail(goodsId , actNo,img) {
         this.isBack = true
         this.curScrollTop = this.$refs.hello.scrollTop
-        this.$router.push({ path: '/WarehouseDetail', query: {goodsId, actNo ,imgUrl,img} })
+        this.$router.push({ path: '/WarehouseDetail', query: {goodsId, actNo ,img} })
       },
       changeStatusDialog1(row) {
         this.orderData1 = row

@@ -32,10 +32,10 @@
         <div class="dingdans_top">
           <div class="dingdans_top_left">
             <strong v-if="item.goodsName"
-                    @click="scanCode(item.goodsId, 1) ">
+                    @click="goodsDetail(item.goodsId, 1) ">
               {{item.goodsName | sizeFilter }}
             </strong>
-            <strong v-else  @click="scanCode(item.goodsId, 1) " style="color: #409EFF">
+            <strong v-else  @click="goodsDetail(item.goodsId, 1) " style="color: #409EFF">
               {{item.actNo}}
             </strong>
           </div>
@@ -607,7 +607,7 @@
         || to.path  =="/order"
         || to.path  =="/storeDetail"
         || to.path  =="/WarehouseDetail"
-        || to.path  =="/scanCode") {
+        || to.path  =="/goodsDetail") {
         from.meta.isBack = this.isBack;
         // this.curScrollTop = this.$refs.hello.scrollTop
       }else {
@@ -930,10 +930,10 @@
         this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({path: '/storeDetail', query: {id}})
       },
-      scanCode(id, type) {
+      goodsDetail(id, type) {
         this.isBack = true
         this.curScrollTop = this.$refs.hello.scrollTop
-        this.$router.push({ path: '/scanCode', query: { id, type } })
+        this.$router.push({ path: '/goodsDetail', query: { id, type } })
       },
       gotoDw(spuId) {
         if (!spuId){

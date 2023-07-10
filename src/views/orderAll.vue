@@ -80,7 +80,7 @@
             </p>
           </div>
           <div class="diangdans_con_right_dw">
-            <div class="dingdans_con_right_top_dw" @click="scanCode(item.goodsId, 1) ">
+            <div class="dingdans_con_right_top_dw" @click="goodsDetail(item.goodsId, 1) ">
               <span>
                 {{item.goodsName}}
               </span>
@@ -701,7 +701,7 @@
       }
     },
     beforeRouteLeave(to, from, next) {
-      if (to.path == "/store" || to.path == "/orderDetail" || to.path == "/WlDetail" || to.path == "/scanCode") {
+      if (to.path == "/store" || to.path == "/orderDetail" || to.path == "/WlDetail" || to.path == "/goodsDetail") {
         from.meta.isBack = this.isBack;
       } else {
         this.curScrollTop = 0
@@ -1050,10 +1050,10 @@
         document.body.removeChild(input)
         this.$toast('已复制至剪切板')
       },
-      scanCode(id, type) {
+      goodsDetail(id, type) {
         this.isBack = true
         this.curScrollTop = this.$refs.hello.scrollTop
-        this.$router.push({ path: '/scanCode', query: { id, type } })
+        this.$router.push({ path: '/goodsDetail', query: { id, type } })
       },
       jumpactNo(actNo) {
         this.isBack = true

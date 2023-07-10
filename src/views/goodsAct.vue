@@ -43,11 +43,11 @@
 <!--        <div class="dingdans_top">-->
 <!--          <div class="dingdans_top_left">-->
 <!--            <strong v-if="item.goodsName"-->
-<!--                    @click="scanCode(item.goodsId, 1) "-->
+<!--                    @click="goodsDetail(item.goodsId, 1) "-->
 <!--                    :style="item.goodsId ? 'color: #409EFF' : ''">-->
 <!--              {{item.goodsName | sizeFilter }}-->
 <!--            </strong>-->
-<!--            <strong v-else  @click="scanCode(item.goodsId, 1) " :style="item.goodsId ? 'color: #409EFF' : ''">-->
+<!--            <strong v-else  @click="goodsDetail(item.goodsId, 1) " :style="item.goodsId ? 'color: #409EFF' : ''">-->
 <!--              {{item.actNo}}-->
 <!--            </strong>-->
 <!--          </div>-->
@@ -72,7 +72,7 @@
           <div class="diangdans_con_right21" style="    margin-top: 30px;">
             <div class="dingdans_con_right_top" style="margin-top: -28px;">
               <strong v-if="item.goodsName"
-                      @click="scanCode(item.goodsId, 1,item.spuId) ">
+                      @click="goodsDetail(item.goodsId, 1,item.spuId) ">
                 {{item.goodsName }}
               </strong>
 <!--              货号：<strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>-->
@@ -283,7 +283,7 @@
     },
     beforeRouteLeave(to, from, next) {
       let path = to.path
-      if (path == "/scanCode") {
+      if (path == "/goodsDetail") {
         from.meta.isBack = true;
       }else {
         this.curScrollTop = 0
@@ -450,7 +450,7 @@
         }
         this.getPage()
       },
-      scanCode(id, flag,spuId) {
+      goodsDetail(id, flag,spuId) {
         // let isActUser = localStorage.getItem('isActUser')
         if (this.isActUser == 1) {
           this.gotoDw(spuId)
@@ -458,7 +458,7 @@
         }
         this.isBack = true
         this.curScrollTop = this.$refs.hello.scrollTop
-        this.$router.push({ path: '/scanCode', query: { id, flag } })
+        this.$router.push({ path: '/goodsDetail', query: { id, flag } })
       },
       // jumpactNo(actNo) {
       //   this.$router.push({ path: '/store', query: { actNo } })

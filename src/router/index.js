@@ -31,6 +31,7 @@ const WarehouseDetail = resolve => require(['@/views/WarehouseDetail.vue'], reso
 const OpenWarehouse = resolve => require(['@/views/OpenWarehouse.vue'], resolve)
 const scanCode = resolve => require(['@/views/scanCode.vue'], resolve)
 const scanCodeV2 = resolve => require(['@/views/scanCodeV2.vue'], resolve)
+const goodsDetail = resolve => require(['@/views/goodsDetail.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
 const loginByCode = resolve => require(['@/views/loginByCode.vue'], resolve)
 const logout = resolve => require(['@/views/logout.vue'], resolve)
@@ -241,6 +242,13 @@ export default new Router({
       path: '/userInfo',
       name: '用户详情',
       component: userInfo,
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      },
+    }, {
+      path: '/goodsDetail',
+      name: '商品详情',
+      component: goodsDetail,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },
