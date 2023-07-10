@@ -4,8 +4,17 @@
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
       </div>
+<!--      <div slot="right">-->
+<!--        <mt-button size="normal" style="font-size: 16px"  @click="handleClick1">新增</mt-button>-->
+<!--      </div>-->
       <div slot="right">
-        <mt-button size="normal" style="font-size: 16px"  @click="handleClick1">新增</mt-button>
+        <el-dropdown trigger="click" style="margin-left: 1px;">
+          <mt-button size="normal" style="font-size: 16px; color: #656b79" >管理</mt-button>
+          <el-dropdown-menu slot="dropdown" >
+            <el-dropdown-item type="text" @click.native="handleClick1">新增</el-dropdown-item>
+            <el-dropdown-item type="text" @click.native="resetHandle">重置</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
     </mt-header>
 <!--    <div class="fenlei_top">-->
@@ -82,17 +91,36 @@
         </div>
       </mt-header>
       <section style="height: 80vw;width: 100vw">
-        <mt-field label="状态" style="margin-top: 11vw;">
-            <select class="select100" v-model="queryParam.type">
-               <option :disabled="true" value="" selected>请选择类型</option>
-              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>
-            </select>
+        <mt-field label="类型" style="margin-top: 11vw;">
+<!--            <select class="select100" v-model="queryParam.type">-->
+<!--               <option :disabled="true" value="" selected>请选择类型</option>-->
+<!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
+<!--            </select>-->
+
+            <el-select size="small" class="select100" v-model="queryParam.type" >
+          <el-option :disabled="true" value="" selected>请选择类型</el-option>
+          <el-option
+            v-for="item in typeList"
+            :key="+item.fieldValue"
+            :label="item.fieldName"
+            :value="+item.fieldValue">
+          </el-option>
+            </el-select>
         </mt-field>
         <mt-field label="关系">
-            <select class="select100" v-model="queryParam.label">
-               <option :disabled="true" value="" selected>请选择关系</option>
-              <option v-for="x in labelList" :value="x.fieldValue">{{x.fieldName}}</option>
-            </select>
+<!--            <el-select class="select100" v-model="queryParam.label">-->
+<!--               <option :disabled="true" value="" selected>请选择关系</option>-->
+<!--              <option v-for="x in labelList" :value="x.fieldValue">{{x.fieldName}}</option>-->
+<!--            </select>-->
+            <el-select size="small" class="select100" v-model="queryParam.label" >
+          <el-option :disabled="true" value="" selected>请选择关系</el-option>
+          <el-option
+            v-for="item in labelList"
+            :key="+item.fieldValue"
+            :label="item.fieldName"
+            :value="+item.fieldValue">
+          </el-option>
+            </el-select>
         </mt-field>
       </section>
     </mt-popup>
@@ -110,16 +138,34 @@
         <mt-field label="姓名"  placeholder="请输入姓名"  style="margin-top: 11vw;" v-model="requestParam.name"></mt-field>
         <mt-field label="金额" placeholder="请输入金额" type="number" v-model="requestParam.price"></mt-field>
         <mt-field label="关系">
-            <select class="select80" v-model="requestParam.label">
-          <option :disabled="true" value="" selected>请选择</option>
-              <option v-for="x in labelList" :value="x.fieldValue">{{x.fieldName}}</option>
-            </select>
+<!--            <select class="select80" v-model="requestParam.label">-->
+<!--          <option :disabled="true" value="" selected>请选择</option>-->
+<!--              <option v-for="x in labelList" :value="x.fieldValue">{{x.fieldName}}</option>-->
+<!--            </select>-->
+            <el-select size="small" class="select80" v-model="requestParam.label" >
+          <el-option :disabled="true" value="" selected>请选择关系</el-option>
+          <el-option
+            v-for="item in labelList"
+            :key="+item.fieldValue"
+            :label="item.fieldName"
+            :value="+item.fieldValue">
+          </el-option>
+            </el-select>
         </mt-field>
         <mt-field label="类型">
-            <select  class="select80" v-model="requestParam.type">
-          <option :disabled="true" value="" selected>请选择</option>
-              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>
-            </select>
+<!--            <select  class="select80" v-model="requestParam.type">-->
+<!--          <option :disabled="true" value="" selected>请选择</option>-->
+<!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
+<!--            </select>-->
+            <el-select size="small" class="select80" v-model="requestParam.type" >
+          <el-option :disabled="true" value="" selected>请选择类型</el-option>
+          <el-option
+            v-for="item in typeList"
+            :key="+item.fieldValue"
+            :label="item.fieldName"
+            :value="+item.fieldValue">
+          </el-option>
+            </el-select>
         </mt-field>
       </section>
     </mt-popup>
