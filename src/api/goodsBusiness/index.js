@@ -4,6 +4,7 @@ export const goodsBusinessApi = {
   page: (body) => request({
     url: '/gw/op/v1/goodsBusiness',
     method: 'get',
+    loading: false,
     params: body
   }),
   // 批量删除
@@ -28,6 +29,7 @@ export const goodsBusinessApi = {
   // 获取详情
   getDetailById: (id) => request({
     url: '/gw/op/v1/goodsBusiness/' + id,
+    loading: false,
     method: 'get'
   }),
   // 新增

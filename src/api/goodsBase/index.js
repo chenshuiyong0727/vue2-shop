@@ -4,12 +4,14 @@ export const goodsBaseApi = {
   // 获取数据列表
   page: (body) => request({
     url: '/gw/op/v1/goodsBase',
+    loading: false,
     method: 'get',
     params: body
   }),
   // 获取数据列表
   syncOldPriceToNew: () => request({
     url: '/gw/op/v2/goodsBase/syncOldPriceToNew',
+    loading: false,
     method: 'get'
   }),
   // 批量删除
@@ -34,6 +36,7 @@ export const goodsBaseApi = {
   // 获取详情
   getDetailById: (id) => request({
     url: '/gw/op/v1/goodsBase/h5/' + id,
+    loading: false,
     method: 'get'
   }),
 

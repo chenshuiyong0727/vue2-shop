@@ -4,12 +4,14 @@ export const goodsBaseSizePriceApi = {
   page: (body) => request({
     url: '/gw/op/v1/goodsBaseSizePrice',
     method: 'get',
+    loading: false,
     params: body
   }),
   // 获取数据列表
   getPriceData: (body) => request({
     url: '/gw/op/v1/goodsBaseSizePrice/getPriceData',
     method: 'get',
+    loading: false,
     params: body
   }),
   // 批量删除
@@ -34,6 +36,7 @@ export const goodsBaseSizePriceApi = {
   // 获取详情
   getDetailById: (id) => request({
     url: '/gw/op/v1/goodsBaseSizePrice/' + id,
+    loading: false,
     method: 'get'
   }),
   // 新增

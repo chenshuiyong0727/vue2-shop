@@ -5,18 +5,21 @@ export const goodsInventoryApi = {
   page: (body) => request({
     url: '/gw/op/v1/goodsInventory',
     method: 'get',
+    loading: false,
     params: body
   }),
   // 获取数据列表
   pageGoods: (body) => request({
     url: '/gw/op/v1/goodsInventory/pageGoods',
     method: 'get',
+    loading: false,
     params: body
   }),
   // 获取数据列表
   pageOpen: (body) => request({
     url: '/gw/op/v1/goodsInventory/pageOpen',
     method: 'get',
+    loading: false,
     params: body
   }),
   // 批量删除
@@ -41,6 +44,7 @@ export const goodsInventoryApi = {
   // 获取详情
   getDetailById: (id) => request({
     url: '/gw/op/v1/goodsInventory/' + id,
+    loading: false,
     method: 'get'
   }),
   // 新增

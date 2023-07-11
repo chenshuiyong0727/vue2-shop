@@ -4,10 +4,12 @@ export const giftApi = {
   page: (body) => request({
     url: '/gw/op/v1/gift',
     method: 'get',
+    loading: false,
     params: body
   }),
   data: () => request({
     url: '/gw/op/v1/gift/data',
+    loading: false,
     method: 'get'
   }),
   // 批量删除
@@ -32,6 +34,7 @@ export const giftApi = {
   // 获取详情
   getDetailById: (id) => request({
     url: '/gw/op/v1/gift/' + id,
+    loading: false,
     method: 'get'
   }),
   // 新增

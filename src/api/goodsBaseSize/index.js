@@ -29,6 +29,7 @@ export const goodsBaseSizeApi = {
   // 获取详情
   getDetailById: (id) => request({
     url: '/gw/op/v1/goodsBaseSize/' + id,
+    loading: false,
     method: 'get'
   }),
   // 新增

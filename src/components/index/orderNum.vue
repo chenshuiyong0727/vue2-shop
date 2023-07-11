@@ -77,7 +77,7 @@
 flex-direction:row;
 align-items:center;">
             <img style="width: 30px;margin-left: 4vw; "  src="../../../static/img/timeout_2.png">
-            <span style="color: #333;font-size: 15px;margin-left: 10px">即将过期订单</span>
+            <span style="color: #333;font-size: 15px;margin-left: 10px">即将到期订单</span>
           </div>
           <div style="display:flex;
 flex-direction:row;

@@ -3,6 +3,7 @@ export const goodsActApi = {
   // 获取数据列表
   page: (body) => request({
     url: '/gw/op/v1/goodsAct',
+    loading: false,
     method: 'get',
     params: body
   }),
@@ -28,6 +29,7 @@ export const goodsActApi = {
   // 获取详情
   getDetailById: (id) => request({
     url: '/gw/op/v1/goodsAct/' + id,
+    loading: false,
     method: 'get'
   }),
   // 新增

@@ -18,6 +18,7 @@ export const goodsOrderApi = {
   waybillNoList: (body) => request({
     url: '/gw/op/v1/goodsOrder/waybillNoList',
     method: 'get',
+    loading: false,
     params: body
   }),
   // 批量删除
@@ -47,6 +48,7 @@ export const goodsOrderApi = {
   // 获取详情
   getDetailById: (id) => request({
     url: '/gw/op/v1/goodsOrder/' + id,
+    loading: false,
     method: 'get'
   }),
   // 新增
@@ -69,15 +71,18 @@ export const goodsOrderApi = {
   }),
   indexData: () => request({
     url: '/gw/op/v1/goodsOrder/indexData',
+    loading: false,
     method: 'get'
   }),
   indexOrderData: (body) => request({
     url: 'gw/op/v1/goodsOrder/indexOrderData',
+    loading: false,
     method: 'get',
     params: body
   }),
   todaySync: (body) => request({
     url: 'gw/op/v1/goodsOrder/todaySync',
+    loading: false,
     method: 'get',
     params: body
   })

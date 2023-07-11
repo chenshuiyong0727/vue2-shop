@@ -98,11 +98,19 @@
                 {{item.addressId | dictToDescTypeValue(38)}}
               </span>
             </div>
-            <div v-if="item.surplusDay && item.surplusDay <=12" style="    margin-top: 15px;margin-bottom: 10px;">
-              <span  class="color-danger">剩余天数</span>
-              <span  class="color-danger">
+            <div v-if="item.surplusDay && item.saleType ==2 " style="    margin-top: 12px;margin-bottom: 5px;">
+              <span v-if="item.surplusDay >12">剩余天数</span>
+              <span v-if="item.surplusDay >=0 && item.surplusDay <=12" class="color-danger">剩余天数</span>
+              <span v-if="item.surplusDay < 0" class="color-danger">到期天数</span>
+              <span v-if="item.surplusDay >12">
                 {{item.surplusDay}}
               </span>
+              <strong  v-if="item.surplusDay >=0 && item.surplusDay <=12"  class="color-danger">
+                {{item.surplusDay}}
+              </strong>
+              <strong  v-if="item.surplusDay < 0"  class="color-danger">
+                {{ 0 - item.surplusDay}}
+              </strong>
             </div>
             <div class="dingdans_con_right_top_dw_2">
               <div>
