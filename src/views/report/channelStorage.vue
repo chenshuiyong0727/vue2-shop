@@ -29,54 +29,154 @@
 <!--        </mt-button>-->
 <!--      </div>-->
     </div>
+
     <div style="padding-top: 0.86rem">
-      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
-        <div class="dingdans_top">
-          <div class="dingdans_top_left">
-<!--            <strong>渠道：</strong>-->
-              <strong
-                v-if="item.months == '合计'"> {{item.months}} </strong>
-              <strong v-else> {{item.months | dictToDescTypeValue(47)  }} </strong>
+      <div class="dingdans_item_rt" v-for="(item,index) in tableData" :key="index">
+        <div class="dingdans_top_rt">
+          <strong style="margin-left: 12px;"
+            v-if="item.months == '合计'"> {{item.months}} </strong>
+          <strong v-else style="margin-left: 12px;"> {{item.months | dictToDescTypeValue(47)  }} </strong>
+<!--          <strong-->
+<!--            @click="jumpDetail(item.months )"> {{item.months}} </strong>-->
+        </div>
+        <div class="dingdans_con_rt">
+          <div  style="">
+            <strong>
+              {{item.successNum}}
+            </strong>
+            <p>入库数</p>
+          </div>
+          <div  style="">
+            <strong>
+              {{item.orderAmount}}
+            </strong>
+            <p>入库总额</p>
+          </div>
+          <div  >
+            <strong>
+              {{item.profits}}
+            </strong>
+            <p>已产生利润</p>
+          </div>
+          <div style="    border-right-width: 0vw;">
+            <strong>
+              {{item.profitsAmount}}
+            </strong>
+            <p>市价总额</p>
           </div>
         </div>
-        <div class="dingdans_con">
-          <div class="diangdans_con_right">
-            <div class="dingdans_con_right_top">
-              入库数：<strong>{{item.successNum}}</strong>
-              入库总额：<strong>{{item.orderAmount}}</strong>
-              市价总额：<strong>{{item.profitsAmount}}</strong>
-              <span v-if="item.successNum">入库均价：<strong>{{item.orderAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>入库均价：<strong>0</strong></span>
-              <span v-if="item.successNum">市价均价：<strong>{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>市价均价：<strong>0</strong></span>
-              剩余库存：<strong>{{item.inventory}}</strong>
-              剩余库存总额：<strong>{{item.inventoryPrice}}</strong>
-              已售数量：<strong>{{item.saleNum}}</strong>
-              出售金额：<strong>{{item.theirPrice}}</strong>
-              已产生利润：<strong>{{item.profits}}</strong>
-              利润均价：<strong>{{item.profits / item.saleNum  | numFilter}}</strong>
-              预估利润：<strong>{{item.thisTimeProfits}}</strong>
-            </div>
-<!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
+        <div class="dingdans_con_rt">
+          <div  >
+            <strong v-if="item.successNum">
+              {{item.orderAmount / item.successNum  | numFilter}}
+            </strong>
+            <strong v-else>
+              0
+            </strong>
+            <p>入库均价</p>
+          </div>
+          <div  >
+            <strong v-if="item.successNum">
+              {{item.profitsAmount / item.successNum  | numFilter}}
+            </strong>
+            <strong v-else>
+              0
+            </strong>
+            <p>市价均价</p>
+          </div>
+          <div  >
+            <strong>
+              {{item.inventory}}
+            </strong>
+            <p>剩余库存</p>
+          </div>
+          <div style="border-right-width: 0vw;">
+            <strong>
+              {{item.inventoryPrice}}
+            </strong>
+            <p>剩余总额</p>
+          </div>
+        </div>
+        <div class="dingdans_con_rt">
+          <div  >
+            <strong>
+              {{item.saleNum}}
+            </strong>
+            <p>已售数量</p>
+          </div>
+          <div  >
+            <strong>
+              {{item.theirPrice}}
+            </strong>
+            <p>出售金额</p>
+          </div>
+          <div  >
+            <strong v-if="item.saleNum">
+              {{item.profits / item.saleNum  | numFilter}}
+            </strong>
+            <strong v-else>0</strong>
+            <p>利润均价</p>
+          </div>
+          <div style=" border-right-width: 0vw;">
+            <strong>
+              {{item.thisTimeProfits}}
+            </strong>
+            <p>预估利润</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+<!--    <div11 style="padding-top: 0.86rem">-->
+<!--      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">-->
+<!--        <div class="dingdans_top">-->
+<!--          <div class="dingdans_top_left">-->
+<!--&lt;!&ndash;            <strong>渠道：</strong>&ndash;&gt;-->
+<!--              <strong-->
+<!--                v-if="item.months == '合计'"> {{item.months}} </strong>-->
+<!--              <strong v-else> {{item.months | dictToDescTypeValue(47)  }} </strong>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="dingdans_con">-->
+<!--          <div class="diangdans_con_right">-->
+<!--            <div class="dingdans_con_right_top">-->
+<!--              入库数：<strong>{{item.successNum}}</strong>-->
+<!--              入库总额：<strong>{{item.orderAmount}}</strong>-->
+<!--              市价总额：<strong>{{item.profitsAmount}}</strong>-->
 <!--              <span v-if="item.successNum">入库均价：<strong>{{item.orderAmount / item.successNum  | numFilter}}</strong></span>-->
 <!--              <span v-else>入库均价：<strong>0</strong></span>-->
 <!--              <span v-if="item.successNum">市价均价：<strong>{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>-->
 <!--              <span v-else>市价均价：<strong>0</strong></span>-->
 <!--              剩余库存：<strong>{{item.inventory}}</strong>-->
-<!--            </div>-->
-<!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
 <!--              剩余库存总额：<strong>{{item.inventoryPrice}}</strong>-->
 <!--              已售数量：<strong>{{item.saleNum}}</strong>-->
-<!--            </div>-->
-<!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
 <!--              出售金额：<strong>{{item.theirPrice}}</strong>-->
-<!--              产生利润：<strong>{{item.profits}}</strong>-->
+<!--              已产生利润：<strong>{{item.profits}}</strong>-->
+<!--              利润均价：<strong>{{item.profits / item.saleNum  | numFilter}}</strong>-->
+<!--              预估利润：<strong>{{item.thisTimeProfits}}</strong>-->
 <!--            </div>-->
-          </div>
-        </div>
-      </div>
-    </div>
-    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
+<!--&lt;!&ndash;            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">&ndash;&gt;-->
+<!--&lt;!&ndash;              <span v-if="item.successNum">入库均价：<strong>{{item.orderAmount / item.successNum  | numFilter}}</strong></span>&ndash;&gt;-->
+<!--&lt;!&ndash;              <span v-else>入库均价：<strong>0</strong></span>&ndash;&gt;-->
+<!--&lt;!&ndash;              <span v-if="item.successNum">市价均价：<strong>{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>&ndash;&gt;-->
+<!--&lt;!&ndash;              <span v-else>市价均价：<strong>0</strong></span>&ndash;&gt;-->
+<!--&lt;!&ndash;              剩余库存：<strong>{{item.inventory}}</strong>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">&ndash;&gt;-->
+<!--&lt;!&ndash;              剩余库存总额：<strong>{{item.inventoryPrice}}</strong>&ndash;&gt;-->
+<!--&lt;!&ndash;              已售数量：<strong>{{item.saleNum}}</strong>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">&ndash;&gt;-->
+<!--&lt;!&ndash;              出售金额：<strong>{{item.theirPrice}}</strong>&ndash;&gt;-->
+<!--&lt;!&ndash;              产生利润：<strong>{{item.profits}}</strong>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div11>-->
+<!--    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>-->
   </div>
 </template>
 <script>

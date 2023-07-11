@@ -21,49 +21,71 @@
           type="month" placeholder="时间结束" @change="getPage">
         </el-date-picker>
       </div>
-<!--      <div class="fenlei_top_right" >-->
-<!--        <mt-button-->
-<!--          type="primary"-->
-<!--          size="small"-->
-<!--          @click="getPage">搜索</mt-button>-->
-<!--      </div>-->
     </div>
-     <div style="padding-top: 0.86rem">
-      <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index">
-        <div class="dingdans_top">
-          <div class="dingdans_top_left">
-<!--           <strong>月份：</strong> <strong class="color-danger"> {{item.months}} </strong>-->
-            <strong>月份：</strong>
-            <a>
-              <strong
-                @click="sellListDetail(item.months )"
-                :style="item.months == '合计' ? '' : 'color: #409EFF;'"> {{item.months}} </strong>
-            </a>
+    <!--    列表开始-->
+    <div style="padding-top: 0.86rem">
+      <div class="dingdans_item_rt" v-for="(item,index) in tableData" :key="index">
+        <div class="dingdans_top_rt">
+          <strong style="margin-left: 12px;">月份：</strong>
+          <strong style="color: #409eff"
+            @click="sellListDetail(item.months )"> {{item.months}} </strong>
+        </div>
+        <div class="dingdans_con_rt">
+          <div  style="width: 33vw">
+            <strong>
+              {{item.successNum}}
+            </strong>
+            <p>销售数</p>
+          </div>
+          <div  style="width: 33vw">
+            <strong>
+              {{item.orderAmount}}
+            </strong>
+            <p>销售金额</p>
+          </div>
+          <div style="width: 33vw;    border-right-width: 0vw;">
+            <strong>
+              {{item.theirPrice}} %
+            </strong>
+            <p>利润</p>
           </div>
         </div>
-        <div class="dingdans_con">
-          <div class="diangdans_con_right">
-            <div class="dingdans_con_right_top" style="margin-bottom: -1vw;">
-              销售数：<strong >{{item.successNum}}</strong>
-              销售金额：<strong >{{item.orderAmount}}</strong>
-              利润：<strong >{{item.profitsAmount}}</strong>
-            </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: -1vw;">
-              <span v-if="item.successNum">销售均价：<strong >{{item.orderAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>销售均价：<strong >0</strong></span>
-              <span v-if="item.successNum">平均利润：<strong >{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>平均利润：<strong >0</strong></span>
-            </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">
-              瑕疵数：<strong >{{item.saleNum}}</strong>
-              通过比例：<strong >{{item.theirPrice}} %</strong>
-            </div>
+        <div class="dingdans_con_rt">
+          <div  >
+            <strong v-if="item.successNum">
+              {{item.orderAmount / item.successNum  | numFilter}}
+            </strong>
+            <strong v-else>
+              0
+            </strong>
+            <p>销售均价</p>
+          </div>
+          <div  >
+            <strong v-if="item.successNum">
+              {{item.profitsAmount / item.successNum  | numFilter}}
+            </strong>
+            <strong v-else>
+              0
+            </strong>
+            <p>平均利润</p>
+          </div>
+          <div  >
+            <strong>
+              {{item.saleNum}}
+            </strong>
+            <p>瑕疵数</p>
+          </div>
+          <div style="border-right-width: 0vw;">
+            <strong>
+              {{item.theirPrice}} %
+            </strong>
+            <p>通过比例</p>
           </div>
         </div>
       </div>
-     </div>
-    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
+    </div>
   </div>
+    <!--    列表结束-->
 </template>
 <script>
   import Baseline from '@/common/_baseline.vue'
@@ -99,6 +121,9 @@
         }
       },
       sellListDetail(months) {
+        if (months == '合计'){
+          return
+        }
         this.$router.push({ path: '/sellListDetail', query: { months }})
       },
       getPage() {

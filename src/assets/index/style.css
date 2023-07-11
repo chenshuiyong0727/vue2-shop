@@ -667,3 +667,73 @@ select{
   text-align: center;
   margin-top: 2.1px;
 }
+
+.dingdans_item_rt {
+  padding: 2.4vw 1.2vw;
+  background: #ffffff;
+  border-bottom: 1vw solid #eee;
+  padding-right: 3%;
+  padding-left: 3%;
+}
+
+.dingdans_top_rt {
+  font-size: 17px;
+  height: 25px;
+  line-height: 25px;
+  border-left: 6px solid #409eff;
+  color: #333333;
+}
+
+.dingdans_con_rt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.3vw 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+> div {
+  text-align: center;
+  width: 25vw;
+  border-right-color: #B9B9B9;
+  border-right-style: solid;
+  border-right-width: 1px;
+  font-size: 15px;
+> strong {
+  color:#333333;
+  font-size: 16px;
+  line-height: 20px;
+}
+> p {
+  color:#999999;
+  margin-top: 2px;
+}
+}
+
+}
+
+
+.dingdans_con_rt_left {
+  width: 35vw;
+  height: 20vw;
+  display: flex;
+}
+
+.dingdans_con_rt_left img {
+  width: 100%;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.diangdans_con_right_rt {
+  width: 130vw;
+  padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dingdans_con_rt_right_down {
+  margin-top: 1.4vw;
+  font-size: 13px;
+  margin-bottom: 2vw;
+}

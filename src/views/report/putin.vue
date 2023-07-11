@@ -22,35 +22,36 @@
                         type="month" placeholder="时间结束" @change="getPage">
         </el-date-picker>
       </div>
-<!--      <div class="fenlei_top_right">-->
-<!--        <mt-button-->
-<!--          type="primary"-->
-<!--          size="small"-->
-<!--          @click="getPage">搜索-->
-<!--        </mt-button>-->
-<!--      </div>-->
     </div>
+
+<!--    列表开始-->
     <div style="padding-top: 0.86rem">
       <div class="dingdans_item_rt" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top_rt">
             <strong style="margin-left: 12px;">月份：</strong>
-              <strong
+              <strong style="color: #409eff"
                 @click="jumpDetail(item.months )"> {{item.months}} </strong>
         </div>
         <div class="dingdans_con_rt">
-          <div  style="width: 33vw">
+          <div  style="">
             <strong>
               {{item.successNum}}
             </strong>
             <p>入库数</p>
           </div>
-          <div  style="width: 33vw">
+          <div  style="">
             <strong>
               {{item.orderAmount}}
             </strong>
             <p>入库总额</p>
           </div>
-          <div style="width: 33vw;    border-right-width: 0vw;">
+          <div  >
+            <strong>
+              {{item.profits}}
+            </strong>
+            <p>已产生利润</p>
+          </div>
+          <div style="   border-right-width: 0vw;">
             <strong>
               {{item.profitsAmount}}
             </strong>
@@ -103,10 +104,11 @@
             <p>出售金额</p>
           </div>
           <div  >
-            <strong>
-              {{item.profits}}
+            <strong v-if="item.saleNum">
+              {{item.profits / item.saleNum  | numFilter}}
             </strong>
-            <p>已产生利润</p>
+            <strong v-else>0</strong>
+            <p>利润均价</p>
           </div>
           <div style=" border-right-width: 0vw;">
             <strong>
@@ -118,7 +120,9 @@
 
       </div>
     </div>
-<!--    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>-->
+    <!--    列表结束-->
+
+    <!--    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>-->
   </div>
 </template>
 <script>
@@ -185,75 +189,6 @@
 
   strong {
     font-weight: 600;
-  }
-
-  .dingdans_item_rt {
-    padding: 2.4vw 1.2vw;
-    background: #ffffff;
-    border-bottom: 1vw solid #eee;
-    padding-right: 3%;
-    padding-left: 3%;
-  }
-
-  .dingdans_top_rt {
-    font-size: 17px;
-    height: 25px;
-    line-height: 25px;
-    border-left: 6px solid #409eff;
-    color: #333333;
-  }
-
-  .dingdans_con_rt {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.3vw 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    > div {
-      text-align: center;
-      width: 25vw;
-      border-right-color: #B9B9B9;
-      border-right-style: solid;
-      border-right-width: 1px;
-      font-size: 15px;
-      > strong {
-        color:#409eff;
-        font-size: 16px;
-        line-height: 20px;
-        }
-      > p {
-       margin-top: 2px;
-        }
-      }
-
-  }
-
-
-  .dingdans_con_rt_left {
-    width: 35vw;
-    height: 20vw;
-    display: flex;
-  }
-
-  .dingdans_con_rt_left img {
-    width: 100%;
-    margin: auto;
-    border-radius: 10px;
-  }
-
-  .diangdans_con_right_rt {
-    width: 130vw;
-    padding-left: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .dingdans_con_rt_right_down {
-    margin-top: 1.4vw;
-    font-size: 13px;
-    margin-bottom: 2vw;
   }
 
   /*.dingdans_con_rt_right_down_1 {*/

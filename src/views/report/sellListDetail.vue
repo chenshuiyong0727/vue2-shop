@@ -29,37 +29,131 @@
 <!--        </mt-button>-->
 <!--      </div>-->
     </div>
+    <!--    列表开始-->
     <div style="padding-top: 0.86rem">
-      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
-        <div class="dingdans_top">
-          <div class="dingdans_top_left">
-            <strong>月份：</strong>
-            <a>
-              <strong
-                @click="jumpDetail(item.months )"
-                :style="item.months == '合计' ? '' : 'color: #409EFF;'"> {{item.months}} </strong>
-            </a>
-            <!--            <strong>月份：</strong> <strong class="color-danger"> {{item.months}} </strong>-->
+      <div class="dingdans_item_rt" v-for="(item,index) in tableData" :key="index">
+        <div class="dingdans_top_rt">
+          <strong style="margin-left: 12px;">日期：</strong>
+          <strong style="color: #409eff"
+            @click="jumpDetail(item.months )"> {{item.months}} </strong>
+        </div>
+        <div class="dingdans_con_rt">
+          <div  style="width: 20vw">
+            <strong>
+              {{item.successNum}}
+            </strong>
+            <p>销售数</p>
+          </div>
+          <div  style="width: 20vw">
+            <strong>
+              {{item.orderAmount}}
+            </strong>
+            <p>销售金额</p>
+          </div>
+          <div  style="width: 20vw">
+            <strong>
+              {{item.profitsAmount}}
+            </strong>
+            <p>利润</p>
+          </div>
+          <div  style="width: 20vw" >
+            <strong v-if="item.successNum">
+              {{item.orderAmount / item.successNum  | numFilter}}
+            </strong>
+            <strong v-else>
+              0
+            </strong>
+            <p>销售均价</p>
+          </div>
+          <div   style="width:20vw;    border-right-width: 0vw;">
+            <strong v-if="item.successNum">
+              {{item.profitsAmount / item.successNum  | numFilter}}
+            </strong>
+            <strong v-else>
+              0
+            </strong>
+            <p>平均利润</p>
           </div>
         </div>
-        <div class="dingdans_con">
-          <div class="diangdans_con_right">
-            <div class="dingdans_con_right_top">
-              销售数：<strong >{{item.successNum}}</strong>
-              销售金额：<strong >{{item.orderAmount}}</strong>
-              利润：<strong >{{item.profitsAmount}}</strong>
-            </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">
-              <span v-if="item.successNum">销售均价：<strong >{{item.orderAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>销售均价：<strong >0</strong></span>
-              <span v-if="item.successNum">平均利润：<strong >{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>平均利润：<strong >0</strong></span>
-            </div>
-          </div>
-        </div>
+<!--        <div class="dingdans_con_rt">-->
+<!--          <div  >-->
+<!--            <strong v-if="item.successNum">-->
+<!--              {{item.orderAmount / item.successNum  | numFilter}}-->
+<!--            </strong>-->
+<!--            <strong v-else>-->
+<!--              0-->
+<!--            </strong>-->
+<!--            <p>入库均价</p>-->
+<!--          </div>-->
+<!--          <div  >-->
+<!--            <strong v-if="item.successNum">-->
+<!--              {{item.profitsAmount / item.successNum  | numFilter}}-->
+<!--            </strong>-->
+<!--            <strong v-else>-->
+<!--              0-->
+<!--            </strong>-->
+<!--            <p>市价均价</p>-->
+<!--          </div>-->
+<!--          <div  >-->
+<!--            <strong>-->
+<!--              {{item.inventory}}-->
+<!--            </strong>-->
+<!--            <p>剩余库存</p>-->
+<!--          </div>-->
+<!--          <div style="border-right-width: 0vw;">-->
+<!--            <strong>-->
+<!--              {{item.inventoryPrice}}-->
+<!--            </strong>-->
+<!--            <p>剩余总额</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="dingdans_con_right_top">-->
+<!--          销售数：<strong >{{item.successNum}}</strong>-->
+<!--          销售金额：<strong >{{item.orderAmount}}</strong>-->
+<!--          利润：<strong >{{item.profitsAmount}}</strong>-->
+<!--        </div>-->
+<!--        <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
+<!--          <span v-if="item.successNum">销售均价：<strong >{{item.orderAmount / item.successNum  | numFilter}}</strong></span>-->
+<!--          <span v-else>销售均价：<strong >0</strong></span>-->
+<!--          <span v-if="item.successNum">平均利润：<strong >{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>-->
+<!--          <span v-else>平均利润：<strong >0</strong></span>-->
+<!--        </div>-->
+<!--        <div1 class="dingdans_con_rt">-->
+<!--          <div  >-->
+<!--            <strong v-if="item.successNum">-->
+<!--              {{item.orderAmount / item.successNum  | numFilter}}-->
+<!--            </strong>-->
+<!--            <strong v-else>-->
+<!--              0-->
+<!--            </strong>-->
+<!--            <p>销售均价</p>-->
+<!--          </div>-->
+<!--          <div  >-->
+<!--            <strong v-if="item.successNum">-->
+<!--              {{item.profitsAmount / item.successNum  | numFilter}}-->
+<!--            </strong>-->
+<!--            <strong v-else>-->
+<!--              0-->
+<!--            </strong>-->
+<!--            <p>平均利润</p>-->
+<!--          </div>-->
+<!--          <div  >-->
+<!--            <strong>-->
+<!--              {{item.saleNum}}-->
+<!--            </strong>-->
+<!--            <p>瑕疵数</p>-->
+<!--          </div>-->
+<!--          <div style=" border-right-width: 0vw;">-->
+<!--            <strong>-->
+<!--              {{item.theirPrice}} %-->
+<!--            </strong>-->
+<!--            <p>通过比例</p>-->
+<!--          </div>-->
+<!--        </div1>-->
+
       </div>
     </div>
-    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
+    <!--    列表结束-->
   </div>
 </template>
 <script>
@@ -133,6 +227,9 @@
         return m
       },
       jumpDetail(months) {
+        if (months == '合计'){
+          return
+        }
         this.$router.push({ path: '/order', query: { months }})
       },
       getPage() {

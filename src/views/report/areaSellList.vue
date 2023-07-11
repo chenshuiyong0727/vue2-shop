@@ -29,37 +29,105 @@
       <ve-pie height="320px"
               :data="chartData1" :settings="chartSettings1"></ve-pie>
     </div>
-     <div  :style="queryParam.addressId ? 'padding-top: 0.86rem' : ''">
-      <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index" v-if="!(queryParam.addressId && item.months == '合计')">
-        <div class="dingdans_top">
-          <div class="dingdans_top_left">
-<!--           <strong>月份：</strong> <strong class="color-danger"> {{item.months}} </strong>-->
-              <strong v-if="item.months != '合计'">{{ item.months | dictToDescTypeValue(38) }}</strong>
-              <strong v-else>{{ item.months }}</strong>
+
+    <!--    列表开始-->
+    <div  :style="queryParam.addressId ? 'padding-top: 0.86rem' : ''">
+      <div class="dingdans_item_rt" v-for="(item,index) in tableData" :key="index" v-if="!(queryParam.addressId && item.months == '合计')">
+        <div class="dingdans_top_rt">
+          <strong style="margin-left: 12px;" v-if="item.months != '合计'">{{ item.months | dictToDescTypeValue(38) }}</strong>
+          <strong style="margin-left: 12px;" v-else>{{ item.months }}</strong>
+        </div>
+        <div class="dingdans_con_rt">
+          <div  style="width: 33vw">
+            <strong>
+              {{item.successNum}}
+            </strong>
+            <p>销售数</p>
+          </div>
+          <div  style="width: 33vw">
+            <strong>
+              {{item.orderAmount}}
+            </strong>
+            <p>销售金额</p>
+          </div>
+          <div  style="   border-right-width: 0vw;width: 33vw">
+            <strong>
+              {{item.profitsAmount}}
+            </strong>
+            <p>利润</p>
           </div>
         </div>
-        <div class="dingdans_con">
-          <div class="diangdans_con_right">
-            <div class="dingdans_con_right_top" style="margin-bottom: -1vw;">
-              销售数：<strong >{{item.successNum}}</strong>
-              销售金额：<strong >{{item.orderAmount}}</strong>
-              利润：<strong >{{item.profitsAmount}}</strong>
-            </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: -1vw;">
-              <span v-if="item.successNum">销售均价：<strong >{{item.orderAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>销售均价：<strong >0</strong></span>
-              <span v-if="item.successNum">平均利润：<strong >{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>
-              <span v-else>平均利润：<strong >0</strong></span>
-            </div>
-            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">
-              瑕疵数：<strong >{{item.defectsNum}}</strong>
-              通过比例：<strong >{{item.defectsNum /  (item.successNum +  item.defectsNum) * 100   | numFilter}} %</strong>
-            </div>
+        <div class="dingdans_con_rt">
+          <div  >
+            <strong v-if="item.successNum">
+              {{item.orderAmount / item.successNum  | numFilter}}
+            </strong>
+            <strong v-else>
+              0
+            </strong>
+            <p>销售均价</p>
+          </div>
+          <div  >
+            <strong v-if="item.successNum">
+              {{item.profitsAmount / item.successNum  | numFilter}}
+            </strong>
+            <strong v-else>
+              0
+            </strong>
+            <p>平均利润</p>
+          </div>
+          <div  >
+            <strong>
+              {{item.defectsNum}}
+            </strong>
+            <p>瑕疵数</p>
+          </div>
+          <div style=" border-right-width: 0vw;">
+            <strong v-if="item.defectsNum">
+              {{item.defectsNum /  (item.successNum +  item.defectsNum) * 100   | numFilter}} %
+            </strong>
+            <strong v-else>
+              0
+            </strong>
+            <p>瑕疵比例</p>
           </div>
         </div>
+
       </div>
-     </div>
-    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>
+    </div>
+    <!--    列表结束-->
+
+<!--     <div1  :style="queryParam.addressId ? 'padding-top: 0.86rem' : ''">-->
+<!--      <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index" v-if="!(queryParam.addressId && item.months == '合计')">-->
+<!--        <div class="dingdans_top">-->
+<!--          <div class="dingdans_top_left">-->
+<!--&lt;!&ndash;           <strong>月份：</strong> <strong class="color-danger"> {{item.months}} </strong>&ndash;&gt;-->
+<!--              <strong v-if="item.months != '合计'">{{ item.months | dictToDescTypeValue(38) }}</strong>-->
+<!--              <strong v-else>{{ item.months }}</strong>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="dingdans_con">-->
+<!--          <div class="diangdans_con_right">-->
+<!--            <div class="dingdans_con_right_top" style="margin-bottom: -1vw;">-->
+<!--              销售数：<strong >{{item.successNum}}</strong>-->
+<!--              销售金额：<strong >{{item.orderAmount}}</strong>-->
+<!--              利润：<strong >{{item.profitsAmount}}</strong>-->
+<!--            </div>-->
+<!--            <div class="dingdans_con_right_down" style="margin-bottom: -1vw;">-->
+<!--              <span v-if="item.successNum">销售均价：<strong >{{item.orderAmount / item.successNum  | numFilter}}</strong></span>-->
+<!--              <span v-else>销售均价：<strong >0</strong></span>-->
+<!--              <span v-if="item.successNum">平均利润：<strong >{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>-->
+<!--              <span v-else>平均利润：<strong >0</strong></span>-->
+<!--            </div>-->
+<!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
+<!--              瑕疵数：<strong >{{item.defectsNum}}</strong>-->
+<!--              通过比例：<strong >{{item.defectsNum /  (item.successNum +  item.defectsNum) * 100   | numFilter}} %</strong>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--     </div1>-->
+<!--    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>-->
   </div>
 </template>
 <script>
