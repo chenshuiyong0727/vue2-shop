@@ -20,8 +20,9 @@
 <!--    搜索结束-->
 <!--    待办事项-->
     <v-orderNum :orderIofo ="orderIofo" :storeData ="storeData"/>
+
     <!--    销售走势-->
-    <div style="margin-top: 18px; background-color: #fff;height: 520px;
+    <div style="margin-top: 4vw; background-color: #fff;height: 520px;
     width: 92vw;
     margin-left: 4vw;">
 <!--      <h1 class="index-title"  style="border-top-style:none">-->

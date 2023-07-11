@@ -71,7 +71,21 @@
           <span class="color-font">{{orderIofo.count8}}</span>
           <p style="color: #8c8a8a;font-size: 14px;">瑕疵</p>
         </router-link>
-      </section>
+      </section >
+        <section  @click="order(1)" class="my-pay-21" v-if="orderIofo.countTheExpire">
+          <div style="width: 78vw ;display:flex;
+flex-direction:row;
+align-items:center;">
+            <img style="width: 30px;margin-left: 4vw; "  src="../../../static/img/timeout_2.png">
+            <span style="color: #333;font-size: 15px;margin-left: 10px">即将过期订单</span>
+          </div>
+          <div style="display:flex;
+flex-direction:row;
+align-items:center;">
+            <span class="color-font-strong" style="font-size: 25px;">{{orderIofo.countTheExpire}}</span>
+            <img style="width: 20px;" src="../../../static/img/more.png">
+          </div>
+        </section>
     </div>
   </div>
 </template>
@@ -90,20 +104,11 @@
     },
     components: {
     },
-    // methods:{
-    //   logout(){
-    //     alert(1)
-    //     // userContainerApi.logout().then(res => {
-    //     //   if (res.subCode === 1000) {
-    //     //     removeCookieByName('org_token_auth')
-    //     //     removeCookieByName('refresh_org_token_auth')
-    //     //     removeCookieByName('user_id')
-    //     //     resetRouter()
-    //     //     localStorage.clear() // remove all session
-    //     //   }
-    //     // })
-    //   }
-    // }
+    methods:{
+      order(theExpire) {
+        this.$router.push({ path: '/order', query: { theExpire }})
+      },
+    }
   }
 </script>
 
@@ -365,5 +370,19 @@
         text-align: center;
       }
     }
+  }
+  .my-pay-21 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: #fff;
+    border-bottom-color: rgba(185, 185, 185, 0.14);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin-top: 4vw;
+    padding-top: 4vw;
+    padding-bottom: 4vw;
+    margin-left: 4vw;
+    width: 92vw;
   }
 </style>

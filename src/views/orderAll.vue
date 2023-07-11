@@ -28,15 +28,16 @@
       </div>
     </div>
     <div class="searchList">
-      <span style="margin-right: 6vw;" :class="!queryParam.status ? 'activity' : ''" @click="searchStatus('')">全部</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==3 ? 'activity' : ''" @click="searchStatus(3)">待发货</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==4 ? 'activity' : ''" @click="searchStatus(4)">已发货</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==5 ? 'activity' : ''" @click="searchStatus(5)">运输中</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==6 ? 'activity' : ''" @click="searchStatus(6)">已收货</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==11 ? 'activity' : ''" @click="searchStatus(11)">已入库</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==2 ? 'activity' : ''" @click="searchStatus(2)">已上架</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==7 ? 'activity' : ''" @click="searchStatus(7)">交易成功</span>
-      <span style="margin-right: 0px;" :class="queryParam.status==8 ? 'activity' : ''" @click="searchStatus(8)">瑕疵</span>
+      <span style="margin-right: 6vw;" :class="!queryParam.status && !queryParam.theExpire? 'activity' : ''" @click="searchStatus('')">全部</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==3 && !queryParam.theExpire ? 'activity' : ''" @click="searchStatus(3)">待发货</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==4 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(4)">已发货</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==5 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(5)">运输中</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==6 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(6)">已收货</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==11 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(11)">已入库</span>
+      <span style="margin-right: 6vw;" :class="!queryParam.status  && queryParam.theExpire ? 'activity' : ''" @click="searchTheExpire">即将到期</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==2 && !queryParam.theExpire ? 'activity' : ''" @click="searchStatus(2)">已上架</span>
+      <span style="margin-right: 6vw;" :class="queryParam.status==7 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(7)">交易成功</span>
+      <span style="margin-right: 0px;" :class="queryParam.status==8 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(8)">瑕疵</span>
     </div>
     <mt-loadmore
       style="margin-top: 87px;"
@@ -95,6 +96,12 @@
             <div v-if="item.addressId" style="    margin-bottom: 10px;">
               <span  class="dingdans_con_dw_address">
                 {{item.addressId | dictToDescTypeValue(38)}}
+              </span>
+            </div>
+            <div v-if="item.surplusDay && item.surplusDay <=12" style="    margin-top: 15px;margin-bottom: 10px;">
+              <span  class="color-danger">剩余天数</span>
+              <span  class="color-danger">
+                {{item.surplusDay}}
               </span>
             </div>
             <div class="dingdans_con_right_top_dw_2">
@@ -355,8 +362,7 @@
       </mt-header>
       <section style="height: 100vw;width: 100vw">
         <mt-field label="状态" style="margin-top: 12vw;">
-          <el-select size="small" class="select100" v-model="queryParam.status"
-                     @change="changeSystem">
+          <el-select size="small" class="select100" v-model="queryParam.status">
             <el-option label="状态" value=""></el-option>
             <el-option
               v-for="item in statusList"
@@ -616,6 +622,7 @@
           orderNo: '',
           inventoryId: '',
           status: '',
+          theExpire: '',
           shelvesPriceFrom: '',
           shelvesPriceTo: '',
           freightFrom: '',
@@ -671,7 +678,7 @@
         this.listSysDict()
         this.resetData()
         //isBack 时添加中router中的元信息，判读是否要缓存
-        const {actNo, status, months, orderNo, saleType} = this.$route.query
+        const {actNo, status, months, orderNo, saleType,theExpire} = this.$route.query
         if (saleType) {
           this.saleType = saleType
           this.queryParam.saleType = saleType
@@ -683,16 +690,18 @@
           this.status = +status
           this.queryParam.status = +status
         }
+        if (theExpire) {
+          this.queryParam.theExpire = +theExpire
+        }
         this.months = months
         if (this.queryParam.keyword || this.queryParam.status || this.months
-          || this.queryParam.orderNo || this.queryParam.saleType) {
-          if (this.queryParam.status) {
-            this.changeSystem()
-          }
+          || this.queryParam.orderNo || this.queryParam.saleType || this.queryParam.theExpire) {
+          // if (this.queryParam.status) {
+          //   this.changeSystem()
+          // }
           if (this.months) {
             this.queryParam.successTimeFrom = this.months
             this.queryParam.successTimeTo = this.months
-            this.titleName = this.months + ' 订单'
           }
         }
         this.getPage()
@@ -843,14 +852,14 @@
       open(picker) {
         this.$refs[picker].open();
       },
-      changeSystem() {
-        let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
-          localStorage.getItem('sysDictList')) : []
-        let res = sysDictList.filter(
-          item => item.typeValue == 37 && item.fieldValue == this.queryParam.status)
-        this.titleName = res.length ? res[0].fieldName : ''
-        this.titleName = this.titleName + '订单'
-      },
+      // changeSystem() {
+      //   let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
+      //     localStorage.getItem('sysDictList')) : []
+      //   let res = sysDictList.filter(
+      //     item => item.typeValue == 37 && item.fieldValue == this.queryParam.status)
+      //   this.titleName = res.length ? res[0].fieldName : ''
+      //   this.titleName = this.titleName + '订单'
+      // },
       changeOrder() {
         let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
           localStorage.getItem('sysDictList')) : []
@@ -871,6 +880,12 @@
       },
       searchStatus(status) {
         this.queryParam.status = status
+        this.queryParam.theExpire = ''
+        this.search1()
+      },
+      searchTheExpire() {
+        this.queryParam.status = ''
+        this.queryParam.theExpire = 1
         this.search1()
       },
       resetData() {
@@ -881,6 +896,7 @@
           orderNo: '',
           inventoryId: '',
           status: '',
+          theExpire: '',
           shelvesPriceFrom: '',
           shelvesPriceTo: '',
           freightFrom: '',
@@ -914,6 +930,7 @@
           orderNo: '',
           inventoryId: '',
           status: '',
+          theExpire: '',
           shelvesPriceFrom: '',
           shelvesPriceTo: '',
           freightFrom: '',
@@ -944,7 +961,6 @@
         if (this.saleType) {
           this.queryParam.saleType = this.saleType
         }
-        this.changeSystem()
         this.search1()
       },
       handleTopChange(p_status) {

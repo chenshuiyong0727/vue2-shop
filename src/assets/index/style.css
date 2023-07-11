@@ -100,6 +100,10 @@
   color: #409eff;
   font-weight: 600;
 }
+.color-font-strong {
+  color: #F56C6C;
+  font-weight: 600;
+}
 .color-font {
   color: #333333;
   font-weight: 600;
@@ -579,6 +583,16 @@ select{
   padding-right: 3px;
   margin-left: -2px;
 }
+/*.dingdans_con_dw_expire {*/
+/*  font-size: 12px;*/
+/*  border-color: #F56C6C;*/
+/*  border-style: solid;*/
+/*  border-width: 3px;*/
+/*  padding: 5px;*/
+/*  border-radius: 5px;*/
+/*  padding-right: 3px;*/
+/*  margin-left: -2px;*/
+/*}*/
 .dingdans_con_dw_time {
   /*font-size: 12px;*/
   padding: 5px;
