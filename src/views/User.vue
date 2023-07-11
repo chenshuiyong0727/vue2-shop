@@ -1,17 +1,9 @@
 <template lang="html">
 
-  <div class="car" style="height: 100%;font-size: 15px; border-top:0">
-    <!--    <mt-header title="个人中心">-->
-    <!--      <div slot="left">-->
-    <!--        <mt-button icon="back" @click="$router.go(-1)"></mt-button>-->
-    <!--      </div>-->
-    <!--    </mt-header>-->
+  <div class="car" style="height: 100%;font-size: 15px; border-top:0;">
     <div style="
         padding-bottom: 40vw;
     background-image: linear-gradient(#e5f4ff, #f3f2f8);">
-<!--      <div  class="mint-header">-->
-<!--        <h1 class="mint-header-title">个人中心</h1>-->
-<!--      </div>-->
       <div class="zuoyouduiqi" style="padding-top: 3vw">
         <div style="margin-left: 4vw;" @click="scanCode(1)">
           <img style="width: 23px; "  src="../../static/img/saoyisao4.png">
@@ -38,18 +30,7 @@
           }}</span>
         <div class="my-indent-right">
           <el-button type="primary" @click="comfirm(2)" size="small" round>账户管理</el-button>
-
-          <!--            <span style="-->
-<!--            margin-left: -10px;-->
-<!--      display: inline-block;-->
-<!--      font-size: 14px;-->
-<!--      color: rgba(0, 0, 0, 0.4);-->
-<!--      position: relative;">-->
-<!--              <el-button @click="comfirm(2)" style="    border: 1px solid #333; color: #333"-->
-<!--                         size="small" round>账户管理</el-button>-->
-<!--            </span>-->
         </div>
-
       </div>
     </div>
     <div class="main" style="margin-top: -138px;">
@@ -194,7 +175,7 @@
         </router-link>
       </section>
     </div>
-    <v-baseline/>
+    <div style=" padding-top: 1px;"></div>
     <v-footer></v-footer>
   </div>
 </template>
@@ -203,13 +184,11 @@
   // import * as mockData from '@/http/mock.js' //模拟数据
   import {goodsBaseApi} from '@/api/goodsBase'
   import {goodsOrderApi} from '@/api/goodsOrder'
-  import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import {userContainerApi} from '@/api/user'
 
   export default {
     components: {
-      'v-baseline': Baseline,
       'v-footer': Footer
     },
     data() {
