@@ -650,7 +650,7 @@
           sellTimeTo: '',
           successTimeFrom: '',
           successTimeTo: '',
-          pageSize: 20,
+          pageSize: 10,
           pageNum: 1
         },
         successTimeFrom:'',
@@ -837,6 +837,10 @@
               for (let i = 0; i < list.length; i++) {
                 this.tableData.push(list[i])
               }
+              setTimeout(()=>{
+                let ht2 = (this.$refs.hello.scrollTop)*1 +475
+                this.$refs.hello.scrollTop = ht2
+              },100)
             } else {
               this.allLoaded = true;
               this.$toast('没有更多了')
@@ -924,7 +928,7 @@
           sellTimeTo: '',
           successTimeFrom: '',
           successTimeTo: '',
-          pageSize: 20,
+          pageSize: 10,
           pageNum: 1
         }
         this.allLoaded = false;
@@ -958,7 +962,7 @@
           sellTimeTo: '',
           successTimeFrom: '',
           successTimeTo: '',
-          pageSize: 20,
+          pageSize: 10,
           pageNum: 1
         }
         this.titleName = '订单'

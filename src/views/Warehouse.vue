@@ -757,6 +757,10 @@
               for (let i = 0; i < list.length; i++) {
                 this.tableData.push(list[i])
               }
+              setTimeout(()=>{
+                let ht2 = (this.$refs.hello.scrollTop)*1 +475
+                this.$refs.hello.scrollTop = ht2
+              },100)
             } else {
               this.allLoaded = true;
               this.$toast('没有更多了')
