@@ -27,17 +27,17 @@
         <img src="../../static/img/search.png" height="30px;" width="30px;">
       </div>
     </div>
-    <div class="searchList">
-      <span style="margin-right: 6vw;" :class="!queryParam.status && !queryParam.theExpire? 'activity' : ''" @click="searchStatus('')">全部</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==3 && !queryParam.theExpire ? 'activity' : ''" @click="searchStatus(3)">待发货</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==4 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(4)">已发货</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==5 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(5)">运输中</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==6 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(6)">已收货</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==11 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(11)">已入库</span>
-      <span style="margin-right: 6vw;" :class="!queryParam.status  && queryParam.theExpire ? 'activity' : ''" @click="searchTheExpire">即将到期</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==2 && !queryParam.theExpire ? 'activity' : ''" @click="searchStatus(2)">已上架</span>
-      <span style="margin-right: 6vw;" :class="queryParam.status==7 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(7)">交易成功</span>
-      <span style="margin-right: 0px;" :class="queryParam.status==8 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(8)">瑕疵</span>
+    <div class="searchList" ref="searchList">
+      <span style="margin-right: 6vw;" class="aaa" :class="!queryParam.status && !queryParam.theExpire? 'activity' : ''" @click="searchStatus('')">全部</span>
+      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==3 && !queryParam.theExpire ? 'activity' : ''" @click="searchStatus(3)">待发货</span>
+      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==4 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(4)">已发货</span>
+      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==5 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(5)">运输中</span>
+      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==6 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(6)">已收货</span>
+      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==11 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(11,4)">已入库</span>
+      <span style="margin-right: 6vw;" class="aaa" :class="!queryParam.status  && queryParam.theExpire ? 'activity' : ''" @click="searchTheExpire">即将到期</span>
+      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==2 && !queryParam.theExpire ? 'activity' : ''" @click="searchStatus(2,7)">已上架</span>
+      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==7 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(7,7)">交易成功</span>
+      <span style="margin-right: 0px;" class="aaa" :class="queryParam.status==8 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(8,7)">瑕疵</span>
     </div>
     <mt-loadmore
       style="margin-top: 87px;"
@@ -674,6 +674,7 @@
         tableData: [],
         wlData: [],
         wlDataSize: '',
+        scrollNum: '',
         totalCount: 1
       }
     },
@@ -686,11 +687,15 @@
         this.listSysDict()
         this.resetData()
         //isBack 时添加中router中的元信息，判读是否要缓存
-        const {actNo, status, months, orderNo, saleType,theExpire} = this.$route.query
+        const {actNo, status, months, orderNo, saleType,theExpire,scrollNum} = this.$route.query
         if (saleType) {
           this.saleType = saleType
           this.queryParam.saleType = saleType
           this.changeOrder()
+        }
+        if (scrollNum){
+          this.scrollNum = scrollNum
+          this.tabScroll()
         }
         this.queryParam.orderNo = orderNo
         this.queryParam.keyword = actNo
@@ -715,6 +720,9 @@
         this.getPage()
       } else {
         this.$refs.hello.scrollTop = this.curScrollTop
+        if (this.scrollNum){
+          this.tabScroll()
+        }
       }
     },
     beforeRouteLeave(to, from, next) {
@@ -727,6 +735,12 @@
       next()
     },
     methods: {
+      tabScroll(){
+        let scrollNum = this.scrollNum
+        let activeTab = document.querySelectorAll('.aaa');
+        console.log(activeTab[scrollNum].offsetLeft);
+        this.$refs.searchList.scrollLeft = activeTab[scrollNum].offsetLeft;
+      },
       initBatch() {
         this.showSd = false
         this.checkAll = false
@@ -890,14 +904,16 @@
         this.$refs.hello.scrollTop = 0
         this.getPage()
       },
-      searchStatus(status) {
+      searchStatus(status,scrollNum) {
         this.queryParam.status = status
         this.queryParam.theExpire = ''
+        this.scrollNum = scrollNum
         this.search1()
       },
       searchTheExpire() {
         this.queryParam.status = ''
         this.queryParam.theExpire = 1
+        this.scrollNum = 7
         this.search1()
       },
       resetData() {

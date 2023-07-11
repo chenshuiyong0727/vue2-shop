@@ -55,24 +55,24 @@
         </router-link>
       </section>
       <section class="my-pay-2" style="border-bottom-style:none;">
-        <router-link :to="{ path: '/order?status=11'}">
+        <router-link :to="{ path: '/order?status=11&scrollNum=4'}">
           <span class="color-font">{{orderIofo.count11}}</span>
           <p style="color: #8c8a8a;font-size: 14px;">已入库</p>
         </router-link>
-        <router-link :to="{ path: '/order?status=2'}">
+        <router-link :to="{ path: '/order?status=2&scrollNum=7'}">
           <span class="color-font">{{orderIofo.count2}}</span>
           <p style="color: #8c8a8a;font-size: 14px;">已上架</p>
         </router-link>
-        <router-link :to="{ path: '/order?status=7'}">
+        <router-link :to="{ path: '/order?status=7&scrollNum=7'}">
           <span class="color-font">{{orderIofo.count7}}</span>
           <p style="color: #8c8a8a;font-size: 14px;">交易成功</p>
         </router-link>
-        <router-link :to="{ path: '/order?status=8'}">
+        <router-link :to="{ path: '/order?status=8&scrollNum=7'}">
           <span class="color-font">{{orderIofo.count8}}</span>
           <p style="color: #8c8a8a;font-size: 14px;">瑕疵</p>
         </router-link>
       </section >
-        <section  @click="order(1)" class="my-pay-21" v-if="orderIofo.countTheExpire">
+        <section  @click="order(1,6)" class="my-pay-21" v-if="orderIofo.countTheExpire">
           <div style="width: 78vw ;display:flex;
 flex-direction:row;
 align-items:center;">
@@ -105,8 +105,8 @@ align-items:center;">
     components: {
     },
     methods:{
-      order(theExpire) {
-        this.$router.push({ path: '/order', query: { theExpire }})
+      order(theExpire,scrollNum) {
+        this.$router.push({ path: '/order', query: { theExpire,scrollNum }})
       },
     }
   }
