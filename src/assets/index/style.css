@@ -120,6 +120,7 @@
   color: #0fbe8f;
 }
 .mint-header {
+  /*background-image: linear-gradient(rgb(64, 158, 255), rgb(255, 255, 255));*/
   padding: 5.81vw 4.8vw !important;
   background-color: #ffffff;
   color: black;
