@@ -72,16 +72,12 @@
           <p style="color: #8c8a8a;font-size: 14px;">瑕疵</p>
         </router-link>
       </section >
-        <section  @click="order(1,6)" class="my-pay-21" v-if="orderIofo.countTheExpire">
-          <div style="width: 78vw ;display:flex;
-flex-direction:row;
-align-items:center;">
-            <img style="width: 30px;margin-left: 4vw; "  src="../../../static/img/timeout_2.png">
+        <section  @click="order(1,6)" class="zuoyouduiqi my-pay-21" v-if="orderIofo.countTheExpire">
+          <div class="wenzitupduiqi" style="margin-left: 4vw;">
+            <img style="width: 30px; "  src="../../../static/img/timeout_2.png">
             <span style="color: #333;font-size: 15px;margin-left: 10px">即将到期订单</span>
           </div>
-          <div style="display:flex;
-flex-direction:row;
-align-items:center;">
+          <div class="wenzitupduiqi" style="margin-right: 4vw;">
             <span class="color-font-strong" style="font-size: 25px;">{{orderIofo.countTheExpire}}</span>
             <img style="width: 20px;" src="../../../static/img/more.png">
           </div>
@@ -372,9 +368,6 @@ align-items:center;">
     }
   }
   .my-pay-21 {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     background-color: #fff;
     border-bottom-color: rgba(185, 185, 185, 0.14);
     border-bottom-style: solid;

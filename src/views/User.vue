@@ -1,41 +1,58 @@
 <template lang="html">
 
-  <div class="car" style="height: 100%;font-size: 15px;">
-    <mt-header title="个人中心">
-      <div slot="left">
-        <mt-button icon="back" @click="$router.go(-1)"></mt-button>
-      </div>
-    </mt-header>
-    <header class="header"
-            style="
-              height: 80px;
-    margin-top: 42px;
-    background-color: #fff;
-    border-bottom-color: rgba(185, 185, 185, 0.14);
-    border-bottom-style: solid;
-    border-bottom-width: 1px;"
-    >
-      <div @click="userInfo" class="header-icon" style="margin-left: 6vw;">
-        <img v-if="imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" :src="imgUrl">
-        <!--          <img v-if="form && !form.imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" src="../../static/img/userimg5.jpg">-->
-      </div>
-      <span  @click="userInfo">{{
-       form.userRealName ? form.userRealName : form.userAccount ? form.userAccount : '系统用户'
-        }}</span>
-      <div class="my-indent-right">
-          <span style="
-          margin-left: -10px;
-    display: inline-block;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.4);
-    position: relative;">
-            <el-button @click="comfirm(2)" style="    border: 1px solid #333; color: #333"
-                       size="small" round>账户管理</el-button>
+  <div class="car" style="height: 100%;font-size: 15px; border-top:0">
+    <!--    <mt-header title="个人中心">-->
+    <!--      <div slot="left">-->
+    <!--        <mt-button icon="back" @click="$router.go(-1)"></mt-button>-->
+    <!--      </div>-->
+    <!--    </mt-header>-->
+    <div style="
+        padding-bottom: 40vw;
+    background-image: linear-gradient(#e5f4ff, #f3f2f8);">
+<!--      <div  class="mint-header">-->
+<!--        <h1 class="mint-header-title">个人中心</h1>-->
+<!--      </div>-->
+      <div class="zuoyouduiqi" style="padding-top: 3vw">
+        <div style="margin-left: 4vw;" @click="scanCode(1)">
+          <img style="width: 23px; "  src="../../static/img/saoyisao4.png">
+        </div>
+        <div>
+          <span style="font-size: 20px; color: black;" class="mint-header-title">
+            个人中心
           </span>
+        </div>
+        <div @click="comfirm(1)" style="margin-right: 4vw;">
+          <img style="width: 26px; "  src="../../static/img/setting0.png">
+        </div>
       </div>
+      <div class="header"
+              style="
+                height:100px;"
+      >
+        <div @click="userInfo" class="header-icon" style="margin-left: 6vw;">
+          <img v-if="imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" :src="imgUrl">
+          <!--          <img v-if="form && !form.imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" src="../../static/img/userimg5.jpg">-->
+        </div>
+        <span @click="userInfo">{{
+         form.userRealName ? form.userRealName : form.userAccount ? form.userAccount : '系统用户'
+          }}</span>
+        <div class="my-indent-right">
+          <el-button type="primary" @click="comfirm(2)" size="small" round>账户管理</el-button>
 
-    </header>
-    <div class="main">
+          <!--            <span style="-->
+<!--            margin-left: -10px;-->
+<!--      display: inline-block;-->
+<!--      font-size: 14px;-->
+<!--      color: rgba(0, 0, 0, 0.4);-->
+<!--      position: relative;">-->
+<!--              <el-button @click="comfirm(2)" style="    border: 1px solid #333; color: #333"-->
+<!--                         size="small" round>账户管理</el-button>-->
+<!--            </span>-->
+        </div>
+
+      </div>
+    </div>
+    <div class="main" style="margin-top: -138px;">
       <router-link class="my-indent" style="    margin-bottom: -10px;" :to="{ name: '订单'}">
         <span class="my-indent-left">订单</span>
         <div class="my-indent-right">
@@ -105,7 +122,8 @@
         </router-link>
         <router-link :to="{ name: '入库渠道报表'}" class="my-settle1-top">
           <div>
-            <img style="width: 27px;margin-bottom: 10px;" src="../../static/img/new/qudao.png"></img>
+            <img style="width: 27px;margin-bottom: 10px;"
+                 src="../../static/img/new/qudao.png"></img>
           </div>
 
           <p>
@@ -114,7 +132,8 @@
         </router-link>
         <router-link :to="{ name: '销售报表'}" class="my-settle1-bottom">
           <div>
-            <img style="width: 27px;margin-bottom: 10px;" src="../../static/img/new/xiaoshou.png"></img>
+            <img style="width: 27px;margin-bottom: 10px;"
+                 src="../../static/img/new/xiaoshou.png"></img>
           </div>
           <p>
             <span style="color: #333">销售报表</span><i class="icon-go"></i>
@@ -182,11 +201,11 @@
 
 <script>
   // import * as mockData from '@/http/mock.js' //模拟数据
-  import { goodsBaseApi } from '@/api/goodsBase'
+  import {goodsBaseApi} from '@/api/goodsBase'
   import {goodsOrderApi} from '@/api/goodsOrder'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
-  import { userContainerApi } from '@/api/user'
+  import {userContainerApi} from '@/api/user'
 
   export default {
     components: {
@@ -214,11 +233,14 @@
       this.getData()
     },
     methods: {
-      userInfo(){
-        this.$router.push({ path: '/userInfo' })
+      userInfo() {
+        this.$router.push({path: '/userInfo'})
       },
-      comfirm(type){
-        this.$router.push({ path: '/logout', query: { type } })
+      scanCode(photo) {
+        this.$router.push({ path: '/scanCode', query: { photo } })
+      },
+      comfirm(type) {
+        this.$router.push({path: '/logout', query: {type}})
       },
       syncOldPriceToNew1() {
         goodsBaseApi.syncOldPriceToNew().then(res => {
@@ -240,7 +262,7 @@
             this.form = res.data ? res.data : {}
             if (this.form.imgUrl) {
               this.imgUrl = this.fileUrl + this.form.imgUrl
-            }else{
+            } else {
               this.imgUrl = '../../static/img/userimg5.jpg'
             }
           } else {
@@ -282,6 +304,7 @@
     padding-bottom: 14vw;
     background-color: #f3f2f8;
     border-top: 1vw solid #eee;
+
     .header {
       width: 100%;
       height: 16vw;
@@ -330,6 +353,7 @@
       height: 100%;
       margin-bottom: 50px;
       background-color: #f3f2f8;
+
       .my-indent {
         width: 100%;
         display: block;
@@ -404,6 +428,7 @@
         .bd();
         .bt();
         color: #333;
+
         > a {
           background-color: #fff;
           display: block;

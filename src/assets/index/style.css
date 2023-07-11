@@ -752,3 +752,19 @@ select{
   font-size: 13px;
   margin-bottom: 2vw;
 }
+/*左右对齐*/
+.zuoyouduiqi{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/*文字图片对齐*/
+.wenzitupduiqi{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+}
+.my-indent-right .el-button--small.is-round  {
+  padding: 9px 15px;
+  line-height: 0.8;
+}
