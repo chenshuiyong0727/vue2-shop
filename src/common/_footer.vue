@@ -2,10 +2,7 @@
   <!-- gotoRouter:点击后路由跳转到与id名相同的route.name所对应的路径 -->
   <footer class="footer" @click.stop='gotoRouter'>
     <mt-tabbar v-model="selected" style="border-top: 1px solid #f3f2f8;" fixed>
-      <mt-tab-item id="首页">
-        <img style="width: 6.9vw" :src="index_img" ></img>
-        <p :style="blue1">首页</p>
-      </mt-tab-item>
+
       <mt-tab-item id="订单">
         <img style="width: 6.9vw"  :src="order_img" ></img>
         <p :style="blue2">订单</p>
@@ -14,9 +11,11 @@
         <img style="width: 6.9vw"  :src="goods_img" ></img>
         <p :style="blue5">商品</p>
       </mt-tab-item>
-<!--      <mt-tab-item id="扫码">-->
-<!--        <img style="width: 11vw"  src="../../static/img/new/score3.png" ></img>-->
-<!--      </mt-tab-item>-->
+      <mt-tab-item id="首页">
+        <img v-if="!showIndex" style="width: 6.9vw" :src="index_img" ></img>
+        <img v-else style="width: 34px" :src="index_img" ></img>
+        <p v-if="!showIndex" :style="blue1">首页</p>
+      </mt-tab-item>
       <mt-tab-item id="仓库">
         <img style="width: 6.9vw" :src="store_img"></img>
         <p :style="blue3">仓库</p>
@@ -49,13 +48,14 @@
     data() {
       return {
         //对应mt-tab-item 的id值
+        showIndex: true,
         blue1: 'color:#409EFF;margin-top: 1vw;',
         blue2: 'margin-top: 1vw;',
         blue3: 'margin-top: 1vw;',
         blue4: 'margin-top: 1vw;',
         blue5: 'margin-top: 1vw;',
         selected: '',
-        index_img: '../../static/img/new/index_1.png',
+        index_img: '../../static/img/logo/logo.png',
         order_img: '../../static/img/new/order_0.png',
         store_img: '../../static/img/new/store_0.png',
         person_img: '../../static/img/new/person_0.png',
@@ -69,7 +69,8 @@
       switch (Rname) {
         case '首页':
           this.selected = '首页';
-          this.index_img= '../../static/img/new/index_1.png'
+          this.showIndex =  true
+          this.index_img= '../../static/img/logo/logo.png'
           this.order_img= '../../static/img/new/order_0.png'
           this.store_img= '../../static/img/new/store_0.png'
           this.person_img= '../../static/img/new/person_0.png'
@@ -84,6 +85,7 @@
           this.selected = '订单';
           this.order_img= '../../static/img/new/order_1.png'
           this.index_img= '../../static/img/new/index_0.png'
+          this.showIndex =  false
           this.store_img= '../../static/img/new/store_0.png'
           this.person_img= '../../static/img/new/person_0.png'
           this.goods_img= '../../static/img/new/good_0.png'
@@ -98,6 +100,7 @@
           this.store_img= '../../static/img/new/store_1.png'
           this.order_img= '../../static/img/new/order_0.png'
           this.index_img= '../../static/img/new/index_0.png'
+          this.showIndex =  false
           this.person_img= '../../static/img/new/person_0.png'
           this.goods_img= '../../static/img/new/good_0.png'
           this.blue3= 'color:#409EFF;margin-top: 1vw;'
@@ -111,6 +114,7 @@
           this.store_img= '../../static/img/new/store_0.png'
           this.order_img= '../../static/img/new/order_0.png'
           this.index_img= '../../static/img/new/index_0.png'
+          this.showIndex =  false
           this.goods_img= '../../static/img/new/good_0.png'
           this.selected = '用户页';
           this.blue4= 'color:#409EFF;margin-top: 1vw;'
@@ -125,6 +129,7 @@
           this.store_img= '../../static/img/new/store_0.png'
           this.order_img= '../../static/img/new/order_0.png'
           this.index_img= '../../static/img/new/index_0.png'
+          this.showIndex =  false
           this.selected = '商品';
           this.blue5= 'color:#409EFF;margin-top: 1vw;'
           this.blue1= 'margin-top: 1vw;'
