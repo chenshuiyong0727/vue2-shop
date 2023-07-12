@@ -1,29 +1,20 @@
 <template lang="html">
 
-  <div class="car1" >
-<!--  <div class="car1" style="  padding-top: 28px;">-->
-<!--    <mt-header title="移动仓库">-->
-<!--    </mt-header>-->
-<!--    &lt;!&ndash;    搜索开始&ndash;&gt;-->
-<!--    <div class="fenlei_top_index" style="">-->
-<!--      <div class="fenlei_top_left_index">-->
-<!--        <el-input-->
-<!--          clearable-->
-<!--          placeholder="请输入货号/商品名"-->
-<!--          prefix-icon="el-icon-search"-->
-<!--          v-model.trim="queryParamTop.actNo">-->
-<!--        </el-input>-->
-<!--      </div>-->
-<!--      <div class="fenlei_top_right" @click="scanCode(1)">-->
-<!--        <img src="../../../static/img/photo_7.png" height="30px;" width="30px;">-->
-<!--      </div>-->
-<!--    </div>-->
-    <div style="
+  <div class="car1" ref="content">
+    <mt-header  v-if="flag" title="个人中心">
+      <div slot="left">
+        <img  @click="scanCode(1)" style="width: 23px; "  src="../../../static/img/saoyisao4.png">
+      </div>
+      <div slot="right">
+        <img  @click="comfirm(1)" style="width: 26px; "  src="../../../static/img/setting0.png">
+      </div>
+    </mt-header>
+    <div  v-else style="
         padding-bottom: 40vw;
     background-image: linear-gradient(#e5f4ff, #f3f2f8);">
       <div class="zuoyouduiqi" style="padding-top: 3vw">
         <div style="margin-left: 4vw;" @click="scanCode(1)">
-          <img style="width: 23px; "  src="../../../static/img/logo/logo-333-1.png">
+          <img style="width: 21px; "  src="../../../static/img/logo/logo-333-1.png">
         </div>
         <div>
           <span style="font-size: 20px; color: black;" class="mint-header-title">
@@ -149,6 +140,7 @@
     },
     data() {
       return {
+        flag: false,
         queryParamTop: {
           actNo: ''
         },
@@ -156,10 +148,24 @@
     },
     components: {
     },
+    mounted(){
+      this.$refs.content.onscroll = ()=>{
+        this.handleScroll();
+      }
+    },
     created(){
       this.keyupSubmit()
     },
     methods:{
+      handleScroll () {
+        let scrollTop = this.$refs.content.scrollTop;
+        console.info(scrollTop)
+        if (scrollTop < 10){
+          this.flag = false
+        } else{
+          this.flag = true
+        }
+      },
       keyupSubmit() {
         document.onkeydown = (e) => {
           let _key = window.event.keyCode
@@ -217,7 +223,7 @@
   }
   .car1 {
     width: 100%;
-    /*background-color: #6ae9ff;*/
+    overflow: auto;
     background-color: #f3f2f8;
     .header {
       width: 100%;
