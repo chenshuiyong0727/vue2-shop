@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <div class="car" ref="content" style="height: 100%;font-size: 15px; border-top:0;    overflow: auto;">
+  <div class="car2" ref="content" style="height: 100%;font-size: 15px; border-top:0;    overflow: auto;">
     <div v-if="flag">
       <mt-header  title="个人中心">
         <div slot="left">
@@ -208,16 +208,16 @@
           <p style="color: #333">红包</p>
         </router-link>
       </section>
-      <section class="my-pay-1">
-        <router-link :to="{ path: '/logout?type=1'}" style="width: 25%">
-          <img
-            style="margin-top: 7px;margin-bottom: -4px;width: 27px;"
-            src="../../static/img/setting7.png"></img>
-          <p style="color: #333">设置</p>
-        </router-link>
-      </section>
+<!--      <section class="my-pay-1">-->
+<!--        <router-link :to="{ path: '/logout?type=1'}" style="width: 25%">-->
+<!--          <img-->
+<!--            style="margin-top: 7px;margin-bottom: -4px;width: 27px;"-->
+<!--            src="../../static/img/setting7.png"></img>-->
+<!--          <p style="color: #333">设置</p>-->
+<!--        </router-link>-->
+<!--      </section>-->
     </div>
-    <div style=" padding-top: 1px;"></div>
+<!--    <div style=" padding-top: 1px;"></div>-->
     <v-footer></v-footer>
   </div>
 </template>
@@ -262,7 +262,7 @@
       handleScroll () {
         let scrollTop = this.$refs.content.scrollTop;
         console.info(scrollTop)
-        if (scrollTop < 40){
+        if (scrollTop < 10){
           this.flag = false
         } else{
           this.flag = true
@@ -347,7 +347,7 @@
     background-color: #f3f2f8;
   }
 
-  .car {
+  .car2 {
     width: 100%;
     padding-bottom: 14vw;
     background-color: #f3f2f8;
@@ -398,7 +398,7 @@
     .main {
       width: 92vw;
       margin-left: 4vw;
-      height: 100%;
+      /*height: 100%;*/
       margin-bottom: 50px;
       background-color: #f3f2f8;
 
