@@ -44,8 +44,8 @@
       <div  v-else style="
         padding-bottom: 40vw;
     background-image: linear-gradient(#e5f4ff, #f3f2f8);">
-        <div class="zuoyouduiqi" style="padding-top: 3vw">
-          <div style="margin-left: 4vw;" @click="scanCode(1)">
+        <div class="zuoyouduiqi" style="padding: 2.81vw 4.8vw !important;">
+          <div class="mint-header-button is-left" @click="scanCode(1)">
             <img style="width: 21px; "  src="../../static/img/logo/logo-333-1.png">
           </div>
           <div>
@@ -53,7 +53,7 @@
             移动仓库
           </span>
           </div>
-          <div @click="comfirm(1)" style="margin-right: 4vw;">
+          <div class="mint-header-button is-right" @click="comfirm(1)" >
             <img style="width: 26px; "  src="../../static/img/photo2.png">
           </div>
         </div>
