@@ -1,11 +1,8 @@
 <template>
   <div class="hello" ref="hello">
-    <mt-header title="瑕疵商品">
+    <mt-header :title="titleName">
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
-      </div>
-      <div slot="right">
-        <mt-button size="normal" style="font-size: 16px; color: #656b79" @click="resetHandle" >重置</mt-button>
       </div>
     </mt-header>
 <!--    <div class="fenlei_top">-->
@@ -30,7 +27,7 @@
       </div>
     </div>
     <mt-loadmore
-      style="padding-top: 48px;"
+      style="padding-top: 0.86rem"
       :top-method="loadTop"
       :bottom-method="loadBottom"
       :bottom-all-loaded="allLoaded"
@@ -39,98 +36,53 @@
       :autoFill="false"
       ref="loadmore"
     >
-      <div class="dingdans_item_dw"
-              v-for="(item,index) in tableData"
-              :key="index"
-      >
-        <!--        头部-->
-        <div class="dingdans_top_dw">
-          <div class="dingdans_top_left_dw">
-            <span>订单号:</span>
-            <span>{{item.orderNo }}</span>
+      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
+        <div class="dingdans_top">
+          <div class="dingdans_top_left">
+            <strong style="color: #409EFF"  @click="jumpactOrder(item.orderNo)">{{item.orderNo}} </strong>
           </div>
-          <div class="dingdans_top_right_dw">
-            <span>{{ item.status | dictToDescTypeValue(45) }} </span>
+          <div class="dingdans_top_right">
+            <strong
+            :class="item.status == 1 ? 'color-danger' : 'color-success'"
+          >{{ item.status | dictToDescTypeValue(45) }} </strong>
           </div>
         </div>
-        <!--        中间-->
-        <div class="dingdans_con_dw">
-          <div v-if="showSd" style="width: 50px;
-    margin-left: -2px;
-    margin-right: 2px;" >
-            <el-checkbox v-model="item.checked" :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
+        <div class="dingdans_con">
+          <div class="dingdans_con_left" @click="avatarShow(item.img)">
+            <img  v-bind:src="item.img" alt="" >
           </div>
-          <div :src="item.img" class="dingdans_con_left_dw"
-               @click="avatarShow(item.img)">
-            <img :src="item.img" >
-<!--            <p class="mark_dw">-->
-<!--              <span class="text_dw">-->
-<!--                {{ item.saleType | dictToDescTypeValue(46) }}-->
-<!--              </span>-->
-<!--            </p>-->
-          </div>
-          <div class="diangdans_con_right_dw">
-            <div class="dingdans_con_right_top_dw" @click="goodsDetail(item.goodsId, 1) ">
-              <span>
+          <div class="diangdans_con_right">
+            <div class="dingdans_con_right_top" >
+              <strong v-if="item.goodsName"
+                      @click="goodsDetail(item.goodsId, 1) "
+                      >
                 {{item.goodsName}}
-              </span>
+              </strong>
             </div>
-            <div class="dingdans_con_right_top_dw_1">
-              <span @click="jumpactNo(item.actNo)">
-              {{item.actNo}}
-              </span>
-              <img @click="copyUrl(item.actNo)" style="width: 20px;margin-bottom: 8px;"
-                   src="../../static/img/copy6.png">
+            <div class="dingdans_con_right_down">
+              货号：<strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>
+              <strong> {{item.createTime |formateTime }}</strong>
             </div>
-            <div v-if="item.addressId" style="    margin-bottom: 10px;">
-              <span  class="dingdans_con_dw_address">
-                {{item.addressId | dictToDescTypeValue(38)}}
-              </span>
-            </div>
-            <div class="dingdans_con_right_top_dw_2">
-              <div>
-                 <span>
-                {{item.size}}
-              </span>
-              </div>
-              <div>
-                <strong v-if="item.shelvesPrice"   style="color: #333333">
-                  ¥
-                </strong>
-                <strong  v-if="item.shelvesPrice" style="font-size: 17px ;margin-left: -2px;color: #333333">
-                  {{item.shelvesPrice}}
-                </strong>
-                <span  style="margin-left: 3px;text-decoration:line-through;">
-                  {{item.price}}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--底部-->
-        <div class="dingdans_bottom_dw">
-          <div class="dingdans_top_left_dw">
-            <el-tooltip :content="item.reason" placement="top">
-              <span style="color: #333333">{{item.reason | sizeFilterNum(20) }}</span>
-            </el-tooltip>
-          </div>
-          <!--          操作栏-->
-          <div class="dingdans_top_right_dw">
-            <div class="dingdans_con_right_down_2_1">
-              <el-dropdown trigger="click" style="margin-left: 1px;">
-                <button
-                  class="dw-button-common">操作
-                </button>
-                <el-dropdown-menu slot="dropdown" >
-                  <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>
-                  <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
+            <div class="dingdans_top" style="margin-bottom: -5px;">
+              <el-tooltip style="width: 40vw;" :content="item.reason" placement="top">
+                <strong>{{item.reason | sizeFilterNum(12) }}</strong>
+              </el-tooltip>
+
+              <el-button
+                type="text"
+                size="small"
+                class="color-danger"
+                style="font-size: 3.5vw;font-weight: 600;margin-left: 50px;"
+                @click="goDel(item.id)">删除</el-button>
+              <el-button
+                type="text"
+                size="small"
+                style="font-size: 3.5vw;font-weight: 600;"
+                @click="handleClick(item)">修改</el-button>
             </div>
           </div>
         </div>
       </div>
-
       <div slot="top" class="mint-loadmore-top">
         <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }">松手释放↓</span>
         <span v-show="topStatus === 'loading'">加载中</span>
@@ -143,8 +95,8 @@
         <span v-if="bottomStatus === 'loading'">加载中</span>
       </div>
     </mt-loadmore>
-    <div v-if="allLoaded" class="to-the-bottom-1" style="padding:0">
-      <p v-if="emtityMsg">
+        <div v-if="allLoaded" class="to-the-bottom">
+      <p v-if="emtityMsg != '没有更多了'">
         <img src="../../static/img/new/empity_7.png" style="width: 60vw;">
       </p>
       <p>
@@ -156,7 +108,7 @@
       v-model="isShowDialog2">
       <mt-header title="筛选" >
         <div slot="right">
-          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px">关闭</mt-button>
+          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px"> 重置（关闭）</mt-button>
         </div>
         <div slot="left">
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
@@ -164,19 +116,10 @@
       </mt-header>
       <section style="height: 80vw;width: 100vw">
         <mt-field label="状态" style="margin-top: 11vw;">
-<!--            <select class="select100" v-model="queryParam.status"  >-->
-<!--               <option :disabled="true" value="" selected>请选择类型</option>-->
-<!--              <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>-->
-<!--            </select>-->
-            <el-select size="small" class="select100" v-model="queryParam.status"  >
-          <el-option :disabled="true">请选择状态</el-option>
-          <el-option
-            v-for="item in statusList"
-            :key="item.fieldValue"
-            :label="item.fieldName"
-            :value="+item.fieldValue">
-          </el-option>
-            </el-select>
+            <select class="select100" v-model="queryParam.status"  >
+               <option :disabled="true" value="" selected>请选择类型</option>
+              <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>
+            </select>
         </mt-field>
         <mt-field label="订单号" placeholder="请输入订单号"  v-model="queryParam.orderNo"></mt-field>
         <mt-field label="原因" placeholder="请输入原因"  v-model="queryParam.reason"></mt-field>
@@ -218,19 +161,10 @@
         <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :disabled="true"></mt-field>
         <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
         <mt-field label="状态">
-<!--            <select  class="select100" v-model="requestParam.status">-->
-<!--          <option :disabled="true" value="" selected>请选择</option>-->
-<!--              <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>-->
-<!--            </select>-->
-            <el-select size="small" class="select100" v-model="requestParam.status">
-          <el-option :disabled="true">请选择状态</el-option>
-          <el-option
-            v-for="item in statusList"
-            :key="item.fieldValue"
-            :label="item.fieldName"
-            :value="+item.fieldValue">
-          </el-option>
-            </el-select>
+            <select  class="select100" v-model="requestParam.status">
+          <option :disabled="true" value="" selected>请选择</option>
+              <option v-for="x in statusList" :value="x.fieldValue">{{x.fieldName}}</option>
+            </select>
         </mt-field>
         <mt-field label="创建时间">
           <el-date-picker class="select100" style="width: 62vw"
@@ -267,7 +201,7 @@
         orderData2: '',
         isShowDialog2: false,
         titleName: '瑕疵商品',
-        emtityMsg: '',
+        emtityMsg: '没有更多了',
         pictureZoomShow: false,
         imageZoom: '',
         fileUrl: fileUrl,
@@ -333,18 +267,16 @@
         this.$router.push({ path: '/otherAdd', query: { id, type } })
       },
       getPage() {
-        this.emtityMsg = ''
         goodsDefectsApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             if (this.totalCount == 0) {
               this.allLoaded = true;
-              if (this.queryParam.pageNum == 1){
-                this.emtityMsg = '暂无相关商品'
-              }
+              this.emtityMsg = '暂无相关数据'
             } else if (this.totalCount <= this.queryParam.pageSize) {
               this.allLoaded = true;
+              this.emtityMsg = '没有更多了'
             }
           } else {
             this.$toast(res.subMsg)
@@ -375,6 +307,7 @@
               },100)
             } else {
               this.allLoaded = true;
+              this.emtityMsg = '没有更多了'
               this.$toast('没有更多了')
             }
           } else {
@@ -457,18 +390,6 @@
       goodsDetail(id, type) {
         this.$router.push({ path: '/goodsDetail', query: { id, type } })
       },
-      // 复制链接
-      copyUrl(url) {
-        const input = document.createElement('input')
-        document.body.appendChild(input)
-        input.setAttribute('value', url)
-        input.select()
-        if (document.execCommand('copy')) {
-          document.execCommand('copy')
-        }
-        document.body.removeChild(input)
-        this.$toast('已复制至剪切板')
-      },
       jumpactNo(actNo) {
         this.$router.push({ path: '/store', query: { actNo } })
       },
@@ -489,13 +410,6 @@
           })
         }).catch(() => {
         })
-      },
-      gotoDw(spuId) {
-        if (!spuId) {
-          return
-        }
-        let url = "https://m.dewu.com/router/product/ProductDetail?spuId=";
-        window.location.href = url + spuId;
       },
       handleClick(row) {
         this.orderData = row
