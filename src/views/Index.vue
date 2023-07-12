@@ -1,22 +1,22 @@
 <template lang="html">
   <!-- 在首页父组件发送http请求,后将数据通过props传递给子组件,可减少请求次数,减少服务器压力 -->
-  <div class="hello" ref="hello">
-    <mt-header title="移动仓库">
-    </mt-header>
-    <!--    搜索开始-->
-    <div class="fenlei_top">
-      <div class="fenlei_top_left">
-        <el-input
-          clearable
-          placeholder="请输入货号/商品名"
-          prefix-icon="el-icon-search"
-          v-model.trim="queryParamTop.actNo">
-        </el-input>
-      </div>
-      <div class="fenlei_top_right" @click="scanCode(1)">
-        <img src="../../static/img/photo_7.png" height="30px;" width="30px;">
-      </div>
-    </div>
+  <div class="hello" ref="hello" style="padding-top: 0px;">
+<!--    <mt-header title="移动仓库">-->
+<!--    </mt-header>-->
+<!--    &lt;!&ndash;    搜索开始&ndash;&gt;-->
+<!--    <div class="fenlei_top">-->
+<!--      <div class="fenlei_top_left">-->
+<!--        <el-input-->
+<!--          clearable-->
+<!--          placeholder="请输入货号/商品名"-->
+<!--          prefix-icon="el-icon-search"-->
+<!--          v-model.trim="queryParamTop.actNo">-->
+<!--        </el-input>-->
+<!--      </div>-->
+<!--      <div class="fenlei_top_right" @click="scanCode(1)">-->
+<!--        <img src="../../static/img/photo_7.png" height="30px;" width="30px;">-->
+<!--      </div>-->
+<!--    </div>-->
 <!--    待办事项-->
     <v-orderNum :orderIofo ="orderIofo" :storeData ="storeData"/>
 

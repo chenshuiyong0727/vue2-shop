@@ -1,10 +1,54 @@
 <template lang="html">
 
-  <div class="car1" style="  padding-top: 28px;">
-    <div class="main">
+  <div class="car1" >
+<!--  <div class="car1" style="  padding-top: 28px;">-->
+<!--    <mt-header title="移动仓库">-->
+<!--    </mt-header>-->
+<!--    &lt;!&ndash;    搜索开始&ndash;&gt;-->
+<!--    <div class="fenlei_top_index" style="">-->
+<!--      <div class="fenlei_top_left_index">-->
+<!--        <el-input-->
+<!--          clearable-->
+<!--          placeholder="请输入货号/商品名"-->
+<!--          prefix-icon="el-icon-search"-->
+<!--          v-model.trim="queryParamTop.actNo">-->
+<!--        </el-input>-->
+<!--      </div>-->
+<!--      <div class="fenlei_top_right" @click="scanCode(1)">-->
+<!--        <img src="../../../static/img/photo_7.png" height="30px;" width="30px;">-->
+<!--      </div>-->
+<!--    </div>-->
+    <div style="
+        padding-bottom: 40vw;
+    background-image: linear-gradient(#e5f4ff, #f3f2f8);">
+      <div class="zuoyouduiqi" style="padding-top: 3vw">
+        <div style="margin-left: 4vw;" @click="scanCode(1)">
+          <img style="width: 23px; "  src="../../../static/img/logo/logo-333-1.png">
+        </div>
+        <div>
+          <span style="font-size: 20px; color: black;" class="mint-header-title">
+            移动仓库
+          </span>
+        </div>
+        <div @click="comfirm(1)" style="margin-right: 4vw;">
+          <img style="width: 26px; "  src="../../../static/img/photo2.png">
+        </div>
+      </div>
+      <div class="header">
+        <div class="my-indent-right-1">
+<!--          <el-button type="primary" @click="comfirm(2)" size="small" round>账户管理</el-button>-->
+
+                  <el-input
+                    clearable
+                    placeholder="请输入货号/商品名"
+                    prefix-icon="el-icon-search"
+                    v-model.trim="queryParamTop.actNo">
+                  </el-input>
+
+        </div>
+      </div>
       <section class="my-pay-2" style="border-bottom-style:none;
-         padding-top: 6vw;
-         border-bottom-style: none; margin-left: 0;width: 100vw;">
+         padding-top: 4vw; ">
         <router-link :to="{ path: '/store'}">
           <span style="    margin-top: -3px;">
              <img
@@ -30,6 +74,11 @@
           <p style="color: #8c8a8a;font-size: 14px;">待移库</p>
         </router-link>
       </section>
+
+    </div>
+
+
+    <div class="main" style="margin-top: -142px;">
       <h1 class="section1-title" style="border-top-style:none">
       <span style="    margin-left: 20px;">
         订单管理
@@ -98,9 +147,33 @@
         default: {}
       }
     },
+    data() {
+      return {
+        queryParamTop: {
+          actNo: ''
+        },
+      }
+    },
     components: {
     },
+    created(){
+      this.keyupSubmit()
+    },
     methods:{
+      keyupSubmit() {
+        document.onkeydown = (e) => {
+          let _key = window.event.keyCode
+          if (_key === 13) {
+            this.jumpGoods(this.queryParamTop.actNo)
+          }
+        }
+      },
+      jumpGoods(actNo) {
+        this.$router.push({ path: '/GoodsBase', query: { actNo } })
+      },
+      scanCode(photo) {
+        this.$router.push({ path: '/scanCode', query: { photo } })
+      },
       order(theExpire,scrollNum) {
         this.$router.push({ path: '/order', query: { theExpire,scrollNum }})
       },
@@ -148,10 +221,10 @@
     background-color: #f3f2f8;
     .header {
       width: 100%;
-      height: 16vw;
+      height: 20vw;
       /*background: url(../../../static/carbg.png) center 0 #f37d0f;*/
       background-size: auto 100%;
-      padding: 3.2vw 0;
+      /*padding: 3.2vw 0;*/
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;

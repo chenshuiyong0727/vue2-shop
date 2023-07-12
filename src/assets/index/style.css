@@ -312,6 +312,21 @@ select{
 .fenlei_top_left{
   width: 100vw !important;
 }
+.fenlei_top_index {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  width: 100vw;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  margin-top: 11.6vw !important;
+}
+.fenlei_top_left_index{
+  width: 100vw !important;
+}
 
 .el-input__inner {
   -webkit-appearance: none;
@@ -767,4 +782,25 @@ select{
 .my-indent-right .el-button--small.is-round  {
   padding: 9px 15px;
   line-height: 0.8;
+}
+.my-indent-right-1{
+  width: 92vw;
+  margin-left: 4vw;
+}
+.my-indent-right-1 .el-input__inner {
+  -webkit-appearance: none;
+  background-color: #FFF;
+  background-image: none;
+  /* border-radius: 4px; */
+  /* border: 1px solid #DCDFE6; */
+  box-sizing: border-box;
+  color: #606266;
+  display: inline-block;
+  height: 35px;
+  line-height: 35px;
+  outline: 0;
+  padding: 0 30px;
+  -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+  transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+  width: 100%;
 }
