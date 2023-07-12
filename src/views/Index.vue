@@ -3,7 +3,7 @@
   <div class="hello" ref="hello">
     <mt-header title="移动仓库">
     </mt-header>
-<!--    搜索开始-->
+    <!--    搜索开始-->
     <div class="fenlei_top">
       <div class="fenlei_top_left">
         <el-input
@@ -17,7 +17,6 @@
         <img src="../../static/img/photo_7.png" height="30px;" width="30px;">
       </div>
     </div>
-<!--    搜索结束-->
 <!--    待办事项-->
     <v-orderNum :orderIofo ="orderIofo" :storeData ="storeData"/>
 
