@@ -1,7 +1,47 @@
 <template lang="html">
 
-  <div class="car" style="height: 100%;font-size: 15px; border-top:0;">
-    <div style="
+  <div class="car" ref="content" style="height: 100%;font-size: 15px; border-top:0;    overflow: auto;">
+    <div v-if="flag">
+      <mt-header  title="个人中心">
+        <div slot="left">
+          <img  @click="scanCode(1)" style="width: 23px; "  src="../../static/img/saoyisao4.png">
+        </div>
+        <div slot="right">
+          <img  @click="comfirm(1)" style="width: 26px; "  src="../../static/img/setting0.png">
+        </div>
+      </mt-header>
+      <header class="header"
+              style="
+                height: 80px;
+      margin-top: 42px;
+      background-color: #fff;
+      border-bottom-color: rgba(185, 185, 185, 0.14);
+      border-bottom-style: solid;
+      border-bottom-width: 1px;"
+      >
+        <div @click="userInfo" class="header-icon" style="margin-left: 6vw;">
+          <img v-if="imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" :src="imgUrl">
+          <!--          <img v-if="form && !form.imgUrl" style="width: 50px;height: 50px;border-radius: 100%;" src="../../static/img/userimg5.jpg">-->
+        </div>
+        <span  @click="userInfo">{{
+         form.userRealName ? form.userRealName : form.userAccount ? form.userAccount : '系统用户'
+          }}</span>
+        <div class="my-indent-right">
+<!--            <span style="-->
+<!--            margin-left: -10px;-->
+<!--      display: inline-block;-->
+<!--      font-size: 14px;-->
+<!--      color: rgba(0, 0, 0, 0.4);-->
+<!--      position: relative;">-->
+<!--              <el-button @click="comfirm(2)" style="    border: 1px solid #333; color: #333"-->
+<!--                         size="small" round>账户管理</el-button>-->
+<!--            </span>-->
+          <el-button type="primary" @click="comfirm(2)" size="small" round>账户管理</el-button>
+        </div>
+      </header>
+    </div>
+
+    <div v-else style="
         padding-bottom: 40vw;
     background-image: linear-gradient(#e5f4ff, #f3f2f8);">
       <div class="zuoyouduiqi" style="padding-top: 3vw">
@@ -33,7 +73,9 @@
         </div>
       </div>
     </div>
-    <div class="main" style="margin-top: -138px;">
+
+
+    <div class="main" :style="!flag? 'margin-top: -138px;': ''">
       <router-link class="my-indent" style="    margin-bottom: -10px;" :to="{ name: '订单'}">
         <span class="my-indent-left">订单</span>
         <div class="my-indent-right">
@@ -193,6 +235,7 @@
     },
     data() {
       return {
+        flag: false,
         imgUrl: '',
         fileUrl: fileUrl,
         orderIofo: {},
@@ -206,12 +249,38 @@
         }
       }
     },
-
+    mounted(){
+      this.$refs.content.onscroll = ()=>{
+        this.handleScroll();
+      }
+    },
     created() {
       this.getUcUser()
       this.getData()
     },
     methods: {
+      handleScroll () {
+        let scrollTop = this.$refs.content.scrollTop;
+        console.info(scrollTop)
+        if (scrollTop < 40){
+          this.flag = false
+        } else{
+          this.flag = true
+        }
+        // let blocks = document.querySelectorAll('.conBlock');
+        // let tabblocks = document.querySelectorAll('.tab-title');
+        // blocks.forEach((item, index) => {
+        //   if (scrollTop >= item.offsetTop - 160) {
+        //     this.activeId = index;
+        //   }
+        // })
+        // if(tabblocks[this.activeId].offsetLeft > window.innerWidth-50){
+        //   this.$refs['tab-content'].scrollLeft = tabblocks[this.activeId].offsetLeft;
+        // }
+        // if(this.$refs['tab-content'].scrollLeft>tabblocks[this.activeId].offsetLeft){
+        //   this.$refs['tab-content'].scrollLeft = 0;
+        // }
+      },
       userInfo() {
         this.$router.push({path: '/userInfo'})
       },
