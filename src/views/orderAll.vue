@@ -29,10 +29,26 @@
     </div>
     <div class="searchList" ref="searchList">
       <span style="margin-right: 6vw;" class="aaa" :class="!queryParam.status && !queryParam.theExpire? 'activity' : ''" @click="searchStatus('')">全部</span>
-      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==3 && !queryParam.theExpire ? 'activity' : ''" @click="searchStatus(3)">待发货</span>
-      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==4 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(4)">已发货</span>
-      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==5 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(5)">运输中</span>
-      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==6 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(6)">已收货</span>
+      <div :style="!orderIofo.count3 ? 'margin-right: 6vw; display: flex;' : 'margin-right: 3vw;display: flex;' ">
+        <span class="aaa" :class="queryParam.status==3 && !queryParam.theExpire ? 'activity' : ''" @click="searchStatus(3)">待发货</span>
+        <i v-if="orderIofo.count3" class="danger-num-1">{{orderIofo.count3}}</i>
+      </div>
+      <div :style="!orderIofo.count4 ? 'margin-right: 6vw; display: flex;' : 'margin-right: 3vw;display: flex;' ">
+        <span class="aaa" :class="queryParam.status==4 && !queryParam.theExpire ? 'activity' : ''" @click="searchStatus(4)">已发货</span>
+        <i v-if="orderIofo.count4" class="danger-num-1">{{orderIofo.count4}}</i>
+      </div>
+      <div :style="!orderIofo.count5 ? 'margin-right: 6vw; display: flex;' : 'margin-right: 3vw;display: flex;' ">
+         <span class="aaa" :class="queryParam.status==5 && !queryParam.theExpire ? 'activity' : ''" @click="searchStatus(5)">运输中</span>
+        <i v-if="orderIofo.count5" class="danger-num-1">{{orderIofo.count5}}</i>
+      </div>
+      <div :style="!orderIofo.count6 ? 'margin-right: 6vw; display: flex;' : 'margin-right: 3vw;display: flex;' ">
+        <span class="aaa" :class="queryParam.status==6 && !queryParam.theExpire ? 'activity' : ''" @click="searchStatus(6,4)">已收货</span>
+        <i v-if="orderIofo.count6" class="danger-num-1">{{orderIofo.count6}}</i>
+      </div>
+<!--      -->
+<!--      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==4 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(4)">已发货</span>-->
+<!--      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==5 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(5)">运输中</span>-->
+<!--      <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==6 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(6)">已收货</span>-->
       <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==11 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(11,4)">已入库</span>
       <span style="margin-right: 6vw;" class="aaa" :class="!queryParam.status  && queryParam.theExpire ? 'activity' : ''" @click="searchTheExpire">即将到期</span>
       <span style="margin-right: 6vw;" class="aaa" :class="queryParam.status==2 && !queryParam.theExpire ? 'activity' : ''" @click="searchStatus(2,7)">已上架</span>
@@ -612,6 +628,7 @@
           addressId: ''
         },
         titleName: '订单',
+        orderIofo: {},
         emtityMsg: '',
         orderData: '',
         isShowDialog: false,
@@ -790,6 +807,7 @@
       },
       getPage() {
         this.initBatch()
+        this.getData()
         this.emtityMsg = ''
         goodsOrderApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
@@ -901,6 +919,15 @@
       },
       changeSystem1() {
         this.$forceUpdate()
+      },
+      getData() {
+        goodsOrderApi.orderData().then(res => {
+          if (res.subCode === 1000) {
+            this.orderIofo = res.data ? res.data.countDto : {}
+          } else {
+            this.$toast(res.subMsg)
+          }
+        })
       },
       search1() {
         this.queryParam.pageNum = 1
@@ -1449,6 +1476,20 @@
     padding: 3vw;
     color: rgb(51, 51, 51);
     font-size: 4.2vw;
+  }
+  .danger-num-1 {
+    padding: 0px 6px;
+    min-width: 11px;
+    text-align: center;
+    height: 12px;
+    line-height: 12px;
+    color: #fff;
+    background-color: #F56C6C;
+    font-size: 12px;
+    top: 0;
+    right: 0;
+    border-radius: 8px;
+    margin-left: -3px;
   }
 
 </style>

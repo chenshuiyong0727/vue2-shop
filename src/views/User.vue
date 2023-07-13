@@ -296,7 +296,7 @@
         })
       },
       getData() {
-        goodsOrderApi.indexData().then(res => {
+        goodsOrderApi.orderData().then(res => {
           if (res.subCode === 1000) {
             this.orderIofo = res.data ? res.data.countDto : {}
           } else {
