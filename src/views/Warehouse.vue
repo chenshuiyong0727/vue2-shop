@@ -29,11 +29,23 @@
       </div>
     </div>
     <div class="searchList">
-      <span style="" :class="queryParam.inventory==1 && queryParam.today==7 ? 'activity' : ''" @click="searchStatus(1,7)">变更</span>
-      <span style="" :class="queryParam.inventory==1 && queryParam.today==2 ? 'activity' : ''" @click="searchStatus(1,2)">待上架</span>
-      <span  :class="queryParam.inventory==1 && !queryParam.today ? 'activity' : ''" @click="searchStatus(1)">现货</span>
-      <span style="" :class="queryParam.inventory==1 && queryParam.today==3 ? 'activity' : ''" @click="searchStatus(1,3)">待移库</span>
-      <span style="" :class="queryParam.inventory==0 ? 'activity' : ''" @click="searchStatus(0)">售空</span>
+      <div :style="!storeData.upCout ? 'margin-right: 6vw; display: flex;' : 'margin-right: 4vw;display: flex;' ">
+        <span style="" :class="queryParam.inventory==1 && queryParam.today==7 ? 'activity' : ''" @click="searchStatus(1,7)">变更</span>
+        <i v-if="storeData.upCout" class="danger-num-1">{{storeData.upCout}}</i>
+      </div>
+      <div :style="!storeData.successNumLast ? 'margin-right: 6vw; display: flex;' : 'margin-right: 4vw;display: flex;' ">
+        <span style="" :class="queryParam.inventory==1 && queryParam.today==2 ? 'activity' : ''" @click="searchStatus(1,2)">待上架</span>
+        <i v-if="storeData.successNumLast" class="danger-num-1">{{storeData.successNumLast}}</i>
+      </div>
+      <span style="margin-right: 6vw;" :class="queryParam.inventory==1 && !queryParam.today ? 'activity' : ''" @click="searchStatus(1)">现货</span>
+<!--      <span style="" :class="queryParam.inventory==1 && queryParam.today==7 ? 'activity' : ''" @click="searchStatus(1,7)">变更</span>-->
+<!--      <span style="" :class="queryParam.inventory==1 && queryParam.today==2 ? 'activity' : ''" @click="searchStatus(1,2)">待上架</span>-->
+<!--      <span style="" :class="queryParam.inventory==1 && queryParam.today==3 ? 'activity' : ''" @click="searchStatus(1,3)">待移库</span>-->
+      <div :style="!storeData.waitMoveCout ? 'margin-right: 6vw; display: flex;' : 'margin-right: 4vw;display: flex;' ">
+        <span style="" :class="queryParam.inventory==1 && queryParam.today==3 ? 'activity' : ''" @click="searchStatus(1,3)">待移库</span>
+        <i v-if="storeData.waitMoveCout" class="danger-num-1">{{storeData.waitMoveCout}}</i>
+      </div>
+      <span style="margin-right: 6vw;" :class="queryParam.inventory==0 ? 'activity' : ''" @click="searchStatus(0)">售空</span>
     </div>
 <!--    列表-->
     <mt-loadmore
@@ -439,6 +451,7 @@
         typeList: [],
         fileUrl: fileUrl,
         today: '',
+        storeData: {},
         queryParam: {
           today: '',
           syncTimeFrom: '',
@@ -689,6 +702,15 @@
           this.queryParam.successTimeTo = null
         }
       },
+      getData2() {
+        goodsOrderApi.todaySync({}).then(res => {
+          if (res.subCode === 1000) {
+            this.storeData = res.data
+          } else {
+            this.$toast(res.subMsg)
+          }
+        })
+      },
       getPage() {
         if (this.queryParam.inventory == 1) {
           this.queryParam.inventoryFrom = 1
@@ -700,6 +722,7 @@
           this.queryParam.inventoryFrom = ''
           this.queryParam.inventoryTo = ''
         }
+        this.getData2()
         this.emtityMsg = ''
         goodsInventoryApi.pageGoods(this.queryParam).then(res => {
           if (res.subCode === 1000) {

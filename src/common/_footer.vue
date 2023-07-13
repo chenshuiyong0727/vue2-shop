@@ -2,7 +2,11 @@
   <!-- gotoRouter:点击后路由跳转到与id名相同的route.name所对应的路径 -->
   <footer class="footer" @click.stop='gotoRouter'>
     <mt-tabbar v-model="selected" style="border-top: 1px solid #f3f2f8;" fixed>
-
+      <mt-tab-item id="首页">
+        <img v-if="!showIndex" style="width: 6.9vw" :src="index_img" ></img>
+        <img v-else style="width: 34px" :src="index_img" ></img>
+        <p v-if="!showIndex" :style="blue1">首页</p>
+      </mt-tab-item>
       <mt-tab-item id="订单">
         <img style="width: 6.9vw"  :src="order_img" ></img>
         <p :style="blue2">订单</p>
@@ -10,11 +14,6 @@
       <mt-tab-item id="商品">
         <img style="width: 6.9vw"  :src="goods_img" ></img>
         <p :style="blue5">商品</p>
-      </mt-tab-item>
-      <mt-tab-item id="首页">
-        <img v-if="!showIndex" style="width: 6.9vw" :src="index_img" ></img>
-        <img v-else style="width: 34px" :src="index_img" ></img>
-        <p v-if="!showIndex" :style="blue1">首页</p>
       </mt-tab-item>
       <mt-tab-item id="仓库">
         <img style="width: 6.9vw" :src="store_img"></img>

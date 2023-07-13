@@ -1477,19 +1477,4 @@
     color: rgb(51, 51, 51);
     font-size: 4.2vw;
   }
-  .danger-num-1 {
-    padding: 0px 6px;
-    min-width: 11px;
-    text-align: center;
-    height: 12px;
-    line-height: 12px;
-    color: #fff;
-    background-color: #F56C6C;
-    font-size: 12px;
-    top: 0;
-    right: 0;
-    border-radius: 8px;
-    margin-left: -3px;
-  }
-
 </style>
