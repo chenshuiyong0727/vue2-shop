@@ -1,8 +1,17 @@
 <template>
   <div class="hello" ref="hello">
-    <mt-header :title="titleName">
+    <mt-header title="其他收支">
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
+      </div>
+      <div slot="right">
+        <el-dropdown trigger="click" style="margin-left: 1px;">
+          <mt-button size="normal" style="font-size: 16px; color: #656b79" >管理</mt-button>
+          <el-dropdown-menu slot="dropdown" >
+            <el-dropdown-item type="text" @click.native="goDetail(null,3)">添加</el-dropdown-item>
+            <el-dropdown-item type="text" @click.native="resetHandle">重置</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
     </mt-header>
       <div class="fenlei_top">
@@ -45,48 +54,63 @@
       :autoFill="false"
       ref="loadmore"
     >
-      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
-        <div class="dingdans_top">
-          <div class="dingdans_top_left">
-            商品名称：<strong> {{item.name}} </strong>
-          </div>
-          <div class="dingdans_top_right">
-            类型：<strong
-            :class="item.type == 2 ? 'color-danger' : 'color-success'"
-          >{{ item.type | dictToDescTypeValue(39) }} </strong>
-          </div>
-        </div>
-        <div class="dingdans_con">
-          <div v-if="item.imgUrl" class="dingdans_con_left" @click="avatarShow(item.imgUrl)">
-            <img  v-bind:src="fileUrl + item.imgUrl" alt="" >
-          </div>
-          <div v-else class="dingdans_con_left">
-            <img src="../../static/img/other2.png">
-          </div>
-          <div class="diangdans_con_right">
-            <div class="dingdans_con_right_top" style="margin-top: -28px;">
-              金额：<strong  class="color-danger">{{item.price}} </strong>
-              <span v-if="item.actNo">货号：<strong>{{item.actNo}}</strong></span>
-              <span v-if="item.brand">品牌：<strong>{{item.brand}}</strong></span>
+
+      <div>
+        <div class="dingdans_item_other" v-for="(item,index) in tableData" :key="index">
+          <div class="dingdans_top_other zuoyouduiqi">
+            <div @click="goDetail(item.id , 1)" >
+              <strong style="margin-left: 12px;"> {{item.name}} </strong>
             </div>
-            <div class="dingdans_con_right_down">
-              <span>备注：<strong>{{item.remark}}</strong></span>
+            <div>
+              <el-dropdown trigger="click" style="margin-left: 1px;">
+                <button
+                  class="dw-button-common">操作
+                </button>
+                <el-dropdown-menu slot="dropdown" >
+                  <el-dropdown-item type="text" @click.native="goDetail(item.id , 1)">查看</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="goDetail(item.id ,2)">修改</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </div>
-            <div style="
-            margin-bottom: -14vw;
-    font-size: 3.5vw;
-    margin-top: -1vw;">
-              <strong> {{item.createTime |formateTime }}</strong>
-              <el-button
-                style="margin-left: 5.1vw;font-size: 3.5vw;font-weight: 600;"
-                type="text"
-                size="small"
-                @click="goDetail(item.id , 1)">查看</el-button>
-              <el-button
-                type="text"
-                style="font-size: 3.5vw;font-weight: 600;"
-                size="small"
-                @click="goDetail(item.id ,2)">修改</el-button>
+          </div>
+          <div style="margin-top: 10px;" class="dingdans_con_other bt1">
+            <div class="dingdans_top_common_other_left">
+              <span>类型：</span>
+            </div>
+            <div class="dingdans_top_common_other">
+              <span >{{ item.type | dictToDescTypeValue(39) }}</span>
+            </div>
+          </div>
+          <div class="dingdans_con_other bt1">
+            <div  class="dingdans_top_common_other_left">
+              <span>金额：</span>
+            </div>
+            <div   class="dingdans_top_common_other">
+              <span >{{ item.price }}</span>
+            </div>
+          </div>
+<!--          <div class="dingdans_con_other bt1">-->
+<!--            <div  class="dingdans_top_common_other_left">-->
+<!--              <span>货号：</span>-->
+<!--            </div>-->
+<!--            <div   class="dingdans_top_common_other">-->
+<!--              <span >{{ item.actNo }}</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="dingdans_con_other bt1">-->
+<!--            <div  class="dingdans_top_common_other_left">-->
+<!--              <span>品牌：</span>-->
+<!--            </div>-->
+<!--            <div   class="dingdans_top_common_other">-->
+<!--              <span >{{ item.brand }}</span>-->
+<!--            </div>-->
+<!--          </div>-->
+          <div class="dingdans_con_other bt1">
+            <div  class="dingdans_top_common_other_left">
+              <span>时间：</span>
+            </div>
+            <div   class="dingdans_top_common_other">
+              <span >{{item.createTime |formateTime }}</span>
             </div>
           </div>
         </div>
@@ -103,20 +127,12 @@
         <span v-if="bottomStatus === 'loading'">加载中</span>
       </div>
     </mt-loadmore>
-        <div v-if="allLoaded" class="to-the-bottom">
-      <p v-if="emtityMsg != '没有更多了'">
-        <img src="../../static/img/new/empity_7.png" style="width: 60vw;">
-      </p>
-      <p>
-        <span>{{emtityMsg}}</span>
-      </p>
-    </div>
     <mt-popup
       position="bottom"
       v-model="isShowDialog2">
       <mt-header title="筛选" >
         <div slot="right">
-          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px"> 重置（关闭）</mt-button>
+          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px">关闭</mt-button>
         </div>
         <div slot="left">
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
@@ -128,7 +144,7 @@
 <!--               <option :disabled="true" value="" selected>请选择类型</option>-->
 <!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
 <!--            </select>-->
-            <el-select size="small" class="select100" v-model="queryParam.type" @change="changeSystem" >
+            <el-select size="small" class="select100" v-model="queryParam.type" >
           <el-option :disabled="true" value="" selected>请选择类型</el-option>
           <el-option
             v-for="item in typeList"
@@ -162,19 +178,27 @@
         <img :src="fileUrl + imageZoom" alt="" width="100%" height="100%">
       </div>
     </div>
-    <div style="
-    right: 15px;
-    bottom: 10vw;
-    position: absolute;
-    text-align: center;
-    ">
-      <mt-button  @click="goDetail(null,3)"  style="margin-left: 5px;
-    border-radius: 100%;
-    margin-top: 0px;
-    height: 55px;
-    width: 55px;" type="primary">
-        <img src="../../static/img/add.png" height="30" width="30" slot="icon">
-      </mt-button>
+<!--    <div style="-->
+<!--    right: 15px;-->
+<!--    bottom: 10vw;-->
+<!--    position: absolute;-->
+<!--    text-align: center;-->
+<!--    ">-->
+<!--      <mt-button  @click="goDetail(null,3)"  style="margin-left: 5px;-->
+<!--    border-radius: 100%;-->
+<!--    margin-top: 0px;-->
+<!--    height: 55px;-->
+<!--    width: 55px;" type="primary">-->
+<!--        <img src="../../static/img/add.png" height="30" width="30" slot="icon">-->
+<!--      </mt-button>-->
+<!--    </div>-->
+    <div v-if="allLoaded" class="to-the-bottom-1" >
+      <p v-if="emtityMsg">
+        <img src="../../static/img/new/empity_7.png" style="width: 60vw;">
+      </p>
+      <p>
+        <span>{{emtityMsg}}</span>
+      </p>
     </div>
 <!--    <v-footer></v-footer>-->
   </div>
@@ -193,8 +217,7 @@
       return {
         orderData2: '',
         isShowDialog2: false,
-        titleName: '其他收支',
-        emtityMsg: '没有更多了',
+        emtityMsg: '',
         pictureZoomShow: false,
         imageZoom: '',
         fileUrl: fileUrl,
@@ -210,7 +233,7 @@
           createTimeTo: '',
           updateTimeFrom: '',
           updateTimeTo: '',
-          pageSize: 20,
+          pageSize: 10,
           pageNum: 1
         },
         typeList: [],
@@ -239,6 +262,7 @@
         this.$router.push({ path: '/otherAdd', query: { id, type } })
       },
       getPage() {
+        this.emtityMsg = ''
         goodsOtherApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
@@ -248,7 +272,6 @@
               this.emtityMsg = '暂无相关数据'
             } else if (this.totalCount <= this.queryParam.pageSize) {
               this.allLoaded = true;
-              this.emtityMsg = '没有更多了'
             }
           } else {
             this.$toast(res.subMsg)
@@ -278,7 +301,6 @@
               },100)
             } else {
               this.allLoaded = true;
-              this.emtityMsg = '没有更多了'
               this.$toast('没有更多了')
             }
           } else {
@@ -300,14 +322,6 @@
       open(picker) {
         this.$refs[picker].open();
       },
-      changeSystem() {
-        let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
-          localStorage.getItem('sysDictList')) : []
-        let res = sysDictList.filter(
-          item => item.typeValue == 39 && item.fieldValue == this.queryParam.status)
-        this.titleName = res.length ? res[0].fieldName : ''
-        this.titleName = this.titleName
-      },
       search1() {
         this.queryParam.pageNum = 1
         this.allLoaded = false;
@@ -328,11 +342,9 @@
           createTimeTo: '',
           updateTimeFrom: '',
           updateTimeTo: '',
-          pageSize: 20,
+          pageSize: 10,
           pageNum: 1
         }
-        this.titleName = '其他收支'
-        this.changeSystem()
         this.search1()
       },
       handleTopChange(p_status) {
