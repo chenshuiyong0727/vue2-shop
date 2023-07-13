@@ -23,10 +23,10 @@
       <div v-if="flag">
         <mt-header   title="移动仓库">
           <div slot="left">
-            <img  @click="scanCode(1)" style="width: 21px; "  src="../../static/img/logo/logo-333-1.png">
+            <img  style="width: 21px; "  src="../../static/img/logo/logo-333-1.png">
           </div>
           <div slot="right">
-            <img  @click="comfirm(1)" style="width: 26px; "  src="../../static/img/photo2.png">
+            <img  @click="scanCode(1)"  style="width: 26px; "  src="../../static/img/photo2.png">
           </div>
         </mt-header>
         <div class="header" style="    margin-top: 11vw;margin-bottom: -3px;">
@@ -45,7 +45,7 @@
         padding-bottom: 40vw;
     background-image: linear-gradient(#e5f4ff, #f3f2f8);">
         <div class="zuoyouduiqi" style="padding: 2.81vw 4.8vw !important;">
-          <div class="mint-header-button is-left" @click="scanCode(1)">
+          <div class="mint-header-button is-left" >
             <img style="width: 21px; "  src="../../static/img/logo/logo-333-1.png">
           </div>
           <div>
@@ -53,7 +53,7 @@
             移动仓库
           </span>
           </div>
-          <div class="mint-header-button is-right" @click="comfirm(1)" >
+          <div class="mint-header-button is-right" @click="scanCode(1)"  >
             <img style="width: 26px; "  src="../../static/img/photo2.png">
           </div>
         </div>
@@ -379,6 +379,9 @@ export default {
     }
   },
   methods: {
+    order(theExpire,scrollNum) {
+      this.$router.push({ path: '/order', query: { theExpire,scrollNum }})
+    },
     handleScroll () {
       let scrollTop = this.$refs.hello.scrollTop
       console.info(scrollTop)

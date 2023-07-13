@@ -1,14 +1,11 @@
 <template>
   <div class="hello" ref="hello">
-    <mt-header title="Nike">
+    <mt-header title="首创奥莱活动">
       <div slot="left" v-if="isActUser !=1">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
       </div>
       <div slot="left" v-else>
         <mt-button  icon="back" @click="$router.push({ path: '/logout?type=1' })"></mt-button>
-      </div>
-      <div slot="right">
-        <mt-button size="normal" style="font-size: 16px; color: #656b79" @click="resetHandle" >重置</mt-button>
       </div>
     </mt-header>
 <!--    <div class="fenlei_top">-->
@@ -32,21 +29,8 @@
         <img src="../../static/img/search.png" height="30px;" width="30px;">
       </div>
     </div>
-    <div class="searchList">
-      <span style="margin-right: 6vw;" :class="!queryParam.type ? 'activity' : ''" @click="searchStatus('')">全部</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='01' ? 'activity' : ''" @click="searchStatus('01')">男鞋</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='02' ? 'activity' : ''" @click="searchStatus('02')">女鞋</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='03' ? 'activity' : ''" @click="searchStatus('03')">男女</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='11' ? 'activity' : ''" @click="searchStatus('11')">服装</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='05' ? 'activity' : ''" @click="searchStatus('05')">大童</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='07' ? 'activity' : ''" @click="searchStatus('07')">中童</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='04' ? 'activity' : ''" @click="searchStatus('04')">幼童</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='06' ? 'activity' : ''" @click="searchStatus('06')">婴童</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='20' ? 'activity' : ''" @click="searchStatus('20')">包包</span>
-      <span style="margin-right: 6vw;" :class="queryParam.type=='21' ? 'activity' : ''" @click="searchStatus('21')">帽子</span>
-    </div>
     <mt-loadmore
-      style="padding-top: 87px"
+      style="padding-top: 0.86rem"
       :top-method="loadTop"
       :bottom-method="loadBottom"
       :bottom-all-loaded="allLoaded"
@@ -55,87 +39,73 @@
       :autoFill="false"
       ref="loadmore"
     >
-      <div class="dingdans_item_dw"
-              v-for="(item,index) in tableData"
-              :key="index"
-      >
-        <div class="dingdans_con_dw">
-          <div :src="item.img" class="dingdans_con_left_dw"
-               @click="avatarShow(item.img)">
-            <img :src="item.img" >
-            <p class="mark_dw">
-              <span class="text_dw">
+      <div class="dingdans_item_act" v-for="(item,index) in tableData" :key="index">
+<!--        <div class="dingdans_top">-->
+<!--          <div class="dingdans_top_left">-->
+<!--            <strong v-if="item.goodsName"-->
+<!--                    @click="goodsDetail(item.goodsId, 1) "-->
+<!--                    :style="item.goodsId ? 'color: #409EFF' : ''">-->
+<!--              {{item.goodsName | sizeFilter }}-->
+<!--            </strong>-->
+<!--            <strong v-else  @click="goodsDetail(item.goodsId, 1) " :style="item.goodsId ? 'color: #409EFF' : ''">-->
+<!--              {{item.actNo}}-->
+<!--            </strong>-->
+<!--          </div>-->
+<!--          <div class="dingdans_top_right">-->
+<!--            类型：<strong-->
+<!--            class="color-danger"-->
+<!--          > {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
+<!--          </div>-->
+<!--        </div>-->
+        <div class="dingdans_con_act">
+<!--          <div  :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">-->
+<!--            <img :src="item.img">-->
+<!--          </div>-->
+          <div v-if="item.img" :src="item.img" class="dingdans_con_left wrap" @click="avatarShow(item.img)">
+            <img :src="item.img" style="margin-top: 25px;">
+            <p class="mark1">
+              <span class="text1" >
                 {{ item.type | dictToDescTypeValue(20221108) }}
               </span>
             </p>
           </div>
-          <div class="diangdans_con_right_dw">
-            <div class="dingdans_con_right_top_dw" @click="goodsDetail(item.goodsId, 1,item.spuId)">
-              <span>
-                {{item.goodsName}}
-              </span>
+          <div class="diangdans_con_right21" style="    margin-top: 30px;">
+            <div class="dingdans_con_right_top" style="margin-top: -28px;">
+              <strong v-if="item.goodsName"
+                      @click="goodsDetail(item.goodsId, 1,item.spuId) ">
+                {{item.goodsName }}
+              </strong>
+<!--              货号：<strong style="color: #409EFF"  @click="jumpactNo(item.actNo)">{{item.actNo}} </strong>-->
+<!--              价格：<strong  class="color-danger">{{item.price}} </strong>-->
+<!--              类型：<strong class="color-danger"> {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
+              <!--              类型：<strong style="color: #409EFF" > {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
             </div>
-            <div class="dingdans_con_right_top_dw_1 zuoyouduiqi">
-              <div>
-                   <span @click="jumpactNo(item.actNo)">
-              {{item.actNo}}
-              </span>
-                <img @click="copyUrl(item.actNo)" style="width: 20px;margin-bottom: 8px;"
-                     src="../../static/img/copy6.png">
-              </div>
-              <div>
-                <span style="font-weight: 400;">库存</span>
-                <span :class="item.num > 50 ? 'color-danger' : ''" >{{item.num}} </span>
-              </div>
+            <div class="dingdans_con_right_down"  style="margin-bottom: 0px;">
+             <strong class="color-url" @click="copyUrl(item.actNo)">{{item.actNo}} </strong>
+<!--              <strong class="color-danger"> {{ item.type | dictToDescTypeValue(20221108) }}</strong>-->
+              库存：<strong :class="item.num > 50 ? 'color-danger' : ''" >{{item.num}} </strong>
+<!--              价格：<strong  >{{item.price}} </strong>-->
             </div>
-            <div class="dingdans_con_right_top_dw_1 zuoyouduiqi" style="font-weight: 400;margin-top: -5px;">
-              <div>
-                价格
-                <span  class="color-danger" >{{item.price}} </span>
-                <span style="text-decoration:line-through;color: #7a7a7a;" >{{item.price/0.65  | numFilter0 }} </span>
-              </div>
-              <div>
-                周均价
-                <span class="color-danger" >{{item.thisTimeThePrice}} </span>
-                <span style="text-decoration:line-through;color: #7a7a7a;" >{{item.sevenAveragePrice }} </span>
-              </div>
+            <div class="dingdans_con_right_down" style="margin-bottom: 0px;"  >
+              折后价：<strong class="color-danger" >{{item.price}} </strong>
+              原价：<strong  >{{item.price/0.65  | numFilter0 }} </strong>
             </div>
+            <div class="dingdans_con_right_down" style="margin-bottom: 0px;"  >
+              到手：<strong class="color-danger" >{{item.thisTimeThePrice}} </strong>
+              周均价：<strong  >{{item.sevenAveragePrice}} </strong>
+            </div>
+            <div class="dingdans_con_right_down" style="margin-bottom: 0px;"  >
+              利润：<strong :class="item.thisTimeProfits > 50 ? 'color-danger' : ''" >{{item.thisTimeProfits}} </strong>
+              周销量：<strong :class="item.sevenSaleCount > 10 ? 'color-danger' : ''" >{{item.sevenSaleCount}} </strong>
+              <span v-if="item.thisTimeProfits <= 0" style="margin-left: 20px;">垃圾</span>
+              <strong v-if="item.thisTimeProfits >= 50 && item.sevenSaleCount >= 10 && item.num >= 50"
+                    class="color-danger" style="margin-left: 5px;font-size: 20px;">冲冲冲</strong>
+            </div>
+          </div>
+          <div class="diangdans_con_right22"  @click="gotoDw(item.spuId)"  style="margin-top: 10px;">
+            <img src="../../static/img/dw_1.png" height="30px;"width="30px;" >
           </div>
         </div>
-
-        <!--底部-->
-        <div1 class="dingdans_bottom_dw">
-          <div class="dingdans_top_left_dw">
-            <span v-if="item.thisTimeProfits"> 利润</span>
-            <span :class="item.thisTimeProfits > 50 ? 'color-danger' : ''">{{item.thisTimeProfits }} </span>
-            <span v-if="item.sevenSaleCount">, 周销量</span>
-            <span :class="item.sevenSaleCount > 10 ? 'color-danger' : ''">{{item.sevenSaleCount }} </span>
-            <span v-if="item.thisTimeProfits <= 0" style="margin-left: 20px;">垃圾</span>
-            <strong v-if="item.thisTimeProfits >= 50 && item.sevenSaleCount >= 10 && item.num >= 10"
-                    class="color-danger" style="margin-left: 5px;font-size: 20px;">冲冲冲</strong>
-          </div>
-          <!--          操作栏-->
-          <div class="dingdans_top_right_dw">
-            <div class="dingdans_con_right_down_2_1">
-              <button @click="gotoDw(item.spuId)"
-                class="dw-button-common">得物
-              </button>
-<!--              <el-dropdown1 trigger="click" style="margin-left: 1px;">-->
-<!--                <button-->
-<!--                  class="dw-button-common">操作-->
-<!--                </button>-->
-<!--                <el-dropdown-menu slot="dropdown" >-->
-<!--                  <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>-->
-<!--                  <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>-->
-<!--                  <el-dropdown-item type="text" @click.native="gotoWl(item)">物流</el-dropdown-item>-->
-<!--                  <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>-->
-<!--                  <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>-->
-<!--                </el-dropdown-menu>-->
-<!--              </el-dropdown1>-->
-            </div>
-          </div>
-        </div1>
-        <!--底部-->
       </div>
       <div slot="top" class="mint-loadmore-top">
         <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }">松手释放↓</span>
@@ -149,8 +119,8 @@
         <span v-if="bottomStatus === 'loading'">加载中</span>
       </div>
     </mt-loadmore>
-    <div v-if="allLoaded" class="to-the-bottom-1">
-      <p v-if="emtityMsg">
+        <div v-if="allLoaded" class="to-the-bottom">
+      <p v-if="emtityMsg != '没有更多了'">
         <img src="../../static/img/new/empity_7.png" style="width: 60vw;">
       </p>
       <p>
@@ -162,7 +132,7 @@
       v-model="isShowDialog2">
       <mt-header title="筛选" >
         <div slot="right">
-          <mt-button size="normal" style="font-size: 16px">关闭</mt-button>
+          <mt-button size="normal"  style="font-size: 16px"> 重置（关闭）</mt-button>
         </div>
         <div slot="left">
           <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
@@ -255,7 +225,7 @@
         isActUser: '',
         isShowDialog2: false,
         titleName: '首创奥莱活动',
-        emtityMsg: '',
+        emtityMsg: '没有更多了',
         pictureZoomShow: false,
         imageZoom: '',
         showSd: false,
@@ -272,7 +242,7 @@
           numTo: '',
           sevenSaleCountFrom: '',
           sevenSaleCountTo: '',
-          pageSize: 10,
+          pageSize: 20,
           pageNum: 1
         },
         typeList: [],
@@ -354,18 +324,16 @@
       //   this.$router.push({ path: '/otherAdd', query: { id, type } })
       // },
       getPage() {
-        this.emtityMsg = ''
         goodsActApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             if (this.totalCount == 0) {
               this.allLoaded = true;
-              if (this.queryParam.pageNum == 1){
-                this.emtityMsg = '暂无相关商品'
-              }
+              this.emtityMsg = '暂无相关数据'
             } else if (this.totalCount <= this.queryParam.pageSize) {
               this.allLoaded = true;
+              this.emtityMsg = '没有更多了'
             }
           } else {
             this.$toast(res.subMsg)
@@ -395,6 +363,7 @@
               },100)
             } else {
               this.allLoaded = true;
+              this.emtityMsg = '没有更多了'
               this.$toast('没有更多了')
             }
           } else {
@@ -444,7 +413,7 @@
           numTo: '',
           sevenSaleCountFrom: '',
           sevenSaleCountTo: '',
-          pageSize: 10,
+          pageSize: 20,
           pageNum: 1
         }
         this.titleName = '活动'
@@ -456,10 +425,6 @@
       },
       handleBottomChange(p_status) {
         this.bottomStatus = p_status;
-      },
-      searchStatus(type) {
-        this.queryParam.type = type
-        this.search1()
       },
       loadBottom() {
         // 一次下拉加载5条更多数据，使用定时器默认ajax加载
@@ -499,9 +464,9 @@
         this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({ path: '/goodsDetail', query: { id, flag } })
       },
-      jumpactNo(actNo) {
-        this.$router.push({ path: '/store', query: { actNo } })
-      },
+      // jumpactNo(actNo) {
+      //   this.$router.push({ path: '/store', query: { actNo } })
+      // },
       avatarShow(e) {
         this.imageZoom = e
         this.pictureZoomShow = true
