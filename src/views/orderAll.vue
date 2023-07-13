@@ -61,7 +61,12 @@
             <span>{{item.orderNo }}</span>
           </div>
           <div class="dingdans_top_right_dw">
-            <span>{{ item.status | dictToDescTypeValue(37) }} </span>
+<!--            <span>{{ item.status | dictToDescTypeValue(37) }} </span>-->
+            <span v-if="item.status == 7" class="color-success">{{ item.status |
+              dictToDescTypeValue(37) }} </span>
+            <span v-else-if="[3,4,5,6,8].includes(item.status)" class="color-danger">{{
+              item.status | dictToDescTypeValue(37) }} </span>
+            <span v-else>{{ item.status | dictToDescTypeValue(37) }} </span>
           </div>
         </div>
 <!--        中间-->
