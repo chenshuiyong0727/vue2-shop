@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <mt-header :title="titleName">
+    <mt-header title="入库渠道报表">
       <div slot="left">
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
@@ -127,56 +127,14 @@
 
       </div>
     </div>
-
-
-<!--    <div11 style="padding-top: 0.86rem">-->
-<!--      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">-->
-<!--        <div class="dingdans_top">-->
-<!--          <div class="dingdans_top_left">-->
-<!--&lt;!&ndash;            <strong>渠道：</strong>&ndash;&gt;-->
-<!--              <strong-->
-<!--                v-if="item.months == '合计'"> {{item.months}} </strong>-->
-<!--              <strong v-else> {{item.months | dictToDescTypeValue(47)  }} </strong>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="dingdans_con">-->
-<!--          <div class="diangdans_con_right">-->
-<!--            <div class="dingdans_con_right_top">-->
-<!--              入库数：<strong>{{item.successNum}}</strong>-->
-<!--              入库总额：<strong>{{item.orderAmount}}</strong>-->
-<!--              市价总额：<strong>{{item.profitsAmount}}</strong>-->
-<!--              <span v-if="item.successNum">入库均价：<strong>{{item.orderAmount / item.successNum  | numFilter}}</strong></span>-->
-<!--              <span v-else>入库均价：<strong>0</strong></span>-->
-<!--              <span v-if="item.successNum">市价均价：<strong>{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>-->
-<!--              <span v-else>市价均价：<strong>0</strong></span>-->
-<!--              剩余库存：<strong>{{item.inventory}}</strong>-->
-<!--              剩余库存总额：<strong>{{item.inventoryPrice}}</strong>-->
-<!--              已售数量：<strong>{{item.saleNum}}</strong>-->
-<!--              出售金额：<strong>{{item.theirPrice}}</strong>-->
-<!--              已产生利润：<strong>{{item.profits}}</strong>-->
-<!--              利润均价：<strong>{{item.profits / item.saleNum  | numFilter}}</strong>-->
-<!--              预估利润：<strong>{{item.thisTimeProfits}}</strong>-->
-<!--            </div>-->
-<!--&lt;!&ndash;            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">&ndash;&gt;-->
-<!--&lt;!&ndash;              <span v-if="item.successNum">入库均价：<strong>{{item.orderAmount / item.successNum  | numFilter}}</strong></span>&ndash;&gt;-->
-<!--&lt;!&ndash;              <span v-else>入库均价：<strong>0</strong></span>&ndash;&gt;-->
-<!--&lt;!&ndash;              <span v-if="item.successNum">市价均价：<strong>{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>&ndash;&gt;-->
-<!--&lt;!&ndash;              <span v-else>市价均价：<strong>0</strong></span>&ndash;&gt;-->
-<!--&lt;!&ndash;              剩余库存：<strong>{{item.inventory}}</strong>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">&ndash;&gt;-->
-<!--&lt;!&ndash;              剩余库存总额：<strong>{{item.inventoryPrice}}</strong>&ndash;&gt;-->
-<!--&lt;!&ndash;              已售数量：<strong>{{item.saleNum}}</strong>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">&ndash;&gt;-->
-<!--&lt;!&ndash;              出售金额：<strong>{{item.theirPrice}}</strong>&ndash;&gt;-->
-<!--&lt;!&ndash;              产生利润：<strong>{{item.profits}}</strong>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div11>-->
-<!--    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>-->
+    <div v-if="!tableData.length" class="to-the-bottom-1" >
+      <p>
+        <img src="../../../static/img/new/empity_7.png" style="width: 60vw;">
+      </p>
+      <p>
+        <span>暂无相关数据</span>
+      </p>
+    </div>
   </div>
 </template>
 <script>
@@ -192,6 +150,7 @@
     name: "HelloWorld",
     data() {
       return {
+        allLoaded: false,
         titleName: '入库渠道报表',
         emtityMsg: '没有更多了',
         queryParam: {
@@ -217,11 +176,13 @@
         this.$router.push({ path: '/putinDetail', query: { months }})
       },
       getPage() {
+        this.allLoaded = false
         reportApi.channelStorage(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data : []
             if (this.tableData.length == 0) {
               this.emtityMsg = '暂无相关数据'
+              this.allLoaded = false
             } else {
               this.emtityMsg = '没有更多了'
             }

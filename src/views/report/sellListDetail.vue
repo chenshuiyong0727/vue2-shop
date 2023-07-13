@@ -75,82 +75,15 @@
             <p>平均利润</p>
           </div>
         </div>
-<!--        <div class="dingdans_con_rt">-->
-<!--          <div  >-->
-<!--            <strong v-if="item.successNum">-->
-<!--              {{item.orderAmount / item.successNum  | numFilter}}-->
-<!--            </strong>-->
-<!--            <strong v-else>-->
-<!--              0-->
-<!--            </strong>-->
-<!--            <p>入库均价</p>-->
-<!--          </div>-->
-<!--          <div  >-->
-<!--            <strong v-if="item.successNum">-->
-<!--              {{item.profitsAmount / item.successNum  | numFilter}}-->
-<!--            </strong>-->
-<!--            <strong v-else>-->
-<!--              0-->
-<!--            </strong>-->
-<!--            <p>市价均价</p>-->
-<!--          </div>-->
-<!--          <div  >-->
-<!--            <strong>-->
-<!--              {{item.inventory}}-->
-<!--            </strong>-->
-<!--            <p>剩余库存</p>-->
-<!--          </div>-->
-<!--          <div style="border-right-width: 0vw;">-->
-<!--            <strong>-->
-<!--              {{item.inventoryPrice}}-->
-<!--            </strong>-->
-<!--            <p>剩余总额</p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="dingdans_con_right_top">-->
-<!--          销售数：<strong >{{item.successNum}}</strong>-->
-<!--          销售金额：<strong >{{item.orderAmount}}</strong>-->
-<!--          利润：<strong >{{item.profitsAmount}}</strong>-->
-<!--        </div>-->
-<!--        <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
-<!--          <span v-if="item.successNum">销售均价：<strong >{{item.orderAmount / item.successNum  | numFilter}}</strong></span>-->
-<!--          <span v-else>销售均价：<strong >0</strong></span>-->
-<!--          <span v-if="item.successNum">平均利润：<strong >{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>-->
-<!--          <span v-else>平均利润：<strong >0</strong></span>-->
-<!--        </div>-->
-<!--        <div1 class="dingdans_con_rt">-->
-<!--          <div  >-->
-<!--            <strong v-if="item.successNum">-->
-<!--              {{item.orderAmount / item.successNum  | numFilter}}-->
-<!--            </strong>-->
-<!--            <strong v-else>-->
-<!--              0-->
-<!--            </strong>-->
-<!--            <p>销售均价</p>-->
-<!--          </div>-->
-<!--          <div  >-->
-<!--            <strong v-if="item.successNum">-->
-<!--              {{item.profitsAmount / item.successNum  | numFilter}}-->
-<!--            </strong>-->
-<!--            <strong v-else>-->
-<!--              0-->
-<!--            </strong>-->
-<!--            <p>平均利润</p>-->
-<!--          </div>-->
-<!--          <div  >-->
-<!--            <strong>-->
-<!--              {{item.saleNum}}-->
-<!--            </strong>-->
-<!--            <p>瑕疵数</p>-->
-<!--          </div>-->
-<!--          <div style=" border-right-width: 0vw;">-->
-<!--            <strong>-->
-<!--              {{item.theirPrice}} %-->
-<!--            </strong>-->
-<!--            <p>通过比例</p>-->
-<!--          </div>-->
-<!--        </div1>-->
-
+      </div>
+      <!--    列表结束-->
+      <div v-if="!tableData.length" class="to-the-bottom-1" >
+        <p>
+          <img src="../../../static/img/new/empity_7.png" style="width: 60vw;">
+        </p>
+        <p>
+          <span>暂无相关数据</span>
+        </p>
       </div>
     </div>
     <!--    列表结束-->

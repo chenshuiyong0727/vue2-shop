@@ -84,6 +84,15 @@
         </div>
       </div>
     </div>
+    <div v-if="allLoaded" class="to-the-bottom-1" >
+      <p>
+        <img src="../../../static/img/new/empity_7.png" style="width: 60vw;">
+      </p>
+      <p>
+        <span>暂无相关数据</span>
+      </p>
+    </div>
+
   </div>
     <!--    列表结束-->
 </template>
@@ -99,6 +108,7 @@
     name: "HelloWorld",
     data() {
       return {
+        allLoaded: false,
         titleName: '销售报表',
         emtityMsg: '没有更多了',
         queryParam: {
@@ -127,11 +137,13 @@
         this.$router.push({ path: '/sellListDetail', query: { months }})
       },
       getPage() {
+        this.allLoaded = false
         reportApi.sellList(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data : []
             if (this.tableData.length == 0) {
               this.emtityMsg = '暂无相关数据'
+              this.allLoaded = true
             } else {
               this.emtityMsg = '没有更多了'
             }

@@ -104,7 +104,7 @@
         </div>
 
         <!--底部-->
-        <div1 class="dingdans_bottom_dw">
+        <div class="dingdans_bottom_dw">
           <div class="dingdans_top_left_dw">
             <span v-if="item.thisTimeProfits"> 利润</span>
             <span :class="item.thisTimeProfits > 50 ? 'color-danger' : ''">{{item.thisTimeProfits }} </span>
@@ -134,7 +134,7 @@
 <!--              </el-dropdown1>-->
             </div>
           </div>
-        </div1>
+        </div>
         <!--底部-->
       </div>
       <div slot="top" class="mint-loadmore-top">

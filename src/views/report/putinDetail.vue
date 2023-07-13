@@ -124,48 +124,14 @@
 
       </div>
     </div>
-
-<!--    <div123 style="padding-top: 0.86rem">-->
-<!--      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">-->
-<!--        <div class="dingdans_top">-->
-<!--          <div class="dingdans_top_left">-->
-<!--            <strong>月份：</strong>-->
-<!--            <a>-->
-<!--              <strong-->
-<!--                @click="jumpDetail(item.months )"-->
-<!--                :style="item.months == '合计' ? '' : 'color: #409EFF;'"> {{item.months}} </strong>-->
-<!--            </a>-->
-<!--            &lt;!&ndash;            <strong>月份：</strong> <strong class="color-danger"> {{item.months}} </strong>&ndash;&gt;-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="dingdans_con">-->
-<!--          <div class="diangdans_con_right">-->
-<!--            <div class="dingdans_con_right_top">-->
-<!--              入库数：<strong>{{item.successNum}}</strong>-->
-<!--              入库总额：<strong>{{item.orderAmount}}</strong>-->
-<!--              市价总额：<strong>{{item.profitsAmount}}</strong>-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">&ndash;&gt;-->
-<!--              <span v-if="item.successNum">入库均价：<strong>{{item.orderAmount / item.successNum  | numFilter}}</strong></span>-->
-<!--              <span v-else>入库均价：<strong>0</strong></span>-->
-<!--              <span v-if="item.successNum">市价均价：<strong>{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>-->
-<!--              <span v-else>市价均价：<strong>0</strong></span>-->
-<!--              剩余库存：<strong>{{item.inventory}}</strong>-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">&ndash;&gt;-->
-<!--              剩余库存总额：<strong>{{item.inventoryPrice}}</strong>-->
-<!--              已售数量：<strong>{{item.saleNum}}</strong>-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">&ndash;&gt;-->
-<!--              出售金额：<strong>{{item.theirPrice}}</strong>-->
-<!--              产生利润：<strong>{{item.profits}}</strong>-->
-<!--              预计利润：<strong>{{item.thisTimeProfits}}</strong>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div123>-->
-<!--    <p style="padding: 0.5rem 0;" class="to-the-bottom">{{emtityMsg}}</p>-->
+    <div v-if="allLoaded" class="to-the-bottom-1" >
+      <p>
+        <img src="../../../static/img/new/empity_7.png" style="width: 60vw;">
+      </p>
+      <p>
+        <span>暂无相关数据</span>
+      </p>
+    </div>
   </div>
 </template>
 <script>
@@ -181,6 +147,7 @@
     name: "HelloWorld",
     data() {
       return {
+        allLoaded: false,
         months: '',
         titleName: '入库报表',
         emtityMsg: '没有更多了',
@@ -242,11 +209,13 @@
         this.$router.push({ path: '/putinDayDetail', query: { months }})
       },
       getPage() {
+        this.allLoaded = false
         reportApi.putInStorageDay(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data : []
             if (this.tableData.length == 0) {
               this.emtityMsg = '暂无相关数据'
+              this.allLoaded = true
             } else {
               this.emtityMsg = '没有更多了'
             }
