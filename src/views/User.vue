@@ -208,14 +208,14 @@
           <p style="color: #333">红包</p>
         </router-link>
       </section>
-<!--      <section class="my-pay-1">-->
-<!--        <router-link :to="{ path: '/logout?type=1'}" style="width: 25%">-->
-<!--          <img-->
-<!--            style="margin-top: 7px;margin-bottom: -4px;width: 27px;"-->
-<!--            src="../../static/img/setting7.png"></img>-->
-<!--          <p style="color: #333">设置</p>-->
-<!--        </router-link>-->
-<!--      </section>-->
+      <section class="my-pay-1">
+        <router-link :to="{ path: '/memo'}" style="width: 25%">
+          <img
+            style="margin-top: 7px;margin-bottom: -4px;width: 27px;"
+            src="../../static/img/new/memo.png"></img>
+          <p style="color: #333">备忘录</p>
+        </router-link>
+      </section>
     </div>
 <!--    <div style=" padding-top: 1px;"></div>-->
     <v-footer></v-footer>

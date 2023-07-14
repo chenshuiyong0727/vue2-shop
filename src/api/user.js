@@ -22,6 +22,7 @@ export const userContainerApi = {
   // 获取详情
   getUcUser: () => request({
     url: '/gw/op/v1/auth/getUcUser',
+    loading: false,
     method: 'get'
   }),
   // 更新

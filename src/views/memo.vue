@@ -1,6 +1,6 @@
 <template>
   <div class="hello" ref="hello">
-    <mt-header title="其他收支">
+    <mt-header title="备忘录">
       <div slot="left">
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
       </div>
@@ -18,7 +18,7 @@
         <div class="fenlei_top_left">
           <el-input
             clearable
-            placeholder="搜索商品名称"
+            placeholder="搜索名称"
             prefix-icon="el-icon-search"
             v-model.trim="queryParam.name">
           </el-input>
@@ -73,22 +73,38 @@
               </el-dropdown>
             </div>
           </div>
+          <div class="dingdans_con_other bt1">
+            <div  class="dingdans_top_common_other_left">
+              <span>时间：</span>
+            </div>
+            <div   class="dingdans_top_common_other">
+              <span >{{item.happenTime }}</span>
+            </div>
+          </div>
           <div style="margin-top: 10px;" class="dingdans_con_other bt1">
             <div class="dingdans_top_common_other_left">
               <span>类型：</span>
             </div>
             <div class="dingdans_top_common_other">
-              <span >{{ item.type | dictToDescTypeValue(39) }}</span>
+              <span >{{ item.type | dictToDescTypeValue(49) }}</span>
             </div>
           </div>
-          <div class="dingdans_con_other bt1">
-            <div  class="dingdans_top_common_other_left">
-              <span>金额：</span>
+          <div style="margin-top: 10px;" class="dingdans_con_other bt1">
+            <div class="dingdans_top_common_other_left">
+              <span>日历类型：</span>
             </div>
-            <div   class="dingdans_top_common_other">
-              <span >{{ item.price }}</span>
+            <div class="dingdans_top_common_other">
+              <span >{{ item.dateType | dictToDescTypeValue(50) }}</span>
             </div>
           </div>
+<!--          <div class="dingdans_con_other bt1">-->
+<!--            <div  class="dingdans_top_common_other_left">-->
+<!--              <span>金额：</span>-->
+<!--            </div>-->
+<!--            <div   class="dingdans_top_common_other">-->
+<!--              <span >{{ item.price }}</span>-->
+<!--            </div>-->
+<!--          </div>-->
 <!--          <div class="dingdans_con_other bt1">-->
 <!--            <div  class="dingdans_top_common_other_left">-->
 <!--              <span>货号：</span>-->
@@ -105,14 +121,6 @@
 <!--              <span >{{ item.brand }}</span>-->
 <!--            </div>-->
 <!--          </div>-->
-          <div class="dingdans_con_other bt1">
-            <div  class="dingdans_top_common_other_left">
-              <span>时间：</span>
-            </div>
-            <div   class="dingdans_top_common_other">
-              <span >{{item.createTime |formateTime }}</span>
-            </div>
-          </div>
         </div>
       </div>
       <div slot="top" class="mint-loadmore-top">
@@ -154,23 +162,23 @@
           </el-option>
             </el-select>
         </mt-field>
-        <mt-field label="品牌" placeholder="请输入品牌"  v-model="queryParam.brand"></mt-field>
-<!--        <mt-field label="开始时间" type="date" placeholder="开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>-->
-<!--        <mt-field label="结束时间" type="date" placeholder="结束时间"  v-model="queryParam.createTimeTo" ></mt-field>-->
-        <mt-field label="开始时间">
-          <el-date-picker class="select100"
-                          size="small"
-                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
-                          type="date" placeholder="开始时间">
-          </el-date-picker>
-        </mt-field>
-        <mt-field label="结束时间">
-          <el-date-picker class="select100"
-                          size="small"
-                          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
-                          type="date" placeholder="结束时间">
-          </el-date-picker>
-        </mt-field>
+<!--        <mt-field label="品牌" placeholder="请输入品牌"  v-model="queryParam.brand"></mt-field>-->
+<!--&lt;!&ndash;        <mt-field label="开始时间" type="date" placeholder="开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mt-field label="结束时间" type="date" placeholder="结束时间"  v-model="queryParam.createTimeTo" ></mt-field>&ndash;&gt;-->
+<!--        <mt-field label="开始时间">-->
+<!--          <el-date-picker class="select100"-->
+<!--                          size="small"-->
+<!--                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"-->
+<!--                          type="date" placeholder="开始时间">-->
+<!--          </el-date-picker>-->
+<!--        </mt-field>-->
+<!--        <mt-field label="结束时间">-->
+<!--          <el-date-picker class="select100"-->
+<!--                          size="small"-->
+<!--                          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"-->
+<!--                          type="date" placeholder="结束时间">-->
+<!--          </el-date-picker>-->
+<!--        </mt-field>-->
       </section>
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
@@ -206,7 +214,7 @@
 <script>
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
-  import { goodsOtherApi } from '@/api/goodsOther'
+  import { memoApi } from '@/api/memo'
   export default {
     components: {
       'v-baseline': Baseline,
@@ -223,20 +231,12 @@
         fileUrl: fileUrl,
         queryParam: {
           type: '',
-          actNo: '',
           name: '',
-          brand: '',
-          remark: '',
-          priceFrom: '',
-          priceTo: '',
-          createTimeFrom: '',
-          createTimeTo: '',
-          updateTimeFrom: '',
-          updateTimeTo: '',
           pageSize: 10,
           pageNum: 1
         },
         typeList: [],
+        dateTypeList: [],
         topStatus: "",
         bottomStatus: "",
         allLoaded: false,
@@ -259,11 +259,11 @@
         }
       },
       goDetail(id, type) {
-        this.$router.push({ path: '/otherAdd', query: { id, type } })
+        this.$router.push({ path: '/memoAdd', query: { id, type } })
       },
       getPage() {
         this.emtityMsg = ''
-        goodsOtherApi.page(this.queryParam).then(res => {
+        memoApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
@@ -281,14 +281,15 @@
       listSysDict() {
         let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
           localStorage.getItem('sysDictList')) : []
-        this.typeList = sysDictList.filter(item => item.typeValue == 39)
+        this.typeList = sysDictList.filter(item => item.typeValue == 49)
+        this.dateTypeList = sysDictList.filter(item => item.typeValue == 50)
       },
       loadData(p_status) {
         // 第一次加载或者下拉刷新最新数据
         if (p_status === "refresh") {
           this.tableData = [];
         }
-        goodsOtherApi.page(this.queryParam).then(res => {
+        memoApi.page(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             let list =  res.data ? res.data.list : []
             if (list && list.length) {
@@ -332,16 +333,7 @@
       resetHandle() {
         this.queryParam = {
           type: '',
-          actNo: '',
           name: '',
-          brand: '',
-          remark: '',
-          priceFrom: '',
-          priceTo: '',
-          createTimeFrom: '',
-          createTimeTo: '',
-          updateTimeFrom: '',
-          updateTimeTo: '',
           pageSize: 10,
           pageNum: 1
         }
