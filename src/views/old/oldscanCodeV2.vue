@@ -12,7 +12,9 @@
 <!--      </div>-->
       <div slot="right">
         <el-dropdown trigger="click" style="margin-left: 1px;">
-          <mt-button size="normal" style="font-size: 16px; color: #656b79" >管理</mt-button>
+           <mt-button size="normal">
+            <img  style="width: 25px" src="../../static/img/slh.png">
+          </mt-button>
           <el-dropdown-menu slot="dropdown" >
             <el-dropdown-item type="text" v-if="form.id" @click.native="gotoAdd(form.id,2)">手动编辑</el-dropdown-item>
             <el-dropdown-item type="text" v-if="type != 3" @click.native="getImgUrl">智能更新</el-dropdown-item>

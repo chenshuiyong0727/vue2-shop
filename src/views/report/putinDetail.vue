@@ -5,31 +5,25 @@
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
     </mt-header>
-    <div class="fenlei_top">
+    <div class="fenlei_top zuoyouduiqi">
       <div class="fenlei_top_left">
-        <el-date-picker style="width: 42vw"
-                        v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
-                        type="date" placeholder="时间开始"  @change="getPage">
+        <el-date-picker style="width: 44vw ;background-color: white"
+                        popper-class="popperClass1"
+                        v-model="queryParam.createTimeFrom" value-format="yyyy-MM"
+                        type="month" placeholder="时间开始" @change="getPage">
         </el-date-picker>
       </div>
-      <div style="width: 8vw" class="fenlei_top_left">
-        <span style="margin-right: 2vw;margin-left: 1vw;">至</span>
+      <div style="margin-right: 6px;margin-left: 6px;">
+        <span>至</span>
       </div>
       <div class="fenlei_top_left">
-        <el-date-picker style="width: 42vw"
-                        v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
-                        type="date" placeholder="时间结束"  @change="getPage">
+        <el-date-picker style="width: 44vw"
+                        v-model="queryParam.createTimeTo" value-format="yyyy-MM"
+                        type="month" placeholder="时间结束" @change="getPage">
         </el-date-picker>
       </div>
-<!--      <div class="fenlei_top_right">-->
-<!--        <mt-button-->
-<!--          type="primary"-->
-<!--          size="small"-->
-<!--          @click="getPage">搜索-->
-<!--        </mt-button>-->
-<!--      </div>-->
     </div>
-    <div style="padding-top: 0.86rem">
+    <div style="padding-top: 47px;">
       <div class="dingdans_item_rt" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top_rt">
           <strong style="margin-left: 12px;">日期：</strong>
@@ -228,8 +222,8 @@
   };
 </script>
 
-<style>
-
+<style lang="less" scoped>
+  @import '../../assets/index/rt_style.less';
   @import '../../assets/index/style.css';
 
   strong {

@@ -5,8 +5,10 @@
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
       <div slot="right">
-        <el-dropdown trigger="click" style="margin-left: 1px;">
-          <mt-button size="normal" style="font-size: 16px; color: #656b79" >管理</mt-button>
+        <el-dropdown trigger="click">
+          <mt-button size="normal">
+            <img  style="width: 25px" src="../../static/img/slh.png">
+          </mt-button>
           <el-dropdown-menu slot="dropdown" >
             <el-dropdown-item type="text" @click.native="showSdClick">{{!showSd ? '批量操作' : '退出' }}</el-dropdown-item>
             <el-dropdown-item type="text" @click.native="resetHandle">重置</el-dropdown-item>

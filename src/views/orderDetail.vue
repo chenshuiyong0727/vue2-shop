@@ -159,7 +159,7 @@
       </div>
     </div>
 
-    <div v-if="form.status == 4 || form.status ==  5 || form.status == 6 || form.status == 7"
+    <div v-if="requestParamWl.waybillNo && ( form.status == 4 || form.status ==  5 || form.status == 6 || form.status == 7)"
          style="color: #333333;width: 100vw; height: 40px;background-color: white;">
       <div class="zuoyouduiqi" style="padding-top: 25px;">
         <div style="margin-left: 10px;">
@@ -175,7 +175,7 @@
         </div>
       </div>
     </div>
-    <div  v-if="form.status == 4 || form.status == 5 || form.status == 6 || form.status == 7"
+    <div  v-if="requestParamWl.waybillNo && ( form.status == 4 || form.status ==  5 || form.status == 6 || form.status == 7)"
           style="color: #808082;width: 100vw; background-color: white;">
       <div class="zuoyouduiqi" style="padding-top: 17px;
           margin-bottom: 7px;
@@ -252,7 +252,7 @@
             <img @click="copyUrl(form.actNo)" style="width: 20px;margin-bottom: 8px;"
                  src="../../static/img/copy6.png">
           </div>
-          <div v-if="form.surplusDay && form.saleType ==2 " style="margin-bottom: 5px;">
+          <div v-if="form.surplusDay && form.saleType ==2  && form.status != 7 " style="margin-bottom: 5px;">
             <span v-if="form.surplusDay >12">剩余天数</span>
             <span v-if="form.surplusDay >=0 && form.surplusDay <=12" class="color-danger">剩余天数</span>
             <span v-if="form.surplusDay < 0" class="color-danger">到期天数</span>

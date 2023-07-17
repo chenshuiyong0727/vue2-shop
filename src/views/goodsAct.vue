@@ -8,7 +8,7 @@
         <mt-button  icon="back" @click="$router.push({ path: '/logout?type=1' })"></mt-button>
       </div>
       <div slot="right">
-        <mt-button size="normal" style="font-size: 16px; color: #656b79" @click="resetHandle" >重置</mt-button>
+        <mt-button size="normal" style="font-size: 15px; color: black" @click="resetHandle" >重置</mt-button>
       </div>
     </mt-header>
 <!--    <div class="fenlei_top">-->
