@@ -109,7 +109,7 @@
       v-model="isShowDialog1">
       <mt-header title="查看详情">
         <div slot="right">
-          <mt-button size="normal"  @click="isShowDialog1 = false" style="font-size: 16px">关闭</mt-button>
+          <mt-button size="normal"  @click="isShowDialog1 = false" style="font-size: 15px">关闭</mt-button>
         </div>
         <div slot="left">
           <mt-button size="normal" @click="goDel" style="font-size: 16px">移除</mt-button>

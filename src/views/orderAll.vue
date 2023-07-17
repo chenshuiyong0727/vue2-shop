@@ -224,11 +224,11 @@
       v-model="isShowDialog">
       <mt-header title="修改">
         <div slot="right">
-          <mt-button size="normal" @click="isShowDialog = false" style="font-size: 16px">关闭
+          <mt-button size="normal" @click="isShowDialog = false" style="font-size: 15px">关闭
           </mt-button>
         </div>
         <div slot="left">
-          <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>
+          <mt-button size="normal" @click="confirmHandle" style="font-size: 15px">确定</mt-button>
         </div>
       </mt-header>
       <section style="height: 148vw;width: 100vw;    margin-bottom: 17vw;overflow-y:scroll;">
@@ -301,7 +301,7 @@
       v-model="isShowDialogWl">
       <mt-header title="物流详情">
         <div slot="left">
-          <mt-button size="normal" @click="isShowDialogWl = false" style="font-size: 16px">关闭
+          <mt-button size="normal" @click="isShowDialogWl = false" style="font-size: 15px">关闭
           </mt-button>
         </div>
       </mt-header>
@@ -353,11 +353,11 @@
       v-model="isShowDialog1">
       <mt-header title="修改地址">
         <div slot="right">
-          <mt-button size="normal" @click="isShowDialog1 = false" style="font-size: 16px">关闭
+          <mt-button size="normal" @click="isShowDialog1 = false" style="font-size: 15px">关闭
           </mt-button>
         </div>
         <div slot="left">
-          <mt-button size="normal" @click="updateAddress" style="font-size: 16px">确定</mt-button>
+          <mt-button size="normal" @click="updateAddress" style="font-size: 15px">确定</mt-button>
         </div>
       </mt-header>
       <section style="height: 85vw;width: 80vw">
@@ -387,10 +387,10 @@
       v-model="isShowDialog2">
       <mt-header title="筛选">
         <div slot="right">
-          <mt-button size="normal" @click="resetHandle" style="font-size: 16px">关闭</mt-button>
+          <mt-button size="normal" @click="resetHandle" style="font-size: 15px">关闭</mt-button>
         </div>
         <div slot="left">
-          <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
+          <mt-button size="normal" @click="search1" style="font-size: 15px">确定</mt-button>
         </div>
       </mt-header>
       <section style="height: 100vw;width: 100vw">
@@ -464,11 +464,11 @@
       v-model="isShowDialog3">
       <mt-header title="批量操作">
         <div slot="right">
-          <mt-button size="normal" @click="isShowDialog3 = false" style="font-size: 16px">关闭
+          <mt-button size="normal" @click="isShowDialog3 = false" style="font-size: 15px">关闭
           </mt-button>
         </div>
         <div slot="left">
-          <mt-button size="normal" @click="confirmHandle3" style="font-size: 16px">确定</mt-button>
+          <mt-button size="normal" @click="confirmHandle3" style="font-size: 15px">确定</mt-button>
         </div>
       </mt-header>
       <section style="height: 100vw;width: 100vw">

@@ -156,10 +156,10 @@
       v-model="isShowDialog2">
       <mt-header title="筛选" >
         <div slot="right">
-          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px">关闭</mt-button>
+          <mt-button size="normal"  @click="resetHandle" style="font-size: 15px">关闭</mt-button>
         </div>
         <div slot="left">
-          <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
+          <mt-button size="normal" @click="search1" style="font-size: 15px">确定</mt-button>
         </div>
       </mt-header>
       <section style="height: 80vw;width: 100vw">
@@ -208,10 +208,10 @@
       v-model="isShowDialog">
       <mt-header title="修改">
         <div slot="right">
-          <mt-button size="normal"  @click="isShowDialog = false" style="font-size: 16px">关闭</mt-button>
+          <mt-button size="normal"  @click="isShowDialog = false" style="font-size: 15px">关闭</mt-button>
         </div>
         <div slot="left">
-          <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>
+          <mt-button size="normal" @click="confirmHandle" style="font-size: 15px">确定</mt-button>
         </div>
       </mt-header>
       <section style="height: 80vw;width: 100vw">

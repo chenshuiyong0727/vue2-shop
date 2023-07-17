@@ -162,10 +162,10 @@
       v-model="isShowDialog2">
       <mt-header title="筛选" >
         <div slot="right">
-          <mt-button size="normal" style="font-size: 16px">关闭</mt-button>
+          <mt-button size="normal"  @click="isShowDialog2 = false" style="font-size: 15px">关闭</mt-button>
         </div>
         <div slot="left">
-          <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
+          <mt-button size="normal" @click="search1" style="font-size: 15px">确定</mt-button>
         </div>
       </mt-header>
       <section style="height: 120vw;width: 100vw">

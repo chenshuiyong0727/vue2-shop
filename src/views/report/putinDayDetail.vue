@@ -111,7 +111,7 @@
               </div>
             </div>
           </div>
-          <div1 class="dingdans_bottom_dw">
+          <div class="dingdans_bottom_dw">
             <div class="dingdans_top_left_dw">
               预计利润
               <span  class="color-danger" >{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</span>
@@ -120,7 +120,7 @@
             <div class="dingdans_top_right_dw">
               <span> {{item.createTime |formateTime }}</span>
             </div>
-          </div1>
+          </div>
 <!--          <div1 class="dingdans_top">-->
 <!--            <div class="dingdans_top_left">-->
 <!--              货号：<strong @click="WarehouseDetail(item.goodsId ,item.actNo ,item.imgUrl,item.img )" style="color: #409EFF"> {{item.actNo}} </strong>-->

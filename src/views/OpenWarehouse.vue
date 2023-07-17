@@ -1,6 +1,9 @@
 <template>
   <div class="hello" ref="hello">
     <mt-header title="Nike">
+      <div slot="right">
+        <mt-button size="normal" style="font-size: 15px; color: black" @click="resetHandle" >重置</mt-button>
+      </div>
     </mt-header>
 <!--    <div class="fenlei_top">-->
 <!--      <div    class="fenlei_top_left">-->
@@ -33,26 +36,34 @@
       :autoFill="false"
       ref="loadmore"
     >
-      <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
-        <div class="dingdans_top">
-          <div class="dingdans_top_left">
-            货号：<strong> {{item.actNo}} </strong>
+      <div class="dingdans_item_dw"
+            v-for="(item,index) in tableData"
+            :key="index"
+      >
+        <div class="dingdans_con_dw" style="padding: 0px;">
+          <div :src="item.img" class="dingdans_con_left_dw"
+               @click="avatarShow(item.img)">
+            <img :src="item.img" >
           </div>
-          <div class="dingdans_top_right">
-            尺码：<strong class="color-danger">{{item.size }}</strong>
-          </div>
-        </div>
-        <div class="dingdans_con">
-          <div v-if="item.img" :src="item.img" class="dingdans_con_left" @click="avatarShow(item.img)">
-            <img :src="item.img">
-          </div>
-          <div class="diangdans_con_right">
-            <div class="dingdans_con_right_top" style="font-size: 14px;" >
-               <span>{{item.goodsName}}</span>
+          <div class="diangdans_con_right_dw">
+            <div class="dingdans_con_right_top_dw">
+              <span>
+                {{item.goodsName}}
+              </span>
+            </div>
+            <div class="dingdans_con_right_top_dw_1 zuoyouduiqi">
+              <span>
+              {{item.actNo}}
+              </span>
+              <span>
+             尺码： {{item.size}}
+              </span>
             </div>
           </div>
         </div>
+        <!--底部-->
       </div>
+
       <div slot="top" class="mint-loadmore-top">
         <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }">松手释放↓</span>
         <span v-show="topStatus === 'loading'">加载中</span>
@@ -70,14 +81,14 @@
       v-model="isShowDialog2">
       <mt-header title="筛选" >
         <div slot="right">
-          <mt-button size="normal"  @click="resetHandle" style="font-size: 16px"> 重置（关闭）</mt-button>
+          <mt-button size="normal"  @click="resetHandle" style="font-size: 15px">关闭</mt-button>
         </div>
         <div slot="left">
-          <mt-button size="normal" @click="search1" style="font-size: 16px">确定</mt-button>
+          <mt-button size="normal" @click="search1" style="font-size: 15px">确定</mt-button>
         </div>
       </mt-header>
       <section style="height: 80vw;width: 100vw">
-        <mt-field label="状态" style="margin-top: 11vw;">
+        <mt-field label="状态" >
             <select class="select100" v-model="queryParam.inventory" @change="changeSystem" :disabled="true">
           <option :disabled="true" value="" selected>请选择状态</option>
               <option v-for="x in inventoryToList" :value="x.fieldValue">{{x.fieldName}}</option>
@@ -86,8 +97,8 @@
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
       </section>
     </mt-popup>
-        <div v-if="allLoaded" class="to-the-bottom">
-      <p v-if="emtityMsg != '没有更多了'">
+    <div v-if="!tableData.length" class="to-the-bottom-1">
+      <p v-if="emtityMsg">
         <img src="../../static/img/new/empity_7.png" style="width: 60vw;">
       </p>
       <p>
@@ -255,16 +266,18 @@
         }
       },
       getPage() {
+        this.emtityMsg = ''
         goodsInventoryApi.pageOpen(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             if (this.totalCount == 0) {
               this.allLoaded = true;
-              this.emtityMsg = '暂无相关库存'
+              if (this.queryParam.pageNum == 1){
+                this.emtityMsg = '暂无相关商品'
+              }
             } else if (this.totalCount <= this.queryParam.pageSize) {
               this.allLoaded = tr
-              this.emtityMsg = '没有更多了'
             }
           } else {
             this.$toast(res.subMsg)
@@ -306,7 +319,6 @@
               },100)
             } else {
               this.allLoaded = true;
-              this.emtityMsg = '没有更多了'
               this.$toast('没有更多了')
             }
           } else {

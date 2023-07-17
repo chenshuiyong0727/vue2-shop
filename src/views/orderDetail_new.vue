@@ -486,7 +486,7 @@
       v-model="isShowDialogWl">
       <mt-header title="物流详情">
         <div slot="left">
-          <mt-button size="normal" @click="isShowDialogWl = false" style="font-size: 16px">关闭
+          <mt-button size="normal" @click="isShowDialogWl = false" style="font-size: 15px">关闭
           </mt-button>
         </div>
       </mt-header>
