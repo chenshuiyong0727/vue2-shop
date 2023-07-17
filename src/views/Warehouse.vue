@@ -89,7 +89,7 @@
             </p>
           </div>
           <div class="diangdans_con_right_dw">
-            <div class="dingdans_con_right_top_dw" @click="goodsDetail(item.goodsId, 1) ">
+            <div class="dingdans_con_right_top_dw" @click="goDetail(item.id) ">
               <span>
                 {{item.goodsName}}
               </span>
@@ -162,12 +162,12 @@
                   class="dw-button-common">操作
                 </button>
                 <el-dropdown-menu slot="dropdown" >
+                  <el-dropdown-item type="text" @click.native="goodsDetail(item.goodsId, 1) ">商品详情</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="WarehouseDetail(item.goodsId ,item.actNo ,item.img )">库存信息</el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="jumpactNo(item.actNo)">订单</el-dropdown-item>
                   <el-dropdown-item type="text" v-if="item.inventory > item.galleryCount" @click.native="changeStatusDialog1(item)">上架</el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="WarehouseDetail(item.goodsId ,item.actNo ,item.img )">库存</el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="goDel(item.id)">删除</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
