@@ -188,7 +188,7 @@
                   <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="gotoWl(item)">查看物流</el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="goodsDetail(item.goodsId, 1)">商品详情</el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="orderDetailnew(item.id, 1)">订单详情</el-dropdown-item>
+<!--                  <el-dropdown-item type="text" @click.native="orderDetailnew(item.id, 1)">订单详情</el-dropdown-item>-->
                   <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
