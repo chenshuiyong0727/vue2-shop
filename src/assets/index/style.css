@@ -96,6 +96,9 @@
 .color-danger {
   color: #F56C6C;
 }
+.color-dw {
+  color: #1ba5ad;
+}
 .color-danger-strong {
   color: #409eff;
   font-weight: 600;
@@ -268,6 +271,27 @@ select{
 .zhihui_act{
   background-color: #333333;
 }
+.dw-button-common-a2 {
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background: #FFF;
+  border: 1px solid #a2a2a2;
+  color: #a2a2a2;
+  -webkit-appearance: none;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: 0;
+  margin: 0;
+  -webkit-transition: .1s;
+  transition: .1s;
+  padding: 6px 16px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+
 .dw-button-common {
   display: inline-block;
   line-height: 1;
@@ -886,4 +910,17 @@ select{
   border-top-color: rgba(185, 185, 185, .14);
   border-top-style: solid;
   height: 34px;
+}
+.mint-header-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 400;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
 }

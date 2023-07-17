@@ -203,10 +203,10 @@ export default {
 
 </script>
 
-<style lang="less" scoped>
+<style>
   @import '../assets/index/style.css';
-
   .login {
+    overflow: hidden;
   >section {
     .tip {
       padding: 6vw 3vw;
@@ -216,5 +216,7 @@ export default {
     }
   }
 }
-
+  ::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
+  }
 </style>

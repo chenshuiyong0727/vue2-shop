@@ -102,7 +102,7 @@
             </p>
           </div>
           <div class="diangdans_con_right_dw">
-            <div class="dingdans_con_right_top_dw" @click="goodsDetail(item.goodsId, 1) ">
+            <div class="dingdans_con_right_top_dw" @click="goDetail(item.id) ">
               <span>
                 {{item.goodsName}}
               </span>
@@ -119,7 +119,7 @@
                 {{item.addressId | dictToDescTypeValue(38)}}
               </span>
             </div>
-            <div v-if="item.surplusDay && item.saleType ==2 " style="    margin-top: 12px;margin-bottom: 5px;">
+            <div v-if="item.surplusDay && item.saleType ==2  && item.status !=7" style="    margin-top: 12px;margin-bottom: 5px;">
               <span v-if="item.surplusDay >12">剩余天数</span>
               <span v-if="item.surplusDay >=0 && item.surplusDay <=12" class="color-danger">剩余天数</span>
               <span v-if="item.surplusDay < 0" class="color-danger">到期天数</span>
@@ -186,8 +186,9 @@
                 <el-dropdown-menu slot="dropdown" >
                   <el-dropdown-item type="text" @click.native="handleClick(item)">修改</el-dropdown-item>
                   <el-dropdown-item type="text" @click.native="gotoDw(item.spuId)">得物</el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="gotoWl(item)">物流</el-dropdown-item>
-                  <el-dropdown-item type="text" @click.native="goDetail(item.id)">详情</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="gotoWl(item)">查看物流</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="goodsDetail(item.goodsId, 1)">商品详情</el-dropdown-item>
+                  <el-dropdown-item type="text" @click.native="orderDetailnew(item.id, 1)">订单详情</el-dropdown-item>
                   <el-dropdown-item type="text" class="color-danger" @click.native="goDel(item.id)">删除</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
@@ -228,7 +229,7 @@
           <mt-button size="normal" @click="confirmHandle" style="font-size: 16px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 148vw;width: 100vw">
+      <section style="height: 148vw;width: 100vw;    margin-bottom: 17vw;overflow-y:scroll;">
         <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo"
                   :disabled="true"></mt-field>
         <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
@@ -247,7 +248,7 @@
           </el-select>
         </mt-field>
         <mt-field label="状态">
-          <el-select size="small" class="select100" v-model="requestParam.status">
+          <el-select size="small" class="select100" v-model="requestParam.status" @change="keyup1">
             <el-option label="状态" value=""></el-option>
             <el-option
               v-for="item in statusList"
@@ -304,11 +305,12 @@
       </mt-header>
       <div class="wlInfo">
         <p><span style="color: #979a9e">顺丰速运 :</span>  <span>{{requestParamWl.waybillNo}}</span>
-          <el-button
-          type="text"
-          style="font-weight: 600;padding-left: 5px;padding-top: 0px;padding-bottom: 0px;"
-          @click="copyUrl(requestParamWl.waybillNo )">复制
-        </el-button>
+<!--          <el-button-->
+<!--          type="text"-->
+<!--          style="font-weight: 600;padding-left: 5px;padding-top: 0px;padding-bottom: 0px;"-->
+<!--          @click="copyUrl(requestParamWl.waybillNo )">复制-->
+<!--        </el-button>-->
+          <button class="dw-button-common-a2"  @click="copyUrl(requestParamWl.waybillNo )" style=" margin-left: 10px;   padding: 1px 5px;">复制</button>
         </p>
         <p style="margin-top: 2px;"><span style="color: #979a9e">实际金额 :</span> <span>{{requestParamWl.freight}}</span></p>
         <p style="margin-top: 2px;">
@@ -1141,6 +1143,11 @@
         this.curScrollTop = this.$refs.hello.scrollTop
         this.$router.push({path: '/orderDetail', query: {id}})
       },
+      orderDetailnew(id) {
+        this.isBack = true
+        this.curScrollTop = this.$refs.hello.scrollTop
+        this.$router.push({path: '/orderDetailnew', query: {id}})
+      },
       gotoDw(spuId) {
         if (!spuId) {
           return
@@ -1442,7 +1449,7 @@
     text-align: left;
     margin-left: 25px;
     font-size: 15px;
-    margin-top: -17px;
+    margin-top: -20px;
 
   }
 
@@ -1451,7 +1458,7 @@
     margin-left: 25px;
     color: #333;
     font-size: 15px;
-    margin-top: -17px;
+    margin-top: -20px;
   }
 
   .status-line {

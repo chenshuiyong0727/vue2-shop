@@ -49,7 +49,7 @@
             <img style="width: 21px; "  src="../../static/img/logo/logo-333-1.png">
           </div>
           <div>
-          <span style="font-size: 20px; color: black;" class="mint-header-title">
+          <span style="font-size: 16px; color: black;" class="mint-header-title">
             移动仓库
           </span>
           </div>

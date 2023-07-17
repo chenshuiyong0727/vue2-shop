@@ -1627,7 +1627,7 @@
     text-align: left;
     margin-left: 25px;
     font-size: 15px;
-    margin-top: -17px;
+    margin-top: -20px;
 
   }
 
@@ -1636,7 +1636,7 @@
     margin-left: 25px;
     color: #333;
     font-size: 15px;
-    margin-top: -17px;
+    margin-top: -20px;
   }
 
   .status-line {
