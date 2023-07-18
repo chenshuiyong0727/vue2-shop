@@ -140,15 +140,15 @@
       </mt-header>
       <section style="height: 80vw;width: 100vw">
         <mt-field label="类型" style="margin-top: 11vw;">
-          <el-select size="small" class="select100" v-model="queryParam.type" @change="changeSystem" >
-            <el-option :disabled="true">请选择类型</el-option>
-            <el-option
+          <select class=" select100_select select"v-model="queryParam.type">
+            <option label="请选择类型"  value=""></option>
+            <option
               v-for="item in typeList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="item.fieldValue">
-            </el-option>
-          </el-select>
+            </option>
+          </select>
         </mt-field>
         <mt-field label="品牌" placeholder="请输入品牌"  v-model="queryParam.brand"></mt-field>
         <mt-field label="备注" placeholder="请输入备注"  v-model="queryParam.remark"></mt-field>

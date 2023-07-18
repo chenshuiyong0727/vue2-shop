@@ -180,30 +180,50 @@
 <!--          <option :disabled="true" value="" selected>请选择类型</option>-->
 <!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
 <!--            </select>-->
-            <el-select size="small" class="select100" v-model="queryParam.type"  >
-          <el-option :disabled="true" value="" selected>请选择类型</el-option>
-          <el-option
-            v-for="item in typeList"
-            :key="item.fieldValue"
-            :label="item.fieldName"
-            :value="item.fieldValue">
-          </el-option>
-            </el-select>
+<!--            <el-select size="small" class="select100" v-model="queryParam.type"  >-->
+<!--          <el-option :disabled="true" value="" selected>请选择类型</el-option>-->
+<!--          <el-option-->
+<!--            v-for="item in typeList"-->
+<!--            :key="item.fieldValue"-->
+<!--            :label="item.fieldName"-->
+<!--            :value="item.fieldValue">-->
+<!--          </el-option>-->
+<!--            </el-select>-->
+
+          <select class=" select100_select select" v-model="queryParam.type">
+            <option label="请选择类型"  value=""></option>
+            <option
+              v-for="item in typeList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="item.fieldValue">
+            </option>
+          </select>
         </mt-field>
         <mt-field label="排序">
 <!--            <select class="select100" v-model="queryParam.type" @change="changeSystem" >-->
 <!--          <option :disabled="true" value="" selected>请选择类型</option>-->
 <!--              <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
 <!--            </select>-->
-            <el-select size="small" class="select100" v-model="queryParam.sort" >
-          <el-option :disabled="true" value="" selected>请选择排序</el-option>
-          <el-option
-            v-for="item in sortList"
-            :key="item.fieldValue"
-            :label="item.fieldName"
-            :value="item.fieldValue">
-          </el-option>
-            </el-select>
+<!--            <el-select size="small" class="select100" v-model="queryParam.sort" >-->
+<!--          <el-option :disabled="true" value="" selected>请选择排序</el-option>-->
+<!--          <el-option-->
+<!--            v-for="item in sortList"-->
+<!--            :key="item.fieldValue"-->
+<!--            :label="item.fieldName"-->
+<!--            :value="item.fieldValue">-->
+<!--          </el-option>-->
+<!--            </el-select>-->
+
+          <select class=" select100_select select" v-model="queryParam.sort">
+            <option label="请选择排序"  value=""></option>
+            <option
+              v-for="item in sortList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="item.fieldValue">
+            </option>
+          </select>
         </mt-field>
         <mt-field label="价格开始"  placeholder="价格开始" type="NUMBER" v-model="queryParam.priceFrom" ></mt-field>
         <mt-field label="价格结束"  placeholder="价格结束" type="NUMBER" v-model="queryParam.priceTo" ></mt-field>

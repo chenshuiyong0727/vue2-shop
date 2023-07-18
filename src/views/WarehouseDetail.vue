@@ -185,15 +185,24 @@
       <section style="height: 40vw;width: 80vw">
         <mt-field label="选中数" style="margin-top: 11vw;" v-model="ids.length" :disabled="true"></mt-field>
         <mt-field label="仓库">
-            <el-select size="small" class="select80" v-model="requestParam.warehouseId"  >
-              <el-option :disabled="true" value="" selected>请选择仓库</el-option>
-              <el-option
-                v-for="item in warehouseList"
-                :key="item.fieldValue"
-                :label="item.fieldName"
-                :value="+item.fieldValue">
-              </el-option>
-            </el-select>
+<!--            <el-select size="small" class="select80" v-model="requestParam.warehouseId"  >-->
+<!--              <el-option :disabled="true" value="" selected>请选择仓库</el-option>-->
+<!--              <el-option-->
+<!--                v-for="item in warehouseList"-->
+<!--                :key="item.fieldValue"-->
+<!--                :label="item.fieldName"-->
+<!--                :value="+item.fieldValue">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
+          <select class=" select80_select select"v-model="requestParam.warehouseId">
+            <option label="请选择仓库"  value=""></option>
+            <option
+              v-for="item in warehouseList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+            </option>
+          </select>
         </mt-field>
       </section>
     </mt-popup>
@@ -210,15 +219,24 @@
       <section style="height: 40vw;width: 80vw">
         <mt-field label="选中数" style="margin-top: 11vw;" v-model="ids.length" :disabled="true"></mt-field>
         <mt-field label="渠道">
-            <el-select size="small" class="select80" v-model="requestParamChannelId.channelId"  >
-              <el-option :disabled="true" value="" selected>请选择渠道</el-option>
-              <el-option
-                v-for="item in channelIdList"
-                :key="item.fieldValue"
-                :label="item.fieldName"
-                :value="+item.fieldValue">
-              </el-option>
-            </el-select>
+<!--            <el-select size="small" class="select80" v-model="requestParamChannelId.channelId"  >-->
+<!--              <el-option :disabled="true" value="" selected>请选择渠道</el-option>-->
+<!--              <el-option-->
+<!--                v-for="item in channelIdList"-->
+<!--                :key="item.fieldValue"-->
+<!--                :label="item.fieldName"-->
+<!--                :value="+item.fieldValue">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
+          <select class=" select80_select select"v-model="requestParamChannelId.channelId">
+            <option label="请选择渠道"  value=""></option>
+            <option
+              v-for="item in channelIdList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+            </option>
+          </select>
         </mt-field>
       </section>
     </mt-popup>

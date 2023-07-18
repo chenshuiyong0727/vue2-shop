@@ -7,15 +7,40 @@
     </mt-header>
     <div class="fenlei_top">
 <!--      <div    class="fenlei_top_left">-->
-        <el-select style="width: 95vw;" size="small" v-model="queryParam.addressId" @change="getPage">
-          <el-option label="地址" value=""></el-option>
-          <el-option
-            v-for="item in addressList"
-            :key="item.fieldValue"
-            :label="item.fieldName"
-            :value="item.fieldValue">
-          </el-option>
-        </el-select>
+<!--        <el-select style="width: 95vw;" size="small" v-model="queryParam.addressId" @change="getPage">-->
+<!--          <el-option label="地址" value=""></el-option>-->
+<!--          <el-option-->
+<!--            v-for="item in addressList"-->
+<!--            :key="item.fieldValue"-->
+<!--            :label="item.fieldName"-->
+<!--            :value="item.fieldValue">-->
+<!--          </el-option>-->
+<!--        </el-select>-->
+
+      <select style="width: 95vw !important;
+    -webkit-appearance: none;
+    background-color: #f4f3f8;
+    background-image: none;
+    border-radius: 0px;
+    border: 0px solid #DCDFE6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    outline: 0;
+    padding: 0 15px;
+    -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+"  class=" select100_select select el-input__inner" v-model="queryParam.addressId" @change="getPage">
+        <option label="请选择地址"  value=""></option>
+        <option
+          v-for="item in addressList"
+          :key="item.fieldValue"
+          :label="item.fieldName"
+          :value="item.fieldValue">
+        </option>
+      </select>
 <!--        <input type="text" v-model.trim="queryParam.keyword" placeholder="请输入货号/商品名" class="ins">-->
 <!--      </div>-->
 <!--      <div class="fenlei_top_right" >-->

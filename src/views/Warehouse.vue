@@ -197,6 +197,7 @@
       </p>
     </div>
     <mt-popup
+      position="bottom"
       v-model="isShowDialog">
       <mt-header title="修改">
         <div slot="right">
@@ -206,19 +207,28 @@
           <mt-button size="normal" @click="confirmHandle" style="font-size: 15px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 130vw;width: 80vw">
+      <section style="height: 130vw;width: 100vw">
         <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo" :disabled="true"></mt-field>
 <!--        <mt-field label="* 尺码" v-model="orderData.size" :disabled="true"></mt-field>-->
         <mt-field label="* 尺码">
-            <el-select size="small" class="select80" v-model="requestParam.sizeId"  >
-              <el-option :disabled="true" value="" selected>请选择</el-option>
-              <el-option
-                v-for="item in sizeList"
-                :key="item.id"
-                :label="item.size"
-                :value="item.id">
-              </el-option>
-            </el-select>
+<!--            <el-select size="small" class="select80" v-model="requestParam.sizeId"  >-->
+<!--              <el-option :disabled="true" value="" selected>请选择</el-option>-->
+<!--              <el-option-->
+<!--                v-for="item in sizeList"-->
+<!--                :key="item.id"-->
+<!--                :label="item.size"-->
+<!--                :value="item.id">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
+          <select class=" select100_select select"v-model="requestParam.sizeId">
+            <option label="请选择尺码"  value=""></option>
+            <option
+              v-for="item in sizeList"
+              :key="item.id"
+              :label="item.size"
+              :value="item.id">
+            </option>
+          </select>
         </mt-field>
         <mt-field label="* 原始库存" placeholder="请输入原始库存" type="number" v-model="requestParam.oldInventory"></mt-field>
         <mt-field label="* 剩余库存" placeholder="请输入剩余库存" type="number" v-model="requestParam.inventory"></mt-field>
@@ -270,78 +280,143 @@
 <!--          <option :disabled="true" value="" selected>请选择排序</option>-->
 <!--              <option v-for="x in sortList" :value="x.fieldValue">{{x.fieldName}}</option>-->
 <!--            </select>-->
-            <el-select size="small" class="select100" v-model="queryParam.sort"  >
-              <el-option :disabled="true" value="" selected>请选择排序</el-option>
-              <el-option
-                v-for="item in sortList"
-                :key="item.fieldValue"
-                :label="item.fieldName"
-                :value="item.fieldValue">
-              </el-option>
-            </el-select>
+<!--            <el-select size="small" class="select100" v-model="queryParam.sort"  >-->
+<!--              <el-option :disabled="true" value="" selected>请选择排序</el-option>-->
+<!--              <el-option-->
+<!--                v-for="item in sortList"-->
+<!--                :key="item.fieldValue"-->
+<!--                :label="item.fieldName"-->
+<!--                :value="item.fieldValue">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
+          <select class=" select100_select select"v-model="queryParam.sort">
+            <option label="请选择类型"  value=""></option>
+            <option
+              v-for="item in sortList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="item.fieldValue">
+            </option>
+          </select>
         </mt-field>
         <mt-field label="状态">
 <!--            <select class="select100" v-model="queryParam.inventory" @change="changeSystem" >-->
 <!--              <option :disabled="true" value="" selected>请选择状态</option>-->
 <!--              <option v-for="x in inventoryToList" :value="x.fieldValue">{{x.fieldName}}</option>-->
 <!--            </select>-->
-            <el-select size="small" class="select100" v-model="queryParam.inventory" @change="changeSystem"  >
-              <el-option :disabled="true" value="" selected>请选择状态</el-option>
-              <el-option
-                v-for="item in inventoryToList"
-                :key="item.fieldValue"
-                :label="item.fieldName"
-                :value="item.fieldValue">
-              </el-option>
-            </el-select>
+<!--            <el-select size="small" class="select100" v-model="queryParam.inventory" @change="changeSystem"  >-->
+<!--              <el-option :disabled="true" value="" selected>请选择状态</el-option>-->
+<!--              <el-option-->
+<!--                v-for="item in inventoryToList"-->
+<!--                :key="item.fieldValue"-->
+<!--                :label="item.fieldName"-->
+<!--                :value="item.fieldValue">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
+          <select class=" select100_select select"v-model="queryParam.inventory">
+            <option label="请选择状态"  value=""></option>
+            <option
+              v-for="item in inventoryToList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="item.fieldValue">
+            </option>
+          </select>
         </mt-field>
         <mt-field label="仓库">
-            <el-select size="small" class="select100" v-model="queryParam.warehouseId"  >
-              <el-option :disabled="true" value="" selected>请选择仓库</el-option>
-              <el-option
-                v-for="item in warehouseList"
-                :key="item.fieldValue"
-                :label="item.fieldName"
-                :value="+item.fieldValue">
-              </el-option>
-            </el-select>
+<!--            <el-select size="small" class="select100" v-model="queryParam.warehouseId"  >-->
+<!--              <el-option :disabled="true" value="" selected>请选择仓库</el-option>-->
+<!--              <el-option-->
+<!--                v-for="item in warehouseList"-->
+<!--                :key="item.fieldValue"-->
+<!--                :label="item.fieldName"-->
+<!--                :value="+item.fieldValue">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
+<!--          <select class=" select100_select select"v-model="queryParam.warehouseId">-->
+<!--            <option label="请选择仓库"  value=""></option>-->
+<!--            <option-->
+<!--              v-for="item in warehouseList"-->
+<!--              :key="item.fieldValue"-->
+<!--              :label="item.fieldName"-->
+<!--              :value="item.fieldValue">-->
+<!--            </option>-->
+<!--          </select>-->
+          <select class=" select100_select select" v-model="queryParam.warehouseId">
+            <option label="请选择类型"  value=""></option>
+            <option
+              v-for="item in warehouseList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+            </option>
+          </select>
         </mt-field>
         <mt-field label="类型">
-            <el-select size="small" class="select100" v-model="queryParam.goodType" >
-          <el-option :disabled="true" value="" selected>请选择商品类型</el-option>
-          <el-option
-            v-for="item in typeList"
-            :key="item.fieldValue"
-            :label="item.fieldName"
-            :value="item.fieldValue">
-          </el-option>
-            </el-select>
+<!--            <el-select size="small" class="select100" v-model="queryParam.goodType" >-->
+<!--          <el-option :disabled="true" value="" selected>请选择商品类型</el-option>-->
+<!--          <el-option-->
+<!--            v-for="item in typeList"-->
+<!--            :key="item.fieldValue"-->
+<!--            :label="item.fieldName"-->
+<!--            :value="item.fieldValue">-->
+<!--          </el-option>-->
+<!--            </el-select>-->
+          <select class=" select100_select select"v-model="queryParam.goodType">
+            <option label="请选择商品类型"  value=""></option>
+            <option
+              v-for="item in typeList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="item.fieldValue">
+            </option>
+          </select>
         </mt-field>
         <mt-field label="渠道">
-            <el-select size="small" class="select100" v-model="queryParam.channelId"  >
-              <el-option :disabled="true" value="" selected>请选择渠道</el-option>
-              <el-option
-                v-for="item in channelIdList"
-                :key="item.fieldValue"
-                :label="item.fieldName"
-                :value="+item.fieldValue">
-              </el-option>
-            </el-select>
+<!--            <el-select size="small" class="select100" v-model="queryParam.channelId"  >-->
+<!--              <el-option :disabled="true" value="" selected>请选择渠道</el-option>-->
+<!--              <el-option-->
+<!--                v-for="item in channelIdList"-->
+<!--                :key="item.fieldValue"-->
+<!--                :label="item.fieldName"-->
+<!--                :value="+item.fieldValue">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
+
+          <select class=" select100_select select" v-model="queryParam.channelId">
+            <option label="请选择渠道"  value=""></option>
+            <option
+              v-for="item in channelIdList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="+item.fieldValue">
+            </option>
+          </select>
+
         </mt-field>
         <mt-field label="特殊条件">
 <!--            <select class="select100" v-model="queryParam.today" @change="changeSystem" >-->
 <!--              <option :disabled="true" value="" selected>请选择特殊条件</option>-->
 <!--              <option v-for="x in todayList" :value="x.fieldValue">{{x.fieldName}}</option>-->
 <!--            </select>-->
-            <el-select size="small" class="select100" v-model="queryParam.today"  >
-              <el-option :disabled="true" value="" selected>请选择特殊条件</el-option>
-              <el-option
-                v-for="item in todayList"
-                :key="item.fieldValue"
-                :label="item.fieldName"
-                :value="item.fieldValue">
-              </el-option>
-            </el-select>
+<!--            <el-select size="small" class="select100" v-model="queryParam.today"  >-->
+<!--              <el-option :disabled="true" value="" selected>请选择特殊条件</el-option>-->
+<!--              <el-option-->
+<!--                v-for="item in todayList"-->
+<!--                :key="item.fieldValue"-->
+<!--                :label="item.fieldName"-->
+<!--                :value="item.fieldValue">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
+          <select class=" select100_select select"v-model="queryParam.today">
+            <option label="请选择特殊条件"  value=""></option>
+            <option
+              v-for="item in todayList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="item.fieldValue">
+            </option>
+          </select>
         </mt-field>
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
         <mt-field label="入库开始时间">

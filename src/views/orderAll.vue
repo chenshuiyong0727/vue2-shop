@@ -237,39 +237,67 @@
         <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
         <mt-field label="运单号" placeholder="请输入运单号" v-model="requestParam.waybillNo"></mt-field>
         <mt-field label="地址">
-            
-          <el-select size="small" class="select100" v-model="requestParam.addressId">
-            <el-option :disabled="true" value="" selected>请选择</el-option>
-            <el-option
+<!--          <el-select size="small" class="select100" v-model="requestParam.addressId">-->
+<!--            <el-option :disabled="true" value="" selected>请选择</el-option>-->
+<!--            <el-option-->
+<!--              v-for="item in addressList"-->
+<!--              :key="item.fieldValue"-->
+<!--              :label="item.fieldName"-->
+<!--              :value="+item.fieldValue">-->
+<!--            </el-option>-->
+<!--              -->
+<!--          </el-select>-->
+          <select class=" select100_select select" v-model="requestParam.addressId">
+            <option label="请选择地址"  value=""></option>
+            <option
               v-for="item in addressList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
-            </el-option>
-              
-          </el-select>
+            </option>
+          </select>
         </mt-field>
         <mt-field label="状态">
-          <el-select size="small" class="select100" v-model="requestParam.status" @change="keyup1">
-            <el-option label="状态" value=""></el-option>
-            <el-option
+<!--          <el-select size="small" class="select100" v-model="requestParam.status" @change="keyup1">-->
+<!--            <el-option label="状态" value=""></el-option>-->
+<!--            <el-option-->
+<!--              v-for="item in statusList"-->
+<!--              :key="item.fieldValue"-->
+<!--              :label="item.fieldName"-->
+<!--              :value="+item.fieldValue">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
+
+          <select class=" select100_select select" v-model="requestParam.status" @change="keyup1">
+            <option label="请选择状态"  value=""></option>
+            <option
               v-for="item in statusList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
-            </el-option>
-          </el-select>
+            </option>
+          </select>
         </mt-field>
         <mt-field label="销售类型">
-          <el-select size="small" class="select100" v-model="requestParam.saleType">
-            <el-option label="销售类型" value=""></el-option>
-            <el-option
+<!--          <el-select size="small" class="select100" v-model="requestParam.saleType">-->
+<!--            <el-option label="销售类型" value=""></el-option>-->
+<!--            <el-option-->
+<!--              v-for="item in saleTypeList"-->
+<!--              :key="item.fieldValue"-->
+<!--              :label="item.fieldName"-->
+<!--              :value="+item.fieldValue">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
+
+          <select class=" select100_select select" v-model="requestParam.saleType">
+            <option label="请选择销售类型"  value=""></option>
+            <option
               v-for="item in saleTypeList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
-            </el-option>
-          </el-select>
+            </option>
+          </select>
         </mt-field>
         <mt-field label="瑕疵原因" v-if="requestParam.status == 8" placeholder="请输入瑕疵原因"
                   v-model="requestParam.reason"></mt-field>
@@ -349,39 +377,39 @@
 
       </div>
     </mt-popup>
-    <mt-popup
-      v-model="isShowDialog1">
-      <mt-header title="修改地址">
-        <div slot="right">
-          <mt-button size="normal" @click="isShowDialog1 = false" style="font-size: 15px">关闭
-          </mt-button>
-        </div>
-        <div slot="left">
-          <mt-button size="normal" @click="updateAddress" style="font-size: 15px">确定</mt-button>
-        </div>
-      </mt-header>
-      <section style="height: 85vw;width: 80vw">
-        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData1.actNo"
-                  :readonly="1==1"></mt-field>
-        <mt-field label="尺码" v-model="orderData1.size" :readonly="1==1"></mt-field>
-        <mt-field label="运费" placeholder="请输入运费" type="number"
-                  v-model="requestParam1.freight"></mt-field>
-        <mt-field label="运单号" placeholder="请输入运单号" v-model="requestParam1.waybillNo"></mt-field>
-        <mt-field label="地址">
-            
-          <el-select size="small" class="select80" v-model="requestParam1.addressId">
-            <el-option :disabled="true" value="" selected>请选择</el-option>
-            <el-option
-              v-for="item in addressList"
-              :key="item.fieldValue"
-              :label="item.fieldName"
-              :value="+item.fieldValue">
-            </el-option>
-              
-          </el-select>
-        </mt-field>
-      </section>
-    </mt-popup>
+<!--    <mt-popup1-->
+<!--      v-model="isShowDialog1">-->
+<!--      <mt-header title="修改地址">-->
+<!--        <div slot="right">-->
+<!--          <mt-button size="normal" @click="isShowDialog1 = false" style="font-size: 15px">关闭-->
+<!--          </mt-button>-->
+<!--        </div>-->
+<!--        <div slot="left">-->
+<!--          <mt-button size="normal" @click="updateAddress" style="font-size: 15px">确定</mt-button>-->
+<!--        </div>-->
+<!--      </mt-header>-->
+<!--      <section style="height: 85vw;width: 80vw">-->
+<!--        <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData1.actNo"-->
+<!--                  :readonly="1==1"></mt-field>-->
+<!--        <mt-field label="尺码" v-model="orderData1.size" :readonly="1==1"></mt-field>-->
+<!--        <mt-field label="运费" placeholder="请输入运费" type="number"-->
+<!--                  v-model="requestParam1.freight"></mt-field>-->
+<!--        <mt-field label="运单号" placeholder="请输入运单号" v-model="requestParam1.waybillNo"></mt-field>-->
+<!--        <mt-field label="地址">-->
+<!--            -->
+<!--          <el-select size="small" class="select80" v-model="requestParam1.addressId">-->
+<!--            <el-option :disabled="true" value="" selected>请选择</el-option>-->
+<!--            <el-option-->
+<!--              v-for="item in addressList"-->
+<!--              :key="item.fieldValue"-->
+<!--              :label="item.fieldName"-->
+<!--              :value="+item.fieldValue">-->
+<!--            </el-option>-->
+<!--              -->
+<!--          </el-select>-->
+<!--        </mt-field>-->
+<!--      </section>-->
+<!--    </mt-popup1>-->
     <mt-popup
       position="bottom"
       v-model="isShowDialog2">
@@ -395,51 +423,89 @@
       </mt-header>
       <section style="height: 100vw;width: 100vw">
         <mt-field label="状态" style="margin-top: 12vw;">
-          <el-select size="small" class="select100" v-model="queryParam.status">
-            <el-option label="状态" value=""></el-option>
-            <el-option
+<!--          <el-select size="small" class="select100" v-model="queryParam.status">-->
+<!--            <el-option label="状态" value=""></el-option>-->
+<!--            <el-option-->
+<!--              v-for="item in statusList"-->
+<!--              :key="item.fieldValue"-->
+<!--              :label="item.fieldName"-->
+<!--              :value="+item.fieldValue">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
+          <select class=" select100_select select" v-model="queryParam.status">
+            <option label="请选择状态"  value=""></option>
+            <option
               v-for="item in statusList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
-            </el-option>
-          </el-select>
+            </option>
+          </select>
         </mt-field>
-        <mt-field label="类型">
-            <el-select size="small" class="select100" v-model="queryParam.goodType" >
-          <el-option :disabled="true" value="" selected>请选择商品类型</el-option>
-          <el-option
-            v-for="item in typeList"
-            :key="item.fieldValue"
-            :label="item.fieldName"
-            :value="item.fieldValue">
-          </el-option>
-            </el-select>
+        <mt-field label="商品类型">
+<!--            <el-select size="small" class="select100" v-model="queryParam.goodType" >-->
+<!--          <el-option :disabled="true" value="" selected>请选择商品类型</el-option>-->
+<!--          <el-option-->
+<!--            v-for="item in typeList"-->
+<!--            :key="item.fieldValue"-->
+<!--            :label="item.fieldName"-->
+<!--            :value="item.fieldValue">-->
+<!--          </el-option>-->
+<!--            </el-select>-->
+
+          <select class=" select100_select select" v-model="queryParam.goodType">
+            <option label="请选择商品类型"  value=""></option>
+            <option
+              v-for="item in typeList"
+              :key="item.fieldValue"
+              :label="item.fieldName"
+              :value="item.fieldValue">
+            </option>
+          </select>
         </mt-field>
         <mt-field label="地址">
             
-          <el-select size="small" class="select100" v-model="queryParam.addressId">
-            <el-option :disabled="true" value="" selected>请选择地址</el-option>
-            <el-option
+<!--          <el-select size="small" class="select100" v-model="queryParam.addressId">-->
+<!--            <el-option :disabled="true" value="" selected>请选择地址</el-option>-->
+<!--            <el-option-->
+<!--              v-for="item in addressList"-->
+<!--              :key="item.fieldValue"-->
+<!--              :label="item.fieldName"-->
+<!--              :value="+item.fieldValue">-->
+<!--            </el-option>-->
+<!--              -->
+<!--          </el-select>-->
+
+          <select class=" select100_select select" v-model="queryParam.addressId">
+            <option label="请选择地址"  value=""></option>
+            <option
               v-for="item in addressList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
-            </el-option>
-              
-          </el-select>
+            </option>
+          </select>
         </mt-field>
         <mt-field label="销售类型">
-          <el-select size="small" class="select100" v-model="queryParam.saleType"
-                     @change="changeSystem1">
-            <el-option label="销售类型" value=""></el-option>
-            <el-option
+<!--          <el-select size="small" class="select100" v-model="queryParam.saleType">-->
+<!--            <el-option label="销售类型" value=""></el-option>-->
+<!--            <el-option-->
+<!--              v-for="item in saleTypeList"-->
+<!--              :key="item.fieldValue"-->
+<!--              :label="item.fieldName"-->
+<!--              :value="+item.fieldValue">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
+
+          <select class=" select100_select select" v-model="queryParam.saleType">
+            <option label="请选择销售类型"  value=""></option>
+            <option
               v-for="item in saleTypeList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
-            </el-option>
-          </el-select>
+            </option>
+          </select>
         </mt-field>
         <mt-field label="运单号" placeholder="请输入运单号" v-model="queryParam.waybillNo"></mt-field>
         <mt-field label="订单号" placeholder="请输入订单号" v-model="queryParam.orderNo"></mt-field>
@@ -482,43 +548,72 @@
           </el-date-picker>
         </mt-field>
         <mt-field label="地址">
-            
-          <el-select size="small" class="select100" v-model="requestParam3.addressId">
-            <el-option :disabled="true" value="" selected>请选择仓库</el-option>
-            <el-option
+<!--            -->
+<!--          <el-select size="small" class="select100" v-model="requestParam3.addressId">-->
+<!--            <el-option :disabled="true" value="" selected>请选择仓库</el-option>-->
+<!--            <el-option-->
+<!--              v-for="item in addressList"-->
+<!--              :key="item.fieldValue"-->
+<!--              :label="item.fieldName"-->
+<!--              :value="+item.fieldValue">-->
+<!--            </el-option>-->
+<!--              -->
+<!--          </el-select>-->
+
+          <select class=" select100_select select" v-model="requestParam3.addressId">
+            <option label="请选择地址"  value=""></option>
+            <option
               v-for="item in addressList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
-            </el-option>
-              
-          </el-select>
+            </option>
+          </select>
         </mt-field>
         <mt-field label="销售类型">
             
-          <el-select size="small" class="select100" v-model="requestParam3.saleType">
-            <el-option :disabled="true" value="" selected>请选择销售类型</el-option>
-            <el-option
+<!--          <el-select size="small" class="select100" v-model="requestParam3.saleType">-->
+<!--            <el-option :disabled="true" value="" selected>请选择销售类型</el-option>-->
+<!--            <el-option-->
+<!--              v-for="item in saleTypeList"-->
+<!--              :key="item.fieldValue"-->
+<!--              :label="item.fieldName"-->
+<!--              :value="+item.fieldValue">-->
+<!--            </el-option>-->
+<!--              -->
+<!--          </el-select>-->
+
+          <select class=" select100_select select" v-model="requestParam3.saleType">
+            <option label="请选择销售类型"  value=""></option>
+            <option
               v-for="item in saleTypeList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
-            </el-option>
-              
-          </el-select>
+            </option>
+          </select>
         </mt-field>
         <mt-field label="状态">
-            
-          <el-select size="small" class="select100" v-model="requestParam3.status">
-            <el-option :disabled="true" value="" selected>请选择状态</el-option>
-            <el-option
+<!--            -->
+<!--          <el-select size="small" class="select100" v-model="requestParam3.status">-->
+<!--            <el-option :disabled="true" value="" selected>请选择状态</el-option>-->
+<!--            <el-option-->
+<!--              v-for="item in statusList"-->
+<!--              :key="item.fieldValue"-->
+<!--              :label="item.fieldName"-->
+<!--              :value="+item.fieldValue">-->
+<!--            </el-option>-->
+<!--              -->
+<!--          </el-select>-->
+          <select class=" select100_select select" v-model="requestParam3.status">
+            <option label="请选择状态"  value=""></option>
+            <option
               v-for="item in statusList"
               :key="item.fieldValue"
               :label="item.fieldName"
               :value="+item.fieldValue">
-            </el-option>
-              
-          </el-select>
+            </option>
+          </select>
         </mt-field>
         <mt-field label="免仓储费天数" placeholder="请输入免仓储费天数" type="number"
                   v-model="requestParam3.inStoreFreeDay"></mt-field>

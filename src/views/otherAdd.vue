@@ -39,15 +39,24 @@
 <!--            <option :disabled="true" value="" selected>请选择类型</option>-->
 <!--            <option v-for="x in typeList" :value="x.fieldValue">{{x.fieldName}}</option>-->
 <!--          </select>-->
-          <el-select size="small" class="select100" v-model="form.type" :disabled="type == 1 " >
-        <el-option :disabled="true" value="" selected>请选择类型</el-option>
-        <el-option
-          v-for="item in typeList"
-          :key="item.fieldValue"
-          :label="item.fieldName"
-          :value="+item.fieldValue">
-        </el-option>
-          </el-select>
+<!--          <el-select size="small" class="select100" v-model="form.type" :disabled="type == 1 " >-->
+<!--        <el-option :disabled="true" value="" selected>请选择类型</el-option>-->
+<!--        <el-option-->
+<!--          v-for="item in typeList"-->
+<!--          :key="item.fieldValue"-->
+<!--          :label="item.fieldName"-->
+<!--          :value="+item.fieldValue">-->
+<!--        </el-option>-->
+<!--          </el-select>-->
+        <select class=" select100_select select" v-model="form.type" :disabled="type == 1 " >
+          <option label="请选择类型"  value=""></option>
+          <option
+            v-for="item in typeList"
+            :key="item.fieldValue"
+            :label="item.fieldName"
+            :value="+item.fieldValue">
+          </option>
+        </select>
       </mt-field>
       <mt-field
         :disabled="type == 1 "
