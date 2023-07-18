@@ -5,24 +5,55 @@
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
     </mt-header>
+<!--    <div class="fenlei_top zuoyouduiqi">-->
+<!--      <div class="fenlei_top_left">-->
+<!--        <el-date-picker style="width: 44vw ;background-color: white"-->
+<!--                        popper-class="popperClass1"-->
+<!--                        v-model="queryParam.createTimeFrom" value-format="yyyy-MM"-->
+<!--                        type="month" placeholder="时间开始" @change="getPage">-->
+<!--        </el-date-picker>-->
+<!--      </div>-->
+<!--      <div style="margin-right: 6px;margin-left: 6px;">-->
+<!--        <span>至</span>-->
+<!--      </div>-->
+<!--      <div class="fenlei_top_left">-->
+<!--        <el-date-picker style="width: 44vw"-->
+<!--                        v-model="queryParam.createTimeTo" value-format="yyyy-MM"-->
+<!--                        type="month" placeholder="时间结束" @change="getPage">-->
+<!--        </el-date-picker>-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="fenlei_top zuoyouduiqi">
       <div class="fenlei_top_left">
-        <el-date-picker style="width: 44vw ;background-color: white"
-                        popper-class="popperClass1"
-                        v-model="queryParam.createTimeFrom" value-format="yyyy-MM"
-                        type="month" placeholder="时间开始" @change="getPage">
-        </el-date-picker>
+        <div  @click="chosseTime(1)">
+          <el-date-picker style="width: 44vw" readonly="readonly"
+                          v-model="queryParam.createTimeFrom"
+                          value-format="yyyy-MM-dd" type="date"
+                          placeholder="开始时间"></el-date-picker>
+        </div>
       </div>
       <div style="margin-right: 6px;margin-left: 6px;">
         <span>至</span>
       </div>
       <div class="fenlei_top_left">
-        <el-date-picker style="width: 44vw"
-                        v-model="queryParam.createTimeTo" value-format="yyyy-MM"
-                        type="month" placeholder="时间结束" @change="getPage">
-        </el-date-picker>
+        <div  @click="chosseTime(2)">
+          <el-date-picker style="width: 44vw" readonly="readonly"
+                          v-model="queryParam.createTimeTo"
+                          value-format="yyyy-MM-dd" type="date"
+                          placeholder="结束时间"></el-date-picker>
+        </div>
       </div>
     </div>
+    <mt-datetime-picker
+      v-model="pickerValue"
+      type="date"
+      ref="picker"
+      :startDate="new Date(2022, 3, 1 )"
+      year-format="{value} 年"
+      month-format="{value} 月"
+      date-format="{value} 日"
+      @confirm="handleConfirm">
+    </mt-datetime-picker>
     <div style="padding-top: 0.86rem">
       <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div v-if="item.actNo == '合计'"  style="    height: 50px;
@@ -41,12 +72,12 @@
 <!--                  size="small"-->
 <!--                  @click="getPage"> 搜索-->
 <!--                </mt-button>-->
-                <mt-button
+                <el-link
                   style="margin-left: 40px;"
                   type="primary"
                   size="small"
-                  @click="jumpDetail(months )">库存
-                </mt-button>
+                  @click="jumpDetail(months )">查看库存
+                </el-link>
               </p>
             </div>
 <!--            <div class="dingdans_top_right">-->
@@ -186,6 +217,8 @@
     name: "HelloWorld",
     data() {
       return {
+        pickerValue:new Date(),
+        pickerValueType: '',
         pictureZoomShow: false,
         imageZoom: '',
         fileUrl: fileUrl,
@@ -213,6 +246,28 @@
       }
     },
     methods: {
+      chosseTime(pickerValueType) {
+        this.pickerValueType = pickerValueType
+        this.$refs.picker.open();
+      },
+      handleConfirm(val) {
+        let year = new Date(val).getFullYear()
+        let month = new Date(val).getMonth() + 1
+        if (month < 10 ){
+          month = '0' + month
+        }
+        let day = new Date(val).getDate()
+        if (day < 10 ){
+          day = '0' + day
+        }
+        let res = year + '-' +month + '-' + day
+        if(this.pickerValueType == 1) {
+          this.queryParam.createTimeFrom = res
+        }else {
+          this.queryParam.createTimeTo = res
+        }
+        this.getPage()
+      },
       keyupSubmit() {
         document.onkeydown = (e) => {
           let _key = window.event.keyCode

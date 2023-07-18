@@ -5,24 +5,53 @@
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
     </mt-header>
+<!--    <div class="fenlei_top zuoyouduiqi">-->
+<!--      <div class="fenlei_top_left">-->
+<!--        <el-date-picker style="width: 44vw ;background-color: white"-->
+<!--                        popper-class="popperClass1"-->
+<!--                        v-model="queryParam.createTimeFrom" value-format="yyyy-MM"-->
+<!--                        type="month" placeholder="时间开始" @change="getPage">-->
+<!--        </el-date-picker>-->
+<!--      </div>-->
+<!--      <div style="margin-right: 6px;margin-left: 6px;">-->
+<!--        <span>至</span>-->
+<!--      </div>-->
+<!--      <div class="fenlei_top_left">-->
+<!--        <el-date-picker style="width: 44vw"-->
+<!--                        v-model="queryParam.createTimeTo" value-format="yyyy-MM"-->
+<!--                        type="month" placeholder="时间结束" @change="getPage">-->
+<!--        </el-date-picker>-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="fenlei_top zuoyouduiqi">
       <div class="fenlei_top_left">
-        <el-date-picker style="width: 44vw ;background-color: white"
-                        popper-class="popperClass1"
-                        v-model="queryParam.createTimeFrom" value-format="yyyy-MM"
-                        type="month" placeholder="时间开始" @change="getPage">
-        </el-date-picker>
+        <div  @click="chosseTime(1)">
+          <el-date-picker style="width: 44vw" readonly="readonly"
+                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM"  type="month"
+                          placeholder="开始时间"></el-date-picker>
+        </div>
       </div>
       <div style="margin-right: 6px;margin-left: 6px;">
         <span>至</span>
       </div>
       <div class="fenlei_top_left">
-        <el-date-picker style="width: 44vw"
-                        v-model="queryParam.createTimeTo" value-format="yyyy-MM"
-                        type="month" placeholder="时间结束" @change="getPage">
-        </el-date-picker>
+        <div  @click="chosseTime(2)">
+          <el-date-picker style="width: 44vw" readonly="readonly"
+                          v-model="queryParam.createTimeTo" value-format="yyyy-MM"  type="month"
+                          placeholder="结束时间"></el-date-picker>
+        </div>
       </div>
     </div>
+    <mt-datetime-picker
+      v-model="pickerValue"
+      type="date"
+      ref="picker"
+      :startDate="new Date(2022, 3, 1 )"
+      :endDate="new Date()"
+      year-format="{value} 年"
+      month-format="{value} 月"
+      @confirm="handleConfirm">
+    </mt-datetime-picker>
 
     <div style="padding-top: 47px;">
       <div class="dingdans_item_rt" v-for="(item,index) in tableData" :key="index">
@@ -144,6 +173,8 @@
     name: "HelloWorld",
     data() {
       return {
+        pickerValue:new Date(),
+        pickerValueType: '',
         allLoaded: false,
         titleName: '入库渠道报表',
         emtityMsg: '没有更多了',
@@ -158,6 +189,25 @@
       this.getPage()
     },
     methods: {
+      chosseTime(pickerValueType) {
+        this.pickerValueType = pickerValueType
+        this.$refs.picker.open();
+        this.$refs.picker.$el.getElementsByClassName('picker-slot')[2].style.display = 'none'
+      },
+      handleConfirm(val) {
+        let year = new Date(val).getFullYear()
+        let month = new Date(val).getMonth() + 1
+        if (month < 10 ){
+          month = '0' + month
+        }
+        let res = year + '-' +month
+        if(this.pickerValueType == 1) {
+          this.queryParam.createTimeFrom = res
+        }else {
+          this.queryParam.createTimeTo = res
+        }
+        this.getPage()
+      },
       keyupSubmit() {
         document.onkeydown = (e) => {
           let _key = window.event.keyCode
