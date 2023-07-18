@@ -61,7 +61,7 @@
         <div class="dingdans_item_other" v-for="(item,index) in tableData" :key="index">
           <div class="dingdans_top_other zuoyouduiqi">
             <div @click="goDetail(item.id , 1)" >
-              <strong style="margin-left: 12px;"> {{item.name}} </strong>
+              <strong class="dingdans_con_other_strong"> {{item.name}} </strong>
             </div>
             <div>
               <el-dropdown trigger="click" style="margin-left: 1px;">
@@ -75,43 +75,27 @@
               </el-dropdown>
             </div>
           </div>
-          <div style="margin-top: 10px;" class="dingdans_con_other bt1">
-            <div class="dingdans_top_common_other_left">
+          <div class="dingdans_con_other bt1">
+            <div  class="dingdans_top_common_other_left">
               <span>类型：</span>
             </div>
-            <div class="dingdans_top_common_other">
+            <div   class="dingdans_top_common_other">
               <span >{{ item.type | dictToDescTypeValue(39) }}</span>
             </div>
           </div>
-          <div class="dingdans_con_other bt1">
-            <div  class="dingdans_top_common_other_left">
+          <div style="margin-top: 10px;" class="dingdans_con_other bt1">
+            <div class="dingdans_top_common_other_left">
               <span>金额：</span>
             </div>
-            <div   class="dingdans_top_common_other">
+            <div class="dingdans_top_common_other">
               <span >{{ item.price }}</span>
             </div>
           </div>
-<!--          <div class="dingdans_con_other bt1">-->
-<!--            <div  class="dingdans_top_common_other_left">-->
-<!--              <span>货号：</span>-->
-<!--            </div>-->
-<!--            <div   class="dingdans_top_common_other">-->
-<!--              <span >{{ item.actNo }}</span>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="dingdans_con_other bt1">-->
-<!--            <div  class="dingdans_top_common_other_left">-->
-<!--              <span>品牌：</span>-->
-<!--            </div>-->
-<!--            <div   class="dingdans_top_common_other">-->
-<!--              <span >{{ item.brand }}</span>-->
-<!--            </div>-->
-<!--          </div>-->
-          <div class="dingdans_con_other bt1">
-            <div  class="dingdans_top_common_other_left">
+          <div style="margin-top: 10px;" class="dingdans_con_other bt1">
+            <div class="dingdans_top_common_other_left">
               <span>时间：</span>
             </div>
-            <div   class="dingdans_top_common_other">
+            <div class="dingdans_top_common_other">
               <span >{{item.createTime |formateTime }}</span>
             </div>
           </div>

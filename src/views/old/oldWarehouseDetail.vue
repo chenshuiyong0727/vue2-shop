@@ -62,116 +62,92 @@
       </ul>
     </div>
     <div style="padding-top: 2rem">
-        <div class="dingdans_item_other" v-for="(item,index) in tableData" :key="index">
-          <div class="dingdans_top_other zuoyouduiqi" style="border-left: 0px;">
-            <div  style="width: 50px;
-    margin-left: -2px;
-    margin-right: 2px;" >
-              <el-checkbox v-model="item.checked" :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
-            </div>
-            <div style="margin-right: 12px;" @click="goDetail(item.id , 1)" >
-              <strong>尺码：</strong>
-              <strong style="color: #409eff"> {{item.size}} </strong>
-            </div>
-<!--            <div>-->
-<!--              <strong style="margin-right: 12px;">-->
-<!--                {{ item.warehouseId | dictToDescTypeValue(40) }}-->
-<!--              </strong>-->
-<!--            </div>-->
+      <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index">
+        <div class="dingdans_top">
+          <div class="dingdans_top_left">
+            <strong>尺码：</strong> <strong class="color-danger"> {{item.size}} </strong>
           </div>
-          <div class="dingdans_con_other bt1">
-            <div  class="dingdans_top_common_other_left" style="width: 39vw">
-              <span>剩余库存：</span>
-            </div>
-            <div   class="dingdans_top_common_other">
-              <span >{{item.inventory }}</span>
-            </div>
-          </div>
-          <div style="margin-top: 10px;" class="dingdans_con_other bt1" >
-            <div class="dingdans_top_common_other_left" style="width: 39vw">
-              <span>原始库存：</span>
-            </div>
-            <div class="dingdans_top_common_other">
-              <span >{{ item.oldInventory }}</span>
-            </div>
-          </div>
-          <div style="margin-top: 10px;" class="dingdans_con_other bt1" >
-            <div class="dingdans_top_common_other_left" style="width: 39vw">
-              <span>入库渠道：</span>
-            </div>
-            <div class="dingdans_top_common_other">
-              <span >{{ item.channelId | dictToDescTypeValue(47) }}</span>
-            </div>
-          </div>
-          <div style="margin-top: 10px;" class="dingdans_con_other bt1" >
-            <div class="dingdans_top_common_other_left" style="width: 39vw">
-              <span>所在仓库：</span>
-            </div>
-            <div class="dingdans_top_common_other">
-              <span >  {{ item.warehouseId | dictToDescTypeValue(40) }}</span>
-            </div>
+          <div class="dingdans_top_right">
+            <strong>{{ item.warehouseId | dictToDescTypeValue(40) }} </strong>
           </div>
         </div>
+        <div class="dingdans_con">
+
+          <div style="width: 25px;   display: flex;align-items: center;">
+            <el-checkbox :checked="item.checked" @change="changeChecked(item.id)"></el-checkbox>
+            <strong style="margin-left: 6px;">{{index + 1}}</strong>
+          </div>
+<!--          <div style="width: 10px;">-->
+<!--            <strong>{{index + 1}}</strong>-->
+<!--          </div>-->
+<!--          <div style="width: 18px;">-->
+<!--          </div>-->
+          <div class="diangdans_con_right">
+            <div class="dingdans_con_right_top">
+<!--              预计利润：<strong-->
+<!--              :style="item.thisTimeProfits > 50 ? 'color: #F56C6C' : ''">-->
+<!--              {{item.thisTimeProfits}}</strong>-->
+              <span v-if="item.thisTimePrice" >预计利润：<strong class="color-danger">{{item.thisTimeProfits}}</strong></span>
+              <span v-else>预计利润：<strong class="color-danger">{{(item.dwPrice - (item.dwPrice * 0.075 + 38 + 8.5) - item.price - 10) | numFilter}}</strong></span>
+              剩余库存：<strong :style="item.inventory ? 'color: #F56C6C' : ''">{{item.inventory}}</strong>
+            </div>
+              <div class="dingdans_con_right_top">
+                原始库存：<strong >{{item.oldInventory}}</strong>
+              成功数：<strong >{{item.successCount}}</strong>
+              上架数：<strong >{{item.galleryCount}}</strong>
+                入库价：<strong >{{item.price}}</strong>
+              </div>
+            <div class="dingdans_con_right_top">
+              得物价：
+              <strong v-if="item.thisTimePrice">{{item.thisTimePrice}}</strong>
+              <strong v-else>{{item.dwPrice}}</strong>
+              成功数：<strong >{{item.successCount}}</strong>
+              手续费：<strong >{{(item.dwPrice * 0.075 + 38 + 8.5) | numFilter}}</strong>
+            </div>
+            <div class="dingdans_con_right_top">
+             渠道： <strong>{{ item.channelId | dictToDescTypeValue(47) }} </strong>
+              时间：<strong >{{item.createTime | formateTime }}</strong>
+            </div>
+            <div class="dingdans_con_right_top">
+              <span v-if="item.thisTimePrice">到手：<strong>{{item.thisTimeThePrice}}</strong></span>
+              <span v-if="!item.thisTimePrice && item.theirPrice">到手：<strong>{{item.theirPrice}}</strong></span>
+              总入库价：<strong >{{item.price * item.oldInventory}}</strong>
+              <strong @click="jumpactNo(actNo)" style="margin-left: 10vw;color: #409EFF;">查看订单</strong>
+            </div>
+<!--            <div class="dingdans_con_right_down" style="margin-bottom: -2vw;">-->
+<!--              <span v-if="item.successNum">销售均价：<strong >{{item.orderAmount / item.successNum  | numFilter}}</strong></span>-->
+<!--              <span v-else>销售均价：<strong >0</strong></span>-->
+<!--              <span v-if="item.successNum">平均利润：<strong >{{item.profitsAmount / item.successNum  | numFilter}}</strong></span>-->
+<!--              <span v-else>平均利润：<strong >0</strong></span>-->
+<!--            </div>-->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
         <img :src="imageZoom" alt="" class="showImg">
       </div>
     </div>
-    <p style="padding: 24px 0;" class="to-the-bottom"></p>
-<!--    <div style="-->
-<!--    bottom: 0;-->
-<!--    position: absolute;-->
-<!--    text-align: center;-->
-<!--    ">-->
-<!--&lt;!&ndash;      <mt-button  @click="goGoodsBase"  style="margin-left: 5px;&ndash;&gt;-->
-<!--&lt;!&ndash;    border-radius: 100%;&ndash;&gt;-->
-<!--&lt;!&ndash;    margin-top: 0px;&ndash;&gt;-->
-<!--&lt;!&ndash;    height: 55px;&ndash;&gt;-->
-<!--&lt;!&ndash;    width: 55px;" type="primary">&ndash;&gt;-->
-<!--&lt;!&ndash;        <img src="../../static/img/add.png" height="30" width="30" slot="icon">&ndash;&gt;-->
-<!--&lt;!&ndash;      </mt-button>&ndash;&gt;-->
-<!--      <el-button size="small" v-if="checkAll" v-model="checkAll" @click="checkedAll" style="    margin-left: 65px;margin-bottom: 10px;" type="primary">反选</el-button>-->
-<!--      <el-button size="small" v-else v-model="checkAll" @click="checkedAll" style="    margin-left: 65px;margin-bottom: 10px;" type="primary">全选</el-button>-->
-<!--      <el-button size="small" type="primary" @click="handleClick" >移动仓库</el-button>-->
-<!--      <el-button size="small" type="primary" @click="handleClickChannel" >设置渠道</el-button>-->
-<!--&lt;!&ndash;      <el-button  @click="$router.go(-1)" >取消</el-button>&ndash;&gt;-->
-<!--    </div>-->
-
-    <div  style="
-    bottom: 0px;
-    position: fixed;
+    <p style="padding: 1.5rem 0;" class="to-the-bottom"></p>
+    <div style="
+    bottom: 0;
+    position: absolute;
     text-align: center;
-    width: 100vw;
-    background-color: white;
-    border-top: 1px solid rgb(243, 242, 248);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-   ">
-      <div style="margin-left: 20px;">
-        <el-checkbox :checked="checkAll" v-model="checkAll"  @change="checkedAll" style="color: #666">
-          全选
-        </el-checkbox>
-      </div>
-      <div>
-        <span>已选</span>
-        <span class="color-url" style=" font-size: 17px;font-weight: bolder">{{ids.length}}</span>
-        <el-button   type="primary" round size="small" style="
-        margin-top: 8px;
-    margin-bottom: 8px;
-    margin-left: 8px;" @click="handleClick">移动仓库
-        </el-button>
-        <el-button   type="primary" round size="small" style="
-        margin-top: 8px;
-    margin-bottom: 8px;
-    margin-left: 8px;
-        margin-right: 10px" @click="handleClickChannel">设置渠道
-        </el-button>
-      </div>
+    ">
+<!--      <mt-button  @click="goGoodsBase"  style="margin-left: 5px;-->
+<!--    border-radius: 100%;-->
+<!--    margin-top: 0px;-->
+<!--    height: 55px;-->
+<!--    width: 55px;" type="primary">-->
+<!--        <img src="../../static/img/add.png" height="30" width="30" slot="icon">-->
+<!--      </mt-button>-->
+      <el-button size="small" v-if="checkAll" v-model="checkAll" @click="checkedAll" style="    margin-left: 65px;margin-bottom: 10px;" type="primary">反选</el-button>
+      <el-button size="small" v-else v-model="checkAll" @click="checkedAll" style="    margin-left: 65px;margin-bottom: 10px;" type="primary">全选</el-button>
+      <el-button size="small" type="primary" @click="handleClick" >移动仓库</el-button>
+      <el-button size="small" type="primary" @click="handleClickChannel" >设置渠道</el-button>
+<!--      <el-button  @click="$router.go(-1)" >取消</el-button>-->
     </div>
-
-
     <mt-popup
       v-model="isShowDialog">
       <mt-header title="移动仓库">
@@ -277,7 +253,6 @@
     },
     created() {
       this.listSysDict()
-      this.initBatch()
       const { goodsId , actNo,imgUrl ,img} = this.$route.query
       this.actNo = actNo
       this.imgUrl = imgUrl
@@ -288,11 +263,6 @@
       }
     },
     methods: {
-      initBatch() {
-        this.checkAll = false
-        this.ids= []
-        this.tableData.forEach((obj) => (obj.checked = false));
-      },
       listSysDict() {
         let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
           localStorage.getItem('sysDictList')) : []
@@ -337,21 +307,10 @@
         }
         this.isShowDialog1 = true
       },
-      // checkedAll() {
-      //   this.checkAll = !this.checkAll
-      //   this.tableData= []
-      //   this.getPage(1)
-      // },
       checkedAll() {
-        this.ids= []
-        this.tableData.map(item => {
-          if (this.checkAll) {
-            this.ids.push(item.id)
-          } else {
-            this.delItem(item.id)
-          }
-        })
-        this.tableData.forEach((obj) => (obj.checked = this.checkAll));
+        this.checkAll = !this.checkAll
+        this.tableData= []
+        this.getPage(1)
       },
       jumpactNo(actNo) {
         this.$router.push({ path: '/order', query: { actNo } })
@@ -367,58 +326,37 @@
           }
         }
       },
-      // changeChecked(id) {
-      //   this.tableData.map(item => {
-      //     if(item.id === id) {
-      //       if (item.checked) {
-      //         this.delItem(id)
-      //       } else {
-      //         if (!this.ids.includes(id)) {
-      //           this.ids.push(id)
-      //         }
-      //       }
-      //       item.checked = !item.checked
-      //     }
-      //   })
-      //   // alert(this.ids)
-      //   // console.info("id" ,this.ids)
-      // },
-
       changeChecked(id) {
         this.tableData.map(item => {
-          if (item.id === id) {
+          if(item.id === id) {
             if (item.checked) {
-              this.ids.push(item.id)
+              this.delItem(id)
             } else {
-              this.delItem(item.id)
+              if (!this.ids.includes(id)) {
+                this.ids.push(id)
+              }
             }
+            item.checked = !item.checked
           }
         })
-        let idLength = this.ids.length
-        let totalLength = this.queryParam.pageNum * this.queryParam.pageSize
-        if (idLength == totalLength){
-          this.checkAll = true
-        }else{
-          this.checkAll = false
-        }
+        // alert(this.ids)
+        // console.info("id" ,this.ids)
       },
-      getPage() {
-        this.initBatch()
+      getPage(type) {
         goodsInventoryApi.pageGoods(this.queryParam).then(res => {
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
-            this.initBatch()
             // 将列表parkList进行遍历动态添加checked为false
-            // if (type) {
-            //   this.tableData.map(item => {
-            //     this.$set(item, 'checked', this.checkAll)
-            //     if ( this.checkAll) {
-            //       this.ids.push(item.id)
-            //     } else {
-            //       this.delItem(item.id)
-            //     }
-            //   })
-            // }
+            if (type) {
+              this.tableData.map(item => {
+                this.$set(item, 'checked', this.checkAll)
+                if ( this.checkAll) {
+                  this.ids.push(item.id)
+                } else {
+                  this.delItem(item.id)
+                }
+              })
+            }
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             this.inventoryData = res.data.goodsInventoryPageVo ? res.data.goodsInventoryPageVo
               : this.inventoryData

@@ -741,39 +741,31 @@ select{
 
 .dingdans_con_other {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1.3vw 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
-> div {
-  /*text-align: center;*/
-  /*width: 25vw;*/
   font-size: 15px;
-> strong {
+}
+.dingdans_con_other_strong{
+  margin-left: 12px;
   color:#333333;
   font-size: 16px;
   line-height: 20px;
 }
-> p {
+.dingdans_con_other_p{
   color:#999999;
   margin-top: 2px;
 }
-}
-}
-
 
 .dingdans_top_common_other_left {
   text-align: right;
   width: 25vw;
+  margin-top: 7px;
 }
 
 .dingdans_top_common_other {
   width: 75vw;
   text-align: left;
-  > span {
-    color:#333333;
-  }
+  color:#333333;
+  margin-top: 7px;
 }
 
 /*左右对齐*/
