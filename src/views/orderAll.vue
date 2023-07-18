@@ -25,7 +25,7 @@
           v-model.trim="queryParam.keyword">
         </el-input>
       </div>
-      <div class="fenlei_top_right" @click="isShowDialog2 = true">
+      <div class="fenlei_top_right" @click="gotosearch">
         <img src="../../static/img/search.png" height="30px;" width="30px;">
       </div>
     </div>
@@ -812,7 +812,9 @@
         if (saleType) {
           this.saleType = saleType
           this.queryParam.saleType = saleType
-          this.changeOrder()
+        }else{
+          this.saleType = ''
+          this.queryParam.saleType = ''
         }
         if (scrollNum){
           this.scrollNum = scrollNum
@@ -1008,14 +1010,14 @@
       //   this.titleName = res.length ? res[0].fieldName : ''
       //   this.titleName = this.titleName + '订单'
       // },
-      changeOrder() {
-        let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
-          localStorage.getItem('sysDictList')) : []
-        let res = sysDictList.filter(
-          item => item.typeValue == 46 && item.fieldValue == this.queryParam.saleType)
-        this.titleName = res.length ? res[0].fieldName : ''
-        this.titleName = this.titleName + '订单'
-      },
+      // changeOrder() {
+      //   let sysDictList = localStorage.getItem('sysDictList') ? JSON.parse(
+      //     localStorage.getItem('sysDictList')) : []
+      //   let res = sysDictList.filter(
+      //     item => item.typeValue == 46 && item.fieldValue == this.queryParam.saleType)
+      //   this.titleName = res.length ? res[0].fieldName : ''
+      //   this.titleName = this.titleName + '订单'
+      // },
       changeSystem1() {
         this.$forceUpdate()
       },
@@ -1040,6 +1042,10 @@
         this.queryParam.theExpire = ''
         this.scrollNum = scrollNum
         this.search1()
+      },
+      gotosearch() {
+        console.info('queryParam' , this.queryParam)
+        this.isShowDialog2 = true
       },
       searchTheExpire() {
         this.queryParam.status = ''
@@ -1119,6 +1125,8 @@
         this.successTime = ''
         if (this.saleType) {
           this.queryParam.saleType = this.saleType
+        }else{
+          this.queryParam.saleType = ''
         }
         this.search1()
       },
@@ -1361,7 +1369,7 @@
         this.requestParam.deliveryDeadlineTime = parseTime(this.orderData.deliveryDeadlineTime)
         this.requestParam.freight = this.orderData.freight
         this.requestParam.waybillNo = this.orderData.waybillNo
-        this.requestParam.addressId = this.orderData.addressId
+        this.requestParam.addressId = this.orderData.addressId ? this.orderData.addressId :''
         if (this.orderData.status != 11) {
           this.requestParam.status = this.orderData.status + 1
         } else {

@@ -324,24 +324,6 @@
           </select>
         </mt-field>
         <mt-field label="仓库">
-<!--            <el-select size="small" class="select100" v-model="queryParam.warehouseId"  >-->
-<!--              <el-option :disabled="true" value="" selected>请选择仓库</el-option>-->
-<!--              <el-option-->
-<!--                v-for="item in warehouseList"-->
-<!--                :key="item.fieldValue"-->
-<!--                :label="item.fieldName"-->
-<!--                :value="+item.fieldValue">-->
-<!--              </el-option>-->
-<!--            </el-select>-->
-<!--          <select class=" select100_select select"v-model="queryParam.warehouseId">-->
-<!--            <option label="请选择仓库"  value=""></option>-->
-<!--            <option-->
-<!--              v-for="item in warehouseList"-->
-<!--              :key="item.fieldValue"-->
-<!--              :label="item.fieldName"-->
-<!--              :value="item.fieldValue">-->
-<!--            </option>-->
-<!--          </select>-->
           <select class=" select100_select select" v-model="queryParam.warehouseId">
             <option label="请选择类型"  value=""></option>
             <option
@@ -515,7 +497,7 @@
           addressId: ''
         },
         // popupVisible: false,
-        titleName: '仓库',
+        // titleName: '仓库',
         emtityMsg: '',
         orderData: '',
         isShowDialog: false,
@@ -609,42 +591,42 @@
     //     this.loadData('refresh');
     //   }, 200);
     // },
-    created() {
-      const { actNo,size,months,today } = this.$route.query
-      this.queryParam.size = size
-      this.queryParam.actNo = actNo
-      this.queryParam.today = today
-      this.months = months
-      if (this.queryParam.actNo || this.queryParam.size || this.months ||  this.queryParam.today ) {
-        if (this.months) {
-          this.queryParam.createTimeFrom = this.months
-          this.queryParam.createTimeTo = this.months
-          this.titleName = this.months + ' ' + this.titleName
-        }
-        if (this.queryParam.today == 1) {
-          this.titleName = '今日更新'
-        }
-        if (this.queryParam.today == 2) {
-          this.titleName = '待上架商品'
-        }
-        if (this.queryParam.today == 3) {
-          this.titleName = '待移库商品'
-        }
-        if (this.queryParam.today == 4) {
-          this.titleName = '涨价商品'
-        }
-        if (this.queryParam.today == 5) {
-          this.titleName = '降价商品'
-        }
-        if (this.queryParam.today == 6) {
-          this.titleName = '售空商品'
-        }
-        if (this.queryParam.today == 7) {
-          this.titleName = '变更商品'
-        }
-        this.search1()
-      }
-    },
+    // created() {
+    //   const { actNo,size,months,today } = this.$route.query
+    //   this.queryParam.size = size
+    //   this.queryParam.actNo = actNo
+    //   this.queryParam.today = today
+    //   this.months = months
+    //   if (this.queryParam.actNo || this.queryParam.size || this.months ||  this.queryParam.today ) {
+    //     if (this.months) {
+    //       this.queryParam.createTimeFrom = this.months
+    //       this.queryParam.createTimeTo = this.months
+    //       this.titleName = this.months + ' ' + this.titleName
+    //     }
+    //     if (this.queryParam.today == 1) {
+    //       this.titleName = '今日更新'
+    //     }
+    //     if (this.queryParam.today == 2) {
+    //       this.titleName = '待上架商品'
+    //     }
+    //     if (this.queryParam.today == 3) {
+    //       this.titleName = '待移库商品'
+    //     }
+    //     if (this.queryParam.today == 4) {
+    //       this.titleName = '涨价商品'
+    //     }
+    //     if (this.queryParam.today == 5) {
+    //       this.titleName = '降价商品'
+    //     }
+    //     if (this.queryParam.today == 6) {
+    //       this.titleName = '售空商品'
+    //     }
+    //     if (this.queryParam.today == 7) {
+    //       this.titleName = '变更商品'
+    //     }
+    //     this.search1()
+    //   }
+    // },
     // mounted() {
     //   this.getPage()
     //   this.handleChange()
@@ -677,51 +659,51 @@
         //   // this.search1()
         // }
         const { actNo,size,months ,warehouseId,channelId,today} = this.$route.query
-        this.queryParam.size = size
-        this.queryParam.actNo = actNo
-        this.queryParam.warehouseId = warehouseId
-        this.queryParam.channelId = channelId
-        this.queryParam.today = today
-        this.initToday = today
-        this.months = months
+        this.queryParam.size = size ? size : ''
+        this.queryParam.actNo = actNo ? actNo : ''
+        this.queryParam.warehouseId = warehouseId ? warehouseId : ''
+        this.queryParam.channelId = channelId ? channelId : ''
+        this.queryParam.today = today ? today : ''
+        this.initToday = today ? today : ''
+        this.months = months ? months : ''
         if (this.queryParam.actNo || this.queryParam.size || this.queryParam.warehouseId ||this.queryParam.channelId ||  this.months||  this.queryParam.today) {
           if (this.months) {
             this.queryParam.createTimeFrom = this.months
             this.queryParam.createTimeTo = this.months
-            this.titleName = this.months + ' ' + this.titleName
+            // this.titleName = this.months + ' ' + this.titleName
           }
           // this.search1()
         }
-        if (this.queryParam.warehouseId == 1) {
-          this.titleName = '前埔库存'
-        }else if (this.queryParam.warehouseId == 2) {
-          this.titleName = '云头库存'
-        }else if (this.queryParam.channelId == 1) {
-          this.titleName = '线下'
-        }else if (this.queryParam.channelId == 2) {
-          this.titleName = '线上'
-        }
-        if (this.queryParam.today == 1) {
-          this.titleName = '今日更新'
-        }
-        if (this.queryParam.today == 2) {
-          this.titleName = '待上架商品'
-        }
-        if (this.queryParam.today == 3) {
-          this.titleName = '待移库商品'
-        }
-        if (this.queryParam.today == 4) {
-          this.titleName = '涨价商品'
-        }
-        if (this.queryParam.today == 5) {
-          this.titleName = '降价商品'
-        }
-        if (this.queryParam.today == 6) {
-          this.titleName = '售空商品'
-        }
-        if (this.queryParam.today == 7) {
-          this.titleName = '变更商品'
-        }
+        // if (this.queryParam.warehouseId == 1) {
+        //   this.titleName = '前埔库存'
+        // }else if (this.queryParam.warehouseId == 2) {
+        //   this.titleName = '云头库存'
+        // }else if (this.queryParam.channelId == 1) {
+        //   this.titleName = '线下'
+        // }else if (this.queryParam.channelId == 2) {
+        //   this.titleName = '线上'
+        // }
+        // if (this.queryParam.today == 1) {
+        //   this.titleName = '今日更新'
+        // }
+        // if (this.queryParam.today == 2) {
+        //   this.titleName = '待上架商品'
+        // }
+        // if (this.queryParam.today == 3) {
+        //   this.titleName = '待移库商品'
+        // }
+        // if (this.queryParam.today == 4) {
+        //   this.titleName = '涨价商品'
+        // }
+        // if (this.queryParam.today == 5) {
+        //   this.titleName = '降价商品'
+        // }
+        // if (this.queryParam.today == 6) {
+        //   this.titleName = '售空商品'
+        // }
+        // if (this.queryParam.today == 7) {
+        //   this.titleName = '变更商品'
+        // }
         this.getPage()
       }else {
         this.$refs.hello.scrollTop = this.curScrollTop
@@ -879,12 +861,12 @@
       open(picker) {
         this.$refs[picker].open();
       },
-      changeSystem() {
-        let res = this.inventoryToList.filter(
-          item => item.fieldValue == this.queryParam.inventory)
-        this.titleName = res.length ? res[0].fieldName : ''
-        this.titleName = this.titleName + '仓库'
-      },
+      // changeSystem() {
+      //   let res = this.inventoryToList.filter(
+      //     item => item.fieldValue == this.queryParam.inventory)
+      //   this.titleName = res.length ? res[0].fieldName : ''
+      //   this.titleName = this.titleName + '仓库'
+      // },
       search1() {
         this.queryParam.pageNum = 1
         this.allLoaded = false;
@@ -935,8 +917,8 @@
          pageSize: 10,
           pageNum: 1
         }
-        this.titleName = '仓库'
-        this.changeSystem()
+        // this.titleName = '仓库'
+        // this.changeSystem()
         this.search1()
       },
       handleTopChange(p_status) {
