@@ -11,64 +11,50 @@
         <mt-button size="normal" style="font-size: 16px"  @click="goAdd">保存</mt-button>
       </div>
     </mt-header>
-    <div class="dingdans_item" style="margin-top: 42px; margin-bottom: 7px; border-bottom:0px ;padding:0" >
-      <div class="dingdans_con" style="padding:0">
-        <div style="  width: 210px;
-  height: 84px;
-  position: relative;
-  border-radius: 5px;" >
-          <img style="  width: 80%;
-  margin-top: 16px;
-  margin-left: 10%;" v-bind:src="form.img" alt="" >
+    <div class="dingdans_item" style=" margin-top: 12vw;" >
+      <div class="dingdans_con">
+        <div class="dingdans_con_left" style="margin-left: 14vw;" >
+          <img style="    width: 90px;
+    margin-left: -25px;" v-bind:src="form.img" alt="" >
         </div>
-        <div class="diangdans_con_right" style="font-size: 16px;    width: 130vw;
-    padding-left: 5px;
-    margin-right: 10px;">
+        <div class="diangdans_con_right" style="font-size: 16px;">
           <div class="dingdans_con_right_top">
+
             <p>
               <strong v-if="form.id"
                       @click="goodsDetail(form.id, 1) "
-                      style="  color: #333333;font-size: 14px;">
+                      :style="form.id ? 'font-size: 14px;color: #409EFF;' : 'font-size: 14px;'">
                 {{form.name }}
               </strong>
             </p>
-           <p style="margin-top: 5px;">
-<!--             货号：<strong class="color-danger">{{form.actNo}}</strong>-->
-             <span @click="jumpactNo(form.actNo)">
-              {{form.actNo}}
-              </span>
-             <img @click="copyUrl(form.actNo)" style="width: 20px;margin-bottom: 8px;"
-                  src="../../static/img/copy6.png">
+           <p>
+             货号：<strong class="color-danger">{{form.actNo}}</strong>
            </p>
           </div>
         </div>
       </div>
     </div>
     <div style="
-        margin-bottom: 7px;
+        border-bottom: 1vw solid #eee;
     font-size: 10px;
-    padding-top: 3.4vw;
-    padding-left: 3vw;
+    padding-top: 2.4vw;
+    padding-left: 4vw;
     background: #ffffff;" >
-      <h5 style="font-size: 17px;margin-bottom: 12px; color: #333333">入库尺码</h5>
-      <div class="btm-dance">
-        <div style="text-align: center" @click="addSizeHandle(item, index)"
+      <h5 style="font-size: 20px;margin-bottom: 8px;">选择尺码</h5>
+      <div class="clearfix btm-distance">
+        <div @click="addSizeHandle(item, index)"
               :class="activeIndex.includes(index) ? 'cityActive' : 'city'"
-              v-for="(item, index) in form.sizeVoList" :key="item.id">
-              <span>
-                {{item.size}}
-              </span>
-        </div>
+              v-for="(item, index) in form.sizeVoList" :key="item.id">{{item.size}} </div>
       </div>
     </div>
     <div style="
         border-bottom: 1vw solid #eee;
     font-size: 10px;
-    padding-top: 3.4vw;
+    padding-top: 2.4vw;
     padding-left: 4vw;
     padding-right: 3vw;
     background: #ffffff;" >
-      <h5 style="font-size: 17px;margin-bottom: 12px; color: #333333">尺码列表</h5>
+      <h5 style="font-size: 20px;margin-bottom: 8px;">选择尺码</h5>
       <div class="clearfix btm-distance">
         <el-table  style="margin-top: 20px" border :data="tableData">
 <!--          <el-table-column label="序号" type="index" width="50" align="center"></el-table-column>-->
@@ -97,8 +83,8 @@
           <el-table-column align="center" prop="channelId"  width="80"  label="渠道">
             <template scope="scope">
               <div class="input-box">
-                <select class="select" v-model="scope.row.channelId">
-                  <option label="渠道"  value=""></option>
+                <select v-model="scope.row.channelId">
+                  <option label="渠道" value=""></option>
                   <option
                     v-for="item in channelIdList"
                     :key="item.fieldValue"
@@ -132,7 +118,7 @@
       <section style="height: 90vw;width: 80vw">
         <mt-field label="尺码" style="margin-top: 11vw;"  v-model="orderData1.size" :disabled="true"></mt-field>
         <mt-field label="仓库">
-            <select size="small" class="select80_select" :disabled="true" v-model="orderData1.channelId"  >
+            <select size="small" class="select80" :disabled="true" v-model="orderData1.channelId"  >
               <option :disabled="true" value="" selected>渠道</option>
               <option
                 v-for="item in channelIdList"
@@ -298,21 +284,6 @@ export default {
     },
     goodsDetail(id, flag) {
       this.$router.push({ path: '/goodsDetail', query: { id, flag } })
-    },
-    jumpactNo(actNo) {
-      this.$router.push({path: '/store', query: {actNo}})
-    },
-    // 复制链接
-    copyUrl(url) {
-      const input = document.createElement('input')
-      document.body.appendChild(input)
-      input.setAttribute('value', url)
-      input.select()
-      if (document.execCommand('copy')) {
-        document.execCommand('copy')
-      }
-      document.body.removeChild(input)
-      this.$toast('已复制至剪切板')
     },
     addSizeHandle(item, index = 0) {
       if (!this.activeIndex.includes(index)) {
@@ -487,48 +458,36 @@ export default {
     margin-bottom: 15px;
   }
   .city {
-    height: 33px;
-    width: 63px;
-    border-radius: 5px;
-    font-size: 16px;
+    height: 48px;
+    width: 59px;
+    border-radius: 15px;
+    font-size: 20px;
     background-color: #F6F6F6;
-    padding: 8px 0px;
-    margin-right: 6px;
-    margin-bottom: 13px;
+    padding: 14px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
     display: inline-block;
   }
 
   .cityActive {
-    /*height: 36px;*/
-    /*width: 63px;*/
-    /*border-radius: 5px;*/
-    /*font-size: 17px;*/
-    /*background-color: #BEBEBE;*/
-    /*padding: 9px 0px;*/
-    /*margin-right: 6px;*/
-    /*margin-bottom: 13px;*/
-    /*// 自动换行*/
-    /*display: inline-block;*/
-
-    height: 33px;
-    width: 63px;
-    border-radius: 5px;
-    font-size: 16px;
-    background-color: #BEBEBE;
-    padding: 8px 0px;
-    margin-right: 6px;
-    margin-bottom: 13px;
-    display: inline-block;
-    /*height: 48px;*/
-    /*width: 59px;*/
+    /*height: 20px;*/
+    /*width: 42px;*/
     /*border-radius: 15px;*/
     /*font-size: 20px;*/
     /*background-color: #BEBEBE;*/
-    /*padding: 14px 10px;*/
+    /*padding: 20px 10px;*/
     /*margin-right: 10px;*/
     /*margin-bottom: 10px;*/
     /*display: inline-block;*/
+    height: 48px;
+    width: 59px;
+    border-radius: 15px;
+    font-size: 20px;
+    background-color: #BEBEBE;
+    padding: 14px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
   }
-
 
 </style>
