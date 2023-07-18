@@ -73,7 +73,7 @@
            :style="tableData.length==(index+1) ? 'margin-bottom: 56px;' : ''"
       >
 <!--        头部-->
-        <div class="dingdans_top_dw">
+        <div class="dingdans_top_dw" :style="item.status == 3 && item.deliveryDeadlineTime ? 'border-bottom: 0;' : ''">
           <div class="dingdans_top_left_dw">
             <span>订单号:</span>
             <span>{{item.orderNo }}</span>
@@ -85,6 +85,31 @@
             <span v-else-if="[3,4,5,6,8].includes(item.status)" class="color-danger">{{
               item.status | dictToDescTypeValue(37) }} </span>
             <span v-else>{{ item.status | dictToDescTypeValue(37) }} </span>
+          </div>
+        </div>
+        <div v-if="item.status == 3 && item.deliveryDeadlineTime" style="background-color: #fbfbfd;color: #333333;font-weight: 600;font-size: 13px;">
+          <div style="padding: 6px;
+    margin-left: 5px;">
+            <img style="    width: 18px;
+    margin-top: -3px;"
+                 src="../../static/img/djs.png">
+            <span style="font-size: 14px;margin-left: 2px;">发货仅剩：</span>
+            <strong v-if=" item.days" style="font-size: 15px;">
+              {{ item.days}}
+            </strong>
+            <span v-if=" item.days">天</span>
+            <strong v-if=" item.hours" style="font-size: 15px;">
+              {{ item.hours}}
+            </strong>
+            <span v-if=" item.hours">时 </span>
+            <strong   style="font-size: 15px;">
+              {{ item.minutes}}
+            </strong>
+            <span >分</span>
+            <strong  style="font-size: 15px;">
+              {{ item.seconds}}
+            </strong>
+            <span  >秒</span>
           </div>
         </div>
 <!--        中间-->
@@ -906,6 +931,43 @@
         let date = value.getDate();
         this.queryParam.successTimeFrom = year+'-'+month+'-'+date
       },
+      countdown(orderData ) {
+        if (orderData.status != 3){
+          return
+        }
+        orderData.days = 0
+        orderData.hours = 0
+        orderData.minutes = 0
+        let deliveryDeadlineTime = orderData.deliveryDeadlineTime
+        let endTime = new Date(deliveryDeadlineTime).getTime();
+        let startTime = new Date().getTime();
+        let totalSeconds = endTime - startTime;
+        let interval = setInterval(() => {
+          if (totalSeconds > 0) {
+            orderData.days = Math.floor(totalSeconds / (24 * 60 * 60 * 1000));
+            orderData.hours = Math.floor(
+              (totalSeconds - orderData.days * 24 * 60 * 60 * 1000) / (60 * 60 * 1000)
+            );
+            orderData.minutes = Math.floor(
+              (totalSeconds -
+                orderData.days * 24 * 60 * 60 * 1000 -
+                orderData.hours * 60 * 60 * 1000) /
+              (60 * 1000)
+            );
+            orderData.seconds = Math.floor(
+              (totalSeconds -
+                orderData.days * 24 * 60 * 60 * 1000 -
+                orderData.hours * 60 * 60 * 1000 -
+                orderData.minutes * 60 * 1000) /
+              1000
+            );
+            totalSeconds -= 1000;
+            this.$forceUpdate()
+          } else {
+            clearInterval(interval);
+          }
+        }, 1000);
+      },
       getPage() {
         this.initBatch()
         this.getData()
@@ -914,6 +976,9 @@
           if (res.subCode === 1000) {
             this.tableData = res.data ? res.data.list : []
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
+            for (let i = 0; i < this.tableData.length; i++) {
+              this.countdown(this.tableData[i])
+            }
             this.initBatch()
             if (this.totalCount == 0) {
               this.allLoaded = true;
@@ -1019,6 +1084,7 @@
       //   this.titleName = this.titleName + '订单'
       // },
       changeSystem1() {
+        // 强制刷新
         this.$forceUpdate()
       },
       getData() {

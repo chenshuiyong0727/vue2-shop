@@ -4,6 +4,11 @@
       <div slot="left">
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
+      <div slot="right">
+        <mt-button  @click="$router.go(-1)">
+          <img style="width: 20px" src="../../static/img/kehu.png">
+        </mt-button>
+      </div>
     </mt-header>
     <div v-if="form.status == 3"
          style="color: white;width: 100vw; height: 140px;background-color: #2b2d3c;margin-top: -3.1px;">
@@ -56,12 +61,12 @@
 
       <div class="secInfodata">
         <div class="zuoyouduiqi secInfo">
-          <div style="width: 69vw;">
+          <div style="width: 60vw;">
             <strong style="font-size: 17px;">
               预计收入
             </strong>
           </div>
-          <div style="width: 32vw;    text-align: right;margin-right: -2vw;">
+          <div style="width: 40vw;    text-align: right;margin-right: -2vw;">
             <strong style="font-size: 14px;">
               ¥
             </strong>
@@ -204,9 +209,8 @@
         </div>
       </div>
     </div>
-
     <div v-if="form.addressId"
-         style="color: #808082;width: 100vw; background-color: white;margin-bottom: 7px;">
+         style="color: #808082;width: 100vw; background-color: white;">
       <div class="zuoyouduiqi" style="padding-top: 15px;
     padding-right: 19px;
     padding-bottom: 13px;
@@ -224,8 +228,11 @@
         </div>
       </div>
     </div>
+    <div>
+      <img style="width: 100vw;" src="../../static/img/huijidizhi.jpg">
+    </div>
 
-    <div class="dingdans_item_dw" style="
+    <div class="dingdans_item_dw" style="margin-top: 7px;
     border-bottom: 0px;
 ">
       <div class="dingdans_con_dw">
