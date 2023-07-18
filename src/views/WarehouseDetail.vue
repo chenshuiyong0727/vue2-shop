@@ -79,7 +79,7 @@
 <!--              </strong>-->
 <!--            </div>-->
           </div>
-          <div class="dingdans_con_other bt1">
+          <div class="dingdans_con_other bt1" @click="goDetail(item.id , 1)" >
             <div  class="dingdans_top_common_other_left" style="width: 39vw">
               <span>剩余库存：</span>
             </div>
@@ -87,7 +87,7 @@
               <span >{{item.inventory }}</span>
             </div>
           </div>
-          <div style="margin-top: 10px;" class="dingdans_con_other bt1" >
+          <div style="margin-top: 10px;" class="dingdans_con_other bt1" @click="goDetail(item.id , 1)" >
             <div class="dingdans_top_common_other_left" style="width: 39vw">
               <span>原始库存：</span>
             </div>
@@ -95,7 +95,7 @@
               <span >{{ item.oldInventory }}</span>
             </div>
           </div>
-          <div style="margin-top: 10px;" class="dingdans_con_other bt1" >
+          <div style="margin-top: 10px;" class="dingdans_con_other bt1" @click="goDetail(item.id , 1)" >
             <div class="dingdans_top_common_other_left" style="width: 39vw">
               <span>入库渠道：</span>
             </div>
@@ -103,7 +103,7 @@
               <span >{{ item.channelId | dictToDescTypeValue(47) }}</span>
             </div>
           </div>
-          <div style="margin-top: 10px;" class="dingdans_con_other bt1" >
+          <div style="margin-top: 10px;" class="dingdans_con_other bt1" @click="goDetail(item.id , 1)" >
             <div class="dingdans_top_common_other_left" style="width: 39vw">
               <span>所在仓库：</span>
             </div>
@@ -383,7 +383,9 @@
       //   // alert(this.ids)
       //   // console.info("id" ,this.ids)
       // },
-
+      goDetail(id) {
+        this.$router.push({path: '/storeDetail', query: {id}})
+      },
       changeChecked(id) {
         this.tableData.map(item => {
           if (item.id === id) {
