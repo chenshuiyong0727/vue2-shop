@@ -151,22 +151,26 @@
 
         </mt-field>
         <mt-field label="品牌" placeholder="请输入品牌"  v-model="queryParam.brand"></mt-field>
-<!--        <mt-field label="开始时间" type="date" placeholder="开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>-->
-<!--        <mt-field label="结束时间" type="date" placeholder="结束时间"  v-model="queryParam.createTimeTo" ></mt-field>-->
-        <mt-field label="开始时间">
-          <el-date-picker class="select100"
-                          size="small"
-                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
-                          type="date" placeholder="开始时间">
-          </el-date-picker>
-        </mt-field>
-        <mt-field label="结束时间">
-          <el-date-picker class="select100"
-                          size="small"
-                          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
-                          type="date" placeholder="结束时间">
-          </el-date-picker>
-        </mt-field>
+        <mt-field label="开始时间" type="date" placeholder="开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>
+        <mt-field label="结束时间" type="date" placeholder="结束时间"  v-model="queryParam.createTimeTo" ></mt-field>
+<!--        <mt-field label="开始时间">-->
+<!--          <el-date-picker class="select100"-->
+<!--                          size="small"-->
+<!--                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"-->
+<!--                          type="date" placeholder="开始时间">-->
+<!--          </el-date-picker>-->
+<!--        </mt-field>-->
+<!--        <mt-field label="结束时间">-->
+<!--          <el-date-picker class="select100"-->
+<!--                          size="small"-->
+<!--                          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"-->
+<!--                          type="date" placeholder="结束时间">-->
+<!--          </el-date-picker>-->
+<!--        </mt-field>-->
+
+<!--        <mt-field label="成功开始时间" placeholder="成功开始时间" v-model="queryParam.successTimeFrom"  type="date"></mt-field>-->
+<!--        <mt-field label="成功结束时间" placeholder="成功结束时间" v-model="queryParam.successTimeTo"  type="date"></mt-field>-->
+
       </section>
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">

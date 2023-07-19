@@ -910,3 +910,18 @@ select {
   padding: 0 20px;
 }
 
+.mint-field-core {
+  background-color: #ffffff !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  border: 0;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  outline: 0;
+  line-height: 1.6;
+  font-size: inherit;
+  width: 100%;
+}

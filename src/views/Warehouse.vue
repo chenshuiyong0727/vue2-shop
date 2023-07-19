@@ -234,7 +234,15 @@
         <mt-field label="* 剩余库存" placeholder="请输入剩余库存" type="number" v-model="requestParam.inventory"></mt-field>
         <mt-field label="* 入库价" placeholder="请输入入库价" @keyup.native="keyup1($event)" type="number" v-model="requestParam.price"></mt-field>
         <mt-field label="* 出售价格" placeholder="请输入出售价格" @keyup.native="keyup1($event)" type="number" v-model="requestParam.dwPrice"></mt-field>
-        <mt-field label="* 入库时间" type="datetime" placeholder="选择入库时间"  v-model="requestParam.createTime" ></mt-field>
+<!--        <mt-field label="* 入库时间" type="datetime" placeholder="选择入库时间"  v-model="requestParam.createTime" ></mt-field>-->
+        <mt-field label="* 入库时间">
+          <div @click="chosseTime()">
+            <el-date-picker class="select100" style="width: 62vw" readonly="readonly"
+                            type="datetime" placeholder="选择入库时间"
+                            v-model="requestParam.createTime"
+                            value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
+          </div>
+        </mt-field>
         <mt-field label="手续费" :disabled="true" v-model="requestParam.poundage"></mt-field>
         <mt-field label="到手价" :disabled="true" v-model="requestParam.theirPrice"></mt-field>
         <mt-field label="利润" :disabled="true" v-model="requestParam.profits"></mt-field>
@@ -401,24 +409,24 @@
           </select>
         </mt-field>
         <mt-field label="尺码" placeholder="请输入尺码"  v-model="queryParam.size"></mt-field>
-        <mt-field label="入库开始时间">
-          <el-date-picker class="select100"
-                          size="small"
-                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
-                          type="date" placeholder="入库开始时间">
-          </el-date-picker>
-        </mt-field>
-        <mt-field label="入库结束时间">
-          <el-date-picker class="select100"
-                          size="small"
-                          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
-                          type="date" placeholder="入库结束时间">
-          </el-date-picker>
-        </mt-field>
+<!--        <mt-field label="入库开始时间">-->
+<!--          <el-date-picker class="select100"-->
+<!--                          size="small"-->
+<!--                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"-->
+<!--                          type="date" placeholder="入库开始时间">-->
+<!--          </el-date-picker>-->
+<!--        </mt-field>-->
+<!--        <mt-field label="入库结束时间">-->
+<!--          <el-date-picker class="select100"-->
+<!--                          size="small"-->
+<!--                          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"-->
+<!--                          type="date" placeholder="入库结束时间">-->
+<!--          </el-date-picker>-->
+<!--        </mt-field>-->
 <!--        <mt-field label="同步开始时间" type="date" placeholder="同步开始时间"  v-model="queryParam.syncTimeFrom" ></mt-field>-->
 <!--        <mt-field label="同步结束时间" type="date" placeholder="同步结束时间"  v-model="queryParam.syncTimeTo" ></mt-field>-->
-<!--        <mt-field label="入库开始时间" type="date" placeholder="入库开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>-->
-<!--        <mt-field label="入库结束时间" type="date" placeholder="入库结束时间"  v-model="queryParam.createTimeTo" ></mt-field>-->
+        <mt-field label="入库开始时间" type="date" placeholder="入库开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>
+        <mt-field label="入库结束时间" type="date" placeholder="入库结束时间"  v-model="queryParam.createTimeTo" ></mt-field>
       </section>
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
@@ -448,6 +456,19 @@
 <!--      </mt-button>-->
 <!--    </div>-->
     <v-footer></v-footer>
+    <mt-datetime-picker
+      v-model="requestParam.createTime"
+      type="datetime"
+      year-format="{value}"
+      month-format="{value}"
+      date-format="{value}"
+      hour-format="{value}"
+      minute-format="{value}"
+      second-format="{value}"
+      ref="requestParamCreateTime"
+      :startDate="new Date(2022, 3, 1 )"
+      @confirm="handleConfirmDate">
+    </mt-datetime-picker>
   </div>
 </template>
 <script>
@@ -456,7 +477,7 @@
   import {goodsOrderApi} from '@/api/goodsOrder'
   import {goodsInventoryApi} from '@/api/goodsInventory'
   import { goodsBaseApi } from '@/api/goodsBase'
-  import { parseTime } from '@/utils/index'
+  import { parseTime,formatDateMin } from '@/utils/index'
 
   export default {
     components: {
@@ -858,8 +879,15 @@
         this.getPage()
       },
       // 日期
-      open(picker) {
-        this.$refs[picker].open();
+      // open(picker) {
+      //   this.$refs[picker].open();
+      // },
+      chosseTime() {
+        this.$refs.requestParamCreateTime.open()
+      },
+      handleConfirmDate(val) {
+        let res = formatDateMin(val)
+        this.requestParam.createTime = res
       },
       // changeSystem() {
       //   let res = this.inventoryToList.filter(
@@ -1026,6 +1054,7 @@
           this.$toast('原始库存小于剩余库存')
           return
         }
+        this.requestParam.createTime = this.requestParam.createTime ? parseTime(this.requestParam.createTime) : ''
         goodsInventoryApi.update(this.requestParam).then(res => {
           if (res.subCode === 1000) {
             this.$toast(res.subMsg)

@@ -190,22 +190,22 @@
         </mt-field>
         <mt-field label="订单号" placeholder="请输入订单号"  v-model="queryParam.orderNo"></mt-field>
         <mt-field label="原因" placeholder="请输入原因"  v-model="queryParam.reason"></mt-field>
-<!--        <mt-field label="开始时间" type="date" placeholder="开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>-->
-<!--        <mt-field label="结束时间" type="date" placeholder="结束时间"  v-model="queryParam.createTimeTo" ></mt-field>-->
-        <mt-field label="开始时间">
-          <el-date-picker class="select100"
-                          size="small"
-                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"
-                          type="date" placeholder="开始时间">
-          </el-date-picker>
-        </mt-field>
-        <mt-field label="结束时间">
-          <el-date-picker class="select100"
-                          size="small"
-                          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"
-                          type="date" placeholder="结束时间">
-          </el-date-picker>
-        </mt-field>
+        <mt-field label="开始时间" type="date" placeholder="开始时间"  v-model="queryParam.createTimeFrom" ></mt-field>
+        <mt-field label="结束时间" type="date" placeholder="结束时间"  v-model="queryParam.createTimeTo" ></mt-field>
+<!--        <mt-field label="开始时间">-->
+<!--          <el-date-picker class="select100"-->
+<!--                          size="small"-->
+<!--                          v-model="queryParam.createTimeFrom" value-format="yyyy-MM-dd"-->
+<!--                          type="date" placeholder="开始时间">-->
+<!--          </el-date-picker>-->
+<!--        </mt-field>-->
+<!--        <mt-field label="结束时间">-->
+<!--          <el-date-picker class="select100"-->
+<!--                          size="small"-->
+<!--                          v-model="queryParam.createTimeTo" value-format="yyyy-MM-dd"-->
+<!--                          type="date" placeholder="结束时间">-->
+<!--          </el-date-picker>-->
+<!--        </mt-field>-->
       </section>
     </mt-popup>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
@@ -253,21 +253,37 @@
           </select>
         </mt-field>
         <mt-field label="创建时间">
-          <el-date-picker class="select100" style="width: 62vw"
+          <div @click="chosseTime()">
+             <el-date-picker class="select100" style="width: 62vw" readonly="readonly"
                           type="datetime" placeholder="创建时间"
                           v-model="requestParam.createTime"
-                          value-format="yyyy-MM-dd HH:mm:ss">></el-date-picker>
+                          value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
+          </div>
         </mt-field>
         <mt-field label="瑕疵原因" placeholder="请输入瑕疵原因"  v-model="requestParam.reason"  type="textarea" rows="4"></mt-field>
       </section>
     </mt-popup>
+
+    <mt-datetime-picker
+      v-model="requestParam.createTime"
+      type="datetime"
+      year-format="{value}"
+      month-format="{value}"
+      date-format="{value}"
+      hour-format="{value}"
+      minute-format="{value}"
+      second-format="{value}"
+      ref="requestParamCreateTime"
+      :startDate="new Date(2022, 3, 1 )"
+      @confirm="handleConfirmDate">
+    </mt-datetime-picker>
   </div>
 </template>
 <script>
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import { goodsDefectsApi } from '@/api/goodsDefects'
-  import { parseTime } from '@/utils/index'
+  import {parseTime ,formatDateMin} from '@/utils/index'
   export default {
     components: {
       'v-baseline': Baseline,
@@ -320,6 +336,13 @@
       this.keyupSubmit()
     },
     methods: {
+      chosseTime() {
+        this.$refs.requestParamCreateTime.open()
+      },
+      handleConfirmDate(val) {
+        let res = formatDateMin(val)
+        this.requestParam.createTime = res
+      },
       keyupSubmit() {
         document.onkeydown = (e) => {
           let _key = window.event.keyCode
@@ -341,6 +364,7 @@
           this.$toast('请输入瑕疵原因')
           return
         }
+        this.requestParam.createTime = this.requestParam.createTime ? parseTime(this.requestParam.createTime) : ''
         goodsDefectsApi.update(this.requestParam).then(res => {
           this.$toast(res.subMsg)
           if (res.subCode === 1000) {

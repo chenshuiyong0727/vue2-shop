@@ -170,7 +170,7 @@
           <el-date-picker class="select100" style="width: 62vw"
                           type="datetime" placeholder="创建时间"
                           v-model="requestParam.createTime"
-                          value-format="yyyy-MM-dd HH:mm:ss">></el-date-picker>
+                          value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
         </mt-field>
         <mt-field label="瑕疵原因" placeholder="请输入瑕疵原因"  v-model="requestParam.reason"  type="textarea" rows="4"></mt-field>
       </section>

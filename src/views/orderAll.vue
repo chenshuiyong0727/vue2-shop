@@ -330,11 +330,19 @@
         <mt-field label="瑕疵原因" v-if="requestParam.status == 8" placeholder="请输入瑕疵原因"
                   v-model="requestParam.reason"></mt-field>
         <mt-field label="发货截止时间">
-          <el-date-picker size="small" class="select100" style="width: 62vw"
-                          type="datetime" placeholder="发货截止时间"
-                          v-model="requestParam.deliveryDeadlineTime"
-                          value-format="yyyy-MM-dd HH:mm:ss">>
-          </el-date-picker>
+<!--          <el-date-picker size="small" class="select100" style="width: 62vw"-->
+<!--                          type="datetime" placeholder="发货截止时间"-->
+<!--                          v-model="requestParam.deliveryDeadlineTime"-->
+<!--                          value-format="yyyy-MM-dd HH:mm:ss">-->
+<!--          </el-date-picker>-->
+
+          <div @click="chosseTime(3)">
+            <el-date-picker size="small" class="select100" style="width: 62vw" readonly="readonly"
+                            type="datetime" placeholder="发货截止时间"
+                            v-model="requestParam.deliveryDeadlineTime"
+                            value-format="yyyy-MM-dd HH:mm:ss">
+            </el-date-picker>
+          </div>
         </mt-field>
         <mt-field label="入库价" placeholder="请输入入库价" @keyup.native="keyup1($event)" type="number"
                   v-model="requestParam.price"></mt-field>
@@ -449,7 +457,7 @@
           <mt-button size="normal" @click="search1" style="font-size: 15px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 100vw;width: 100vw">
+      <section style="height: 120vw;width: 100vw">
         <mt-field label="状态" style="margin-top: 12vw;">
 <!--          <el-select size="small" class="select100" v-model="queryParam.status">-->
 <!--            <el-option label="状态" value=""></el-option>-->
@@ -538,23 +546,27 @@
         <mt-field label="运单号" placeholder="请输入运单号" v-model="queryParam.waybillNo"></mt-field>
         <mt-field label="订单号" placeholder="请输入订单号" v-model="queryParam.orderNo"></mt-field>
         <mt-field label="尺码" placeholder="请输入尺码" v-model="queryParam.size"></mt-field>
-        <mt-field label="成功开始时间">
-          <el-date-picker class="select100"
-                          size="small"
-                          v-model="queryParam.successTimeFrom" value-format="yyyy-MM-dd"
-                          type="date" placeholder="成功开始时间">
-          </el-date-picker>
-        </mt-field>
-        <mt-field label="成功结束时间">
-          <el-date-picker class="select100"
-                          size="small"
-                          v-model="queryParam.successTimeTo" value-format="yyyy-MM-dd"
-                          type="date" placeholder="成功结束时间">
-          </el-date-picker>
-        </mt-field>
+        <mt-field label="成功开始时间" placeholder="成功开始时间" v-model="queryParam.successTimeFrom"  type="date"></mt-field>
+        <mt-field label="成功结束时间" placeholder="成功结束时间" v-model="queryParam.successTimeTo"  type="date"></mt-field>
+
+        <!--        <mt-field label="成功开始时间">-->
+<!--          <el-date-picker class="select100"-->
+<!--                          size="small"-->
+<!--                          v-model="queryParam.successTimeFrom" value-format="yyyy-MM-dd"-->
+<!--                          type="date" placeholder="成功开始时间">-->
+<!--          </el-date-picker>-->
+<!--        </mt-field>-->
+<!--        <mt-field label="成功结束时间">-->
+<!--          <el-date-picker class="select100"-->
+<!--                          size="small"-->
+<!--                          v-model="queryParam.successTimeTo" value-format="yyyy-MM-dd"-->
+<!--                          type="date" placeholder="成功结束时间">-->
+<!--          </el-date-picker>-->
+<!--        </mt-field>-->
       </section>
     </mt-popup>
     <mt-popup
+      position="bottom"
       v-model="isShowDialog3">
       <mt-header title="批量操作">
         <div slot="right">
@@ -569,11 +581,24 @@
         <mt-field label="选中数" style="margin-top: 11vw;" v-model="ids.length"
                   :disabled="true"></mt-field>
         <mt-field label="发货截止时间">
-          <el-date-picker size="small" class="select100" style="width: 62vw"
-                          type="datetime" placeholder="发货截止时间"
-                          v-model="requestParam3.deliveryDeadlineTime"
-                          value-format="yyyy-MM-dd HH:mm:ss">>
-          </el-date-picker>
+<!--          <el-date-picker size="small" class="select100" style="width: 62vw"-->
+<!--                          type="datetime" placeholder="发货截止时间"-->
+<!--                          v-model="requestParam3.deliveryDeadlineTime"-->
+<!--                          value-format="yyyy-MM-dd HH:mm:ss">>-->
+<!--          </el-date-picker>-->
+
+          <div @click="chosseTime(2)">
+<!--            <el-date-picker size="small" class="select100" style="width: 62vw" readonly="readonly"-->
+<!--                            type="datetime" placeholder="闪电直发入仓时间"-->
+<!--                            v-model="requestParam3.inStoreTime"-->
+<!--                            value-format="yyyy-MM-dd HH:mm:ss">-->
+<!--            </el-date-picker>-->
+            <el-date-picker size="small" class="select100" style="width: 62vw" readonly="readonly"
+                            type="datetime" placeholder="发货截止时间"
+                            v-model="requestParam3.deliveryDeadlineTime"
+                            value-format="yyyy-MM-dd HH:mm:ss">
+            </el-date-picker>
+          </div>
         </mt-field>
         <mt-field label="地址">
 <!--            -->
@@ -646,11 +671,13 @@
         <mt-field label="免仓储费天数" placeholder="请输入免仓储费天数" type="number"
                   v-model="requestParam3.inStoreFreeDay"></mt-field>
         <mt-field label="寄售入仓时间">
-          <el-date-picker size="small" class="select100" style="width: 62vw"
-                          type="datetime" placeholder="闪电直发入仓时间"
-                          v-model="requestParam3.inStoreTime"
-                          value-format="yyyy-MM-dd HH:mm:ss">>
-          </el-date-picker>
+          <div @click="chosseTime(1)">
+            <el-date-picker size="small" class="select100" style="width: 62vw" readonly="readonly"
+                            type="datetime" placeholder="闪电直发入仓时间"
+                            v-model="requestParam3.inStoreTime"
+                            value-format="yyyy-MM-dd HH:mm:ss">
+            </el-date-picker>
+          </div>
         </mt-field>
         <mt-field label="运费" placeholder="请输入运费" type="number"
                   v-model="requestParam3.freight"></mt-field>
@@ -658,6 +685,46 @@
 
       </section>
     </mt-popup>
+
+    <mt-datetime-picker
+      v-model="requestParam3.inStoreTime"
+      type="datetime"
+      year-format="{value}"
+      month-format="{value}"
+      date-format="{value}"
+      hour-format="{value}"
+      minute-format="{value}"
+      second-format="{value}"
+      ref="requestParam3InStoreTime"
+      :startDate="new Date(2022, 3, 1 )"
+      @confirm="handleConfirmDate">
+    </mt-datetime-picker>
+    <mt-datetime-picker
+      v-model="requestParam3.deliveryDeadlineTime"
+      type="datetime"
+      year-format="{value}"
+      month-format="{value}"
+      date-format="{value}"
+      hour-format="{value}"
+      minute-format="{value}"
+      second-format="{value}"
+      ref="requestParam3DeliveryDeadlineTime"
+      :startDate="new Date(2022, 3, 1 )"
+      @confirm="handleConfirmDate">
+    </mt-datetime-picker>
+    <mt-datetime-picker
+      v-model="requestParam.deliveryDeadlineTime"
+      type="datetime"
+      year-format="{value}"
+      month-format="{value}"
+      date-format="{value}"
+      hour-format="{value}"
+      minute-format="{value}"
+      second-format="{value}"
+      ref="requestParamDeliveryDeadlineTime"
+      :startDate="new Date(2022, 3, 1 )"
+      @confirm="handleConfirmDate">
+    </mt-datetime-picker>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
         <img :src="imageZoom" alt="" class="showImg">
@@ -696,7 +763,7 @@
 <script>
   import Footer from '@/common/_footer.vue'
   import {goodsOrderApi} from '@/api/goodsOrder'
-  import {parseTime} from '@/utils/index'
+  import {parseTime ,formatDateMin} from '@/utils/index'
 
   export default {
     components: {
@@ -824,6 +891,8 @@
         wlData: [],
         wlDataSize: '',
         scrollNum: '',
+        pickerValue:new Date(),
+        pickerValueType: '',
         totalCount: 1
       }
     },
@@ -886,6 +955,32 @@
       next()
     },
     methods: {
+      /**
+       * =》1 requestParam3.inStoreTime
+       * =》2 requestParam3.deliveryDeadlineTime
+       * =》3 requestParam.deliveryDeadlineTime
+       * @param pickerValueType
+       */
+      chosseTime(pickerValueType) {
+        this.pickerValueType = pickerValueType
+        if(this.pickerValueType == 1) {
+          this.$refs.requestParam3InStoreTime.open()
+        }else if (this.pickerValueType ==2) {
+          this.$refs.requestParam3DeliveryDeadlineTime.open()
+        }else if (this.pickerValueType == 3) {
+          this.$refs.requestParamDeliveryDeadlineTime.open()
+        }
+      },
+      handleConfirmDate(val) {
+        let res = formatDateMin(val)
+        if(this.pickerValueType == 1) {
+          this.requestParam3.inStoreTime = res
+        }else if (this.pickerValueType ==2) {
+          this.requestParam3.deliveryDeadlineTime = res
+        }else if (this.pickerValueType == 3) {
+          this.requestParam.deliveryDeadlineTime = res
+        }
+      },
       tabScroll(){
         let scrollNum = this.scrollNum
         let activeTab = document.querySelectorAll('.aaa');
@@ -911,13 +1006,13 @@
         if (id) {
           goodsOrderApi.getDetailById(id).then(res => {
             if (res.subCode === 1000) {
-              this.requestParam3.deliveryDeadlineTime = res.data ? parseTime(
-                res.data.deliveryDeadlineTime) : ''
+              this.requestParam3.deliveryDeadlineTime = res.data ? parseTime(res.data.deliveryDeadlineTime) : ''
               this.requestParam3.inStoreTime = res.data ? parseTime(res.data.inStoreTime) : ''
               this.requestParam3.addressId = res.data ? res.data.addressId : ''
               this.requestParam3.inStoreFreeDay = res.data ? res.data.inStoreFreeDay : ''
               this.requestParam3.freight = res.data ? res.data.freight : ''
               this.requestParam3.waybillNo = res.data ? res.data.waybillNo : ''
+              console.info(this.requestParam3)
             } else {
               this.$toast(res.subMsg)
             }
@@ -926,13 +1021,6 @@
       },
       selectYear () {
         this.$refs.datePicker.open();
-      },
-      handleConfirm (value) {
-        console.log(value);
-        let year = value.getFullYear();
-        let month = value.getMonth() + 1;
-        let date = value.getDate();
-        this.queryParam.successTimeFrom = year+'-'+month+'-'+date
       },
       countdown(orderData ) {
         if (orderData.status != 3){
@@ -1013,6 +1101,10 @@
           this.$toast('闪电直发入仓 ，免仓储费天数不能为空')
           return
         }
+        console.info(this.requestParam3)
+        this.requestParam3.deliveryDeadlineTime = this.requestParam3.deliveryDeadlineTime ? parseTime(this.requestParam3.deliveryDeadlineTime) : ''
+        this.requestParam3.inStoreTime = this.requestParam3.inStoreTime ? parseTime(this.requestParam3.inStoreTime) : ''
+        console.info(this.requestParam3)
         // 闪电直发
         goodsOrderApi.updateSaleType(this.requestParam3).then(res => {
           this.$toast(res.subMsg)

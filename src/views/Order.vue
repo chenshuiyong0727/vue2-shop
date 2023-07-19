@@ -246,7 +246,7 @@
           <el-date-picker size="small" class="select100" style="width: 62vw"
                           type="datetime" placeholder="发货截止时间"
                           v-model="requestParam.deliveryDeadlineTime"
-                          value-format="yyyy-MM-dd HH:mm:ss">>
+                          value-format="yyyy-MM-dd HH:mm:ss">
           </el-date-picker>
         </mt-field>
         <mt-field label="入库价" placeholder="请输入入库价" @keyup.native="keyup1($event)" type="number"
@@ -451,7 +451,7 @@
           <el-date-picker size="small" class="select100" style="width: 62vw"
                           type="datetime" placeholder="发货截止时间"
                           v-model="requestParam3.deliveryDeadlineTime"
-                          value-format="yyyy-MM-dd HH:mm:ss">>
+                          value-format="yyyy-MM-dd HH:mm:ss">
           </el-date-picker>
         </mt-field>
         <mt-field label="地址">
@@ -499,7 +499,7 @@
           <el-date-picker size="small" class="select100" style="width: 62vw"
                           type="datetime" placeholder="闪电直发入仓时间"
                           v-model="requestParam3.inStoreTime"
-                          value-format="yyyy-MM-dd HH:mm:ss">>
+                          value-format="yyyy-MM-dd HH:mm:ss">
           </el-date-picker>
         </mt-field>
         <mt-field label="运费" placeholder="请输入运费" type="number"
