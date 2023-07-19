@@ -4,11 +4,11 @@
       <div slot="left">
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
       </div>
-      <div slot="right">
-        <mt-button  @click="$router.go(-1)">
-          <img style="width: 20px" src="../../static/img/kehu.png">
-        </mt-button>
-      </div>
+<!--      <div slot="right">-->
+<!--        <mt-button  @click="$router.go(-1)">-->
+<!--          <img style="width: 20px" src="../../static/img/kehu.png">-->
+<!--        </mt-button>-->
+<!--      </div>-->
     </mt-header>
     <div v-if="form.status == 3"
          style="color: white;width: 100vw; height: 140px;background-color: #2b2d3c;margin-top: -3.1px;">
@@ -228,9 +228,9 @@
         </div>
       </div>
     </div>
-    <div>
-      <img style="width: 100vw;" src="../../static/img/huijidizhi.jpg">
-    </div>
+<!--    <div>-->
+<!--      <img style="width: 100vw;" src="../../static/img/huijidizhi.jpg">-->
+<!--    </div>-->
 
     <div class="dingdans_item_dw" style="margin-top: 7px;
     border-bottom: 0px;
@@ -249,7 +249,7 @@
     padding-left: 3%;">
           <div class="dingdans_con_right_top_dw" @click="goodsDetail(item.goodsId, 1) ">
               <span>
-                {{form.goodsName}}
+                {{form.goodsName | sizeFilterNum(40) }}
               </span>
           </div>
           <div class="dingdans_con_right_top_dw_1">

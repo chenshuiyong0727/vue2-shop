@@ -48,7 +48,7 @@
           <div class="diangdans_con_right_dw">
             <div class="dingdans_con_right_top_dw">
               <span>
-                {{item.goodsName}}
+                {{item.goodsName | sizeFilterNum(40) }}
               </span>
             </div>
             <div class="dingdans_con_right_top_dw_1 zuoyouduiqi">

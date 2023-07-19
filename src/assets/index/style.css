@@ -810,11 +810,11 @@ select{
   transition: border-color .2s cubic-bezier(.645,.045,.355,1);
   width: 100%;
 }
-.el-tooltip__popper.is-dark {
-  background: #303133;
-  color: #FFF;
-  width: 94vw;
-}
+/*.el-tooltip__popper.is-dark {*/
+/*  background: #303133;*/
+/*  color: #FFF;*/
+/*  width: 94vw;*/
+/*}*/
 .danger-num-1 {
   padding-top: 1px;
   padding-right: 6px;

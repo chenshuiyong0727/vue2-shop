@@ -71,7 +71,8 @@
           <div class="diangdans_con_right_dw">
             <div class="dingdans_con_right_top_dw" @click="goodsDetail(item.id, 1) ">
               <span>
-                {{item.name}}
+<!--                {{item.name}}-->
+                {{item.name | sizeFilterNum(40) }}
               </span>
             </div>
             <div class="dingdans_con_right_top_dw_1">

@@ -242,7 +242,7 @@
     padding-left: 3%;">
         <div class="dingdans_con_right_top_dw" @click="goodsDetail(item.goodsId, 1) ">
               <span>
-                {{form.goodsName}}
+                {{form.goodsName | sizeFilterNum(40) }}
               </span>
         </div>
         <div class="dingdans_con_right_top_dw_1">
