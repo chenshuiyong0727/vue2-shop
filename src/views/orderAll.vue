@@ -1355,7 +1355,7 @@
         let profits = this.requestParam.theirPrice - this.requestParam.freight
           - this.requestParam.price
         this.requestParam.profits = parseFloat(profits).toFixed(2)
-
+        this.requestParam.deliveryDeadlineTime = this.requestParam.deliveryDeadlineTime ? parseTime(this.requestParam.deliveryDeadlineTime) : ''
         goodsOrderApi.sellGoods(this.requestParam).then(res => {
           this.$toast(res.subMsg)
           if (res.subCode === 1000) {

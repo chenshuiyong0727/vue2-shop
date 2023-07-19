@@ -173,14 +173,15 @@
           <strong v-if="form.status == 7" style="font-size: 15px;">查验鉴别通过</strong>
           <strong v-else style="font-size: 15px; ">{{ form.status | dictToDescTypeValue(37) }}</strong>
         </div>
-        <div v-if="requestParamWl.waybillNo" style="margin-right: 15px;" @click="gotoWl">
-          <span style="font-size: 15px; color: #5f6772" >查看物流</span>
-          <img style="    margin-top: -6px;
+        <div v-if="requestParamWl.waybillNo" style="margin-right: 15px;">
+          <span v-if="!wldataLastDate" style="font-size: 15px; color: #5f6772" >暂未物流信息</span>
+          <span v-if="wldataLastDate"  @click="gotoWl" style="font-size: 15px; color: #5f6772" >查看物流</span>
+          <img v-if="wldataLastDate"  @click="gotoWl" style="    margin-top: -6px;
     width: 18px;" src="../../static/img/more-dw.jpg">
         </div>
       </div>
     </div>
-    <div  v-if="requestParamWl.waybillNo && ( form.status == 4 || form.status ==  5 || form.status == 6 || form.status == 7)"
+    <div  v-if="requestParamWl.waybillNo  && ( form.status == 4 || form.status ==  5 || form.status == 6 || form.status == 7)"
           style="color: #808082;width: 100vw; background-color: white;">
       <div class="zuoyouduiqi" style="padding-top: 17px;
           margin-bottom: 7px;
