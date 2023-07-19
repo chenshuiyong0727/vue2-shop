@@ -211,15 +211,19 @@
     align-items: center;
     justify-content: space-between;
     width: 92vw;">
-<!--        <el-date-picker style="width: 37vw;"-->
-<!--                        v-model="queryParam.createTimeFrom" :value-format="valueFormat"-->
-<!--                        :type="dateType"  placeholder="时间开始" @change="getData1">-->
-<!--        </el-date-picker>-->
-<!--        <span style="    font-size: 15px;margin-left: 1vw;">至</span>-->
-<!--        <el-date-picker style="width: 37vw;    margin-right: 8vw;"-->
-<!--                        v-model="queryParam.createTimeTo" :value-format="valueFormat"-->
-<!--                        :type="dateType" placeholder="时间结束" @change="getData1">-->
-<!--        </el-date-picker>-->
+        <div  @click="chosseTime(1)">
+          <el-date-picker style="width: 37vw;" readonly="readonly"
+                          v-model="queryParam.createTimeFrom" :value-format="valueFormat"
+                          :type="dateType"  placeholder="时间开始">
+          </el-date-picker>
+        </div>
+        <span style="    font-size: 15px;margin-left: 1vw;">至</span>
+        <div  @click="chosseTime(2)">
+          <el-date-picker style="width: 37vw;    margin-right: 8vw;" readonly="readonly"
+                          v-model="queryParam.createTimeTo" :value-format="valueFormat"
+                          :type="dateType" placeholder="时间结束">
+          </el-date-picker>
+        </div>
       </div>
       <div style="margin-top: 20px;">
         <ve-line
@@ -235,7 +239,17 @@
     </div>
     <!--    仓库值-->
     <v-section1 :form="form" :countDay="countDay" :count="count":chartData1="chartData1" :orderIofo ="orderIofo" :chartSettings1="chartSettings1" />
-
+    <mt-datetime-picker
+      v-model="pickerValue"
+      type="date"
+      ref="picker"
+      :startDate="new Date(2022, 3, 1 )"
+      :endDate="new Date()"
+      year-format="{value} 年"
+      month-format="{value} 月"
+      date-format="{value} 日"
+      @confirm="handleConfirm">
+    </mt-datetime-picker>
     <v-baseline/>
     <v-footer/>
   </div>
@@ -353,6 +367,8 @@ export default {
       nowDate: '',
       nowTime: '',
       nowWeek: '',
+      pickerValue:new Date(),
+      pickerValueType: '',
       orderData: {},
       storeData: {},
       dateType: 'month',
@@ -379,6 +395,7 @@ export default {
     }
   },
   methods: {
+
     order(theExpire,scrollNum) {
       this.$router.push({ path: '/order', query: { theExpire,scrollNum }})
     },
@@ -465,6 +482,36 @@ export default {
     },
     scanCode(photo) {
       this.$router.push({ path: '/scanCode', query: { photo } })
+    },
+    chosseTime(pickerValueType) {
+      this.pickerValueType = pickerValueType
+      this.$refs.picker.open();
+      if (this.dataType == 1){
+        this.$refs.picker.$el.getElementsByClassName('picker-slot')[2].style.display = 'none'
+      } else {
+        this.$refs.picker.$el.getElementsByClassName('picker-slot')[2].style.display = ''
+      }
+    },
+    handleConfirm(val) {
+      let year = new Date(val).getFullYear()
+      let month = new Date(val).getMonth() + 1
+      if (month < 10 ){
+        month = '0' + month
+      }
+      let res = year + '-' +month
+      if (this.dataType == 0){
+        let day = new Date(val).getDate()
+        if (day < 10 ){
+          day = '0' + day
+        }
+        res = res + '-' + day
+      }
+      if(this.pickerValueType == 1) {
+        this.queryParam.createTimeFrom = res
+      }else {
+        this.queryParam.createTimeTo = res
+      }
+      this.getData1()
     },
     profitData(dataType) {
       this.dataType = dataType
