@@ -79,7 +79,7 @@
         </div>
         <!--        中间-->
         <div class="dingdans_con_dw">
-          <div :src="item.img" class="dingdans_con_left_dw"
+          <div class="dingdans_con_left_dw"
                @click="avatarShow(item.img)">
             <img :src="item.img" >
             <p class="mark_dw">

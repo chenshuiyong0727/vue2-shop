@@ -47,7 +47,7 @@ export default new Router({
       name: '首页',
       component: Index,
       meta: {
-        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+        requireAuth: false,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },
     },
     {
@@ -55,7 +55,7 @@ export default new Router({
       name: '首页',
       component: Index,
       meta: {
-        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+        requireAuth: false,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },
     },
     {

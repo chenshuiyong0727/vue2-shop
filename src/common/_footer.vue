@@ -1,38 +1,42 @@
 <template lang="html">
   <!-- gotoRouter:点击后路由跳转到与id名相同的route.name所对应的路径 -->
-  <footer class="footer" @click.stop='gotoRouter'>
-    <mt-tabbar v-model="selected" style="border-top: 1px solid #f3f2f8;" fixed>
-      <mt-tab-item id="首页">
-        <img style="width: 6.9vw" :src="index_img" ></img>
-        <p :style="blue1">首页</p>
+  <footer class="footer">
+    <mt-tabbar style="border-top: 1px solid #f3f2f8;" fixed>
+      <mt-tab-item id="首页" >
+        <div  @click="gotoRouter('首页')">
+          <img v-if="selected == '首页'" style="width: 6.9vw" src="../../static/img/new/index_1.png" ></img>
+          <img v-else style="width: 6.9vw" src="../../static/img/new/index_0.png" ></img>
+          <p style="margin-top: 1vw;" :class="selected == '首页' ? 'color-url':''" >首页</p>
+        </div>
       </mt-tab-item>
       <mt-tab-item id="订单">
-        <img style="width: 6.9vw"  :src="order_img" ></img>
-        <p :style="blue2">订单</p>
+        <div  @click="gotoRouter('订单')">
+        <img v-if="selected == '订单'" style="width: 6.9vw" src="../../static/img/new/order_1.png" ></img>
+        <img v-else style="width: 6.9vw" src="../../static/img/new/order_0.png" ></img>
+        <p style="margin-top: 1vw;" :class="selected == '订单' ? 'color-url':''" >订单</p>
+        </div>
       </mt-tab-item>
       <mt-tab-item id="商品">
-        <img style="width: 6.9vw"  :src="goods_img" ></img>
-        <p :style="blue5">商品</p>
+        <div  @click="gotoRouter('商品')">
+        <img v-if="selected == '商品'" style="width: 6.9vw" src="../../static/img/new/good_1.png" ></img>
+        <img v-else style="width: 6.9vw" src="../../static/img/new/good_0.png" ></img>
+        <p style="margin-top: 1vw;" :class="selected == '商品' ? 'color-url':''" >商品</p>
+        </div>
       </mt-tab-item>
-      <!--      <mt-tab-item id="扫码">-->
-      <!--        <img style="width: 11vw"  src="../../static/img/new/score3.png" ></img>-->
-      <!--      </mt-tab-item>-->
-      <mt-tab-item id="仓库">
-        <img style="width: 6.9vw" :src="store_img"></img>
-        <p :style="blue3">仓库</p>
+      <mt-tab-item id="仓库" >
+        <div  @click="gotoRouter('仓库')">
+        <img v-if="selected == '仓库'" style="width: 6.9vw" src="../../static/img/new/store_1.png" ></img>
+        <img v-else style="width: 6.9vw" src="../../static/img/new/store_0.png" ></img>
+        <p style="margin-top: 1vw;" :class="selected == '仓库' ? 'color-url':''" >仓库</p>
+        </div>
       </mt-tab-item>
       <mt-tab-item id="用户页">
-        <img style="width: 6.9vw" :src="person_img"></img>
-        <p :style="blue4">我的</p>
+        <div  @click="gotoRouter('用户页')">
+        <img v-if="selected == '用户页'" style="width: 6.9vw" src="../../static/img/new/person_1.png" ></img>
+        <img v-else style="width: 6.9vw" src="../../static/img/new/person_0.png" ></img>
+        <p style="margin-top: 1vw;" :class="selected == '用户页' ? 'color-url':''" >我的</p>
+        </div>
       </mt-tab-item>
-      <!--    <mt-tab-item id="购物车页">-->
-      <!--      <i slot="icon" class="icon-car"></i>-->
-      <!--      购物车-->
-      <!--    </mt-tab-item>-->
-      <!--    <mt-tab-item id="用户页">-->
-      <!--      <i slot="icon" class="icon-user"></i>-->
-      <!--      我的-->
-      <!--    </mt-tab-item>-->
     </mt-tabbar>
   </footer>
 </template>
@@ -40,7 +44,8 @@
 <script>
   export default {
     methods: {
-      gotoRouter() {
+      gotoRouter(selected) {
+        this.selected = selected
         this.$router.push({
           name: this.selected
         })
@@ -48,92 +53,53 @@
     },
     data() {
       return {
-        //对应mt-tab-item 的id值
-        blue1: 'color:#409EFF;margin-top: 1vw;',
-        blue2: 'margin-top: 1vw;',
-        blue3: 'margin-top: 1vw;',
-        blue4: 'margin-top: 1vw;',
-        blue5: 'margin-top: 1vw;',
-        selected: '',
-        index_img: '../../static/img/new/index_1.png',
-        order_img: '../../static/img/new/order_0.png',
-        store_img: '../../static/img/new/store_0.png',
-        person_img: '../../static/img/new/person_0.png',
-        goods_img: '../../static/img/new/good_0.png',
+        selected: '首页',
       }
     },
-    mounted() {
+    activated() {
+      //获取当前路由名称，根据该名称给当前footer添加is-selected
+      let Rname = this.$route.name;
 
+      switch (Rname) {
+        case '首页':
+          this.selected = '首页';
+          break;
+        case '订单':
+          this.selected = '订单';
+          break;
+        case '仓库':
+          this.selected = '仓库';
+          break;
+        case '用户页':
+          this.selected = '用户页';
+          break;
+        case '商品':
+          this.selected = '商品';
+          break;
+      }
+    },
+    created() {
       //获取当前路由名称，根据该名称给当前footer添加is-selected
       let Rname = this.$route.name;
       switch (Rname) {
         case '首页':
           this.selected = '首页';
-          this.index_img= '../../static/img/new/index_1.png'
-          this.order_img= '../../static/img/new/order_0.png'
-          this.store_img= '../../static/img/new/store_0.png'
-          this.person_img= '../../static/img/new/person_0.png'
-          this.goods_img= '../../static/img/new/good_0.png'
-          this.blue1= 'color:#409EFF;margin-top: 1vw;'
-          this.blue2= 'margin-top: 1vw;'
-          this.blue3= 'margin-top: 1vw;'
-          this.blue4= 'margin-top: 1vw;'
-          this.blue5= 'margin-top: 1vw;'
           break;
         case '订单':
           this.selected = '订单';
-          this.order_img= '../../static/img/new/order_1.png'
-          this.index_img= '../../static/img/new/index_0.png'
-          this.store_img= '../../static/img/new/store_0.png'
-          this.person_img= '../../static/img/new/person_0.png'
-          this.goods_img= '../../static/img/new/good_0.png'
-          this.blue2= 'color:#409EFF;margin-top: 1vw;'
-          this.blue1= 'margin-top: 1vw;'
-          this.blue3= 'margin-top: 1vw;'
-          this.blue4= 'margin-top: 1vw;'
-          this.blue5= 'margin-top: 1vw;'
           break;
         case '仓库':
           this.selected = '仓库';
-          this.store_img= '../../static/img/new/store_1.png'
-          this.order_img= '../../static/img/new/order_0.png'
-          this.index_img= '../../static/img/new/index_0.png'
-          this.person_img= '../../static/img/new/person_0.png'
-          this.goods_img= '../../static/img/new/good_0.png'
-          this.blue3= 'color:#409EFF;margin-top: 1vw;'
-          this.blue1= 'margin-top: 1vw;'
-          this.blue2= 'margin-top: 1vw;'
-          this.blue4= 'margin-top: 1vw;'
-          this.blue5= 'margin-top: 1vw;'
           break;
         case '用户页':
-          this.person_img= '../../static/img/new/person_1.png'
-          this.store_img= '../../static/img/new/store_0.png'
-          this.order_img= '../../static/img/new/order_0.png'
-          this.index_img= '../../static/img/new/index_0.png'
-          this.goods_img= '../../static/img/new/good_0.png'
           this.selected = '用户页';
-          this.blue4= 'color:#409EFF;margin-top: 1vw;'
-          this.blue1= 'margin-top: 1vw;'
-          this.blue2= 'margin-top: 1vw;'
-          this.blue3= 'margin-top: 1vw;'
-          this.blue5= 'margin-top: 1vw;'
           break;
         case '商品':
-          this.goods_img= '../../static/img/new/good_1.png'
-          this.person_img= '../../static/img/new/person_0.png'
-          this.store_img= '../../static/img/new/store_0.png'
-          this.order_img= '../../static/img/new/order_0.png'
-          this.index_img= '../../static/img/new/index_0.png'
           this.selected = '商品';
-          this.blue5= 'color:#409EFF;margin-top: 1vw;'
-          this.blue1= 'margin-top: 1vw;'
-          this.blue2= 'margin-top: 1vw;'
-          this.blue3= 'margin-top: 1vw;'
-          this.blue4= 'margin-top: 1vw;'
           break;
       }
     }
+
 
   }
 </script>

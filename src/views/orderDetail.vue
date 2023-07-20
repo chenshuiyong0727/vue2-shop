@@ -237,7 +237,7 @@
     border-bottom: 0px;
 ">
       <div class="dingdans_con_dw">
-        <div :src="form.img" class="dingdans_con_left_dw"
+        <div class="dingdans_con_left_dw"
              @click="avatarShow(form.img)">
           <img :src="form.img" >
           <p class="mark_dw">

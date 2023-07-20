@@ -39,7 +39,7 @@ module.exports = {
       //   }
       // }
       "/gw/op": {
-        target: "http://localhost:28027/gw/op", // mono
+        target: "http://192.168.1.125:28027/gw/op", // mono
         // target: "http://114.132.243.79:28027/gw/op", //设置调用的接口域名和端口
         changeOrigin: true,
         pathRewrite: {
