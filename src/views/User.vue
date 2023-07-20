@@ -4,7 +4,7 @@
     <div v-if="flag">
       <mt-header  title="个人中心">
         <div slot="left">
-          <img  @click="scanCode(1)" style="width: 23px; "  src="../../static/img/saoyisao4.png">
+          <img  @click="scanCode(1)" style="width: 21px; "  src="../../static/img/saoyisao4.png">
         </div>
         <div slot="right">
           <img  @click="comfirm(1)" style="width: 26px; "  src="../../static/img/setting0.png">

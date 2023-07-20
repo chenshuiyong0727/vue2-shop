@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="hello">
+  <div class="hello" v-if="form.orderNo">
     <mt-header title="订单详情">
       <div slot="left">
         <mt-button icon="back" @click="$router.go(-1)"></mt-button>
@@ -11,7 +11,7 @@
 <!--      </div>-->
     </mt-header>
     <div v-if="form.status == 3"
-         style="color: white;width: 100vw; height: 140px;background-color: #2b2d3c;margin-top: 28px;">
+         style="color: white;width: 100vw; height: 140px;background-color: #2b2d3c;margin-top: 24px;">
       <div class="zuoyouduiqi" style="color: white; padding-top: 25px;">
         <div style="margin-left: 20px;">
           <strong style="font-size: 18px;">{{ form.status | dictToDescTypeValue(37) }}</strong>
@@ -52,7 +52,7 @@
       </div>
     </div>
     <div v-else-if="form.status == 7"
-         style="color: white;width: 100vw; background-color: #2b2d3c;margin-top: 28px;    padding-bottom: 20px;">
+         style="color: white;width: 100vw; background-color: #2b2d3c;margin-top: 24px;    padding-bottom: 20px;">
       <div class="zuoyouduiqi" style="color: white; padding-top: 25px;">
         <div style="margin-left: 20px;">
           <strong style="font-size: 17.5px;">{{ form.status | dictToDescTypeValue(37) }}</strong>
@@ -150,7 +150,7 @@
 
 
     <div v-else
-         style="color: white;width: 100vw; background-color: #2b2d3c;margin-top: 28px;">
+         style="color: white;width: 100vw; background-color: #2b2d3c;margin-top: 24px;">
       <div style="margin-left: 20px; padding-top: 30px;">
         <strong v-if="form.status == 4 || form.status == 5" style="font-size: 18px;">待平台收货</strong>
         <strong v-else-if="form.status == 6" style="font-size: 18px;">待平台查验鉴别</strong>
@@ -248,7 +248,7 @@
         </div>
         <div class="diangdans_con_right_dw" style="padding-right: 3%;
     padding-left: 3%;">
-          <div class="dingdans_con_right_top_dw" @click="goodsDetail(item.goodsId, 1) ">
+          <div class="dingdans_con_right_top_dw" @click="goodsDetail(form.goodsId, 1) ">
               <span>
                 {{form.goodsName | sizeFilterNum(40) }}
               </span>

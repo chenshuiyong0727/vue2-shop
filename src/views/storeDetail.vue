@@ -10,7 +10,6 @@
       <div class="cell">
         <img
           @click="avatarShow(form.img)"
-          :disabled="true "
           style="width: 80vw;margin: 0 auto;"
           v-if="form.img"
           :src="form.img"
@@ -189,7 +188,11 @@
 <!--        </strong>-->
 <!--      </div>-->
     </section>
-
+    <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
+      <div class="imageShow">
+        <img :src="imageZoom" alt="" class="showImg">
+      </div>
+    </div>
 <!--    <v-chose/>-->
 <!--    <v-content/>-->
 <!--    <v-baseline/>-->

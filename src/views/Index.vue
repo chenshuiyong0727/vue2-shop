@@ -20,13 +20,22 @@
 <!--    待办事项-->
 <!--    <v-orderNum :orderIofo ="orderIofo" :storeData ="storeData"/>-->
     <div class="car1">
-      <div v-if="flag">
-        <mt-header   title="移动仓库">
+      <div v-if="flag" class="index-header">
+<!--        <mt-header   title="移动仓库">-->
+<!--          <div slot="left">-->
+<!--            <img  style="width: 21px; "  src="../../static/img/logo/logo-333-1.png">-->
+<!--          </div>-->
+<!--          <div slot="right">-->
+<!--            <img  @click="scanCode(1)"  style="width: 26px; "  src="../../static/img/photo2.png">-->
+<!--          </div>-->
+<!--        </mt-header>-->
+
+        <mt-header  title="移动仓库">
           <div slot="left">
-            <img  style="width: 21px; "  src="../../static/img/logo/logo-333-1.png">
+            <img  @click="scanCode(1)" style="width: 21px; "  src="../../static/img/logo/logo-333-1.png">
           </div>
           <div slot="right">
-            <img  @click="scanCode(1)"  style="width: 26px; "  src="../../static/img/photo2.png">
+            <img  @click="comfirm(1)" style="width: 26px; "  src="../../static/img/photo2.png">
           </div>
         </mt-header>
         <div class="header" style="    margin-top: 11vw;margin-bottom: -3px;">
@@ -401,7 +410,7 @@ export default {
     handleScroll () {
       let scrollTop = this.$refs.hello.scrollTop
       console.info(scrollTop)
-      if (scrollTop < 40){
+      if (scrollTop < 80){
         this.flag = false
       } else{
         this.flag = true

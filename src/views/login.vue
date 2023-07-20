@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="login_new">
-    <mt-header title="移动仓库">
+    <mt-header title="">
     </mt-header>
     <div style="
     font-size: 10px;
