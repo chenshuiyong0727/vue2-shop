@@ -8,7 +8,7 @@
         <mt-button  icon="back" @click="$router.go(-1)"></mt-button>
       </div>
     </mt-header>
-    <section style="padding-top:46px">
+    <section style="margin-top: 70px;">
       <mt-field
         label="图片"
       >

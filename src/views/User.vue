@@ -44,18 +44,31 @@
     <div v-else style="
         padding-bottom: 40vw;
     background-image: linear-gradient(#e5f4ff, #f3f2f8);">
-      <div class="zuoyouduiqi" style="    padding: 2.81vw 4.8vw !important;">
-        <div @click="scanCode(1)" class="mint-header-button is-left">
-          <img style="width: 23px; "  src="../../static/img/saoyisao4.png">
+<!--      <div class="zuoyouduiqi" style="    padding: 2.81vw 4.8vw !important;">-->
+<!--        <div @click="scanCode(1)" class="mint-header-button is-left">-->
+<!--          <img style="width: 23px; "  src="../../static/img/saoyisao4.png">-->
+<!--        </div>-->
+<!--        <div>-->
+<!--          <span style="font-size: 16px; color: black;" class="mint-header-title">-->
+<!--            个人中心-->
+<!--          </span>-->
+<!--        </div>-->
+<!--        <div @click="comfirm(1)" class="mint-header-button is-right">-->
+<!--          <img style="width: 26px; "  src="../../static/img/setting0.png">-->
+<!--        </div>-->
+<!--      </div>-->
+      <div class="zuoyouduiqi top-title">
+        <div class="mint-header-button" @click="scanCode(1)">
+          <img style="width: 21px; "  src="../../static/img/saoyisao4.png">
         </div>
-        <div>
+        <div class="mint-header-button" style="text-align: right" @click="comfirm(1)"  >
+          <img style="width: 26px; "  src="../../static/img/setting0.png">
+        </div>
+      </div>
+      <div style="text-align: center;">
           <span style="font-size: 16px; color: black;" class="mint-header-title">
             个人中心
           </span>
-        </div>
-        <div @click="comfirm(1)" class="mint-header-button is-right">
-          <img style="width: 26px; "  src="../../static/img/setting0.png">
-        </div>
       </div>
       <div class="header"
               style="

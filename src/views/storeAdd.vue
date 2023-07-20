@@ -11,7 +11,7 @@
         <mt-button size="normal" style="font-size: 16px"  @click="goAdd">保存</mt-button>
       </div>
     </mt-header>
-    <div class="dingdans_item" style="margin-top: 42px; margin-bottom: 7px; border-bottom:0px ;padding:0" >
+    <div class="dingdans_item" style="margin-top: 74px; margin-bottom: 7px; border-bottom:0px ;padding:0" >
       <div class="dingdans_con" style="padding:0">
         <div style="  width: 210px;
   height: 84px;
@@ -24,7 +24,7 @@
         <div class="diangdans_con_right" style="font-size: 16px;    width: 130vw;
     padding-left: 5px;
     margin-right: 10px;">
-          <div class="dingdans_con_right_top">
+          <div class="dingdans_con_right_top" style="padding: 10px 0;">
             <p>
               <strong v-if="form.id"
                       @click="goodsDetail(form.id, 1) "

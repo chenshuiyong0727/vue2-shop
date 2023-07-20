@@ -56,7 +56,7 @@
     </div>
 
     <!--    列表开始-->
-    <div  :style="queryParam.addressId ? 'padding-top: 47px;' : ''">
+    <div  :style="queryParam.addressId ? 'padding-top: 70px;' : ''">
       <div class="dingdans_item_rt" v-for="(item,index) in tableData" :key="index" v-if="!(queryParam.addressId && item.months == '合计')">
         <div class="dingdans_top_rt">
           <strong style="margin-left: 12px;" v-if="item.months != '合计'">{{ item.months | dictToDescTypeValue(38) }}</strong>

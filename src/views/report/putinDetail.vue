@@ -54,7 +54,7 @@
       date-format="{value} 日"
       @confirm="handleConfirm">
     </mt-datetime-picker>
-    <div style="padding-top: 47px;">
+    <div style="padding-top: 70px;">
       <div class="dingdans_item_rt" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top_rt">
           <strong style="margin-left: 12px;">日期：</strong>

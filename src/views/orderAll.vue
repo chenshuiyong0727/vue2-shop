@@ -58,7 +58,7 @@
       <span style="margin-right: 0px;" class="aaa" :class="queryParam.status==8 && !queryParam.theExpire? 'activity' : ''" @click="searchStatus(8,7)">瑕疵</span>
     </div>
     <mt-loadmore
-      style="margin-top: 87px;"
+      style="margin-top: 116px;"
       :top-method="loadTop"
       :bottom-method="loadBottom"
       :bottom-all-loaded="allLoaded"

@@ -47,7 +47,7 @@
 <!--          </mt-button>-->
 <!--      </div>-->
     <mt-loadmore
-      style="padding-top: 0.86rem"
+      style="margin-top: 70px;"
       :top-method="loadTop"
       :bottom-method="loadBottom"
       :bottom-all-loaded="allLoaded"

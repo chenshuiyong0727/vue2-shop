@@ -8,7 +8,7 @@
         <mt-button size="normal" style="font-size: 16px"  @click="submit">保存</mt-button>
       </div>
     </mt-header>
-    <section style="padding-top:46px">
+    <section style="margin-top: 70px;">
       <mt-field
         :disabled="type == 1 "
         label="事项名称"
@@ -245,6 +245,7 @@ export default {
   @import '../assets/index/style.css';
 
   .login {
+    background-color: #ffffff;
   >section {
     .tip {
       padding: 6vw 3vw;

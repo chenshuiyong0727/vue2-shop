@@ -52,7 +52,7 @@
 
       </ul>
     </div>
-    <div style="padding-top: 3.86rem">
+    <div style="margin-top: 215px;">
       <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top">
           <div class="dingdans_top_left" style="     display: flex;
@@ -644,7 +644,7 @@
     width: 100vw;
     background: #fff;
     position: fixed;
-    top: 0;
+    top: 22px;
     left: 0;
     z-index: 99;
     margin-top:23.6vw;

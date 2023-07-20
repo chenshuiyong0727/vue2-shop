@@ -21,7 +21,7 @@
       </div>
     </mt-header>
     <div class="ui-flex justify-center center"
-         style="width: 100vw; height: 220px;background-color: white;margin-top: -3.1px;">
+         style="width: 100vw; height: 220px;background-color: white;margin-top: 28px;">
       <div class="cell">
         <img
           @click="avatarShow(form.img)"

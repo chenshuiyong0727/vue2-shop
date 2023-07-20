@@ -123,8 +123,10 @@
   color: #0fbe8f;
 }
 .mint-header {
-  /*background-image: linear-gradient(rgb(64, 158, 255), rgb(255, 255, 255));*/
-  padding: 5.81vw 4.8vw !important;
+  padding-top: 48px ;
+  padding-right: 4.8vw ;
+  padding-bottom: 18px ;
+  padding-left: 4.8vw ;
   background-color: #ffffff;
   color: black;
   font-size: 20px;
@@ -333,7 +335,7 @@ select{
   width: 100vw;
   background: #fff;
   position: fixed;
-  top: 0;
+  top: 23px;
   left: 0;
   z-index: 99;
   margin-top: 11.6vw !important;
@@ -530,7 +532,7 @@ select{
   border-bottom: 1vw solid #eee;
   height: 5vw;
   width: 100vw;
-  margin-top: 40px;
+  margin-top: 66px;
   background: #fff;
   padding: 6vw;
   position: fixed;
@@ -924,4 +926,34 @@ select {
   line-height: 1.6;
   font-size: inherit;
   width: 100%;
+}
+.top-title{
+  padding-top: 2.81vw !important;
+  padding-right: 4.8vw !important;
+  padding-left: 4.8vw !important;
+}
+.mint-header-button.is-right{
+  text-align: right;
+  margin-top: -54px;
+}
+.mint-header-button.is-left {
+  text-align: left;
+  margin-top: -54px;
+
+}
+.login_new .mint-header{
+  background-color :#F8FCFF
+}
+.mint-popup .mint-header{
+  padding:0px;
+}
+.mint-popup .mint-header .mint-header-button.is-left{
+  text-align: left;
+  margin-top: 0;
+  margin-left: 15px;
+}
+.mint-popup .mint-header .mint-header-button.is-right{
+  text-align: right;
+  margin-top: 0;
+  margin-right: 15px;
 }

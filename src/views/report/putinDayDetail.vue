@@ -54,7 +54,7 @@
       date-format="{value} 日"
       @confirm="handleConfirm">
     </mt-datetime-picker>
-    <div style="padding-top: 0.86rem">
+    <div style="padding-top: 70px">
       <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div v-if="item.actNo == '合计'"  style="    height: 50px;
     padding-top: 20px;">

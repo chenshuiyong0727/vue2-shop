@@ -51,7 +51,7 @@
     </div>
 <!--    列表-->
     <mt-loadmore
-      style="padding-top: 87px"
+      style="margin-top: 116px;"
       :top-method="loadTop"
       :bottom-method="loadBottom"
       :bottom-all-loaded="allLoaded"

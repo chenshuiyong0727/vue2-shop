@@ -41,21 +41,20 @@
         </div>
       </div>
 
-      <div  v-else style="
-        padding-bottom: 40vw;
-    background-image: linear-gradient(#e5f4ff, #f3f2f8);">
-        <div class="zuoyouduiqi" style="padding: 2.81vw 4.8vw !important;">
-          <div class="mint-header-button is-left" >
+      <div  v-else
+            style="padding-bottom: 40vw;background-image: linear-gradient(#e5f4ff, #f3f2f8);">
+        <div class="zuoyouduiqi top-title">
+          <div class="mint-header-button" >
             <img style="width: 21px; "  src="../../static/img/logo/logo-333-1.png">
           </div>
-          <div>
+          <div class="mint-header-button" style="text-align: right" @click="scanCode(1)"  >
+            <img style="width: 26px; "  src="../../static/img/photo2.png">
+          </div>
+        </div>
+        <div style="text-align: center;">
           <span style="font-size: 16px; color: black;" class="mint-header-title">
             移动仓库
           </span>
-          </div>
-          <div class="mint-header-button is-right" @click="scanCode(1)"  >
-            <img style="width: 26px; "  src="../../static/img/photo2.png">
-          </div>
         </div>
         <div class="header">
           <div class="my-indent-right-1" style="margin-left: 4vw;">

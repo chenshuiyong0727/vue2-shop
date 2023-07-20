@@ -23,7 +23,7 @@
         </el-date-picker>
       </div>
     </div>
-    <div style="padding-top: 0.86rem">
+    <div style="margin-top: 70px;">
       <div class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top">
           <div class="dingdans_top_left">

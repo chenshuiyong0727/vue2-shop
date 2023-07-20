@@ -30,7 +30,7 @@
       </div>
     </div>
     <mt-loadmore
-      style="padding-top: 48px;"
+      style="margin-top: 72px;"
       :top-method="loadTop"
       :bottom-method="loadBottom"
       :bottom-all-loaded="allLoaded"
