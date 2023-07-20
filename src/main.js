@@ -16,9 +16,6 @@ import VeHistogram from 'v-charts/lib/histogram.common'
 // todo import Vconsole from 'vconsole'
 // let vConsole = new Vconsole()
 // Vue.use(vConsole);
-import Vconsole from 'vconsole'
-const vConsole = new Vconsole()
-Vue.use(vConsole)
 Vue.use(ElementUI);
 Vue.use(Mint);
 Vue.config.productionTip = false

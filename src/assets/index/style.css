@@ -246,6 +246,7 @@ select{
   text-decoration: none;
 }
 .el-message-box {
+  margin-bottom: 170px;
   display: inline-block;
   width: 300px;
   padding-bottom: 10px;
@@ -254,7 +255,6 @@ select{
   border-radius: 4px;
   border: 1px solid #EBEEF5;
   font-size: 18px;
-  /*box-shadow: 0 2px 12px 0rgba(0,0,0,.1);*/
   text-align: left;
   overflow: hidden;
   -webkit-backface-visibility: hidden;
@@ -984,4 +984,57 @@ select {
   top: 0;
   right: 0;
   left: 0;
+}
+.el-icon-warning:before{
+  content:''
+}
+.el-message-box__title{
+  padding-left: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  line-height: 1;
+  color: #fff;
+}
+.el-message-box__wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.el-message-box__btns .el-button {
+  border: 0px;
+  padding: 9px 9px;
+  font-size: 14px;
+  border-radius: 3px;
+  color: #409EFF;
+}
+.el-message-box__btns .el-button--primary {
+  font-size: 14px;
+  color: #409EFF;
+  background-color: #FFF;
+  border-color: #FFF;
+}
+.el-icon-close:before{
+  content:''
+}
+/*.el-message-box__content {*/
+/*  padding: 10px 15px;*/
+/*  color: #606266;*/
+/*  font-size: 14px;*/
+/*  margin-bottom: 10px;*/
+/*  margin-top: -20px;*/
+/*}*/
+.el-message-box__content {
+  padding: 10px 15px;
+  color: #333333;
+  font-size: 15px;
+  margin-bottom: 10px;
+  margin-top: -20px;
+}
+.mintui-back:before{
+  content: "\E600";
+  font-size: 22px;
+  margin-left: -3px;
 }

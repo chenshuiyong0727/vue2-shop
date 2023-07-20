@@ -23,8 +23,8 @@ function reloadSubsubscribeArr(newToken) {
 // create an axios instance
 const service = axios.create({
   // baseURL: envSetting.baseURL, // url = base url + request url
-  baseURL: 'http://114.132.243.79:28027/', // 正式 url = base url + request url
-  // baseURL: 'http://192.168.1.125:28027/', // 测试 url = base url + request url
+  // baseURL: 'http://114.132.243.79:28027/', // 正式 url = base url + request url
+  baseURL: 'http://192.168.1.125:28027/', // 测试 url = base url + request url
   // baseURL: 'http://localhost:28027/', // 测试 url = base url + request url
   // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
