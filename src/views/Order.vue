@@ -726,18 +726,15 @@
       }
     },
     // beforeRouteEnter(to, from, next) {
-    //   // console.info('beforeRouteEnter')
     //   this.$refs.loadmore.scrollTo(0, 1000);
     //
     //   // next(vm => {
-    //   //   console.info('beforeRouteEnter')
     //   //   // window.scroll(0, 1000 )
     //   //   this.$refs.loadmore.scrollTo(0, 1000);
     //   //
     //   //   // document.documentElement.scrollTop = 10000
     //   //   // 回到原来的位置
     //   //   // const position = JSON.parse(localStorage.getItem('position'))
-    //   //   // console.info(position)
     //   //   // // document.querySelector('.dingdans_item').scrollTop = position
     //   //   // // let recruitScrollY = this.$store.state.recruitScrollY
     //   //   // window.scroll(0, position)

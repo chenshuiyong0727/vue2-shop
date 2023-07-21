@@ -1147,7 +1147,6 @@
             }
           })
         }).catch(() => {
-          // alert(" b" + id)
           // this.goBack()
         })
         // this.$confirm('是否删除', '提示', {
@@ -1155,7 +1154,6 @@
         //   cancelButtonText: '取消',
         //   type: 'warning'
         // }).then(() => {
-        //   alert(id)
         //   // goodsInventoryApi.delById(id).then(res => {
         //   //   if (res.subCode === 1000) {
         //   //     this.$message.success(res.subMsg)

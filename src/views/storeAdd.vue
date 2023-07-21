@@ -231,7 +231,6 @@ export default {
         this.orderData1.profits = parseFloat(profits).toFixed(2)
       }
       this.isShowDialog1 = true
-      console.info(this.orderData1)
     },
     gotoIndex() {
       this.$router.push({ path: '/'})
@@ -281,7 +280,6 @@ export default {
         table1.push(data1)
       }
       this.tableData = table1
-      console.info(this.tableData)
     },
     setUnifiedDwPrice() {
       if (!this.unifiedDwPrice) {
@@ -338,7 +336,6 @@ export default {
       }
     },
     goDetail(item) {
-      console.info(item)
     },
     goDel() {
       this.del(this.inventoryIndex)
@@ -351,7 +348,6 @@ export default {
           this.activeIndex.splice(i, 1)
         }
       }
-      console.log(this.activeIndex)
     },
     delItem(item) {
       for (let i = 0; i < this.tableData.length; i++) {
@@ -359,7 +355,6 @@ export default {
           this.tableData.splice(i, 1)
         }
       }
-      console.log(this.tableData)
     },
     avatarShow(e) {
       if (!e) {

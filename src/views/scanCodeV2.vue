@@ -398,7 +398,6 @@
             this.loading = false
             let rows = res.data ? res.data.list : []
             this.chartData.rows = rows
-            console.info(this.chartData.rows)
             let theirPrice = res.data.price - (res.data.price * 0.075 + 38 + 8.5)
             this.priceData.theirPrice = parseFloat(theirPrice).toFixed(2)
 
@@ -436,7 +435,6 @@
               }
             }
             if (totalCount < this.form.sizeList.length && this.reqCount < 5) {
-              console.info(this.reqCount)
               setTimeout(()=>{
                 this.reqCount ++
                 this.getPage()
@@ -466,12 +464,10 @@
         }
         showLoading()
         let overSize = file.size / 1024 / 1024
-        console.info("size1",overSize)
         if (overSize > 1) {
           file = await imageConversion.compressAccurately(file, 200)
         }
         overSize = file.size / 1024 / 1024
-        console.info("size2",overSize)
         return file
       },
       // 触发上传材料文件
@@ -480,14 +476,11 @@
         let filename = inputFile.name;
         let index = filename.lastIndexOf(".")
         filename = filename.substring(0, index)
-        console.info(filename)
         let overSize = inputFile.size / 1024 / 1024
-        console.info(overSize)
         if (overSize > 1) {
           inputFile = await imageConversion.compressAccurately(inputFile, 200)
         }
         overSize = inputFile.size / 1024 / 1024
-        console.info(overSize)
         let param = {
           fileId: filename,
           file: inputFile

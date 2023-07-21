@@ -409,7 +409,6 @@ export default {
     },
     handleScroll () {
       let scrollTop = this.$refs.hello.scrollTop
-      console.info(scrollTop)
       if (scrollTop < 80){
         this.flag = false
       } else{

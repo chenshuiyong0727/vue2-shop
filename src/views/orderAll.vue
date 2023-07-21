@@ -984,7 +984,6 @@
       tabScroll(){
         let scrollNum = this.scrollNum
         let activeTab = document.querySelectorAll('.aaa');
-        console.log(activeTab[scrollNum].offsetLeft);
         this.$refs.searchList.scrollLeft = activeTab[scrollNum].offsetLeft;
       },
       initBatch() {
@@ -1012,7 +1011,6 @@
               this.requestParam3.inStoreFreeDay = res.data ? res.data.inStoreFreeDay : ''
               this.requestParam3.freight = res.data ? res.data.freight : ''
               this.requestParam3.waybillNo = res.data ? res.data.waybillNo : ''
-              console.info(this.requestParam3)
             } else {
               this.$toast(res.subMsg)
             }
@@ -1101,10 +1099,8 @@
           this.$toast('闪电直发入仓 ，免仓储费天数不能为空')
           return
         }
-        console.info(this.requestParam3)
         this.requestParam3.deliveryDeadlineTime = this.requestParam3.deliveryDeadlineTime ? parseTime(this.requestParam3.deliveryDeadlineTime) : ''
         this.requestParam3.inStoreTime = this.requestParam3.inStoreTime ? parseTime(this.requestParam3.inStoreTime) : ''
-        console.info(this.requestParam3)
         // 闪电直发
         goodsOrderApi.updateSaleType(this.requestParam3).then(res => {
           this.$toast(res.subMsg)
@@ -1205,7 +1201,6 @@
         this.search1()
       },
       gotosearch() {
-        console.info('queryParam' , this.queryParam)
         this.isShowDialog2 = true
       },
       searchTheExpire() {

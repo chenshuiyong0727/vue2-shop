@@ -398,8 +398,6 @@
       //       item.checked = !item.checked
       //     }
       //   })
-      //   // alert(this.ids)
-      //   // console.info("id" ,this.ids)
       // },
       goDetail(id) {
         this.$router.push({path: '/storeDetail', query: {id}})
@@ -442,7 +440,6 @@
             this.totalCount = res.data ? res.data.pageInfo.totalCount : 0
             this.inventoryData = res.data.goodsInventoryPageVo ? res.data.goodsInventoryPageVo
               : this.inventoryData
-            console.info(res.data.goodsInventoryPageVo)
             if (this.totalCount == 0) {
               this.emtityMsg = '暂无相关数据'
             } else {
