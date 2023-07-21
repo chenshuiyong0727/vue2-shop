@@ -626,6 +626,8 @@
       },
       async handleImageError(res, file) {
         hideLoading()
+        console.error(JSON.stringify(res))
+        console.error('上传失败' ,res)
         this.$toast('上传失败')
       },
 
