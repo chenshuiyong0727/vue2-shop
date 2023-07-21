@@ -32,10 +32,10 @@
 
         <mt-header  title="移动仓库">
           <div slot="left">
-            <img  @click="scanCode(1)" style="width: 21px; "  src="../../static/img/logo/logo-333-1.png">
+            <img style="width: 21px; "  src="../../static/img/logo/logo-333-1.png">
           </div>
           <div slot="right">
-            <img  @click="comfirm(1)" style="width: 26px; "  src="../../static/img/photo2.png">
+            <img  @click="scanCode(1)" style="width: 26px; "  src="../../static/img/photo2.png">
           </div>
         </mt-header>
         <div class="header" style="    margin-top: 11vw;margin-bottom: -3px;">

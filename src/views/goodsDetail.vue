@@ -416,6 +416,7 @@
     },
     data(){
       return {
+        imageZoom: '',
         isShowDialog2: false,
         pictureZoomShow: false,
         props: {

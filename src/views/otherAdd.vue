@@ -15,7 +15,7 @@
         <el-upload
           :disabled="type == 1 "
           class="avatar-uploader"
-          action="/gw/op/v1/file/uploadFileMinio"
+          :action="actionUrl"
           :show-file-list="false"
           :on-error="handleImageError"
           :on-success="handleImageSuccess"
@@ -122,7 +122,9 @@
 <script>
 import Header from '@/common/_header.vue'
 import { goodsOtherApi } from '@/api/goodsOther'
-
+import { envSetting } from '@/utils/env.js'
+import * as imageConversion from 'image-conversion'
+import { hideLoading, showLoading } from '@/components/Loading/loading'
 export default {
   components:{
     'v-header':Header
@@ -138,6 +140,7 @@ export default {
         remark: '',
         price: ''
       },
+      actionUrl: envSetting.baseURL+'/gw/op/v1/file/uploadFileMinio',
       fileUrl: fileUrl,
       typeList: [],
       dataStatusList: [],
@@ -224,13 +227,15 @@ export default {
       this.dataStatusList = sysDictList.filter(item => item.typeValue == 36)
     },
     async handleImageSuccess(res, file) {
+      hideLoading()
       this.$toast('上传成功')
       this.form.imgUrl = res.data
     },
     async handleImageError(res, file) {
+      hideLoading()
       this.$toast('上传失败')
     },
-    beforeImageUpload(file) {
+    async  beforeImageUpload(file) {
       const fileName = file.name
       const fileType = fileName.substring(fileName.lastIndexOf('.'))
       if (
@@ -246,6 +251,15 @@ export default {
         )
         return false
       }
+      showLoading()
+      let overSize = file.size / 1024 / 1024
+      console.info("size1",overSize)
+      if (overSize > 1) {
+        file = await imageConversion.compressAccurately(file, 200)
+      }
+      overSize = file.size / 1024 / 1024
+      console.info("size2",overSize)
+      return file
     },
   }
 }

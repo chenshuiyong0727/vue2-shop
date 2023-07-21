@@ -49,7 +49,7 @@
           <el-upload
             :disabled="type == 1 "
             class="avatar-uploader"
-            action="/gw/op/v1/file/v2/uploadFileStore"
+            :action="actionUrl"
             :show-file-list="false"
             :on-error="handleImageError"
             :on-success="handleImageSuccess"
@@ -63,7 +63,7 @@
             </el-button>
           </el-upload>
         </el-col>
-        <el-col :span="6" >
+        <el-col :span="6">
           <el-button
             :disabled="type == 1 "
             type="text"
@@ -232,7 +232,7 @@
     </el-dialog>
     <div class="popContainer" v-if="pictureZoomShow" @click="pictureZoomShow = false">
       <div class="imageShow">
-        <img :src="form.img" alt="" width="100%" >
+        <img :src="form.img" alt="" width="100%" class="showImg">
       </div>
     </div>
 <!--    <div v-if="type==3 && !form.id" style="-->
@@ -261,7 +261,7 @@
   import { goodsBaseSizePriceApi } from '@/api/goodsBaseSizePrice'
   import axios from 'axios'
   import * as imageConversion from 'image-conversion'
-  // import Footer from '@/common/_footer.vue'
+  import { envSetting } from '@/utils/env.js'
   import { hideLoading, showLoading } from '@/components/Loading/loading'
 
   export default {
@@ -319,6 +319,7 @@
         options: [],
         uploadData: {},
         fileUrl: fileUrl,
+        actionUrl: envSetting.baseURL+'/gw/op/v1/file/v2/uploadFileStore',
         typeList: [],
         requestParam: {
           sizeId: '',
@@ -471,8 +472,9 @@
         return file
       },
       // 触发上传材料文件
-      async getFileData() {
-        let inputFile = this.$refs.file1.files[0];
+      async getFileData(e) {
+        // let inputFile = this.$refs.file1.files[0];
+        let inputFile = e.target.files[0];
         let filename = inputFile.name;
         let index = filename.lastIndexOf(".")
         filename = filename.substring(0, index)
@@ -488,12 +490,14 @@
         this.uploadImg(param);
       },
       uploadImg(param) {
+        // baseURL: 'http://114.132.243.79:28027', // 正式 url = base url + request url
+        let baseURL= 'http://192.168.1.125:28027' // 测试 url = base url + request url
         let formData = new FormData();
         formData.set("actNo", param.fileId);
         formData.set("file", param.file);
         let reopt = {
           method: 'post',
-          url: '/gw/op/v1/file/v2/uploadFileStore',
+          url: this.actionUrl,
           headers: {
             'Content-Type': 'multipart/form-data'
           },
@@ -518,6 +522,10 @@
             this.$toast('识别失败，请手动输入')
           }
         })
+      },
+      plusReady () {
+        const win = plus.webview.create();
+        win.show();
       },
       getDetailById(id) {
         if (id) {

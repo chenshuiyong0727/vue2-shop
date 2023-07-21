@@ -15,7 +15,7 @@
         <el-upload
           :disabled="type == 1 "
           class="avatar-uploader"
-          action="/gw/op/v1/file/uploadFileMinio"
+          :action="actionUrl"
           :show-file-list="false"
           :on-error="handleImageError"
           :on-success="handleImageSuccess"
@@ -64,7 +64,7 @@
 
 <script>
 import Header from '@/common/_header.vue'
-// import { goodsOtherApi } from '@/api/goodsOther'
+import { envSetting } from '@/utils/env.js'
 import { userContainerApi } from '@/api/user'
 import * as imageConversion from 'image-conversion'
 import { hideLoading, showLoading } from '@/components/Loading/loading'
@@ -80,6 +80,7 @@ export default {
         userRealName: '',
         imgUrl: ''
       },
+      actionUrl: envSetting.baseURL+'/gw/op/v1/file/uploadFileMinio',
       fileUrl: fileUrl,
       type: ''
     }
