@@ -944,9 +944,6 @@ select {
 .login_new .mint-header{
   background-color :#F8FCFF
 }
-.mint-popup .mint-header{
-  padding:0px;
-}
 .mint-popup .mint-header .mint-header-button.is-left{
   text-align: left;
   margin-top: 0;
@@ -1037,4 +1034,7 @@ select {
   content: "\E600";
   font-size: 22px;
   margin-left: -3px;
+}
+.mint-popup .mint-header{
+  padding:0px;
 }
