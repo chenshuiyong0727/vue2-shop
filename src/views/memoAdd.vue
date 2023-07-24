@@ -47,7 +47,7 @@
 <!--          :value="+item.fieldValue">-->
 <!--        </el-option>-->
 <!--          </el-select>-->
-        <select class=" select100_select select" v-model="form.type" :disabled="type == 1 ">
+        <select class=" select100_select select" v-model="form.dateType" :disabled="type == 1 ">
           <option label="请选择日历类型"  value=""></option>
           <option
             v-for="item in dateTypeList"
