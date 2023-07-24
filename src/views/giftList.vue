@@ -222,6 +222,8 @@
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import { giftApi } from '@/api/gift'
+  import { changeTitle } from '@/utils/index'
+
   export default {
     components: {
       'v-baseline': Baseline,
@@ -278,6 +280,7 @@
       this.getPage()
       this.listSysDict()
       this.keyupSubmit()
+      changeTitle()
     },
     methods: {
       keyupSubmit() {

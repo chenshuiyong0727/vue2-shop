@@ -201,12 +201,8 @@
 </template>
 
 <script>
-  // import Chose from '@/components/detail/chose.vue'
-  // import Content from '@/components/detail/content.vue'
-  // import Footer from '@/components/detail/footer.vue'
-  // import Baseline from '@/common/_baseline.vue'
+  import { changeTitle } from '@/utils/index'
   import {goodsInventoryApi} from '@/api/goodsInventory'
-  // import detail from '@/http/mock.js' //模拟数据
   export default {
     components:{
       // 'v-chose':Chose,
@@ -232,8 +228,10 @@
       if (id) {
         this.getDetailById(id)
       }
+      changeTitle()
     },
     mounted() {
+      changeTitle()
       this.listSysDict()
     },
     methods:{

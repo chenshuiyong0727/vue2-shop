@@ -50,7 +50,7 @@
 <!--          @click="getPage">搜索</mt-button>-->
 <!--      </div>-->
     </div>
-    <div v-if="!queryParam.addressId" style="background-color: #fff; margin-top: -10px;    border-bottom: 1vw solid #eee;" >
+    <div v-if="!queryParam.addressId" style="background-color: #fff;  border-bottom: 1vw solid #eee;" >
       <ve-pie height="320px"
               :data="chartData1" :settings="chartSettings1"></ve-pie>
     </div>
@@ -159,6 +159,8 @@
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import { reportApi } from '@/api/report'
+  import { changeTitle } from '@/utils/index'
+
   export default {
     components: {
       'v-baseline': Baseline,
@@ -184,6 +186,7 @@
     mounted() {
       this.getPage()
       this.listSysDict()
+      changeTitle()
     },
     methods: {
       keyupSubmit() {
@@ -226,13 +229,7 @@
             } else {
               this.chartData1.rows = []
               for (let i = 0; i < this.tableData.length; i++) {
-                console.info(this.tableData[i])
                 let name = this.getName(this.tableData[i].months)
-                // let typeData = this.addressList.filter(item => item.fieldValue == this.tableData[i].months)
-                // if (!typeData || typeData.length == 0) {
-                //   continue
-                // }
-                // let name = typeData[0].fieldName
                 if (!name) {
                   continue
                 }

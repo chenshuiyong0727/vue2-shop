@@ -167,6 +167,8 @@
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import { goodsBaseApi } from '@/api/goodsBase'
+  import { changeTitle } from '@/utils/index'
+
   export default {
     components: {
       'v-baseline': Baseline,
@@ -217,6 +219,7 @@
     },
     activated() {
       this.keyupSubmit()
+      changeTitle()
       // 新开的页面
       this.isBack = false
       if (this.$route.meta.isBack) {

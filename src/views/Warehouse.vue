@@ -477,7 +477,7 @@
   import {goodsOrderApi} from '@/api/goodsOrder'
   import {goodsInventoryApi} from '@/api/goodsInventory'
   import { goodsBaseApi } from '@/api/goodsBase'
-  import { parseTime,formatDateMin } from '@/utils/index'
+  import { parseTime,formatDateMin,changeTitle } from '@/utils/index'
 
   export default {
     components: {
@@ -654,7 +654,8 @@
     //   this.listSysDict()
     // },
     activated() {
-      this.keyupSubmit()
+            this.keyupSubmit()
+      changeTitle()
 
       // 新开的页面
         this.isBack = false

@@ -171,6 +171,8 @@
 import Header from '@/common/_header.vue'
 import { goodsBaseApi } from '@/api/goodsBase'
 import { goodsInventoryApi } from '@/api/goodsInventory'
+import { changeTitle } from '@/utils/index'
+
 export default {
   components:{
     'v-header':Header
@@ -206,6 +208,7 @@ export default {
     }
   },
   mounted() {
+    changeTitle()
     this.listSysDict()
   },
   methods:{

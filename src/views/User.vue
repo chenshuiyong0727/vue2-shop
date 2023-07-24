@@ -61,12 +61,17 @@
         <div class="mint-header-button" @click="scanCode(1)">
           <img style="width: 22px; "  src="../../static/img/saoyisao4.png">
         </div>
+        <div v-if="envSetting == 'web'" style="text-align: center;">
+          <span style="font-size: 16px; color: #333333;" >
+            个人中心
+          </span>
+        </div>
         <div class="mint-header-button" style="text-align: right" @click="comfirm(1)"  >
           <img style="width: 26px; "  src="../../static/img/setting0.png">
         </div>
       </div>
-      <div style="text-align: center;">
-          <span style="font-size: 16px; color: black;" class="mint-header-title">
+      <div  v-if="envSetting != 'web'" style="text-align: center;">
+          <span style="font-size: 16px; color: #333333;">
             个人中心
           </span>
       </div>
@@ -236,11 +241,11 @@
 </template>
 
 <script>
-  // import * as mockData from '@/http/mock.js' //模拟数据
   import {goodsBaseApi} from '@/api/goodsBase'
   import {goodsOrderApi} from '@/api/goodsOrder'
   import Footer from '@/common/_footer.vue'
   import {userContainerApi} from '@/api/user'
+  import { envSetting } from '@/utils/memt.js'
 
   export default {
     components: {
@@ -250,6 +255,7 @@
       return {
         flag: false,
         imgUrl: '',
+        envSetting: envSetting.ment,
         fileUrl: fileUrl,
         orderIofo: {},
         // userName: localStorage.getItem('user_name'),
@@ -263,15 +269,43 @@
       }
     },
     mounted(){
+      this.changeTitle()
       this.$refs.content.onscroll = ()=>{
         this.handleScroll();
       }
+      this.getUcUser()
+      console.info(this.envSetting)
     },
     created() {
-      this.getUcUser()
+      // this.changeTitle()
+      // this.getUcUser()
       this.getData()
     },
     methods: {
+      changeTitle() {
+        let first = document.querySelectorAll('.mint-header-title')[0]
+        console.info(first)
+        if (!first){
+          // first = document.querySelectorAll('.mint-header-title')[0]
+          first = this.$el.getElementsByClassName('mint-header-title')[0]
+          console.info(first)
+        }
+        if (first){
+          first.style.cssText = 'margin-top: -54px;'
+        }
+        setTimeout(()=>{
+          let first = document.querySelectorAll('.mint-header-title')[0]
+          console.info(first)
+          if (!first){
+            // first = document.querySelectorAll('.mint-header-title')[0]
+            first = this.$el.getElementsByClassName('mint-header-title')[0]
+            console.info(first)
+          }
+          if (first){
+            first.style.cssText = 'margin-top: -54px;'
+          }
+        },1)
+      },
       handleScroll () {
         let scrollTop = this.$refs.content.scrollTop;
         if (scrollTop < 10){

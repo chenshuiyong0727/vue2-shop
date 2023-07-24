@@ -261,6 +261,8 @@
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import { goodsActApi } from '@/api/goodsAct'
+  import { changeTitle } from '@/utils/index'
+
   export default {
     components: {
       'v-baseline': Baseline,
@@ -314,12 +316,12 @@
         totalCount: 1
       }
     },
-    // mounted() {
-    //   this.getPage()
-    //   this.listSysDict()
-    // },
+    mounted() {
+      changeTitle()
+    },
     activated() {
       this.keyupSubmit()
+      changeTitle()
       this.isActUser =  localStorage.getItem('isActUser')
       // 新开的页面
       this.isBack = false

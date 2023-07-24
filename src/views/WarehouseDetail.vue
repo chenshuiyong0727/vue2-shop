@@ -243,9 +243,8 @@
   </div>
 </template>
 <script>
-  // import Footer from '@/components/goodsBase/store_footer.vue'
   import Baseline from '@/common/_baseline.vue'
-  // import Footer from '@/common/_footer.vue'
+  import { changeTitle } from '@/utils/index'
   import { goodsInventoryApi } from '@/api/goodsInventory'
 
   export default {
@@ -304,6 +303,9 @@
       if (this.queryParam.goodsId) {
         this.getPage()
       }
+    },
+    mounted() {
+      changeTitle()
     },
     methods: {
       initBatch() {

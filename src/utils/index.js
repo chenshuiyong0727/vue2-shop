@@ -353,3 +353,41 @@ export function formatDateMin (secs) {
   return year + '-' + month + '-' + date + ' ' + hour + ':' + minute + ':' + second
 }
 
+export function changeTitle() {
+  let first = document.querySelectorAll('.mint-header-title')[0]
+  console.info(first)
+  if (!first){
+    // first = document.querySelectorAll('.mint-header-title')[0]
+    first = this.$el.getElementsByClassName('mint-header-title')[0]
+    console.info(first)
+  }
+  if (first){
+    first.style.cssText = 'margin-top: -54px;'
+  }
+  setTimeout(()=>{
+    let first = document.querySelectorAll('.mint-header-title')[0]
+    console.info(first)
+    if (!first){
+      // first = document.querySelectorAll('.mint-header-title')[0]
+      first = this.$el.getElementsByClassName('mint-header-title')[0]
+      console.info(first)
+    }
+    if (first){
+      first.style.cssText = 'margin-top: -54px;'
+    }
+  },1)
+}
+
+
+// changeTitle() {
+//   let first= document.querySelectorAll('.mint-header-title')[0]
+//   console.info(first)
+//   if (!first){
+//     // first = document.querySelectorAll('.mint-header-title')[0]
+//     first = this.$el.getElementsByClassName('mint-header-title')[0]
+//     console.info(first)
+//   }
+//   if (first){
+//     first.style.cssText = 'color: rgb(228 46 158); margin-top: -54px;'
+//   }
+// },

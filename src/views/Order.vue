@@ -557,7 +557,7 @@
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import {goodsOrderApi} from '@/api/goodsOrder'
-  import {parseTime} from '@/utils/index'
+  import {parseTime,changeTitle} from '@/utils/index'
 
   export default {
     components: {
@@ -689,7 +689,8 @@
     activated() {
       this.showSd = false
       this.checkAll = false
-      this.keyupSubmit()
+            this.keyupSubmit()
+      changeTitle()
       // 新开的页面
       this.isBack = false
       if (!this.$route.meta.isBack) {

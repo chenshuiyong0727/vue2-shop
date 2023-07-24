@@ -283,7 +283,7 @@
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import { goodsDefectsApi } from '@/api/goodsDefects'
-  import {parseTime ,formatDateMin} from '@/utils/index'
+  import {parseTime ,formatDateMin,changeTitle} from '@/utils/index'
   export default {
     components: {
       'v-baseline': Baseline,
@@ -334,6 +334,7 @@
       this.getPage()
       this.listSysDict()
       this.keyupSubmit()
+      changeTitle()
     },
     methods: {
       chosseTime() {

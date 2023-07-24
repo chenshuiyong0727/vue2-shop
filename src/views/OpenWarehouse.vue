@@ -117,6 +117,8 @@
   import Footer from '@/common/_footer.vue'
   import { goodsOrderApi } from '@/api/goodsOrder'
   import { goodsInventoryApi } from '@/api/goodsInventory'
+  import { changeTitle } from '@/utils/index'
+
   import {
     MessageBox
   } from "mint-ui";
@@ -241,9 +243,11 @@
       if (this.queryParam.actNo || this.queryParam.size) {
         this.search1()
       }
-      this.keyupSubmit()
+            this.keyupSubmit()
+      changeTitle()
     },
     mounted() {
+      changeTitle()
       this.getPage()
       this.listSysDict()
     },

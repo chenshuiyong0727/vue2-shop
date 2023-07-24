@@ -146,6 +146,7 @@
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import {reportApi} from '@/api/report'
+  import { changeTitle } from '@/utils/index'
 
   export default {
     components: {
@@ -169,6 +170,7 @@
     },
     mounted() {
       this.getPage()
+      changeTitle()
     },
     methods: {
       chosseTime(pickerValueType) {

@@ -101,6 +101,7 @@
 <script>
 import Header from '@/common/_header.vue'
 import { memoApi } from '@/api/memo'
+import { changeTitle } from '@/utils/index'
 
 export default {
   components:{
@@ -133,6 +134,7 @@ export default {
     }
   },
   mounted() {
+    changeTitle()
     this.listSysDict()
   },
   methods:{

@@ -1,7 +1,6 @@
 <template lang="html">
   <div class="login_new">
-    <mt-header title="">
-    </mt-header>
+    <mt-header title=""></mt-header>
     <div style="
     font-size: 10px;
     padding-top: 15vw;
@@ -62,7 +61,7 @@
 
 <script>
 import Header from '@/common/_header.vue'
-import { deepCopy, encrypt } from '@/utils'
+import { deepCopy, encrypt,changeTitle } from '@/utils'
 import { initSysDict } from '@/utils/initRequest'
 import { userContainerApi } from '@/api/user'
 
@@ -91,6 +90,7 @@ export default {
   //   this.flag = flag
   // },
   mounted() {
+    changeTitle()
     if (localStorage.getItem('org_token_auth')) {
       Toast('您处于登录状态，自动为您跳转到首页');
       this.$router.push({ path: '/'})

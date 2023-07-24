@@ -763,7 +763,7 @@
 <script>
   import Footer from '@/common/_footer.vue'
   import {goodsOrderApi} from '@/api/goodsOrder'
-  import {parseTime ,formatDateMin} from '@/utils/index'
+  import {parseTime ,formatDateMin,changeTitle} from '@/utils/index'
 
   export default {
     components: {
@@ -897,7 +897,8 @@
       }
     },
     activated() {
-      this.keyupSubmit()
+            this.keyupSubmit()
+      changeTitle()
       // 新开的页面
       this.isBack = false
       if (!this.$route.meta.isBack) {

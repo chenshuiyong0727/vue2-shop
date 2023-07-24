@@ -8,7 +8,6 @@ const User = resolve => require(['@/views/User.vue'], resolve)
 const userInfo = resolve => require(['@/views/userInfo.vue'], resolve)
 const Order = resolve => require(['@/views/OrderAll.vue'], resolve)
 const orderDetail = resolve => require(['@/views/orderDetail.vue'], resolve)
-const orderDetailnew = resolve => require(['@/views/orderDetail_new.vue'], resolve)
 const putin = resolve => require(['@/views/report/putin.vue'], resolve)
 const channelStorage = resolve => require(['@/views/report/channelStorage.vue'], resolve)
 const sellListDetail = resolve => require(['@/views/report/sellListDetail.vue'], resolve)
@@ -17,7 +16,6 @@ const putinDayDetail = resolve => require(['@/views/report/putinDayDetail.vue'],
 const areaSellList = resolve => require(['@/views/report/areaSellList.vue'], resolve)
 const sellList = resolve => require(['@/views/report/sellList.vue'], resolve)
 const giftList = resolve => require(['@/views/giftList.vue'], resolve)
-const goodsBusiness = resolve => require(['@/views/goodsBusiness.vue'], resolve)
 const goodsAct = resolve => require(['@/views/goodsAct.vue'], resolve)
 const otherList = resolve => require(['@/views/otherList.vue'], resolve)
 const memo = resolve => require(['@/views/memo.vue'], resolve)
@@ -78,13 +76,6 @@ export default new Router({
       path: '/orderDetail',
       name: '订单详情',
       component: orderDetail,
-      meta: {
-        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
-      },
-    }, {
-      path: '/orderDetailnew',
-      name: '订单详情',
-      component: orderDetailnew,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },
@@ -236,13 +227,6 @@ export default new Router({
       path: '/giftList',
       name: '红包',
       component: giftList,
-      meta: {
-        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
-      },
-    }, {
-      path: '/goodsBusiness',
-      name: '营销',
-      component: goodsBusiness,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
       },

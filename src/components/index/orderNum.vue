@@ -154,7 +154,8 @@
       }
     },
     created(){
-      this.keyupSubmit()
+            this.keyupSubmit()
+      changeTitle()
     },
     methods:{
       handleScroll () {

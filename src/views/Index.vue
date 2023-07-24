@@ -264,11 +264,10 @@
 </template>
 
 <script>
-// import orderNum from '@/components/index/orderNum.vue'
 import Section1 from '@/components/index/section1.vue'
 import Baseline from '@/common/_baseline.vue'
 import Footer from '@/common/_footer.vue'
-// import index from '@/http/mock.js' //模拟数据
+import { changeTitle } from '@/utils/index'
 import { goodsOrderApi } from '@/api/goodsOrder'
 
 export default {
@@ -394,13 +393,13 @@ export default {
     this.getData1()
     this.getData2()
     this.keyupSubmit()
-    // this.getData()
-    // this.getData1()
+    changeTitle()
   },
   mounted(){
     this.$refs.hello.onscroll = ()=>{
       this.handleScroll();
     }
+    changeTitle()
   },
   methods: {
 

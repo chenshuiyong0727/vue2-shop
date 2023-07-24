@@ -1,7 +1,6 @@
 import { userContainerApi } from '@/api/user'
 import { removeCookieByName } from '@/utils/auth'
 import { resetRouter } from '@/router'
-// import { encrypt } from '@/utils'
 
 const getDefaultState = () => {
   return {
