@@ -411,7 +411,7 @@
   import { goodsBaseSizeApi } from '@/api/goodsBaseSize'
   import { goodsBaseSizePriceApi } from '@/api/goodsBaseSizePrice'
   import {goodsBaseApi} from '@/api/goodsBase'
-  import { changeTitle } from '@/utils/index'
+
 
   export default {
     components:{
@@ -482,10 +482,10 @@
       if (id) {
         this.getDetailById(id)
       }
-      changeTitle()
+
     },
     mounted() {
-      changeTitle()
+
     },
     methods:{
       profitData(dayNum) {

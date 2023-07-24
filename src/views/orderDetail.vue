@@ -547,7 +547,7 @@
 
 <script>
   import {goodsOrderApi} from '@/api/goodsOrder'
-  import {parseTime,changeTitle} from '@/utils' // import detail from '@/http/mock.js' //模拟数据
+  import {parseTime} from '@/utils' // import detail from '@/http/mock.js' //模拟数据
 
   export default {
     components: {
@@ -588,7 +588,7 @@
       }
     },
     mounted() {
-      changeTitle()
+
       this.listSysDict()
     },
     methods: {

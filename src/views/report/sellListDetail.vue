@@ -118,7 +118,7 @@
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import {reportApi} from '@/api/report'
-  import { changeTitle } from '@/utils/index'
+
 
   export default {
     components: {
@@ -141,7 +141,7 @@
       }
     },
     mounted() {
-      changeTitle()
+
     },
     created() {
       const { months } = this.$route.query
@@ -154,7 +154,7 @@
         this.queryParam.createTimeTo = to
         this.getPage()
       }
-      changeTitle()
+
     },
     methods: {
       chosseTime(pickerValueType) {

@@ -244,7 +244,7 @@
 </template>
 <script>
   import Baseline from '@/common/_baseline.vue'
-  import { changeTitle } from '@/utils/index'
+
   import { goodsInventoryApi } from '@/api/goodsInventory'
 
   export default {
@@ -305,7 +305,7 @@
       }
     },
     mounted() {
-      changeTitle()
+
     },
     methods: {
       initBatch() {

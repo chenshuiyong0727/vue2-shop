@@ -117,7 +117,7 @@
   import Footer from '@/common/_footer.vue'
   import { goodsOrderApi } from '@/api/goodsOrder'
   import { goodsInventoryApi } from '@/api/goodsInventory'
-  import { changeTitle } from '@/utils/index'
+
 
   import {
     MessageBox
@@ -244,10 +244,10 @@
         this.search1()
       }
             this.keyupSubmit()
-      changeTitle()
+
     },
     mounted() {
-      changeTitle()
+
       this.getPage()
       this.listSysDict()
     },

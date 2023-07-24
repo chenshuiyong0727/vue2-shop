@@ -201,7 +201,7 @@
 </template>
 
 <script>
-  import { changeTitle } from '@/utils/index'
+
   import {goodsInventoryApi} from '@/api/goodsInventory'
   export default {
     components:{
@@ -228,10 +228,10 @@
       if (id) {
         this.getDetailById(id)
       }
-      changeTitle()
+
     },
     mounted() {
-      changeTitle()
+
       this.listSysDict()
     },
     methods:{

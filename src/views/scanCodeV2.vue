@@ -263,7 +263,7 @@
   import * as imageConversion from 'image-conversion'
   import { envSetting } from '@/utils/env.js'
   import { hideLoading, showLoading } from '@/components/Loading/loading'
-  import { changeTitle } from '@/utils/index'
+
   export default {
     components: {
       'v-header': Header,
@@ -331,7 +331,7 @@
       }
     },
     created() {
-      changeTitle()
+
       const {id, type,flag,photo} = this.$route.query
       this.flag = flag
       this.id = id
@@ -348,7 +348,7 @@
       }
     },
     mounted() {
-      changeTitle()
+
     },
     methods: {
       gotoAdd(id, type) {

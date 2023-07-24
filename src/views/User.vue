@@ -269,7 +269,7 @@
       }
     },
     mounted(){
-      this.changeTitle()
+      this.
       this.$refs.content.onscroll = ()=>{
         this.handleScroll();
       }
@@ -277,35 +277,11 @@
       console.info(this.envSetting)
     },
     created() {
-      // this.changeTitle()
+      // this.
       // this.getUcUser()
       this.getData()
     },
     methods: {
-      changeTitle() {
-        let first = document.querySelectorAll('.mint-header-title')[0]
-        console.info(first)
-        if (!first){
-          // first = document.querySelectorAll('.mint-header-title')[0]
-          first = this.$el.getElementsByClassName('mint-header-title')[0]
-          console.info(first)
-        }
-        if (first){
-          first.style.cssText = 'margin-top: -54px;'
-        }
-        setTimeout(()=>{
-          let first = document.querySelectorAll('.mint-header-title')[0]
-          console.info(first)
-          if (!first){
-            // first = document.querySelectorAll('.mint-header-title')[0]
-            first = this.$el.getElementsByClassName('mint-header-title')[0]
-            console.info(first)
-          }
-          if (first){
-            first.style.cssText = 'margin-top: -54px;'
-          }
-        },1)
-      },
       handleScroll () {
         let scrollTop = this.$refs.content.scrollTop;
         if (scrollTop < 10){

@@ -62,7 +62,7 @@ import Header from '@/common/_header.vue'
 import { systemContainerApi } from '@/api/systemManage'
 import { userContainerApi } from '@/api/user'
 import { removeCookieByName } from '@/utils/auth'
-import { changeTitle } from '@/utils/index'
+
 import { Toast } from 'mint-ui'
 export default {
   components: {
@@ -79,7 +79,7 @@ export default {
     }
   },
   mounted() {
-    changeTitle()
+
   },
   methods: {
     // 登录按钮

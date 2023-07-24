@@ -207,7 +207,7 @@
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import { goodsOtherApi } from '@/api/goodsOther'
-  import { changeTitle } from '@/utils/index'
+
   export default {
     components: {
       'v-baseline': Baseline,
@@ -249,7 +249,7 @@
       this.getPage()
       this.listSysDict()
             this.keyupSubmit()
-      changeTitle()
+
     },
     methods: {
       keyupSubmit() {

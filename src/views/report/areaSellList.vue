@@ -159,7 +159,7 @@
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import { reportApi } from '@/api/report'
-  import { changeTitle } from '@/utils/index'
+
 
   export default {
     components: {
@@ -186,7 +186,7 @@
     mounted() {
       this.getPage()
       this.listSysDict()
-      changeTitle()
+
     },
     methods: {
       keyupSubmit() {

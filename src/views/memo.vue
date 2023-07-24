@@ -202,7 +202,7 @@
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   import { memoApi } from '@/api/memo'
-  import { changeTitle } from '@/utils/index'
+
 
   export default {
     components: {
@@ -237,7 +237,7 @@
       this.getPage()
       this.listSysDict()
       this.keyupSubmit()
-      changeTitle()
+
     },
     methods: {
       keyupSubmit() {

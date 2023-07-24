@@ -267,7 +267,7 @@
 import Section1 from '@/components/index/section1.vue'
 import Baseline from '@/common/_baseline.vue'
 import Footer from '@/common/_footer.vue'
-import { changeTitle } from '@/utils/index'
+
 import { goodsOrderApi } from '@/api/goodsOrder'
 
 export default {
@@ -393,13 +393,13 @@ export default {
     this.getData1()
     this.getData2()
     this.keyupSubmit()
-    changeTitle()
+
   },
   mounted(){
     this.$refs.hello.onscroll = ()=>{
       this.handleScroll();
     }
-    changeTitle()
+
   },
   methods: {
 

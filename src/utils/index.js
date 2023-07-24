@@ -379,7 +379,7 @@ export function changeTitle() {
 }
 
 
-// changeTitle() {
+//  {
 //   let first= document.querySelectorAll('.mint-header-title')[0]
 //   console.info(first)
 //   if (!first){

@@ -68,7 +68,7 @@ import { envSetting } from '@/utils/env.js'
 import { userContainerApi } from '@/api/user'
 import * as imageConversion from 'image-conversion'
 import { hideLoading, showLoading } from '@/components/Loading/loading'
-import { changeTitle } from '@/utils/index'
+
 
 export default {
   components:{
@@ -87,7 +87,7 @@ export default {
     }
   },
   created() {
-    changeTitle()
+
     this.getUcUser()
   },
   methods:{

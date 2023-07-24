@@ -39,7 +39,7 @@
 import Header from '@/common/_header.vue'
 import { userContainerApi } from '@/api/user'
 import { removeCookieByName } from '@/utils/auth'
-import { changeTitle } from '@/utils/index'
+
 
 import { Toast } from 'mint-ui'
 export default {
@@ -54,7 +54,7 @@ export default {
     }
   },
   mounted() {
-    changeTitle()
+
   },
   data(){
     return {
