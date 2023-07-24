@@ -13,7 +13,7 @@
             <img  style="width: 25px" src="../../static/img/slh.png">
           </mt-button>
           <el-dropdown-menu slot="dropdown" >
-            <el-dropdown-item type="text" @click.native="handleClick1">新增</el-dropdown-item>
+            <el-dropdown-item type="text" @click.native="handleClick1">添加</el-dropdown-item>
             <el-dropdown-item type="text" @click.native="resetHandle">重置</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -52,7 +52,7 @@
 
       </ul>
     </div>
-    <div style="margin-top: 215px;">
+    <div style="margin-top: 3.8rem;">
       <div  class="dingdans_item" v-for="(item,index) in tableData" :key="index">
         <div class="dingdans_top">
           <div class="dingdans_top_left" style="     display: flex;
@@ -647,7 +647,7 @@
     width: 100vw;
     background: #fff;
     position: fixed;
-    top: 22px;
+    top: 0;
     left: 0;
     z-index: 99;
     margin-top:23.6vw;

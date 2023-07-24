@@ -61,7 +61,7 @@
         </li>
       </ul>
     </div>
-    <div style="margin-top: 130px;">
+    <div style="padding-top: 2rem">
         <div class="dingdans_item_other" v-for="(item,index) in tableData" :key="index">
           <div class="dingdans_top_other zuoyouduiqi" style="border-left: 0px;">
             <div  style="width: 50px;
@@ -540,45 +540,23 @@
     overflow-y: auto;
   }
 
-  /*.fenlei_top_1 {*/
-  /*  border-bottom: 1vw solid #eee;*/
-  /*  display: flex;*/
-  /*  align-items: center;*/
-  /*  justify-content: space-between;*/
-  /*  height: 2rem;*/
-  /*  padding: 0.1rem 0.2rem;*/
-  /*  width: 100vw;*/
-  /*  background: #fff;*/
-  /*  position: fixed;*/
-  /*  top: 30px;*/
-  /*  left: 0;*/
-  /*  z-index: 99;*/
-  /*  margin-top:11.6vw;*/
-  /*  !*margin-top:0.85rem;*!*/
-  /*}*/
   .fenlei_top_1 {
     border-bottom: 1vw solid #eee;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
-    height: 109px;
+    height: 2rem;
     padding: 0.1rem 0.2rem;
     width: 100vw;
     background: #fff;
     position: fixed;
-    top: 24px;
+    top: 0;
     left: 0;
     z-index: 99;
-    margin-top: 11.6vw;
-    border-top: 1vw solid #f1f1f1;
-    /* margin-top: 0.85rem; */
+    margin-top:11.6vw;
+    /*margin-top:0.85rem;*/
   }
+
 
 
   .clearfix11 {

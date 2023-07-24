@@ -11,7 +11,7 @@
 <!--      </div>-->
     </mt-header>
     <div v-if="form.status == 3"
-         style="color: white;width: 100vw; height: 140px;background-color: #2b2d3c;margin-top: 24px;">
+         style="color: white;width: 100vw; height: 140px;background-color: #2b2d3c;margin-top: -3.1px;">
       <div class="zuoyouduiqi" style="color: white; padding-top: 25px;">
         <div style="margin-left: 20px;">
           <strong style="font-size: 18px;">{{ form.status | dictToDescTypeValue(37) }}</strong>
@@ -52,7 +52,7 @@
       </div>
     </div>
     <div v-else-if="form.status == 7"
-         style="color: white;width: 100vw; background-color: #2b2d3c;margin-top: 24px;    padding-bottom: 20px;">
+         style="color: white;width: 100vw; background-color: #2b2d3c;margin-top: -3.1px;    padding-bottom: 20px;">
       <div class="zuoyouduiqi" style="color: white; padding-top: 25px;">
         <div style="margin-left: 20px;">
           <strong style="font-size: 17.5px;">{{ form.status | dictToDescTypeValue(37) }}</strong>
@@ -150,7 +150,7 @@
 
 
     <div v-else
-         style="color: white;width: 100vw; background-color: #2b2d3c;margin-top: 24px;">
+         style="color: white;width: 100vw; background-color: #2b2d3c;margin-top: -3.1px;">
       <div style="margin-left: 20px; padding-top: 30px;">
         <strong v-if="form.status == 4 || form.status == 5" style="font-size: 18px;">待平台收货</strong>
         <strong v-else-if="form.status == 6" style="font-size: 18px;">待平台查验鉴别</strong>
@@ -548,7 +548,6 @@
 <script>
   import {goodsOrderApi} from '@/api/goodsOrder'
   import {parseTime} from '@/utils' // import detail from '@/http/mock.js' //模拟数据
-
   export default {
     components: {
     },
@@ -588,7 +587,6 @@
       }
     },
     mounted() {
-
       this.listSysDict()
     },
     methods: {

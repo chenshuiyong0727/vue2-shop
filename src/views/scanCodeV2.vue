@@ -27,13 +27,11 @@
     <div class="fenlei_top_2" v-if="type!=1">
       <input type="file" capture="user" accept="image/*" style="display:none" ref="file1"
              @click="e => {e.target.value = '';} " @change="getFileData"/>
-      <div style="
-    padding-top: 7px;
-    margin-top: 5px;
+      <el-row style="
+       margin-top: 10px;
        margin-bottom: 10px;
       width: 100vw;display:flex;
        flex-direction:row;
-           border-top: 1vw solid #eee;
       align-items:center;" >
         <el-col :span="6" style="text-align: right"><span>根据货号获取</span></el-col>
         <el-col :span="30" :offset="1">
@@ -41,9 +39,9 @@
           </el-input>
           <el-button type="text"  @click="getImgUrl()">获取信息</el-button>
         </el-col>
-      </div>
+      </el-row>
 
-      <div style="width: 100vw;display:flex;flex-direction:row;align-items:center;" >
+      <el-row style="width: 100vw;display:flex;flex-direction:row;align-items:center;" >
         <el-col :span="6" style="text-align: right"><span>根据图片获取</span></el-col>
         <el-col :span="6" :offset="1">
           <el-upload
@@ -71,10 +69,10 @@
           >拍摄照片
           </el-button>
         </el-col>
-      </div>
+      </el-row>
     </div>
 
-    <section  :style="type!=1 ? 'padding-top:187px;      border-radius: 10px;  margin-left: 4vw;' :
+    <section  :style="type!=1 ? 'padding-top:148px;      border-radius: 10px;  margin-left: 4vw;' :
      'padding-top:50px;   border-radius: 10px;  margin-left: 4vw;'">
 
       <div v-if="form.id">
@@ -656,10 +654,10 @@
     -ms-flex-pack: justify;
     background: #fff;
     position: fixed;
-    height: 110px;
+    height: 97px;
     font-size: 14px;
     z-index: 99;
-    margin-top: 66px;
+    margin-top: 11.6vw;
   }
 
 

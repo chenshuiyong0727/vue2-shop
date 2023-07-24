@@ -11,7 +11,7 @@
         <mt-button size="normal" style="font-size: 16px"  @click="submit">保存</mt-button>
       </div>
     </mt-header>
-    <section style="margin-top: 70px;">
+    <section style="padding-top:46px">
       <mt-field
         label="图片"
       >

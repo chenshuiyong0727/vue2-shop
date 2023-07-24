@@ -10,7 +10,7 @@
       <mt-button @click="gotoAdd(null,3)" style="margin-left: 5px;
     margin-top: 9px;" type="primary">
         <img src="../../../static/img/add.png" height="20" width="20" slot="icon">
-        新增
+        添加
       </mt-button>
   </mt-tabbar>
   </footer>

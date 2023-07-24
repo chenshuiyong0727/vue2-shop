@@ -4,7 +4,7 @@
     <div v-if="flag">
       <mt-header  title="个人中心">
         <div slot="left">
-          <img  @click="scanCode(1)" style="width: 22px; "  src="../../static/img/saoyisao4.png">
+          <img  @click="scanCode(1)" style="width: 23px; "  src="../../static/img/saoyisao4.png">
         </div>
         <div slot="right">
           <img  @click="comfirm(1)" style="width: 26px; "  src="../../static/img/setting0.png">
@@ -27,15 +27,15 @@
          form.userRealName ? form.userRealName : form.userAccount ? form.userAccount : '系统用户'
           }}</span>
         <div class="my-indent-right">
-<!--            <span style="-->
-<!--            margin-left: -10px;-->
-<!--      display: inline-block;-->
-<!--      font-size: 14px;-->
-<!--      color: rgba(0, 0, 0, 0.4);-->
-<!--      position: relative;">-->
-<!--              <el-button @click="comfirm(2)" style="    border: 1px solid #333; color: #333"-->
-<!--                         size="small" round>账户管理</el-button>-->
-<!--            </span>-->
+          <!--            <span style="-->
+          <!--            margin-left: -10px;-->
+          <!--      display: inline-block;-->
+          <!--      font-size: 14px;-->
+          <!--      color: rgba(0, 0, 0, 0.4);-->
+          <!--      position: relative;">-->
+          <!--              <el-button @click="comfirm(2)" style="    border: 1px solid #333; color: #333"-->
+          <!--                         size="small" round>账户管理</el-button>-->
+          <!--            </span>-->
           <el-button type="primary" @click="comfirm(2)" size="small" round>账户管理</el-button>
         </div>
       </header>
@@ -44,39 +44,21 @@
     <div v-else style="
         padding-bottom: 40vw;
     background-image: linear-gradient(#e5f4ff, #f3f2f8);">
-<!--      <div class="zuoyouduiqi" style="    padding: 2.81vw 4.8vw !important;">-->
-<!--        <div @click="scanCode(1)" class="mint-header-button is-left">-->
-<!--          <img style="width: 23px; "  src="../../static/img/saoyisao4.png">-->
-<!--        </div>-->
-<!--        <div>-->
-<!--          <span style="font-size: 16px; color: black;" class="mint-header-title">-->
-<!--            个人中心-->
-<!--          </span>-->
-<!--        </div>-->
-<!--        <div @click="comfirm(1)" class="mint-header-button is-right">-->
-<!--          <img style="width: 26px; "  src="../../static/img/setting0.png">-->
-<!--        </div>-->
-<!--      </div>-->
-      <div class="zuoyouduiqi top-title">
-        <div class="mint-header-button" @click="scanCode(1)">
-          <img style="width: 22px; "  src="../../static/img/saoyisao4.png">
+      <div class="zuoyouduiqi" style="    padding: 2.81vw 4.8vw !important;">
+        <div @click="scanCode(1)" class="mint-header-button is-left">
+          <img style="width: 23px; "  src="../../static/img/saoyisao4.png">
         </div>
-        <div v-if="envSetting == 'web'" style="text-align: center;">
-          <span style="font-size: 16px; color: #333333;" >
+        <div>
+          <span style="font-size: 16px; color: black;" class="mint-header-title">
             个人中心
           </span>
         </div>
-        <div class="mint-header-button" style="text-align: right" @click="comfirm(1)"  >
+        <div @click="comfirm(1)" class="mint-header-button is-right">
           <img style="width: 26px; "  src="../../static/img/setting0.png">
         </div>
       </div>
-      <div  v-if="envSetting != 'web'" style="text-align: center;">
-          <span style="font-size: 16px; color: #333333;">
-            个人中心
-          </span>
-      </div>
       <div class="header"
-              style="
+           style="
                 height:100px;"
       >
         <div @click="userInfo" class="header-icon" style="margin-left: 6vw;">
@@ -235,17 +217,17 @@
         </router-link>
       </section>
     </div>
-<!--    <div style=" padding-top: 1px;"></div>-->
+    <!--    <div style=" padding-top: 1px;"></div>-->
     <v-footer></v-footer>
   </div>
 </template>
 
 <script>
+  // import * as mockData from '@/http/mock.js' //模拟数据
   import {goodsBaseApi} from '@/api/goodsBase'
   import {goodsOrderApi} from '@/api/goodsOrder'
   import Footer from '@/common/_footer.vue'
   import {userContainerApi} from '@/api/user'
-  import { envSetting } from '@/utils/memt.js'
 
   export default {
     components: {
@@ -255,7 +237,6 @@
       return {
         flag: false,
         imgUrl: '',
-        envSetting: envSetting.ment,
         fileUrl: fileUrl,
         orderIofo: {},
         // userName: localStorage.getItem('user_name'),
@@ -269,21 +250,18 @@
       }
     },
     mounted(){
-      this.
       this.$refs.content.onscroll = ()=>{
         this.handleScroll();
       }
-      this.getUcUser()
-      console.info(this.envSetting)
     },
     created() {
-      // this.
-      // this.getUcUser()
+      this.getUcUser()
       this.getData()
     },
     methods: {
       handleScroll () {
         let scrollTop = this.$refs.content.scrollTop;
+        console.info(scrollTop)
         if (scrollTop < 10){
           this.flag = false
         } else{

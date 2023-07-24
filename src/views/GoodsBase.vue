@@ -44,7 +44,7 @@
       <span style="margin-right: 6vw;" :class="queryParam.type=='21' ? 'activity' : ''" @click="searchStatus('21')">帽子</span>
     </div>
     <mt-loadmore
-      style="margin-top: 116px;"
+      style="padding-top: 87px"
       :top-method="loadTop"
       :bottom-method="loadBottom"
       :bottom-all-loaded="allLoaded"
