@@ -259,7 +259,7 @@
           <mt-button size="normal" @click="confirmHandle" style="font-size: 15px">确定</mt-button>
         </div>
       </mt-header>
-      <section style="height: 148vw;width: 100vw;    margin-bottom: 17vw;overflow-y:scroll;">
+      <section style="height: 160vw;width: 100vw;overflow-y:scroll;">
         <mt-field label="货号" style="margin-top: 11vw;" v-model="orderData.actNo"
                   :disabled="true"></mt-field>
         <mt-field label="尺码" v-model="orderData.size" :disabled="true"></mt-field>
