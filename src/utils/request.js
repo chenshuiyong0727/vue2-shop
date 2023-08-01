@@ -2,6 +2,8 @@ import axios from 'axios'
 import { Message,MessageBox } from 'element-ui'
 import store from '@/store'
 import {formatParams , isTokenExpire } from '@/utils'
+import { envSetting } from '@/utils/env.js'
+
 import { hideLoading, showLoading } from '@/components/Loading/loading'
 // import { userContainerApi } from '@/api/user'
 import { Toast } from 'mint-ui'

@@ -7,7 +7,7 @@
       <div slot="right">
         <el-dropdown trigger="click" style="margin-left: 1px;">
            <mt-button size="normal">
-            <img  style="width: 25px" src="../../static/img/slh.png">
+            <img  style="width: 25px;height: 25px;" src="../../static/img/slh.png">
           </mt-button>
           <el-dropdown-menu slot="dropdown" >
             <el-dropdown-item type="text" @click.native="goDetail(null,3)">添加</el-dropdown-item>

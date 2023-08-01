@@ -75,7 +75,7 @@
           </div>
           <div style="width: 33vw;    border-right-width: 0vw;">
             <strong>
-              {{item.theirPrice}} %
+              {{item.profitsAmount}}
             </strong>
             <p>利润</p>
           </div>
